@@ -1,0 +1,20 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+# https://copier.readthedocs.io/en/stable/configuring/#the-copier-answersyml-file
+_commit: v0.0.9
+_src_path: gh:FallingColors/hexdummy
+author: kineticcat
+capitalize_platforms: false
+classname: Complexhex
+default_branch: main
+description: Complex Hex addon for Hex Casting
+display_name: Complex Hex
+github_repo: Complex-Hex
+hexcasting_version: 0.10.3
+homepage_url: https://kineticcat.github.io/Complex-Hex
+initial_mod_version: 0.0.1
+java_version: 17
+license: MIT
+mappings_name: Mojmap
+modid: complexhex
+package: net.complexhex
+sources_url: https://github.com/kineticcat/Complex-Hex

@@ -1,0 +1,27 @@
+# Changes here will be overwritten by Copier. NEVER EDIT MANUALLY
+# See: https://copier.readthedocs.io/en/stable/configuring/#the-copier-answersyml-file
+_commit: v0.1.11
+_src_path: gh:hexdoc-dev/hexdoc-hexcasting-template
+author: kineticcat
+book_id: complexhex:complexhexbook
+default_branch: main
+github_repo: Complex-Hex
+gradle_mod_version_key: modVersion
+hexdoc_mod_plugin_classname: ComplexhexModPlugin
+hexdoc_plugin_classname: ComplexhexPlugin
+java_lang:
+    ext: java
+    src: java
+java_package: net/complexhex
+mod_display_name: Complex Hex
+modid: complexhex
+multiloader: true
+package_export_root: doc/src/hexdoc_complexhex/_export
+package_name: hexdoc-complexhex
+package_slug: hexdoc_complexhex
+package_src: doc/src/hexdoc_complexhex
+pages_url: https://kineticcat.github.io/Complex-Hex
+pattern_regex:
+    per_world_value: registerPerWorld
+    regex: (?P<is_per_world>register|registerPerWorld)\(HexPattern\.fromAngles\("(?P<signature>[qweasd]+)",\s*HexDir\.(?P<startdir>\w+)\),\s*"(?P<name>[^"]+)"?
+pattern_registry: registry/ComplexhexPatternRegistry.java

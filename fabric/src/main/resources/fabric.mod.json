@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "complexhex",
+  "version": "${version}",
+  "name": "Complex Hex",
+  "description": "Complex Hex addon for Hex Casting",
+  "authors": [
+    "kineticcat"
+  ],
+  "contact": {
+    "homepage": "https://kineticcat.github.io/Complex-Hex",
+    "sources": "https://github.com/kineticcat/Complex-Hex"
+  },
+  "license": "MIT",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.complexhex.fabric.ComplexhexFabric"
+    ],
+    "client": [
+      "net.complexhex.fabric.ComplexhexClientFabric"
+    ]
+  },
+  "mixins": [
+    "complexhex-common.mixins.json",
+    "complexhex.mixins.json"
+  ],
+  "depends": {
+    "minecraft": ">=${minecraftVersion}",
+    "fabricloader": ">=${fabricLoaderVersion}",
+    "fabric-api": "*",
+    "fabric-language-kotlin": ">=${fabricKotlinVersion}",
+    "architectury": ">=${architecturyVersion}",
+    "hexcasting": ">=${hexcastingVersion}"
+  }
+}
