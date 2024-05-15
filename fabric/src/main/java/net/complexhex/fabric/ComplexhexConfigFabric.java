@@ -12,6 +12,7 @@ import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 import net.fabricmc.api.EnvType;
 
+
 @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal"})
 @Config(name = Complexhex.MOD_ID)
 public class ComplexhexConfigFabric extends PartitioningSerializer.GlobalData {
@@ -24,6 +25,7 @@ public class ComplexhexConfigFabric extends PartitioningSerializer.GlobalData {
     @ConfigEntry.Category("server")
     @ConfigEntry.Gui.TransitiveObject
     public final Server server = new Server();
+
 
     public static void init() {
         AutoConfig.register(ComplexhexConfigFabric.class, PartitioningSerializer.wrap(JanksonConfigSerializer::new));

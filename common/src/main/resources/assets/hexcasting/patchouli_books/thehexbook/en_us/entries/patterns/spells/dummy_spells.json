@@ -1,0 +1,18 @@
+{
+  "name": "hexcasting.entry.dummy_spells",
+  "category": "hexcasting:patterns",
+  "icon": "minecraft:bedrock",
+  "sortnum": 3,
+  "advancement": "hexcasting:root",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:const/true",
+      "anchor": "hexcasting:const/true",
+      "input": "",
+      "output": "bool",
+      "text": "hexcasting.page.consts.const/true"
+    }
+  ]
+}

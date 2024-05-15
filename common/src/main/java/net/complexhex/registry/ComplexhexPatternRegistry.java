@@ -1,48 +1,48 @@
 package net.complexhex.registry;
 
-import at.petrak.hexcasting.api.PatternRegistry;
-import at.petrak.hexcasting.api.spell.Action;
-import at.petrak.hexcasting.api.spell.math.HexDir;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
-import kotlin.Triple;
-import net.complexhex.casting.patterns.math.OpSignum;
-import net.complexhex.casting.patterns.spells.OpCongrats;
+
+
+import at.petrak.hexcasting.api.casting.ActionRegistryEntry;
+import at.petrak.hexcasting.api.casting.castables.Action;
+import at.petrak.hexcasting.api.casting.math.HexDir;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
+import at.petrak.hexcasting.common.lib.hex.HexActions;
+import net.complexhex.Complexhex;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 
+
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 import static net.complexhex.Complexhex.id;
 
 public class ComplexhexPatternRegistry {
-    public static List<Triple<HexPattern, ResourceLocation, Action>> PATTERNS = new ArrayList<>();
-    public static List<Triple<HexPattern, ResourceLocation, Action>> PER_WORLD_PATTERNS = new ArrayList<>();
-    // IMPORTANT: be careful to keep the registration calls looking like this, or you'll have to edit the hexdoc pattern regex.
-    public static HexPattern CONGRATS = registerPerWorld(HexPattern.fromAngles("eed", HexDir.WEST), "congrats", new OpCongrats());
-    public static HexPattern SIGNUM = register(HexPattern.fromAngles("edd", HexDir.NORTH_WEST), "signum", new OpSignum());
 
-    public static void init() {
-        try {
-            for (Triple<HexPattern, ResourceLocation, Action> patternTriple : PATTERNS) {
-                PatternRegistry.mapPattern(patternTriple.getFirst(), patternTriple.getSecond(), patternTriple.getThird());
-            }
-            for (Triple<HexPattern, ResourceLocation, Action> patternTriple : PER_WORLD_PATTERNS) {
-                PatternRegistry.mapPattern(patternTriple.getFirst(), patternTriple.getSecond(), patternTriple.getThird(), true);
-            }
-        } catch (PatternRegistry.RegisterPatternException e) {
-            e.printStackTrace();
+    private static List<Pattern> PATTERNS = new ArrayList<Pattern>();
+
+    private class Pattern {
+        public ResourceLocation id;
+        public ActionRegistryEntry are;
+
+        public Pattern(String pat, HexDir dir, String name, Action act) {
+            this.id = new ResourceLocation(Complexhex.MOD_ID, name);
+            this.are = new ActionRegistryEntry(HexPattern.fromAngles(pat, dir), act);
+            PATTERNS.add(this);
+        }
+        public void register() {
+            Registry.register(HexActions.REGISTRY, id, are );
         }
     }
 
-    private static HexPattern register(HexPattern pattern, String name, Action action) {
-        Triple<HexPattern, ResourceLocation, Action> triple = new Triple<>(pattern, id(name), action);
-        PATTERNS.add(triple);
-        return pattern;
-    }
 
-    private static HexPattern registerPerWorld(HexPattern pattern, String name, Action action) {
-        Triple<HexPattern, ResourceLocation, Action> triple = new Triple<>(pattern, id(name), action);
-        PER_WORLD_PATTERNS.add(triple);
-        return pattern;
+
+
+    public static void init() {
+        for (Pattern pattern : PATTERNS) {
+            pattern.register();
+        }
     }
 }

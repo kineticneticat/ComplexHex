@@ -1,18 +1,18 @@
 {
   "name": "complexhex.entry.dummy_actions",
   "category": "hexcasting:patterns",
-  "icon": "minecraft:birch_sign",
+  "icon": "minecraft:bedrock",
   "sortnum": 0,
   "advancement": "hexcasting:root",
   "read_by_default": true,
   "pages": [
     {
       "type": "hexcasting:pattern",
-      "op_id": "complexhex:signum",
-      "anchor": "complexhex:signum",
-      "input": "number",
-      "output": "number",
-      "text": "complexhex.page.dummy_actions.signum"
+      "op_id": "hexcasting:const/true",
+      "anchor": "hexcasting:const/true",
+      "input": "",
+      "output": "bool",
+      "text": "hexcasting.page.consts.const/true"
     }
   ]
 }

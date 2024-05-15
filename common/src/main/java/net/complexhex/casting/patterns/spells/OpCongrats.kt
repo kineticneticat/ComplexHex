@@ -1,13 +1,13 @@
 package net.complexhex.casting.patterns.spells
 
 import at.petrak.hexcasting.api.misc.MediaConstants
-import at.petrak.hexcasting.api.spell.ParticleSpray
-import at.petrak.hexcasting.api.spell.RenderedSpell
-import at.petrak.hexcasting.api.spell.SpellAction
-import at.petrak.hexcasting.api.spell.casting.CastingContext
-import at.petrak.hexcasting.api.spell.getEntity
-import at.petrak.hexcasting.api.spell.iota.Iota
-import at.petrak.hexcasting.api.spell.mishaps.MishapBadEntity
+import at.petrak.hexcasting.api.casting.ParticleSpray
+import at.petrak.hexcasting.api.casting.RenderedSpell
+import at.petrak.hexcasting.api.casting.castables.SpellAction
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
+import at.petrak.hexcasting.api.casting.getEntity
+import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.mishaps.MishapBadEntity
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.network.chat.Component
 import net.complexhex.networking.ComplexhexNetworking
@@ -33,19 +33,19 @@ class OpCongrats : SpellAction {
      * them. All the code that actually makes changes to the world (breaking blocks, teleporting things,
      * etc.) should be in the private [Spell] data class below.
      */
-    override fun execute(args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>> {
+    override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         val target = args.getEntity(0, argc)
 
         // makes sure that the target player is inside the range
         // the caster is allowed to affect.
-        ctx.assertEntityInRange(target)
+        env.assertEntityInRange(target)
 
         if (target !is ServerPlayer) throw MishapBadEntity(
             target,
             Component.translatable("text.complexhex.congrats.player")
         )
 
-        return Triple(
+        return SpellAction.Result(
             Spell(target),
             cost,
             listOf(ParticleSpray.burst(target.position(), 1.0))
@@ -58,7 +58,7 @@ class OpCongrats : SpellAction {
      * [cast] method within is responsible for using that data to alter the world.
      */
     private data class Spell(val player: ServerPlayer) : RenderedSpell {
-        override fun cast(ctx: CastingContext) {
+        override fun cast(env: CastingEnvironment) {
             player.sendSystemMessage(Component.translatable("text.complexhex.congrats", player.displayName));
             ComplexhexNetworking.sendToPlayer(player, SetLookPitchS2CMsg(-90f))
         }

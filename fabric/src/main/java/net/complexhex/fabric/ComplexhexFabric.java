@@ -14,6 +14,7 @@ import net.complexhex.Complexhex;
 public class ComplexhexFabric implements ModInitializer {
     @Override
     public void onInitialize() {
+
         Complexhex.init();
     }
 }
