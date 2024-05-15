@@ -1,4 +1,4 @@
-package net.complexhex.casting.patterns.math
+package net.complexhex.casting.arithmetic
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.asActionResult
@@ -15,7 +15,7 @@ class OpSignum : ConstMediaAction {
 
     /**
      * The method called when this Action is actually executed. Accepts the [args]
-     * that were on the stack (there will be [argc] of them), and the [ctx],
+     * that were on the stack (there will be [argc] of them), and the [env],
      * which contains things like references to the caster, the ServerLevel,
      * methods to determine whether locations and entities are in ambit, etc.
      * Returns the list of iotas that should be added back to the stack as the
@@ -23,6 +23,9 @@ class OpSignum : ConstMediaAction {
      */
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         val number = args.getDouble(0, argc)
+
+
+
         return sign(number).asActionResult
     }
 }

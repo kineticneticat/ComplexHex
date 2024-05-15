@@ -1,8 +1,9 @@
 package net.complexhex;
 
-import net.complexhex.registry.ComplexhexIotaTypeRegistry;
+import net.complexhex.api.casting.iota.complex.ComplexHexIotaTypes;
+import net.complexhex.casting.arithmetic.ComplexHexArithmetic;
 import net.complexhex.registry.ComplexhexItemRegistry;
-import net.complexhex.registry.ComplexhexPatternRegistry;
+import net.complexhex.casting.patterns.ComplexhexPatternRegistry;
 import net.complexhex.networking.ComplexhexNetworking;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -22,9 +23,10 @@ public class Complexhex {
 
         ComplexhexAbstractions.initPlatformSpecific();
         ComplexhexItemRegistry.init();
-        ComplexhexIotaTypeRegistry.init();
+        ComplexHexIotaTypes.init();
         ComplexhexPatternRegistry.init();
 		ComplexhexNetworking.init();
+        //ComplexHexArithmetic.init();
 
         LOGGER.info(ComplexhexAbstractions.getConfigDirectory().toAbsolutePath().normalize().toString());
     }

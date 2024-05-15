@@ -1,4 +1,4 @@
-package net.complexhex.casting.patterns.spells
+package net.complexhex.casting.spells
 
 import at.petrak.hexcasting.api.misc.MediaConstants
 import at.petrak.hexcasting.api.casting.ParticleSpray

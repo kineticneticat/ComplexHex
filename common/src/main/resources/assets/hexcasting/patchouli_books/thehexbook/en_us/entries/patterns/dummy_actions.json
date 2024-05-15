@@ -1,5 +1,5 @@
 {
-  "name": "complexhex.entry.dummy_actions",
+  "name": "complexhex.entry.complex_actions",
   "category": "hexcasting:patterns",
   "icon": "minecraft:bedrock",
   "sortnum": 0,
@@ -8,11 +8,11 @@
   "pages": [
     {
       "type": "hexcasting:pattern",
-      "op_id": "hexcasting:const/true",
-      "anchor": "hexcasting:const/true",
+      "op_id": "complexhex:const/complex/i",
+      "anchor": "complexhex:const/complex/i",
       "input": "",
-      "output": "bool",
-      "text": "hexcasting.page.consts.const/true"
+      "output": "complex",
+      "text": "complexhex.page.complex_actions.const.i"
     }
   ]
 }
