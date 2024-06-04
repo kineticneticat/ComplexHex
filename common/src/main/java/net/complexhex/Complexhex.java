@@ -26,7 +26,7 @@ public class Complexhex {
         ComplexHexIotaTypes.init();
         ComplexhexPatternRegistry.init();
 		ComplexhexNetworking.init();
-        //ComplexHexArithmetic.init();
+        ComplexHexArithmetic.init();
 
         LOGGER.info(ComplexhexAbstractions.getConfigDirectory().toAbsolutePath().normalize().toString());
     }

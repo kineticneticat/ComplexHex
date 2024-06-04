@@ -33,7 +33,6 @@ dependencies {
         // Fix for the "two fabric loaders" loading crash
         exclude group: "net.fabricmc", module: "fabric-loader"
     }
-
     // Hex Casting stuff
     modImplementation("at.petra-k.hexcasting:hexcasting-fabric-${minecraftVersion}:${hexcastingVersion}") {
         // If not excluded here, calls a nonexistent method and crashes the dev client

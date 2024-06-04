@@ -19,7 +19,7 @@ public class ComplexNumber {
         this.imag = imag;
     }
     public static ComplexNumber eToTheIPI(double mod, double arg) {
-        return new ComplexNumber(Math.cos(arg), Math.sin(arg)).scalarMul(mod);
+        return new ComplexNumber(Math.cos(arg), Math.sin(arg)).mul(mod);
     }
     public static ComplexNumber fixNaN(ComplexNumber cn) {
         return new ComplexNumber(HexUtils.fixNAN(cn.real), HexUtils.fixNAN(cn.imag));
@@ -28,20 +28,27 @@ public class ComplexNumber {
     public ComplexNumber add(ComplexNumber B) {
         return new ComplexNumber(this.real + B.real, this.imag + B.imag);
     }
+    public ComplexNumber add(double B) {
+        return new ComplexNumber(this.real + B, this.imag);
+    }
     public ComplexNumber sub(ComplexNumber B) {
         return new ComplexNumber(this.real - B.real, this.imag - B.imag);
     }
-    public ComplexNumber scalarMul(double S) {
+    public ComplexNumber sub(double B) {
+        return new ComplexNumber(this.real - B, this.imag);
+    }
+    public ComplexNumber mul(double S) {
         return new ComplexNumber(this.real * S, this.imag * S);
     }
     public ComplexNumber scalarDiv(double S) {
         return new ComplexNumber(this.real / S, this.imag / S);
     }
-    public ComplexNumber complexMul(ComplexNumber B) {
+    public ComplexNumber mul(ComplexNumber B) {
         return new ComplexNumber(
             this.real*B.real - this.imag + B.imag,
             this.real*B.imag + this.imag * B.real);
     }
+    public ComplexNumber conjugate() { return  new ComplexNumber(this.real, -this.imag);}
     public double modulus() {
         return Math.sqrt(Math.pow(this.real, 2) + Math.pow(this.imag, 2));
     }

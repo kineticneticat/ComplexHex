@@ -22,7 +22,7 @@ public class ComplexHexArithmetic {
         }
     }
 
-    public static ComplexArithmetic COMPLEX = make("complex", new ComplexArithmetic());
+    public static ComplexArithmetic COMPLEX = make("complex", ComplexArithmetic.INSTANCE);
 
     private static <T extends Arithmetic> T make(String name, T arithmetic) {
         var old = ARITHMETICS.put(new ResourceLocation(Complexhex.MOD_ID), arithmetic);

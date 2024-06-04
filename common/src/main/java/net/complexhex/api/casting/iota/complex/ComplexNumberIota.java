@@ -10,10 +10,16 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static net.complexhex.Complexhex.MOD_ID;
+
 public class ComplexNumberIota extends Iota {
+    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+
     public ComplexNumberIota(ComplexNumber comp) {
         super(ComplexHexIotaTypes.COMPLEXNUMBER, comp);
     }
@@ -47,7 +53,7 @@ public class ComplexNumberIota extends Iota {
         @Nullable
         @Override
         public ComplexNumberIota deserialize(Tag tag, ServerLevel world) throws IllegalArgumentException {
-            return null;
+            return ComplexNumberIota.deserialize(tag);
         }
 
         @Override
@@ -62,11 +68,14 @@ public class ComplexNumberIota extends Iota {
     };
 
     public static ComplexNumberIota deserialize(Tag tag) {
-        CompoundTag cntag = HexUtils.downcast(tag, CompoundTag.TYPE);
+        CompoundTag ctag = HexUtils.downcast(tag, CompoundTag.TYPE);
+
+        LOGGER.info(ctag);
+
         return new ComplexNumberIota(
                 new ComplexNumber(
-                        cntag.getDouble("real"),
-                        cntag.getDouble("imag")
+                        ctag.getDouble("real"),
+                        ctag.getDouble("imag")
                 )
         );
     }
