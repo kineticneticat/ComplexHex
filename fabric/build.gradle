@@ -12,6 +12,11 @@ architectury {
 
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
+    runs {
+        client {
+            programArgs(["--username", "kineticcat_", "--uuid", "23e372d5-6daa-4047-8f3a-c151fcc2799b"])
+        }
+    }
 }
 
 configurations {

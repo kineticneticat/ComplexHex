@@ -16,10 +16,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.complexhex.fabric.ComplexhexFabric"
+      "dev.complexhex.fabric.ComplexhexFabric"
     ],
     "client": [
-      "net.complexhex.fabric.ComplexhexClientFabric"
+      "dev.complexhex.fabric.ComplexhexClientFabric"
     ]
   },
   "mixins": [

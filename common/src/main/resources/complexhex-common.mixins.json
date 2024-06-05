@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "net.complexhex.mixin",
+  "package": "dev.kineticcat.complexhex.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
