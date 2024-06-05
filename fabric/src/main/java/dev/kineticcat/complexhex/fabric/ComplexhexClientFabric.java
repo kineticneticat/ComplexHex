@@ -1,4 +1,4 @@
-package dev.complexhex.fabric;
+package dev.kineticcat.complexhex.fabric;
 
 import dev.kineticcat.complexhex.ComplexhexClient;
 import net.fabricmc.api.ClientModInitializer;

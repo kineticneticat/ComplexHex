@@ -7,7 +7,7 @@ modId = "complexhex"
 version = "${version}"
 displayName = "Complex Hex"
 logoFile = "icon.png"
-authors = "kineticcat"
+authors = "net"
 description = '''
 Complex Hex addon for Hex Casting
 '''

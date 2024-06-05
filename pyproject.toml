@@ -8,11 +8,11 @@ build-backend = "hatchling.build"
 # project metadata
 
 [project]
-name = "hexdoc-complexhex"
+name = "hexdoc-net"
 description = "Python web book docgen and hexdoc plugin for Complex Hex."
 readme = "doc/README.md"
 authors = [
-    { name="kineticcat" },
+    { name="net" },
 ]
 keywords = ["hexdoc"]
 requires-python = ">=3.11"
@@ -58,7 +58,7 @@ sources = ["doc/src"]
 # hexdoc entry points
 
 [project.entry-points.hexdoc]
-complexhex = "hexdoc_complexhex._hooks:ComplexhexPlugin"
+net = "hexdoc_complexhex._hooks:ComplexhexPlugin"
 
 # linting
 

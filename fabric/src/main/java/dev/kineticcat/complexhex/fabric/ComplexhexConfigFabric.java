@@ -1,4 +1,4 @@
-package dev.complexhex.fabric;
+package dev.kineticcat.complexhex.fabric;
 
 import at.petrak.hexcasting.api.misc.MediaConstants;
 import dev.architectury.platform.Platform;

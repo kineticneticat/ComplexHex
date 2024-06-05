@@ -11,6 +11,7 @@ import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.complexhex.Complexhex;
 import dev.kineticcat.complexhex.casting.spells.OpCongrats;
 import dev.kineticcat.complexhex.stuff.ComplexNumber;
+import dev.kineticcat.complexhex.stuff.Quaternion;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 
@@ -31,7 +32,8 @@ public class ComplexhexPatternRegistry {
     public static final HexPattern IMAGINARY = make("wqqe", HexDir.SOUTH_WEST, "imaginary");
     public static final HexPattern CONJUGATE = make("wqqd", HexDir.SOUTH_WEST, "conjugate");
     // Quaternion Arithmetic
-//    public static final HexPattern CONST$QUATERNION$I = make()
+    public static final HexPattern CONST$QUAT$I$ = make("deeeeeq", HexDir.SOUTH_EAST, "const/quat/i",
+            Action.makeConstantOp(new Quaternion(1, 0, 0, 0).asIota()));
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {
             Registry.register(HexActions.REGISTRY, entry.getKey(), entry.getValue());

@@ -1,4 +1,4 @@
-package dev.complexhex.forge;
+package dev.kineticcat.complexhex.forge;
 
 import dev.kineticcat.complexhex.ComplexhexAbstractions;
 import net.minecraftforge.fml.loading.FMLPaths;

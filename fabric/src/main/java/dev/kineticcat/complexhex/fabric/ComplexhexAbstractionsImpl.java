@@ -1,4 +1,4 @@
-package dev.complexhex.fabric;
+package dev.kineticcat.complexhex.fabric;
 
 import dev.kineticcat.complexhex.ComplexhexAbstractions;
 import net.fabricmc.loader.api.FabricLoader;

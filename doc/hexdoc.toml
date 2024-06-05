@@ -1,5 +1,5 @@
-modid = "complexhex"
-book = "complexhex:complexhexbook"
+modid = "net"
+book = "net:complexhexbook"
 default_lang = "en_us"
 default_branch = "main"
 
@@ -20,14 +20,14 @@ export_dir = "src/hexdoc_complexhex/_export/generated"
 [template]
 icon = "icon.png"
 include = [
-    "complexhex",
+    "net",
     "hexcasting",
     "hexdoc",
 ]
 
 [template.args]
 mod_name = "Complex Hex"
-author = "kineticcat"
+author = "net"
 show_landing_text = false
 
 [extra.hexcasting]
@@ -45,12 +45,12 @@ per_world_value = "{^_per_world_value}"
 
 [_common]
 src = "../common/src"
-package = "{src}/main/java/net/complexhex"
+package = "{src}/main/java/net/net"
 
 [_fabric]
 src = "../fabric/src"
-package = "{src}/main/java/net/complexhex/fabric"
+package = "{src}/main/java/net/net/fabric"
 
 [_forge]
 src = "../forge/src"
-package = "{src}/main/java/net/complexhex/forge"
+package = "{src}/main/java/net/net/forge"

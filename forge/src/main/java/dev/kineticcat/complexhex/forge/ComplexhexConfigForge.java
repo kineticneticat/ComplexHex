@@ -1,4 +1,4 @@
-package dev.complexhex.forge;
+package dev.kineticcat.complexhex.forge;
 
 import at.petrak.hexcasting.api.misc.MediaConstants;
 import dev.kineticcat.complexhex.api.config.ComplexhexConfig;

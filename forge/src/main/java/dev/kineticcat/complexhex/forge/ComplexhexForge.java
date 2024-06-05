@@ -1,4 +1,4 @@
-package dev.complexhex.forge;
+package dev.kineticcat.complexhex.forge;
 
 import dev.architectury.platform.forge.EventBuses;
 import dev.kineticcat.complexhex.Complexhex;

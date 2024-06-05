@@ -1,4 +1,4 @@
-package dev.complexhex.forge;
+package dev.kineticcat.complexhex.forge;
 
 import dev.kineticcat.complexhex.ComplexhexClient;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
