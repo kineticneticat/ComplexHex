@@ -19,7 +19,7 @@ public class Complexhex {
 
 
     public static void init() {
-        LOGGER.info("Complex Hex says hello!");
+        LOGGER.info("Complex Hex says 'ough'");
 
         ComplexhexAbstractions.initPlatformSpecific();
         ComplexhexItemRegistry.init();

@@ -14,13 +14,15 @@ import dev.kineticcat.complexhex.stuff.ComplexNumber;
 import dev.kineticcat.complexhex.stuff.Quaternion;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ComplexhexPatternRegistry {
-
+    public static final Logger LOGGER = LogManager.getLogger(Complexhex.MOD_ID);
     private static final Map<ResourceLocation, ActionRegistryEntry> PATTERNS = new LinkedHashMap<>();
 
     public static final HexPattern CONGRATS = make("eed", HexDir.WEST, "congrats", new OpCongrats());
@@ -54,6 +56,7 @@ public class ComplexhexPatternRegistry {
 
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {
+            LOGGER.info(entry);
             Registry.register(HexActions.REGISTRY, entry.getKey(), entry.getValue());
         }
     }

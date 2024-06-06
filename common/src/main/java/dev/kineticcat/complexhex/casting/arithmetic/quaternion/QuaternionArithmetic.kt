@@ -49,8 +49,7 @@ object QuaternionArithmetic : Arithmetic {
     override fun opTypes() = OPS
 
     override fun getOperator(pattern: HexPattern?): Operator {
-        LOGGER.info(pattern)
-        return when (pattern) {
+        val out =  when (pattern) {
             ADD     -> QQorQDbinaryQ( { a, b -> a.add(b) }, { a, b -> a.add(b) } )
             SUB     -> QQorQDbinaryQ( { a, b -> a.sub(b) }, { a, b -> a.sub(b) } )
             MUL     -> QDbinaryQ      { a, b -> a.mul(b) }
@@ -65,6 +64,7 @@ object QuaternionArithmetic : Arithmetic {
             QUNMAKE -> OpQunmake
             else -> throw InvalidOperatorException("$pattern is not a valid operator in quaternion arithmetic")
         }
+        return out
     }
 
     fun QunaryQ(op: (Quaternion) -> (Quaternion)) = OperatorUnary(ACCEPTS_Q)
