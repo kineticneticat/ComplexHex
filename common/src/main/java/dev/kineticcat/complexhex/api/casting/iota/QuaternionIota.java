@@ -77,13 +77,15 @@ public class QuaternionIota extends Iota {
     }
     public static ChatFormatting QuaternionColour = ChatFormatting.DARK_BLUE;
     public static Component display(Quaternion Q) {
-        if (Q.a+Q.c+Q.d==0) return Component.literal(String.format("%.2f", Q.b)).withStyle(QuaternionColour);
-        if (Q.a+Q.b+Q.d==0) return Component.literal(String.format("%.2f", Q.c)).withStyle(QuaternionColour);
-        if (Q.a+Q.b+Q.c==0) return Component.literal(String.format("%.2f", Q.d)).withStyle(QuaternionColour);
-        String text = String.format("%.2f", Q.a);
-        text += " " + (Q.b<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.b));
-        text += " " + (Q.c<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.c));
-        text += " " + (Q.d<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.d));
+        String text = "";
+        text += Q.a==0 ? "" : String.format("%.2f", Q.a);
+        text += text.equals("") ? ( Q.b==0 ? "" : String.format("%.2f", Q.b)+"i" )
+                                : ( Q.b==0 ? "" : " " + (Q.b<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.b)) + "i" );
+        text += text.equals("") ? ( Q.c==0 ? "" : String.format("%.2f", Q.c)+"j" )
+                                : ( Q.c==0 ? "" : " " + (Q.b<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.c)) + "j" );
+        text += text.equals("") ? ( Q.d==0 ? "" : String.format("%.2f", Q.d)+"k" )
+                                : ( Q.d==0 ? "" : " " + (Q.b<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.d)) + "k" );
+        text = text.equals("") ? String.format("%.2f", 0.0d) : text;
         return Component.literal(text).withStyle(QuaternionColour);
     }
 }

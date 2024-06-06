@@ -23,8 +23,11 @@ public class Quaternion {
     public QuaternionIota asIota() { return new QuaternionIota(this);}
     public static Quaternion fixNaN(Quaternion Q) {return new Quaternion(HexUtils.fixNAN(Q.a), HexUtils.fixNAN(Q.b), HexUtils.fixNAN(Q.c), HexUtils.fixNAN(Q.d));}
     public Quaternion add(Quaternion B) { return new Quaternion(this.a + B.a, this.b + B.b, this.c + B.c, this.d + B.d); }
+    public Quaternion add(Double B) { return new Quaternion(this.a + B, this.b, this.c, this.d); }
     public Quaternion sub(Quaternion B) { return new Quaternion(this.a - B.a, this.b - B.b, this.c - B.c, this.d - B.d); }
+    public Quaternion sub(Double B) { return new Quaternion(this.a - B, this.b, this.c, this.d); }
     public Quaternion mul(double B) { return new Quaternion(this.a * B, this.b * B, this.c * B, this.d * B); }
+    public Quaternion div(double B) { return new Quaternion(this.a / B, this.b / B, this.c / B, this.d / B); }
     public Quaternion mul(Quaternion B) { Quaternion A = this; return new Quaternion(
             (A.a*B.a - A.b*B.b - A.c*B.c - A.d*B.d),
             (A.a*B.b + A.b*B.a + A.c*B.d - A.d*B.c),

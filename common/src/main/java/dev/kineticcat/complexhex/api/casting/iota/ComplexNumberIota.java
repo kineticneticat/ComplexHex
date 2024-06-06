@@ -71,7 +71,7 @@ public class ComplexNumberIota extends Iota {
     public static Component display(ComplexNumber cn) {
         if (cn.real == 0) return Component.literal(String.format("%.2f", cn.imag) + "i").withStyle(ComplexNumberColour);
         else
-            if (cn.imag > 0) return Component.literal(String.format("%.2f", cn.real) + " + " + String.format("%.2f", cn.imag) + "i").withStyle(ComplexNumberColour);
+            if (cn.imag >= 0) return Component.literal(String.format("%.2f", cn.real) + " + " + String.format("%.2f", cn.imag) + "i").withStyle(ComplexNumberColour);
             else             return Component.literal(String.format("%.2f", cn.real) + " - " + String.format("%.2f", Math.abs(cn.imag)) + "i").withStyle(ComplexNumberColour);
     }
 }

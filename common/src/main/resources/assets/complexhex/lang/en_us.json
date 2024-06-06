@@ -1,13 +1,7 @@
 {
-  "item.complexhex.dummy_item": "Dummy Item",
-  "hexcasting.action.complexhex:congrats": "Congrats",
-  "hexcasting.action.complexhex:signum": "Signum Purification",
-  "hexcasting.action.book.complexhex:congrats": "Dum. Spell Actn.",
   "hexcasting.action.book.complexhex:const/complex/i": "Constant Imagination",
-  "complexhex.entry.complex_spells": "Dummy Spells",
   "complexhex.entry.complex_actions": "Complexities",
-  "complexhex.page.complex_spells.congrats": "Accepts a player entity, tells them they are doing a good job and makes them look up.",
   "complexhex.page.complex_actions.const.i": "Pushes 0 + 1i to the stack",
-  "text.complexhex.congrats": "Good job, %1$s!",
-  "text.complexhex.congrats.player": "a Player"
+
+
 }
