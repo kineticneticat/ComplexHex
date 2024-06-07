@@ -1,4 +1,4 @@
-package dev.kineticcat.complexhex.casting.spells
+package dev.kineticcat.complexhex.casting.spell
 
 import at.petrak.hexcasting.api.misc.MediaConstants
 import at.petrak.hexcasting.api.casting.ParticleSpray

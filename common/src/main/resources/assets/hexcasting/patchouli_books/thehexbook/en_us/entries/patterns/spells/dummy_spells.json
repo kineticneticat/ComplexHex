@@ -8,8 +8,8 @@
   "pages": [
     {
       "type": "hexcasting:pattern",
-      "op_id": "complexhex:congrats",
-      "anchor": "hexcasting:congrats",
+      "op_id": "complexhex:qa",
+      "anchor": "complexhex:qa",
       "input": "",
       "output": "bool",
       "text": "complexhex.page.dummy_spells.congrats"

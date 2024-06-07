@@ -1,7 +1,19 @@
 {
+  "complexhex.entry.complexities": "Complexities",
   "hexcasting.action.book.complexhex:const/complex/i": "Constant Imagination",
-  "complexhex.entry.complex_actions": "Complexities",
-  "complexhex.page.complex_actions.const.i": "Pushes 0 + 1i to the stack",
-
-
+  "complexhex.page.complexities.const.i": "Pushes 0 + 1i to the stack.",
+  "hexcasting.action.book.complexhex:const/complex/1": "Constant Realisation",
+  "complexhex.page.complexities.add": "Preforms Addition, num will be treated as num + 0i.",
+  "complexhex.page.complexities.sub": "Preforms Subtraction, num will be treated as num + 0i.",
+  "complexhex.page.complexities.mul": "Preforms Scalar Multiplication.",
+  "complexhex.page.complexities.div": "Preforms Scalar Division.",
+  "complexhex.page.complexities.abs": "Pushes the Argument (the length).",
+  "hexcasting.action.book.complexhex:cmul": "Complex Multiplication",
+  "complexhex.page.complexities.cmul": "Preforms Complex Multiplication.",
+  "hexcasting.action.book.complexhex:real": "Realising Complexities",
+  "complexhex.page.complexities.real": "Pushes the real coefficient.",
+  "hexcasting.action.book.complexhex:imaginary": "Imagining Complexities",
+  "complexhex.page.complexities.imaginary": "Pushes the imaginary coefficient.",
+  "hexcasting.action.book.complexhex:conjugate": "Conjugation Purification",
+  "complexhex.page.complexities.conjugate": "Negates the imaginary coefficient of the topmost iota"
 }
