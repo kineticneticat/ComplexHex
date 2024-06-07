@@ -8,10 +8,26 @@
   "pages": [
     {
       "type": "hexcasting:pattern",
+      "op_id": "complexhex:qmake",
+      "anchor": "complexhex:qmake",
+      "input": "num, vec",
+      "output": "quaternion",
+      "text": "complexhex.page.quaternionics.qmake"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:qunmake",
+      "anchor": "complexhex:qunmake",
+      "input": "quaternion",
+      "output": "num, vec",
+      "text": "complexhex.page.quaternionics.qunmake"
+    },
+    {
+      "type": "hexcasting:pattern",
       "op_id": "complexhex:const/quaternion/1",
       "anchor": "complexhex:const/quaternion/1",
       "input": "",
-      "output": "complex",
+      "output": "quaternion",
       "text": "complexhex.page.quaternionics.const.1"
     },
     {
@@ -42,7 +58,7 @@
       "type": "hexcasting:pattern",
       "op_id": "hexcasting:add",
       "anchor": "hexcasting:add",
-      "input": "quaternion, quaternion",
+      "input": "qtrn, qtrn",
       "output": "quaternion",
       "text": "complexhex.page.quaternionics.add"
     },
@@ -50,7 +66,7 @@
       "type": "hexcasting:pattern",
       "op_id": "hexcasting:sub",
       "anchor": "hexcasting:sub",
-      "input": "quaternion, quaternion",
+      "input": "qrtn, qtrn",
       "output": "quaternion",
       "text": "complexhex.page.quaternionics.sub"
     },
@@ -74,7 +90,7 @@
       "type": "hexcasting:pattern",
       "op_id": "complexhex:qmul",
       "anchor": "complexhex:qmul",
-      "input": "quaternion, quaternion",
+      "input": "quaternion, quat",
       "output": "quaternion",
       "text": "complexhex.page.quaternionics.qmul"
     },
@@ -120,11 +136,11 @@
     },
     {
       "type": "hexcasting:pattern",
-      "op_id": "complexhex:invert",
-      "anchor": "complexhex:invert",
+      "op_id": "complexhex:qinvert",
+      "anchor": "complexhex:qinvert",
       "input": "quaternion",
       "output": "num",
-      "text": "complexhex.page.quaternionics.invert"
+      "text": "complexhex.page.quaternionics.qinvert"
     }
   ]
 }

@@ -9,10 +9,12 @@ import at.petrak.hexcasting.api.casting.math.HexDir;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.complexhex.Complexhex;
+import dev.kineticcat.complexhex.casting.spell.display.OpSummonBlockDisplay;
 import dev.kineticcat.complexhex.stuff.ComplexNumber;
 import dev.kineticcat.complexhex.stuff.Quaternion;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -52,6 +54,9 @@ public class ComplexhexPatternRegistry {
     public static final HexPattern QD = make("waqqqqqedw", HexDir.SOUTH_EAST, "qd");
     public static final HexPattern QMAKE = make("waqqqqqe", HexDir.SOUTH_EAST, "qmake");
     public static final HexPattern QUNMAKE = make("wdeeeeeq", HexDir.SOUTH_EAST, "qunmake");
+    // Displays
+    public static final HexPattern SUMMONBLOCKDISPLAY = make("qwaqawq", HexDir.EAST, "summonblockdisplay",
+            new OpSummonBlockDisplay());
 
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {

@@ -1,4 +1,4 @@
-package dev.kineticcat.complexhex.casting.spell
+package dev.kineticcat.complexhex.casting
 
 import at.petrak.hexcasting.api.misc.MediaConstants
 import at.petrak.hexcasting.api.casting.ParticleSpray
@@ -13,11 +13,11 @@ import net.minecraft.network.chat.Component
 import dev.kineticcat.complexhex.networking.ComplexhexNetworking
 import dev.kineticcat.complexhex.networking.SetLookPitchS2CMsg
 
-class OpCongrats : SpellAction {
+class OpSummonBlockDisplay : SpellAction {
     /**
      * The number of arguments from the stack that this action requires.
      */
-    override val argc = 1
+    override val argc = 2
     val cost = 2 * MediaConstants.DUST_UNIT
 
     /**

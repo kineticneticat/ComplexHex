@@ -12,23 +12,19 @@ import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
-import dev.kineticcat.complexhex.Complexhex
 import dev.kineticcat.complexhex.api.casting.iota.ComplexHexIotaTypes
 import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota
 import dev.kineticcat.complexhex.casting.ComplexhexPatternRegistry.*
 import dev.kineticcat.complexhex.stuff.Quaternion
 import net.minecraft.world.phys.Vec3
-import org.apache.logging.log4j.LogManager
 
 object QuaternionArithmetic : Arithmetic {
-    val LOGGER = LogManager.getLogger(Complexhex.MOD_ID)
 
     private val Q_PREDICATE = IotaPredicate.ofType(ComplexHexIotaTypes.QUATERNION)
     private val D_PREDICATE = IotaPredicate.ofType(HexIotaTypes.DOUBLE)
     private val V_PREDICATE = IotaPredicate.ofType(HexIotaTypes.VEC3)
-    public val ACCEPTS_Q: IotaMultiPredicate = IotaMultiPredicate.all(Q_PREDICATE)
+    val ACCEPTS_Q: IotaMultiPredicate = IotaMultiPredicate.all(Q_PREDICATE)
     private val ACCEPTS_QD: IotaMultiPredicate = IotaMultiPredicate.pair(Q_PREDICATE, D_PREDICATE)
-    private val ACCEPTS_DQ: IotaMultiPredicate = IotaMultiPredicate.pair(D_PREDICATE, Q_PREDICATE)
     private val ACCEPTS_QQorQD: IotaMultiPredicate = IotaMultiPredicate.either(ACCEPTS_Q, ACCEPTS_QD)
     private val ACCEPTS_DV: IotaMultiPredicate = IotaMultiPredicate.pair(D_PREDICATE, V_PREDICATE)
     override fun arithName() = "quaternion_maths"
@@ -69,21 +65,19 @@ object QuaternionArithmetic : Arithmetic {
         return out
     }
 
-    fun QunaryQ(op: (Quaternion) -> (Quaternion)) = OperatorUnary(ACCEPTS_Q)
+    private fun QunaryQ(op: (Quaternion) -> (Quaternion)) = OperatorUnary(ACCEPTS_Q)
         {i: Iota -> op(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion).asIota() }
-    fun QunaryD(op: (Quaternion) -> (Double)) = OperatorUnary(ACCEPTS_Q)
+    private fun QunaryD(op: (Quaternion) -> (Double)) = OperatorUnary(ACCEPTS_Q)
         {i: Iota -> DoubleIota(op(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion))}
-    fun QQbinaryQ(op: (Quaternion, Quaternion) -> (Quaternion)) = OperatorBinary(ACCEPTS_Q)
+    private fun QQbinaryQ(op: (Quaternion, Quaternion) -> (Quaternion)) = OperatorBinary(ACCEPTS_Q)
         {i: Iota, j: Iota -> op(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion, Operator.downcast(j, ComplexHexIotaTypes.QUATERNION).quaternion).asIota() }
     private fun QDbinaryQ(op: (Quaternion, Double) -> (Quaternion)) = OperatorBinary(ACCEPTS_QD)
         {i: Iota, j: Iota -> op(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion, Operator.downcast(j, HexIotaTypes.DOUBLE).double).asIota() }
     private fun QQorQDbinaryQ(opA:(Quaternion, Quaternion) -> (Quaternion), opB:(Quaternion, Double) -> (Quaternion)) = OperatorBinary(ACCEPTS_QQorQD)
-    {i: Iota, j:Iota -> if (j is QuaternionIota) {
-            opA(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion, Operator.downcast(j, ComplexHexIotaTypes.QUATERNION).quaternion).asIota()
-        } else if (j is DoubleIota) {
-            opB(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion, Operator.downcast(j, HexIotaTypes.DOUBLE).double).asIota()
-        } else {
-            throw InvalidOperatorException("i did an oopsie, report this pls :3 (${j::class})")
+    {i: Iota, j:Iota -> when (j) {
+        is QuaternionIota -> opA(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion, Operator.downcast(j, ComplexHexIotaTypes.QUATERNION).quaternion).asIota()
+        is DoubleIota     -> opB(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion, Operator.downcast(j, HexIotaTypes.DOUBLE).double).asIota()
+        else              -> throw InvalidOperatorException("i did an oopsie, report this pls :3 (${j::class})")
         }
     }
     private fun DVbinaryQ(op: (Double, Vec3) -> Quaternion) = OperatorBinary(ACCEPTS_DV)

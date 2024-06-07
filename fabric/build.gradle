@@ -55,6 +55,12 @@ dependencies {
     modImplementation files("${rootProject.rootDir}/lib/serialization-hooks-0.4.99999.jar")
     include files("${rootProject.rootDir}/lib/serialization-hooks-0.4.99999.jar")
 
+//    modImplementation files("${rootProject.rootDir}/lib/hexal-fabric-1.20.1-0.3.0-2.jar")
+//    include files("${rootProject.rootDir}/lib/hexal-fabric-1.20.1-0.3.0-2.jar")
+
+//    modImplementation files("${rootProject.rootDir}/lib/moreiotas-fabric-1.20.1-0.1.0-4.jar")
+//    include files("${rootProject.rootDir}/lib/moreiotas-fabric-1.20.1-0.1.0-4.jar")
+
     //modImplementation "dev.emi:trinkets:${trinketsVersion}"
 
     modApi("me.shedaniel.cloth:cloth-config-fabric:$clothConfigVersion") {
