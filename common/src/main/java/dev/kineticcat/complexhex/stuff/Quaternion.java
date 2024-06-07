@@ -36,5 +36,5 @@ public class Quaternion {
     ); }
     public Quaternion inverse() { return new Quaternion(this.a, -this.b, -this.c, -this.d); }
 
-
+    public Double length() { return Math.sqrt(Math.pow(this.a, 2)+Math.pow(this.b, 2)+Math.pow(this.c, 2)+Math.pow(this.d, 2));}
 }

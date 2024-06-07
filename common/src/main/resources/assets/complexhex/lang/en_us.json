@@ -14,6 +14,6 @@
   "complexhex.page.complexities.real": "Pushes the real coefficient.",
   "hexcasting.action.book.complexhex:imaginary": "Imagining Complexities",
   "complexhex.page.complexities.imaginary": "Pushes the imaginary coefficient.",
-  "hexcasting.action.book.complexhex:conjugate": "Conjugation Purification",
+  "hexcasting.action.book.complexhex:conjugate": "Conjugation Prfn.",
   "complexhex.page.complexities.conjugate": "Negates the imaginary coefficient of the topmost iota"
 }

@@ -31,26 +31,26 @@ object ComplexArithmetic : Arithmetic {
         DIV,
         COMPLEXMUL,
         ABS,
+        CNARG,
         REAL,
         IMAGINARY,
-        CONJUGATE,
-//        PACK,
-//        UNPACK
+        CONJUGATE
     )
 
     override fun opTypes() = OPS
 
     override fun getOperator(pattern: HexPattern): Operator {
         return when (pattern) {
-            ADD        -> CDorCbinaryC({a, b -> a.add(b)}, {a, b -> a.add(b)})
-            SUB        -> CDorCbinaryC({a, b -> a.sub(b)}, {a, b -> a.sub(b)})
-            MUL        -> CDbinaryC {a, b -> a.mul(b)}
-            DIV        -> CDbinaryC {a, b -> a.scalarDiv(b)}
-            COMPLEXMUL -> CCbinaryC {a, b -> a.mul(b)}
-            ABS        -> CunaryD {a -> a.argument()}
-            REAL       -> CunaryD {a -> a.real}
-            IMAGINARY  -> CunaryD {a -> a.imag}
-            CONJUGATE  -> CunaryC {a -> a.conjugate()}
+            ADD        -> CDorCbinaryC({ a, b -> a.add(b) }, {a, b -> a.add(b)})
+            SUB        -> CDorCbinaryC({ a, b -> a.sub(b) }, {a, b -> a.sub(b)})
+            MUL        -> CDbinaryC    { a, b -> a.mul(b) }
+            DIV        -> CDbinaryC    { a, b -> a.scalarDiv(b) }
+            COMPLEXMUL -> CCbinaryC    { a, b -> a.mul(b) }
+            ABS        -> CunaryD      { a -> a.modulus() }
+            CNARG      -> CunaryD      { a -> a.argument() }
+            REAL       -> CunaryD      { a -> a.real }
+            IMAGINARY  -> CunaryD      { a -> a.imag }
+            CONJUGATE  -> CunaryC      { a -> a.conjugate() }
             else -> throw InvalidOperatorException("$pattern is not a valid operator in complex arithmetic")
         }
     }

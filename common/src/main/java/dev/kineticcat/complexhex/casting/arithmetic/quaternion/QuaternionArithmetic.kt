@@ -37,6 +37,7 @@ object QuaternionArithmetic : Arithmetic {
             SUB,
             MUL,
             DIV,
+            ABS,
             QMUL,
             QINVERT,
             QA,
@@ -54,6 +55,7 @@ object QuaternionArithmetic : Arithmetic {
             SUB     -> QQorQDbinaryQ( { a, b -> a.sub(b) }, { a, b -> a.sub(b) } )
             MUL     -> QDbinaryQ      { a, b -> a.mul(b) }
             DIV     -> QDbinaryQ      { a, b -> a.div(b) }
+            ABS     -> QunaryD        { a    -> a.length() }
             QMUL    -> QQbinaryQ      { a, b -> a.mul(b) }
             QINVERT -> QunaryQ        { a    -> a.inverse() }
             QA      -> QunaryD        { a    -> a.a }

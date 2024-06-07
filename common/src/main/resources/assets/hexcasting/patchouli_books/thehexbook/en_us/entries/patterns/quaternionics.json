@@ -1,0 +1,130 @@
+{
+  "name": "complexhex.entry.quaternionics",
+  "category": "hexcasting:patterns",
+  "icon": "minecraft:heart_of_the_sea",
+  "sortnum": 10,
+  "advancement": "hexcasting:root",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:const/quaternion/1",
+      "anchor": "complexhex:const/quaternion/1",
+      "input": "",
+      "output": "complex",
+      "text": "complexhex.page.quaternionics.const.1"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:const/quaternion/i",
+      "anchor": "complexhex:const/quaternion/i",
+      "input": "",
+      "output": "quaternion",
+      "text": "complexhex.page.quaternionics.const.i"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:const/quaternion/j",
+      "anchor": "complexhex:const/quaternion/j",
+      "input": "",
+      "output": "quaternion",
+      "text": "complexhex.page.quaternionics.const.j"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:const/quaternion/k",
+      "anchor": "complexhex:const/quaternion/k",
+      "input": "",
+      "output": "quaternion",
+      "text": "complexhex.page.quaternionics.const.k"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:add",
+      "anchor": "hexcasting:add",
+      "input": "quaternion, quaternion",
+      "output": "quaternion",
+      "text": "complexhex.page.quaternionics.add"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:sub",
+      "anchor": "hexcasting:sub",
+      "input": "quaternion, quaternion",
+      "output": "quaternion",
+      "text": "complexhex.page.quaternionics.sub"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:mul",
+      "anchor": "hexcasting:mul",
+      "input": "quaternion, num",
+      "output": "quaternion",
+      "text": "complexhex.page.quaternionics.mul"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:div",
+      "anchor": "hexcasting:div",
+      "input": "quaternion, num",
+      "output": "quaternion",
+      "text": "complexhex.page.quaternionics.div"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:qmul",
+      "anchor": "complexhex:qmul",
+      "input": "quaternion, quaternion",
+      "output": "quaternion",
+      "text": "complexhex.page.quaternionics.qmul"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:abs",
+      "anchor": "hexcasting:abs",
+      "input": "quaternion",
+      "output": "num",
+      "text": "complexhex.page.quaternionics.abs"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:qa",
+      "anchor": "complexhex:qa",
+      "input": "quaternion",
+      "output": "num",
+      "text": "complexhex.page.quaternionics.qa"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:qb",
+      "anchor": "complexhex:qb",
+      "input": "quaternion",
+      "output": "num",
+      "text": "complexhex.page.quaternionics.qb"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:qc",
+      "anchor": "complexhex:qc",
+      "input": "quaternion",
+      "output": "num",
+      "text": "complexhex.page.quaternionics.qc"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:qd",
+      "anchor": "complexhex:qd",
+      "input": "quaternion",
+      "output": "num",
+      "text": "complexhex.page.quaternionics.qd"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:invert",
+      "anchor": "complexhex:invert",
+      "input": "quaternion",
+      "output": "num",
+      "text": "complexhex.page.quaternionics.invert"
+    }
+  ]
+}

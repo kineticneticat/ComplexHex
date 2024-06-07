@@ -33,6 +33,7 @@ public class ComplexhexPatternRegistry {
     public static final HexPattern REAL = make("wqqq", HexDir.SOUTH_WEST, "real");
     public static final HexPattern IMAGINARY = make("wqqe", HexDir.SOUTH_WEST, "imaginary");
     public static final HexPattern CONJUGATE = make("wqqd", HexDir.SOUTH_WEST, "conjugate");
+    public static final HexPattern CNARG = make("waqqqqqeww", HexDir.SOUTH_EAST, "cnarg");
 
     // Quaternion Arithmetic
     public static final HexPattern CONST$QUAT$1$ = make("waqqqqqea", HexDir.SOUTH_EAST, "const/quaternion/1",

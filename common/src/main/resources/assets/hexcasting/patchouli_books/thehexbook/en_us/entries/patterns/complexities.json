@@ -2,7 +2,7 @@
   "name": "complexhex.entry.complexities",
   "category": "hexcasting:patterns",
   "icon": "minecraft:phantom_membrane",
-  "sortnum": 0,
+  "sortnum": 10,
   "advancement": "hexcasting:root",
   "read_by_default": true,
   "pages": [
