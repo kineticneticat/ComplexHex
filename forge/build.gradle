@@ -25,9 +25,11 @@ loom {
 configurations {
     common
     shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
+    shade
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
     developmentForge.extendsFrom common
+    implementation.extendsFrom shade
 }
 
 dependencies {
@@ -48,6 +50,7 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+    shade 'org.jblas:jblas:1.2.5'
 }
 
 processResources {
@@ -60,7 +63,7 @@ shadowJar {
     exclude "fabric.mod.json"
     exclude "architectury.common.json"
 
-    configurations = [project.configurations.shadowCommon]
+    configurations = [project.configurations.shadowCommon, project.configurations.shade]
     archiveClassifier.set "dev-shadow"
 }
 

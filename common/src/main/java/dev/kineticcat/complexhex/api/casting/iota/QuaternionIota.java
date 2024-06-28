@@ -62,7 +62,7 @@ public class QuaternionIota extends Iota {
 
         @Override
         public int color() {
-            return 0;
+            return ChatFormatting.DARK_BLUE.getColor();
         }
     };
 

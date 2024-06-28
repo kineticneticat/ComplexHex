@@ -2,8 +2,6 @@ package dev.kineticcat.complexhex;
 
 import dev.kineticcat.complexhex.api.casting.iota.ComplexHexIotaTypes;
 import dev.kineticcat.complexhex.casting.ComplexhexPatternRegistry;
-import dev.kineticcat.complexhex.networking.ComplexhexNetworking;
-import dev.kineticcat.complexhex.registry.ComplexhexItemRegistry;
 import dev.kineticcat.complexhex.casting.arithmetic.ComplexHexArithmetic;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -22,10 +20,8 @@ public class Complexhex {
         LOGGER.info("Complex Hex says 'ough'");
 
         ComplexhexAbstractions.initPlatformSpecific();
-        ComplexhexItemRegistry.init();
         ComplexHexIotaTypes.init();
         ComplexhexPatternRegistry.init();
-		ComplexhexNetworking.init();
         ComplexHexArithmetic.init();
 
         LOGGER.info(ComplexhexAbstractions.getConfigDirectory().toAbsolutePath().normalize().toString());

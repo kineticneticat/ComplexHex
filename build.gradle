@@ -37,6 +37,10 @@ subprojects {
 
     sourceSets.main.kotlin.srcDirs += 'src/main/java'
     sourceSets.main.resources.srcDirs += "src/generated/resources"
+
+    dependencies {
+        implementation group: "org.jblas", name: "jblas", version: "1.2.5"
+    }
 }
 
 allprojects {
