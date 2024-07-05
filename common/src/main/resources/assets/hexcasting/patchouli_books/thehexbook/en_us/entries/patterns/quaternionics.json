@@ -141,6 +141,22 @@
       "input": "quaternion",
       "output": "num",
       "text": "complexhex.page.quaternionics.qinvert"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:quattomat",
+      "anchor": "complexhex:quattomat",
+      "input": "quaternion",
+      "output": "matrix",
+      "text": "complexhex.page.quaternionics.quattomat"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:mattoquat",
+      "anchor": "complexhex:mattoquat",
+      "input": "matrix",
+      "output": "quaternion",
+      "text": "complexhex.page.quaternionics.mattoquat"
     }
   ]
 }
