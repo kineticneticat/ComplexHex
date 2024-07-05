@@ -47,5 +47,9 @@
   "hexcasting.action.book.complexhex:qd": "四元数之纯化：k",
   "complexhex.page.quaternionics.qd": "返回 k 的系数。",
   "hexcasting.action.complexhex:qinvert": "四元数逆",
-  "complexhex.page.quaternionics.qinvert": "取反 i、j、k 的系数。"
+  "complexhex.page.quaternionics.qinvert": "取反 i、j、k 的系数。",
+  "hexcasting.action.complexhex:quattomat": "矩阵化",
+  "complexhex.page.quaternionics.quattomat": "返回一个矩阵，此矩阵应当与给定四元数代表同一旋转操作。",
+  "hexcasting.action.complexhex:mattoquat": "四元数化",
+  "complexhex.page.quaternionics.mattoquat": "返回一个四元数，此四元数应当与给定矩阵代表同一旋转操作。"
 }
