@@ -23,7 +23,6 @@
     ]
   },
   "mixins": [
-    "complexhex-common.mixins.json",
     "complexhex.mixins.json"
   ],
   "depends": {

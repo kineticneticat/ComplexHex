@@ -11,6 +11,7 @@ import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.complexhex.Complexhex;
 import dev.kineticcat.complexhex.casting.patterns.OpMatrixToQuaternion;
 import dev.kineticcat.complexhex.casting.patterns.OpQuaternionToMatrix;
+import dev.kineticcat.complexhex.casting.patterns.bits.OpSummonBlockDisplay;
 import dev.kineticcat.complexhex.stuff.ComplexNumber;
 import dev.kineticcat.complexhex.stuff.Quaternion;
 import net.minecraft.core.Registry;
@@ -48,16 +49,19 @@ public class ComplexhexPatternRegistry {
             Action.makeConstantOp(new Quaternion(0, 0, 0, 1).asIota()));
     public static final HexPattern QMUL = make("waqqqqqewaqaw", HexDir.SOUTH_EAST, "qmul");
     public static final HexPattern QINVERT = make("waqqqqqew", HexDir.SOUTH_EAST, "qinvert");
-    public static final HexPattern QA = make("waqqqqqeaw", HexDir.SOUTH_EAST, "qa");
-    public static final HexPattern QB = make("waqqqqqeqw", HexDir.SOUTH_EAST, "qb");
-    public static final HexPattern QC = make("waqqqqqeew", HexDir.SOUTH_EAST, "qc");
-    public static final HexPattern QD = make("waqqqqqedw", HexDir.SOUTH_EAST, "qd");
+    public static final HexPattern QA = make("wdeeeeeqa", HexDir.SOUTH_EAST, "qa");
+    public static final HexPattern QB = make("wdeeeeeqq", HexDir.SOUTH_EAST, "qb");
+    public static final HexPattern QC = make("wdeeeeeqe", HexDir.SOUTH_EAST, "qc");
+    public static final HexPattern QD = make("wdeeeeeqd", HexDir.SOUTH_EAST, "qd");
     public static final HexPattern QMAKE = make("waqqqqqe", HexDir.SOUTH_EAST, "qmake");
     public static final HexPattern QUNMAKE = make("wdeeeeeq", HexDir.SOUTH_EAST, "qunmake");
     public static final HexPattern QUATTOMAT = make("wdeeeeeqeawwaeaww", HexDir.SOUTH_EAST, "quattomat",
             OpQuaternionToMatrix.INSTANCE);
     public static final HexPattern MATTOQUAT = make("waqqqqqeeawwaeaww", HexDir.SOUTH_EAST, "mattoquat",
             OpMatrixToQuaternion.INSTANCE);
+
+    public static final HexPattern SUMMONBLOCKDISPLAY = make("wqwqwqwqwqwawqaqqqqqe", HexDir.SOUTH_EAST, "summonblockdisplay",
+            OpSummonBlockDisplay.INSTANCE);
 
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {

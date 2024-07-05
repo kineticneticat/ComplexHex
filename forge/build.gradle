@@ -17,7 +17,6 @@ loom {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
 
-        mixinConfig "complexhex-common.mixins.json"
         mixinConfig "complexhex.mixins.json"
     }
 }
