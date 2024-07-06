@@ -12,6 +12,7 @@ import dev.kineticcat.complexhex.Complexhex;
 import dev.kineticcat.complexhex.casting.patterns.OpMatrixToQuaternion;
 import dev.kineticcat.complexhex.casting.patterns.OpQuaternionToMatrix;
 import dev.kineticcat.complexhex.casting.patterns.bits.OpSummonBlockDisplay;
+import dev.kineticcat.complexhex.casting.patterns.bits.OpSummonItemDisplay;
 import dev.kineticcat.complexhex.stuff.ComplexNumber;
 import dev.kineticcat.complexhex.stuff.Quaternion;
 import net.minecraft.core.Registry;
@@ -62,6 +63,8 @@ public class ComplexhexPatternRegistry {
 
     public static final HexPattern SUMMONBLOCKDISPLAY = make("wqwqwqwqwqwawqaqqqqqe", HexDir.SOUTH_EAST, "summonblockdisplay",
             OpSummonBlockDisplay.INSTANCE);
+    public static final HexPattern SUMMONITEMDISPLAY = make("wqwqwqwqwqwaqedeaaedeq", HexDir.SOUTH_EAST, "summonitemdisplay",
+            OpSummonItemDisplay.INSTANCE);
 
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {

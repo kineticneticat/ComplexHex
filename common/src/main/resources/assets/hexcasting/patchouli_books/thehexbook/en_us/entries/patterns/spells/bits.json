@@ -13,6 +13,14 @@
       "input": "vector, string",
       "output": "entity",
       "text": "complex.page.summonblockdisplay"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:summonitemdisplay",
+      "anchor": "complexhex:summonitemdisplay",
+      "input": "vector, string",
+      "output": "entity",
+      "text": "complex.page.summonitemdisplay"
     }
   ]
 }

@@ -8,13 +8,12 @@ import at.petrak.hexcasting.api.casting.getVec3
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.misc.MediaConstants
 import dev.kineticcat.complexhex.casting.mishap.MishapBadString
+import dev.kineticcat.complexhex.mixin.ItemDisplayInvoker
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.Display
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.Vec3
 import ram.talia.moreiotas.api.getString
 
@@ -43,11 +42,11 @@ object OpSummonItemDisplay : SpellAction {
 
     private data class Spell(val pos: Vec3, val itemstack: ItemStack) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
-            val blockdisplay = Display.ItemDisplay(EntityType.ITEM_DISPLAY, env.world).apply {
+            val itemdisplay = Display.ItemDisplay(EntityType.ITEM_DISPLAY, env.world).apply {
                 setPos(pos.x, pos.y, pos.z);
-                setI
             }
-            env.world.addFreshEntity(blockdisplay)
+            (itemdisplay as ItemDisplayInvoker).invokeSetItemStack(itemstack)
+            env.world.addFreshEntity(itemdisplay)
         }
     }
 }

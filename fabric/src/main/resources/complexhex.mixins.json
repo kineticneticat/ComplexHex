@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "ItemDisplayInvoker"
   ],
   "injectors": {
     "defaultRequire": 1
