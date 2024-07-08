@@ -51,5 +51,7 @@
   "hexcasting.action.complexhex:quattomat": "Matrixification",
   "complexhex.page.quaternionics.quattomat": "Pushes a matrix that (should) represent the same rotation as the quaternion",
   "hexcasting.action.complexhex:mattoquat": "Quaterniation",
-  "complexhex.page.quaternionics.mattoquat": "Pushes a quaternion that (should) reperesent the same rotation as the matrix"
+  "complexhex.page.quaternionics.mattoquat": "Pushes a quaternion that (should) reperesent the same rotation as the matrix",
+
+  "complexhex.tooltip.bubble_contents": "{%s}"
 }

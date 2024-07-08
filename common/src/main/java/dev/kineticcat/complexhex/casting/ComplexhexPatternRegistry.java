@@ -7,8 +7,11 @@ import at.petrak.hexcasting.api.casting.castables.Action;
 import at.petrak.hexcasting.api.casting.castables.OperationAction;
 import at.petrak.hexcasting.api.casting.math.HexDir;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
+import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntitiesBy;
+import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntityAt;
 import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.complexhex.Complexhex;
+import dev.kineticcat.complexhex.casting.patterns.OpBubbleIota;
 import dev.kineticcat.complexhex.casting.patterns.OpMatrixToQuaternion;
 import dev.kineticcat.complexhex.casting.patterns.OpQuaternionToMatrix;
 import dev.kineticcat.complexhex.casting.patterns.bits.OpSummonBlockDisplay;
@@ -18,6 +21,7 @@ import dev.kineticcat.complexhex.stuff.ComplexNumber;
 import dev.kineticcat.complexhex.stuff.Quaternion;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Display;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -62,12 +66,22 @@ public class ComplexhexPatternRegistry {
     public static final HexPattern MATTOQUAT = make("waqqqqqeeawwaeaww", HexDir.SOUTH_EAST, "mattoquat",
             OpMatrixToQuaternion.INSTANCE);
 
+    // BITs
     public static final HexPattern SUMMONBLOCKDISPLAY = make("wqwqwqwqwqwawqaqqqqqe", HexDir.SOUTH_EAST, "summonblockdisplay",
             OpSummonBlockDisplay.INSTANCE);
     public static final HexPattern SUMMONITEMDISPLAY = make("wqwqwqwqwqwaqedeaaedeq", HexDir.SOUTH_EAST, "summonitemdisplay",
             OpSummonItemDisplay.INSTANCE);
     public static final HexPattern SUMMONTEXTDISPLAY = make("wqwqwqwqwqwawaaqawdeddw", HexDir.SOUTH_EAST, "summontextdisplay",
             OpSummonTextDisplay.INSTANCE);
+    public static final HexPattern GET_ENTITY$BIT = make ("qqwwewewewewewwqqdaqaaww", HexDir.SOUTH_EAST, "get_entity/bit",
+            new OpGetEntityAt(e -> e instanceof Display));
+    public static final HexPattern ZONE_ENTITY$BIT = make ("qqwwewewewewewwqqwdeddww", HexDir.SOUTH_EAST, "zone_entity/bit",
+            new OpGetEntitiesBy(e -> e instanceof Display, false));
+    public static final HexPattern GET_ENTITY$NOT_BIT = make ("eewwqwqwqwqwqwweewaqaaww", HexDir.NORTH_EAST, "zone_entity/not_bit",
+            new OpGetEntitiesBy(e -> e instanceof Display, false));
+
+    public static final HexPattern BUBBLE = make("qdqdqdqdqdq", HexDir.SOUTH_EAST, "buuble",
+            OpBubbleIota.INSTANCE);
 
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {

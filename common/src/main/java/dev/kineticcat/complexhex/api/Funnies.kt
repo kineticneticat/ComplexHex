@@ -15,4 +15,5 @@ fun List<Iota>.getQuaternion(idx: Int, argc: Int = 0): Quaternion {
         throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "quaternion")
     }
 }
+
 inline val Quaternion.asActionResult get() = listOf(QuaternionIota(this))
