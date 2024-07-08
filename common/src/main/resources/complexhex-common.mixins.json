@@ -7,7 +7,7 @@
     "ComplexHexMixin"
   ],
   "mixins": [
-    "ItemDisplayInvoker"
+    "BITInvokers.ItemDisplayInvoker"
   ],
   "injectors": {
     "defaultRequire": 1

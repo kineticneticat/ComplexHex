@@ -82,9 +82,9 @@ public class QuaternionIota extends Iota {
         text += text.equals("") ? ( Q.b==0 ? "" : String.format("%.2f", Q.b)+"i" )
                                 : ( Q.b==0 ? "" : " " + (Q.b<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.b)) + "i" );
         text += text.equals("") ? ( Q.c==0 ? "" : String.format("%.2f", Q.c)+"j" )
-                                : ( Q.c==0 ? "" : " " + (Q.b<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.c)) + "j" );
+                                : ( Q.c==0 ? "" : " " + (Q.c<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.c)) + "j" );
         text += text.equals("") ? ( Q.d==0 ? "" : String.format("%.2f", Q.d)+"k" )
-                                : ( Q.d==0 ? "" : " " + (Q.b<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.d)) + "k" );
+                                : ( Q.d==0 ? "" : " " + (Q.d<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.d)) + "k" );
         text = text.equals("") ? String.format("%.2f", 0.0d) : text;
         return Component.literal(text).withStyle(QuaternionColour);
     }

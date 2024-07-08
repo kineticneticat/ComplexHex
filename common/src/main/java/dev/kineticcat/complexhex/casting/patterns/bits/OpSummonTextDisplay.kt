@@ -7,46 +7,39 @@ import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.getVec3
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.misc.MediaConstants
-import dev.kineticcat.complexhex.casting.mishap.MishapBadString
 import dev.kineticcat.complexhex.mixin.BITInvokers.ItemDisplayInvoker
-import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.resources.ResourceLocation
+import dev.kineticcat.complexhex.mixin.BITInvokers.TextDisplayInvoker
+import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Display
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.item.ItemStack
 import net.minecraft.world.phys.Vec3
 import ram.talia.moreiotas.api.getString
 
 
-object OpSummonItemDisplay : SpellAction {
+object OpSummonTextDisplay : SpellAction {
     override val argc = 2
     private val cost = 2 * MediaConstants.DUST_UNIT
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         val pos = args.getVec3(0, argc)
-        val name = args.getString(1, argc)
+        val text = args.getString(1, argc)
 
         env.assertVecInRange(pos)
-        if (!BuiltInRegistries.ITEM.containsKey(ResourceLocation(name)))
-            throw MishapBadString.of(name, "opsummonitemdisplay")
-
-        val item = BuiltInRegistries.ITEM.get(ResourceLocation(name))
-        val itemstack = ItemStack(item)
 
 
         return SpellAction.Result(
-            Spell(pos, itemstack),
+            Spell(pos, text),
             cost,
             listOf(ParticleSpray.burst(pos, 1.0))
         )
     }
 
-    private data class Spell(val pos: Vec3, val itemstack: ItemStack) : RenderedSpell {
+    private data class Spell(val pos: Vec3, val text: String) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
-            val itemdisplay = Display.ItemDisplay(EntityType.ITEM_DISPLAY, env.world).apply {
+            val textdisplay = Display.TextDisplay(EntityType.TEXT_DISPLAY, env.world).apply {
                 setPos(pos.x, pos.y, pos.z);
             }
-            (itemdisplay as ItemDisplayInvoker).invokeSetItemStack(itemstack)
-            env.world.addFreshEntity(itemdisplay)
+            (textdisplay as TextDisplayInvoker).invokeSetText(Component.literal(text))
+            env.world.addFreshEntity(textdisplay)
         }
     }
 }

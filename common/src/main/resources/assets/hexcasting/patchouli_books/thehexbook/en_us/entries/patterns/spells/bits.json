@@ -11,7 +11,7 @@
       "op_id": "complexhex:summonblockdisplay",
       "anchor": "complexhex:summonblockdisplay",
       "input": "vector, string",
-      "output": "entity",
+      "output": "",
       "text": "complex.page.summonblockdisplay"
     },
     {
@@ -19,8 +19,16 @@
       "op_id": "complexhex:summonitemdisplay",
       "anchor": "complexhex:summonitemdisplay",
       "input": "vector, string",
-      "output": "entity",
+      "output": "",
       "text": "complex.page.summonitemdisplay"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:summontextdisplay",
+      "anchor": "complexhex:summontextdisplay",
+      "input": "vector, string",
+      "output": "",
+      "text": "complex.page.summontextdisplay"
     }
   ]
 }
