@@ -15,53 +15,51 @@ import dev.kineticcat.complexhex.api.getQuaternion
 import dev.kineticcat.complexhex.casting.mishap.MishapBadString
 import dev.kineticcat.complexhex.mixin.BITInvokers.BlockDisplayInvoker
 import dev.kineticcat.complexhex.mixin.BITInvokers.DisplayInvoker
+import dev.kineticcat.complexhex.mixin.BITInvokers.ItemDisplayInvoker
+import dev.kineticcat.complexhex.mixin.BITInvokers.TextDisplayInvoker
 import dev.kineticcat.complexhex.stuff.Quaternion
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.Display
+import net.minecraft.world.entity.Display.BlockDisplay
+import net.minecraft.world.entity.Display.TextDisplay
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.Vec3
+import org.joml.Vector3d
+import org.joml.Vector3f
 import ram.talia.moreiotas.api.getEntityType
 import ram.talia.moreiotas.api.getString
 
 
-object OpRotateBIT : SpellAction {
+object OpTranslateBIT : SpellAction {
     override val argc = 2
     private val cost = 2 * MediaConstants.DUST_UNIT
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         val e = args.getEntity(0, argc)
-        val quaternion = args.getQuaternion(1, argc)
+        val delta = args.getVec3(1, argc)
 
+        if (e !is Display) throw MishapBadEntity(e, Component.translatable("bits.badentity"))
 
         env.assertEntityInRange(e)
-        if (e !is Display) throw MishapBadEntity(e, Component.translatable("bits.rotate.badentity"))
-
         val pos = (e as Display).position()
 
         return SpellAction.Result(
-            Spell(e, quaternion),
+            Spell(e, delta),
             cost,
             listOf(ParticleSpray.burst(pos, 1.0))
         )
     }
 
-    private data class Spell(val BIT: Display, val quat: Quaternion) : RenderedSpell {
+    private data class Spell(val BIT: Display, val delta: Vec3) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
-
-            /////////SOMETHING HERE IS BROKEY!!!!!!
-
-            val currentQuat = BIT.entityData.get((BIT as DisplayInvoker).GetLeftRoatationDataID())
-
-            // applying Old then New so New*Old
-            //i really should change over my maths stuff lmao
-            val newQuat = quat.mul(Quaternion.toMine(currentQuat)).toOther()
-
-            (BIT as DisplayInvoker).invokeSetTransformation(Transformation(null, newQuat, null, null))
-            BIT.tick() //??????
+            val currentPos = BIT.position()
+            val newPos = currentPos.add(delta)
+            BIT.setPos(newPos)
+            BIT.tick() // for good measure i guess????
         }
     }
 }

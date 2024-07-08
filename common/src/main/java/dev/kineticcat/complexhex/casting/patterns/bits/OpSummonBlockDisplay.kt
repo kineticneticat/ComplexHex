@@ -46,6 +46,7 @@ object OpSummonBlockDisplay : SpellAction {
             }
             (blockdisplay as BlockDisplayInvoker).invokeSetBlockState(blockstate)
             env.world.addFreshEntity(blockdisplay)
+            blockdisplay.tick()
         }
     }
 }

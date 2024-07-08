@@ -36,6 +36,8 @@ public class Quaternion {
             (A.a*B.c - A.b*B.d + A.c*B.a + A.d*B.b),
             (A.a*B.d + A.b*B.c - A.c*B.b + A.d*B.a)
     ); }
+    public static Quaternion toMine(Quaternionf B) {return new Quaternion(B.w, B.x, B.y, B.z);}
+    public Quaternionf toOther() {return new Quaternionf(this.a, this.b, this.c, this.d);}
     public Quaternion inverse() { return new Quaternion(this.a, -this.b, -this.c, -this.d); }
 
     public Double length() { return Math.sqrt(Math.pow(this.a, 2)+Math.pow(this.b, 2)+Math.pow(this.c, 2)+Math.pow(this.d, 2));}

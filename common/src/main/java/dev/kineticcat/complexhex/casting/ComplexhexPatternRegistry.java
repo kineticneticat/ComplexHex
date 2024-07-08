@@ -14,9 +14,7 @@ import dev.kineticcat.complexhex.Complexhex;
 import dev.kineticcat.complexhex.casting.patterns.OpBubbleIota;
 import dev.kineticcat.complexhex.casting.patterns.OpMatrixToQuaternion;
 import dev.kineticcat.complexhex.casting.patterns.OpQuaternionToMatrix;
-import dev.kineticcat.complexhex.casting.patterns.bits.OpSummonBlockDisplay;
-import dev.kineticcat.complexhex.casting.patterns.bits.OpSummonItemDisplay;
-import dev.kineticcat.complexhex.casting.patterns.bits.OpSummonTextDisplay;
+import dev.kineticcat.complexhex.casting.patterns.bits.*;
 import dev.kineticcat.complexhex.stuff.ComplexNumber;
 import dev.kineticcat.complexhex.stuff.Quaternion;
 import net.minecraft.core.Registry;
@@ -73,6 +71,12 @@ public class ComplexhexPatternRegistry {
             OpSummonItemDisplay.INSTANCE);
     public static final HexPattern SUMMONTEXTDISPLAY = make("wqwqwqwqwqwawaaqawdeddw", HexDir.SOUTH_EAST, "summontextdisplay",
             OpSummonTextDisplay.INSTANCE);
+
+    public static final HexPattern TRANSLATEBIT = make("wqwqwqwqwqwawwaqaeaqe", HexDir.SOUTH_EAST, "translatebit",
+            OpTranslateBIT.INSTANCE);
+    public static final HexPattern ROTATEBIT = make("wqwqwqwqwqwaqeeeeedww", HexDir.SOUTH_EAST, "rotatebit",
+            OpRotateBIT.INSTANCE);
+
     public static final HexPattern GET_ENTITY$BIT = make ("qqwwewewewewewwqqdaqaaww", HexDir.SOUTH_EAST, "get_entity/bit",
             new OpGetEntityAt(e -> e instanceof Display));
     public static final HexPattern ZONE_ENTITY$BIT = make ("qqwwewewewewewwqqwdeddww", HexDir.SOUTH_EAST, "zone_entity/bit",

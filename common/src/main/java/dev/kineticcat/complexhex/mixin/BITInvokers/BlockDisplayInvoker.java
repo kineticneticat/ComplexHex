@@ -10,4 +10,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface BlockDisplayInvoker {
     @Invoker("setBlockState")
     public void invokeSetBlockState(BlockState blockState);
+    @Invoker("getBlockState")
+    BlockState invokeGetBlockState();
 }

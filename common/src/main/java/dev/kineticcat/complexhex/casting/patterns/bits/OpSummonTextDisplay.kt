@@ -40,6 +40,7 @@ object OpSummonTextDisplay : SpellAction {
             }
             (textdisplay as TextDisplayInvoker).invokeSetText(Component.literal(text))
             env.world.addFreshEntity(textdisplay)
+            textdisplay.tick()
         }
     }
 }

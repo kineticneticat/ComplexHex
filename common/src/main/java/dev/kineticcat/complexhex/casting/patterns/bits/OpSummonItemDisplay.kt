@@ -47,6 +47,7 @@ object OpSummonItemDisplay : SpellAction {
             }
             (itemdisplay as ItemDisplayInvoker).invokeSetItemStack(itemstack)
             env.world.addFreshEntity(itemdisplay)
+            itemdisplay.tick()
         }
     }
 }

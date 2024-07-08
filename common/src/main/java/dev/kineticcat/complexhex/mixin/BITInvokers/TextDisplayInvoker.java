@@ -10,4 +10,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface TextDisplayInvoker {
     @Invoker("setText")
     public void invokeSetText(Component component);
+    @Invoker("getText")
+    Component invokeGetText();
 }

@@ -9,4 +9,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface ItemDisplayInvoker {
     @Invoker("setItemStack")
     void invokeSetItemStack(ItemStack itemStack);
+    @Invoker("getItemStack")
+    ItemStack invokeGetItemstack();
 }
