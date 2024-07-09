@@ -20,6 +20,15 @@ public class Quaternion extends Quaterniond {
     public Quaternion() {
         super(0,0,0,0);
     }
+    public Quaternion(Vec3 axis, double angle) {
+        super(0,0,0,0);
+        double C = Math.cos(angle/2);
+        double S = Math.sin(angle/2);
+        this.w = C;
+        this.x = axis.x*S;
+        this.y = axis.y*S;
+        this.z = axis.z*S;
+    }
 
 
     public QuaternionIota asIota() { return new QuaternionIota(this); }

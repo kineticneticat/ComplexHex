@@ -11,6 +11,7 @@ import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntitiesBy;
 import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntityAt;
 import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.complexhex.Complexhex;
+import dev.kineticcat.complexhex.casting.patterns.OpAxisAngle;
 import dev.kineticcat.complexhex.casting.patterns.OpBubbleIota;
 import dev.kineticcat.complexhex.casting.patterns.OpMatrixToQuaternion;
 import dev.kineticcat.complexhex.casting.patterns.OpQuaternionToMatrix;
@@ -20,6 +21,7 @@ import dev.kineticcat.complexhex.stuff.Quaternion;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Display;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -63,6 +65,8 @@ public class ComplexhexPatternRegistry {
             OpQuaternionToMatrix.INSTANCE);
     public static final HexPattern MATTOQUAT = make("waqqqqqeeawwaeaww", HexDir.SOUTH_EAST, "mattoquat",
             OpMatrixToQuaternion.INSTANCE);
+    public static final HexPattern AXISANGLE = make("waqqqqqedaqqqa", HexDir.SOUTH_EAST, "axisangle",
+            OpAxisAngle.INSTANCE);
 
     // BITs
     public static final HexPattern SUMMONBLOCKDISPLAY = make("wqwqwqwqwqwawqaqqqqqe", HexDir.SOUTH_EAST, "summonblockdisplay",
@@ -76,6 +80,8 @@ public class ComplexhexPatternRegistry {
             OpTranslateBIT.INSTANCE);
     public static final HexPattern ROTATEBIT = make("wqwqwqwqwqwaqeeeeedww", HexDir.SOUTH_EAST, "rotatebit",
             OpRotateBIT.INSTANCE);
+    public static final HexPattern SCALEBIT = make("wqwqwqwqwqwawwaawaawa", HexDir.SOUTH_EAST, "scalebit",
+            OpScaleBIT.INSTANCE);
 
     public static final HexPattern GET_ENTITY$BIT = make ("qqwwewewewewewwqqdaqaaww", HexDir.SOUTH_EAST, "get_entity/bit",
             new OpGetEntityAt(e -> e instanceof Display));

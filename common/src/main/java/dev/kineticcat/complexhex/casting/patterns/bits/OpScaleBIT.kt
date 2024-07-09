@@ -31,12 +31,12 @@ import ram.talia.moreiotas.api.getEntityType
 import ram.talia.moreiotas.api.getString
 
 
-object OpRotateBIT : SpellAction {
+object OpScaleBIT : SpellAction {
     override val argc = 2
     private val cost = 2 * MediaConstants.DUST_UNIT
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         val e = args.getEntity(0, argc)
-        val quaternion = args.getQuaternion(1, argc)
+        val vec = args.getVec3(1, argc)
 
 
         env.assertEntityInRange(e)
@@ -45,18 +45,18 @@ object OpRotateBIT : SpellAction {
         val pos = (e as Display).position()
 
         return SpellAction.Result(
-            Spell(e, quaternion),
+            Spell(e, vec),
             cost,
             listOf(ParticleSpray.burst(pos, 1.0))
         )
     }
 
-    private data class Spell(val BIT: Display, val quat: Quaternion) : RenderedSpell {
+    private data class Spell(val BIT: Display, val vec: Vec3) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
 
-            val oldScale = BIT.entityData.get((BIT as DisplayInvoker).GetScaleDataID())
+            val oldRotation = BIT.entityData.get((BIT as DisplayInvoker).GetLeftRoatationDataID())
 
-            (BIT as DisplayInvoker).invokeSetTransformation(Transformation(null, Quaternionf(quat), oldScale, null))
+            (BIT as DisplayInvoker).invokeSetTransformation(Transformation(null, oldRotation, vec.toVector3f(), null))
             BIT.tick() //??????
         }
     }
