@@ -25,6 +25,8 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.Vec3
+import org.joml.Quaterniond
+import org.joml.Quaternionf
 import ram.talia.moreiotas.api.getEntityType
 import ram.talia.moreiotas.api.getString
 
@@ -52,15 +54,9 @@ object OpRotateBIT : SpellAction {
     private data class Spell(val BIT: Display, val quat: Quaternion) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
 
-            /////////SOMETHING HERE IS BROKEY!!!!!!
+            val oldTranslation = BIT.entityData.get((BIT as DisplayInvoker).GetTranslationDataID())
 
-            val currentQuat = BIT.entityData.get((BIT as DisplayInvoker).GetLeftRoatationDataID())
-
-            // applying Old then New so New*Old
-            //i really should change over my maths stuff lmao
-            val newQuat = quat.mul(Quaternion.toMine(currentQuat)).toOther()
-
-            (BIT as DisplayInvoker).invokeSetTransformation(Transformation(null, newQuat, null, null))
+            (BIT as DisplayInvoker).invokeSetTransformation(Transformation(oldTranslation, Quaternionf(quat), null, null))
             BIT.tick() //??????
         }
     }

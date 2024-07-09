@@ -53,10 +53,10 @@ public class ComplexhexPatternRegistry {
             Action.makeConstantOp(new Quaternion(0, 0, 0, 1).asIota()));
     public static final HexPattern QMUL = make("waqqqqqewaqaw", HexDir.SOUTH_EAST, "qmul");
     public static final HexPattern QINVERT = make("waqqqqqew", HexDir.SOUTH_EAST, "qinvert");
-    public static final HexPattern QA = make("wdeeeeeqa", HexDir.SOUTH_EAST, "qa");
-    public static final HexPattern QB = make("wdeeeeeqq", HexDir.SOUTH_EAST, "qb");
-    public static final HexPattern QC = make("wdeeeeeqe", HexDir.SOUTH_EAST, "qc");
-    public static final HexPattern QD = make("wdeeeeeqd", HexDir.SOUTH_EAST, "qd");
+    public static final HexPattern QW = make("wdeeeeeqa", HexDir.SOUTH_EAST, "qw");
+    public static final HexPattern QX = make("wdeeeeeqq", HexDir.SOUTH_EAST, "qx");
+    public static final HexPattern QY = make("wdeeeeeqe", HexDir.SOUTH_EAST, "qy");
+    public static final HexPattern QZ = make("wdeeeeeqd", HexDir.SOUTH_EAST, "qz");
     public static final HexPattern QMAKE = make("waqqqqqe", HexDir.SOUTH_EAST, "qmake");
     public static final HexPattern QUNMAKE = make("wdeeeeeq", HexDir.SOUTH_EAST, "qunmake");
     public static final HexPattern QUATTOMAT = make("wdeeeeeqeawwaeaww", HexDir.SOUTH_EAST, "quattomat",

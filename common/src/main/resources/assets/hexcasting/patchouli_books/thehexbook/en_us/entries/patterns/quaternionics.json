@@ -104,35 +104,35 @@
     },
     {
       "type": "hexcasting:pattern",
-      "op_id": "complexhex:qa",
-      "anchor": "complexhex:qa",
+      "op_id": "complexhex:qw",
+      "anchor": "complexhex:qw",
       "input": "quaternion",
       "output": "num",
-      "text": "complexhex.page.quaternionics.qa"
+      "text": "complexhex.page.quaternionics.qw"
     },
     {
       "type": "hexcasting:pattern",
-      "op_id": "complexhex:qb",
-      "anchor": "complexhex:qb",
+      "op_id": "complexhex:qx",
+      "anchor": "complexhex:qx",
       "input": "quaternion",
       "output": "num",
-      "text": "complexhex.page.quaternionics.qb"
+      "text": "complexhex.page.quaternionics.qx"
     },
     {
       "type": "hexcasting:pattern",
-      "op_id": "complexhex:qc",
-      "anchor": "complexhex:qc",
+      "op_id": "complexhex:qy",
+      "anchor": "complexhex:qy",
       "input": "quaternion",
       "output": "num",
-      "text": "complexhex.page.quaternionics.qc"
+      "text": "complexhex.page.quaternionics.qy"
     },
     {
       "type": "hexcasting:pattern",
-      "op_id": "complexhex:qd",
-      "anchor": "complexhex:qd",
+      "op_id": "complexhex:qz",
+      "anchor": "complexhex:qz",
       "input": "quaternion",
       "output": "num",
-      "text": "complexhex.page.quaternionics.qd"
+      "text": "complexhex.page.quaternionics.qz"
     },
     {
       "type": "hexcasting:pattern",

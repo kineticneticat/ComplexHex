@@ -4,7 +4,6 @@ import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
-import dev.kineticcat.complexhex.api.asActionResult
 import dev.kineticcat.complexhex.stuff.Quaternion
 import ram.talia.moreiotas.api.getMatrix
 import kotlin.math.sqrt
@@ -48,6 +47,6 @@ object OpMatrixToQuaternion : ConstMediaAction {
             c = (M[1,2] + M[2,1]) / S;
             d = 0.25 * S;
         }
-        return Quaternion(a, b, c, d).asActionResult
+        return Quaternion(a, b, c, d).asActionResult()
     }
 }

@@ -12,15 +12,15 @@ object OpQuaternionToMatrix : ConstMediaAction {
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         val Q = args.getQuaternion(0)
 
-        val a = Q.a
-        val b = Q.b
-        val c = Q.c
-        val d = Q.d
+        val w = Q.w
+        val x = Q.x
+        val y = Q.y
+        val z = Q.z
 
         return DoubleMatrix(arrayOf(
-            doubleArrayOf(2*(b*b+a*a)-1, 2*(b*c-a*d),   2*(b*d+a*c)   ),
-            doubleArrayOf(2*(b*c+a*d),   2*(a*a+c*c)-1, 2*(c*d-a*b)   ),
-            doubleArrayOf(2*(b*d-a*c),   2*(c*d+a*b),   2*(a*a+d*d)-1 )
+            doubleArrayOf(2*(x*x+w*w)-1, 2*(x*y-w*z),   2*(x*z+w*y)   ),
+            doubleArrayOf(2*(x*y+w*z),   2*(w*w+y*y)-1, 2*(y*z-w*x)   ),
+            doubleArrayOf(2*(x*z-w*y),   2*(y*z+w*x),   2*(w*w+z*z)-1 )
         )).asActionResult
     }
 }
