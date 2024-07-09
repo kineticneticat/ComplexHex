@@ -18,7 +18,7 @@ import ram.talia.moreiotas.api.getString
 
 object OpSummonTextDisplay : SpellAction {
     override val argc = 2
-    private val cost = 2 * MediaConstants.DUST_UNIT
+    private val cost = MediaConstants.CRYSTAL_UNIT
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         val pos = args.getVec3(0, argc)
         val text = args.getString(1, argc)

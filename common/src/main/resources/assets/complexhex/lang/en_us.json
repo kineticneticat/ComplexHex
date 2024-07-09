@@ -53,5 +53,10 @@
   "hexcasting.action.complexhex:mattoquat": "Quaterniation",
   "complexhex.page.quaternionics.mattoquat": "Pushes a quaternion that (should) reperesent the same rotation as the matrix",
 
-  "complexhex.tooltip.bubble_contents": "{%s}"
+  "complexhex.tooltip.bubble_contents": "{%s}",
+
+  "complexhex.entry.bits": "BIT Manipulation",
+  "complexhex.page.bitexplainer": "",
+  "hexcasting.action.complexhex.summonblockdisplay": "",
+  "complexhex.page.summonblockdisplay": ""
 }

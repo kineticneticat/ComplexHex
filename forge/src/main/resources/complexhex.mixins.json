@@ -6,6 +6,10 @@
   "client": [
   ],
   "mixins": [
+    "BITInvokers.DisplayInvoker",
+    "BITInvokers.BlockDisplayInvoker",
+    "BITInvokers.ItemDisplayInvoker",
+    "BITInvokers.TextDisplayInvoker"
   ],
   "injectors": {
     "defaultRequire": 1
