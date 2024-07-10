@@ -1,5 +1,5 @@
-modid = "net"
-book = "net:complexhexbook"
+modid = "complexhex"
+book = "complexhex:complexhexbook"
 default_lang = "en_us"
 default_branch = "main"
 
@@ -20,24 +20,24 @@ export_dir = "src/hexdoc_complexhex/_export/generated"
 [template]
 icon = "icon.png"
 include = [
-    "net",
+    "complexhex",
     "hexcasting",
     "hexdoc",
 ]
 
 [template.args]
 mod_name = "Complex Hex"
-author = "net"
+author = "kineticcat"
 show_landing_text = false
 
 [extra.hexcasting]
 # regexes for parsing pattern registry files - try running copier update and picking a different regex if your patterns aren't loading
 # NOTE: "!Raw" means "don't apply variable interpolation to this value"
-_pattern_regex = { "!Raw"='(?P<is_per_world>register|registerPerWorld)\(HexPattern\.fromAngles\("(?P<signature>[qweasd]+)",\s*HexDir\.(?P<startdir>\w+)\),\s*"(?P<name>[^"]+)"?' }
-_per_world_value = "registerPerWorld"
+_pattern_regex = { "!Raw"='\s[\s\S]+?make\("(?<signature>[qweasd]+)", HexDir.(?<startDir>(?:NORTH|SOUTH)_(?:EAST|WEST)), "(?<name>[^"]+)", (?<isPerWorld>true|false)' }
+_per_world_value = "true"
 
 [[extra.hexcasting.pattern_stubs]]
-path = "{^^^_common.package}/registry/ComplexhexPatternRegistry.java"
+path = "{^^^_common.package}/casting/ComplexhexPatternRegistry.java"
 regex = "{^_pattern_regex}"
 per_world_value = "{^_per_world_value}"
 
@@ -45,12 +45,12 @@ per_world_value = "{^_per_world_value}"
 
 [_common]
 src = "../common/src"
-package = "{src}/main/java/net/net"
+package = "{src}/main/java/dev/complexhex"
 
 [_fabric]
 src = "../fabric/src"
-package = "{src}/main/java/net/net/fabric"
+package = "{src}/main/java/dev/complexhex/fabric"
 
 [_forge]
 src = "../forge/src"
-package = "{src}/main/java/net/net/forge"
+package = "{src}/main/java/dev/complexhex/forge"

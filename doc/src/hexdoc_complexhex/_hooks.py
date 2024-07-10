@@ -26,7 +26,7 @@ class ComplexhexModPlugin(ModPluginWithBook):
     @property
     @override
     def modid(self) -> str:
-        return "net"
+        return "complexhex"
 
     @property
     @override
