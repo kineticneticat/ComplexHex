@@ -92,12 +92,11 @@ public class ComplexhexPatternRegistry {
     public static final HexPattern GET_ENTITY$NOT_BIT = make ("eewwqwqwqwqwqwweewaqaaww", HexDir.NORTH_EAST, "zone_entity/not_bit",
             new OpGetEntitiesBy(e -> e instanceof Display, false));
 
-    public static final HexPattern BUBBLE = make("qdqdqdqdqdq", HexDir.SOUTH_EAST, "buuble",
+    public static final HexPattern BUBBLE = make("qdqdqdqdqdq", HexDir.SOUTH_EAST, "bubble",
             OpBubbleIota.INSTANCE);
 
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {
-//            LOGGER.info(entry);
             Registry.register(HexActions.REGISTRY, entry.getKey(), entry.getValue());
         }
     }

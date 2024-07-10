@@ -37,7 +37,7 @@ import ram.talia.moreiotas.api.getString
 
 object OpTranslateBIT : SpellAction {
     override val argc = 2
-    private val cost = 2 * MediaConstants.DUST_UNIT
+    private val cost: long
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         val e = args.getEntity(0, argc)
         val delta = args.getVec3(1, argc)
@@ -46,6 +46,9 @@ object OpTranslateBIT : SpellAction {
 
         env.assertEntityInRange(e)
         val pos = (e as Display).position()
+        env.assertVecInRange(pos.add(delta))
+
+        // cost = delta.length ??? check when home
 
         return SpellAction.Result(
             Spell(e, delta),

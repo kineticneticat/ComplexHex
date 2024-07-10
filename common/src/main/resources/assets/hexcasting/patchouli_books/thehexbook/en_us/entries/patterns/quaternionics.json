@@ -157,6 +157,14 @@
       "input": "matrix",
       "output": "quaternion",
       "text": "complexhex.page.quaternionics.mattoquat"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:axisangle",
+      "anchor": "complexhex:axisangle",
+      "input": "vec, num",
+      "output": "quaternion",
+      "text": "complexhex.page.quaternionics.axisangle"
     }
   ]
 }
