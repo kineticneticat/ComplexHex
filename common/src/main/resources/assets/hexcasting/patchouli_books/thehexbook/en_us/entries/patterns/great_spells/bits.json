@@ -1,6 +1,6 @@
 {
   "name": "complexhex.entry.bits",
-  "category": "hexcasting:patterns/spells",
+  "category": "hexcasting:patterns/great_spells",
   "icon": "minecraft:oak_sign",
   "sortnum": 0,
   "advancement": "hexcasting:root",

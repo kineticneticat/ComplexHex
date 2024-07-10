@@ -35,7 +35,7 @@ object OpKillBIT : SpellAction {
 
         env.assertEntityInRange(e)
 
-        if (e !is Display) throw MishapBadEntity(e, Component.translatable("bits.rotate.badentity"))
+        if (e !is Display) throw MishapBadEntity.of(e, "bit")
 
         val pos = (e as Display).position()
 

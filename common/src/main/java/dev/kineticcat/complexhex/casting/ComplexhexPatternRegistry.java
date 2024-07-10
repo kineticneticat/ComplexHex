@@ -100,14 +100,15 @@ public class ComplexhexPatternRegistry {
             Registry.register(HexActions.REGISTRY, entry.getKey(), entry.getValue());
         }
     }
-    private static HexPattern make(String signature, HexDir dir, String name, Action act ) {
+    // perWorld is never used since it just is there for hexdoc's regex
+    private static HexPattern make(String signature, HexDir dir, String name, Boolean perWorld, Action act ) {
         PATTERNS.put(
                 new ResourceLocation(Complexhex.MOD_ID, name),
                 new ActionRegistryEntry(HexPattern.fromAngles(signature, dir), act)
         );
         return HexPattern.fromAngles(signature, dir);
     }
-    private static HexPattern make(String signature, HexDir dir, String name) {
+    private static HexPattern make(String signature, HexDir dir, String name, Boolean perWorld) {
         HexPattern pattern = HexPattern.fromAngles(signature, dir);
         PATTERNS.put(
                 new ResourceLocation(Complexhex.MOD_ID, name),

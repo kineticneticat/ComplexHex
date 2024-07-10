@@ -1,4 +1,4 @@
-package at.petrak.hexcasting.datagen.tag;
+package dev.kineticcat.complexhex.datagen.tag;
 
 import at.petrak.hexcasting.api.casting.ActionRegistryEntry;
 import at.petrak.hexcasting.api.mod.HexTags;
@@ -34,14 +34,10 @@ public class ComplexHexActionTagProvider extends TagsProvider<ActionRegistryEntr
             tag(ersatzActionTag(HexTags.Actions.CAN_START_ENLIGHTEN)).add(key);
             tag(ersatzActionTag(HexTags.Actions.PER_WORLD_PATTERN)).add(key);
         }
-        // deciding that akashic write can be just a normal spell (as a treat)
     }
 
     private static TagKey<ActionRegistryEntry> ersatzActionTag(TagKey<ActionRegistryEntry> real) {
         if (IXplatAbstractions.INSTANCE.platform() == Platform.FABRIC) {
-            // Vanilla (and Fabric) has a bug here where it *writes* hexcasting action tags to `.../tags/action`
-            // instead of `.../tags/hexcasting/action`.
-            // So we pull this bullshit
             var fakeKey = ResourceKey.<ActionRegistryEntry>createRegistryKey(
                 new ResourceLocation("foobar", "hexcasting/tags/action"));
             return TagKey.create(fakeKey, real.location());

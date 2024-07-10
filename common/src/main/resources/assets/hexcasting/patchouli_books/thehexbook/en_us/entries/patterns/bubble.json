@@ -1,8 +1,8 @@
 {
     "name": "complexhex.entry.bubble",
     "category": "hexcasting:patterns",
-    "icon": "minecraft:phantom_membrane",
-    "sortnum": 10,
+    "icon": "minecraft:glass_bottle",
+    "sortnum": 13,
     "advancement": "hexcasting:root",
     "read_by_default": true,
     "pages": [

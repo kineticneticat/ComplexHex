@@ -13,15 +13,6 @@ public class ComplexhexConfig {
     private static final ClientConfigAccess dummyClient = new ClientConfigAccess() {
     };
     private static final ServerConfigAccess dummyServer = new ServerConfigAccess() {
-        @Override
-        public int getCongratsCost() {
-            throw new IllegalStateException("Attempted to access property of Dummy Config Object");
-        }
-
-        @Override
-        public int getSignumCost() {
-            throw new IllegalStateException("Attempted to access property of Dummy Config Object");
-        }
     };
     private static CommonConfigAccess common = dummyCommon;
     private static ClientConfigAccess client = dummyClient;
@@ -76,13 +67,5 @@ public class ComplexhexConfig {
     }
 
     public interface ServerConfigAccess {
-        double DEF_MIN_COST = 0.0001;
-        double DEF_MAX_COST = 10_000.0;
-        double DEFAULT_CONGRATS_COST = 1.5;
-        double DEFAULT_SIGNUM_COST = 1.0;
-
-        int getCongratsCost();
-
-        int getSignumCost();
     }
 }

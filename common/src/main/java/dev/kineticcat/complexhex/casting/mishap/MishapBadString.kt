@@ -5,11 +5,12 @@ import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.Mishap
 import at.petrak.hexcasting.api.pigment.FrozenPigment
 import at.petrak.hexcasting.api.utils.asTranslatedComponent
+import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.item.DyeColor
 
-class MishapBadString(val text: String, msg: Component) : Mishap() {
+class MishapBadString(val text: String, val wanted: Component) : Mishap() {
     override fun accentColor(ctx: CastingEnvironment, errorCtx: Context): FrozenPigment =
         dyeColor(DyeColor.BROWN)
 
@@ -17,7 +18,11 @@ class MishapBadString(val text: String, msg: Component) : Mishap() {
 
     }
 
-    override fun errorMessage(ctx: CastingEnvironment, errorCtx: Context) = error("string")
+    override fun errorMessage(ctx: CastingEnvironment, errorCtx: Context) = error(
+        "bad_string",
+        wanted,
+        Component.literal("\"$text\"").withStyle(ChatFormatting.DARK_PURPLE)
+    )
 
     companion object {
         @JvmStatic

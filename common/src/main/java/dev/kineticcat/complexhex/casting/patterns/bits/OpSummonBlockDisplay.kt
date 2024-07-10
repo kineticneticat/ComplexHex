@@ -28,7 +28,7 @@ object OpSummonBlockDisplay : SpellAction {
 
         env.assertVecInRange(pos)
         if (!BuiltInRegistries.BLOCK.containsKey(ResourceLocation(name)))
-            throw MishapBadString.of(name, "opsummonblockdisplay")
+            throw MishapBadString.of(name, "blockid")
 
         val blockstate = BuiltInRegistries.BLOCK.get(ResourceLocation(name)).defaultBlockState()
 
