@@ -3,8 +3,6 @@ plugins {
     id "me.modmuss50.mod-publish-plugin" version "0.3.0"
 }
 
-archivesBaseName = getArtifactId("forge")
-
 architectury {
     platformSetupLoomIde()
     forge()
@@ -17,7 +15,8 @@ loom {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
 
-        mixinConfig "complexhex.mixins.json"
+        mixinConfig "complexhex-common.mixins.json"
+        mixinConfig "complexhex-forge.mixins.json"
     }
 }
 
