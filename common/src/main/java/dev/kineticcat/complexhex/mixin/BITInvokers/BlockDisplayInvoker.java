@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(Display.BlockDisplay.class)
-public abstract class BlockDisplayInvoker {
+public interface BlockDisplayInvoker {
     @Invoker("setBlockState")
-    abstract public void invokeSetBlockState(BlockState blockState);
+    void invokeSetBlockState(BlockState blockState);
 }

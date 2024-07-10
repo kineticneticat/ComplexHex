@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(Display.ItemDisplay.class)
-abstract public class ItemDisplayInvoker {
+public interface ItemDisplayInvoker {
     @Invoker("setItemStack")
-    abstract public void invokeSetItemStack(ItemStack itemStack);
+    void invokeSetItemStack(ItemStack itemStack);
 }
