@@ -47,7 +47,6 @@ object OpTranslateBIT : SpellAction {
         env.assertEntityInRange(e)
         val pos = (e as Display).position()
         env.assertVecInRange(pos.add(delta))
-
         cost = delta.length().toLong()
 
         return SpellAction.Result(
