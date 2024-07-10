@@ -23,7 +23,8 @@
     ]
   },
   "mixins": [
-    "complexhex-common.mixins.json"
+    "complexhex-common.mixins.json",
+    "complexhex-fabric.mixins.json"
   ],
   "depends": {
     "minecraft": ">=${minecraftVersion}",
