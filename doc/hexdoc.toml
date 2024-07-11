@@ -1,5 +1,5 @@
 modid = "complexhex"
-book = "complexhex:complexhexbook"
+book = "hexcasting:thehexbook"
 default_lang = "en_us"
 default_branch = "main"
 
