@@ -5,12 +5,9 @@ default_branch = "main"
 
 resource_dirs = [  # top takes priority
     "resources",
-    "{_common.src}/main/resources",
-    { path="{^_common.src}/generated/resources", required=false },
-    "{_fabric.src}/main/resources",
-    { path="{^_fabric.src}/generated/resources", required=false },
-    "{_forge.src}/main/resources",
-    { path="{^_forge.src}/generated/resources", required=false },
+    "{$_common.src}/main/resources",
+    "{$_fabric.src}/main/resources",
+    "{$_forge.src}/main/resources",
     { modid="hexcasting" },
     { modid="minecraft" },
     { modid="hexdoc" },
@@ -31,26 +28,22 @@ author = "kineticcat"
 show_landing_text = false
 
 [extra.hexcasting]
-# regexes for parsing pattern registry files - try running copier update and picking a different regex if your patterns aren't loading
-# NOTE: "!Raw" means "don't apply variable interpolation to this value"
-_pattern_regex = { "!Raw"='\s[\s\S]+?make\("(?<signature>[qweasd]+)", HexDir.(?<startDir>(?:NORTH|SOUTH)_(?:EAST|WEST)), "(?<name>[^"]+)", (?<isPerWorld>true|false)' }
-_per_world_value = "true"
+_pattern_regex = { "!Raw"='HexPattern[\s\S]+?make\(\"(?P<signature>[qweasd]+)\", HexDir\.(?P<startdir>(?:NORTH|SOUTH)_(?:EAST|WEST)), \"(?P<name>[^\"]+?)\"' }
 
 [[extra.hexcasting.pattern_stubs]]
 path = "{^^^_common.package}/casting/ComplexhexPatternRegistry.java"
 regex = "{^_pattern_regex}"
-per_world_value = "{^_per_world_value}"
 
 # platforms
 
 [_common]
 src = "../common/src"
-package = "{src}/main/java/dev/complexhex"
+package = "{src}/main/java/dev/kineticcat/complexhex"
 
 [_fabric]
 src = "../fabric/src"
-package = "{src}/main/java/dev/complexhex/fabric"
+package = "{src}/main/java/dev/kineticcat/complexhex/fabric"
 
 [_forge]
 src = "../forge/src"
-package = "{src}/main/java/dev/complexhex/forge"
+package = "{src}/main/java/dev/kineticcat/complexhex/forge"
