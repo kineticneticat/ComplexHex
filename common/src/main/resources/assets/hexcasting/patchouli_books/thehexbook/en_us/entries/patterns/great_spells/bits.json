@@ -1,0 +1,94 @@
+{
+  "name": "complexhex.entry.bits",
+  "category": "hexcasting:patterns/great_spells",
+  "icon": "minecraft:oak_sign",
+  "sortnum": 11,
+  "advancement": "hexcasting:root",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "complexhex.page.bitexplainer"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:summonblockdisplay",
+      "anchor": "complexhex:summonblockdisplay",
+      "input": "vector, string",
+      "output": "",
+      "text": "complexhex.page.summonblockdisplay"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:summonitemdisplay",
+      "anchor": "complexhex:summonitemdisplay",
+      "input": "vector, string",
+      "output": "",
+      "text": "complexhex.page.summonitemdisplay"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:summontextdisplay",
+      "anchor": "complexhex:summontextdisplay",
+      "input": "vector, string",
+      "output": "",
+      "text": "complexhex.page.summontextdisplay"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:get_entity/bit",
+      "anchor": "complexhex:get_entity/bit",
+      "input": "vector",
+      "output": "entity",
+      "text": "complexhex.page.get_entity/bit"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:zone_entity/bit",
+      "anchor": "complexhex:zone_entity/bit",
+      "input": "vector, number",
+      "output": "[entity]",
+      "text": "complexhex.page.zone_entity/bit"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:zone_entity/not_bit",
+      "anchor": "complexhex:zone_entity/not_bit",
+      "input": "vector, number",
+      "output": "[entity]",
+      "text": "complexhex.page.zone_entity/not_bit"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:translatebit",
+      "anchor": "complexhex:translatebit",
+      "input": "BIT, vec",
+      "output": "",
+      "text": "complexhex.page.translatebit"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:rotatebit",
+      "anchor": "complexhex:rotatebit",
+      "input": "BIT, quat",
+      "output": "",
+      "text": "complexhex.page.rotatebit"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:scalebit",
+      "anchor": "complexhex:scalebit",
+      "input": "BIT, vec",
+      "output": "",
+      "text": "complexhex.page.scalebit"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:killbit",
+      "anchor": "complexhex:killbit",
+      "input": "BIT",
+      "output": "",
+      "text": "complexhex.page.killbit"
+    }
+  ]
+}

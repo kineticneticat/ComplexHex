@@ -11,6 +11,6 @@ import net.minecraft.world.phys.Vec3
 object OpQunmake : OperatorBasic(1, QuaternionArithmetic.ACCEPTS_Q) {
     override fun apply(iotas: Iterable<Iota>, env: CastingEnvironment): Iterable<Iota> {
         val Q = (iotas.iterator().next() as QuaternionIota).quaternion
-        return listOf(DoubleIota(Q.a), Vec3Iota(Vec3(Q.b, Q.c, Q.d)))
+        return listOf(DoubleIota(Q.w), Vec3Iota(Vec3(Q.x, Q.y, Q.z)))
     }
 }

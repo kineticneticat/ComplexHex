@@ -17,6 +17,7 @@ import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota
 import dev.kineticcat.complexhex.casting.ComplexhexPatternRegistry.*
 import dev.kineticcat.complexhex.stuff.Quaternion
 import net.minecraft.world.phys.Vec3
+import kotlin.math.sqrt
 
 object QuaternionArithmetic : Arithmetic {
 
@@ -36,10 +37,10 @@ object QuaternionArithmetic : Arithmetic {
             ABS,
             QMUL,
             QINVERT,
-            QA,
-            QB,
-            QC,
-            QD,
+            QW,
+            QX,
+            QY,
+            QZ,
             QMAKE,
             QUNMAKE
     )
@@ -47,17 +48,17 @@ object QuaternionArithmetic : Arithmetic {
 
     override fun getOperator(pattern: HexPattern?): Operator {
         val out =  when (pattern) {
-            ADD     -> QQorQDbinaryQ( { a, b -> a.add(b) }, { a, b -> a.add(b) } )
-            SUB     -> QQorQDbinaryQ( { a, b -> a.sub(b) }, { a, b -> a.sub(b) } )
-            MUL     -> QDbinaryQ      { a, b -> a.mul(b) }
-            DIV     -> QDbinaryQ      { a, b -> a.div(b) }
-            ABS     -> QunaryD        { a    -> a.length() }
-            QMUL    -> QQbinaryQ      { a, b -> a.mul(b) }
-            QINVERT -> QunaryQ        { a    -> a.inverse() }
-            QA      -> QunaryD        { a    -> a.a }
-            QB      -> QunaryD        { a    -> a.b }
-            QC      -> QunaryD        { a    -> a.c }
-            QD      -> QunaryD        { a    -> a.d }
+            ADD     -> QQbinaryQ      { a, b -> a.Qadd(b) }
+            SUB     -> QQbinaryQ      { a, b -> a.Qsub(b) }
+            MUL     -> QDbinaryQ      { a, b -> a.Qmul(b) }
+            DIV     -> QDbinaryQ      { a, b -> a.Qdiv(b) }
+            ABS     -> QunaryD        { a    -> sqrt(a.lengthSquared()) }
+            QMUL    -> QQbinaryQ      { a, b -> a.Qmul(b) }
+            QINVERT -> QunaryQ        { a    -> a.Qinvert() }
+            QW      -> QunaryD        { a    -> a.w }
+            QX      -> QunaryD        { a    -> a.x }
+            QY      -> QunaryD        { a    -> a.y }
+            QZ      -> QunaryD        { a    -> a.z }
             QMAKE   -> DVbinaryQ      { d, v -> Quaternion(d, v.x, v.y, v.z) }
             QUNMAKE -> OpQunmake
             else -> throw InvalidOperatorException("$pattern is not a valid operator in quaternion arithmetic")
@@ -73,13 +74,6 @@ object QuaternionArithmetic : Arithmetic {
         {i: Iota, j: Iota -> op(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion, Operator.downcast(j, ComplexHexIotaTypes.QUATERNION).quaternion).asIota() }
     private fun QDbinaryQ(op: (Quaternion, Double) -> (Quaternion)) = OperatorBinary(ACCEPTS_QD)
         {i: Iota, j: Iota -> op(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion, Operator.downcast(j, HexIotaTypes.DOUBLE).double).asIota() }
-    private fun QQorQDbinaryQ(opA:(Quaternion, Quaternion) -> (Quaternion), opB:(Quaternion, Double) -> (Quaternion)) = OperatorBinary(ACCEPTS_QQorQD)
-    {i: Iota, j:Iota -> when (j) {
-        is QuaternionIota -> opA(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion, Operator.downcast(j, ComplexHexIotaTypes.QUATERNION).quaternion).asIota()
-        is DoubleIota     -> opB(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion, Operator.downcast(j, HexIotaTypes.DOUBLE).double).asIota()
-        else              -> throw InvalidOperatorException("i did an oopsie, report this pls :3 (${j::class})")
-        }
-    }
     private fun DVbinaryQ(op: (Double, Vec3) -> Quaternion) = OperatorBinary(ACCEPTS_DV)
         {i: Iota, j:Iota -> op(Operator.downcast(i, HexIotaTypes.DOUBLE).double, Operator.downcast(j, HexIotaTypes.VEC3).vec3).asIota()}
 

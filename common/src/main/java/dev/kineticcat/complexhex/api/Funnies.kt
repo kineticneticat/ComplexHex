@@ -5,6 +5,7 @@ import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
 import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota
 import dev.kineticcat.complexhex.stuff.Quaternion
+import org.joml.Quaterniond
 
 // stolen from hexcasting lmao
 fun List<Iota>.getQuaternion(idx: Int, argc: Int = 0): Quaternion {
@@ -15,4 +16,5 @@ fun List<Iota>.getQuaternion(idx: Int, argc: Int = 0): Quaternion {
         throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "quaternion")
     }
 }
-inline val Quaternion.asActionResult get() = listOf(QuaternionIota(this))
+
+

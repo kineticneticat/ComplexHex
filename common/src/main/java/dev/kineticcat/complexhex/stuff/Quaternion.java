@@ -1,40 +1,45 @@
 package dev.kineticcat.complexhex.stuff;
 
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.utils.HexUtils;
 import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Quaterniond;
+import org.joml.Quaterniondc;
+import org.joml.Quaternionf;
 
-public class Quaternion {
-    public double a;
-    public double b;
-    public double c;
-    public double d;
-    public Quaternion(double a, double b, double c, double d) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
+import java.util.List;
+
+import static at.petrak.hexcasting.api.utils.HexUtils.fixNAN;
+
+public class Quaternion extends Quaterniond {
+    public Quaternion(double w, double x, double y, double z) {
+        super(x, y, z, w);
     }
-    public static Quaternion angleAxis(double angle, Vec3 axis) {
+
+    public Quaternion() {
+        super(0,0,0,0);
+    }
+    public Quaternion(Vec3 axis, double angle) {
+        super(0,0,0,0);
         double C = Math.cos(angle/2);
         double S = Math.sin(angle/2);
-        return new Quaternion(C, axis.x*S, axis.y*S, axis.z*S);
+        this.w = C;
+        this.x = axis.x*S;
+        this.y = axis.y*S;
+        this.z = axis.z*S;
     }
-    public QuaternionIota asIota() { return new QuaternionIota(this);}
-    public static Quaternion fixNaN(Quaternion Q) {return new Quaternion(HexUtils.fixNAN(Q.a), HexUtils.fixNAN(Q.b), HexUtils.fixNAN(Q.c), HexUtils.fixNAN(Q.d));}
-    public Quaternion add(Quaternion B) { return new Quaternion(this.a + B.a, this.b + B.b, this.c + B.c, this.d + B.d); }
-    public Quaternion add(Double B) { return new Quaternion(this.a + B, this.b, this.c, this.d); }
-    public Quaternion sub(Quaternion B) { return new Quaternion(this.a - B.a, this.b - B.b, this.c - B.c, this.d - B.d); }
-    public Quaternion sub(Double B) { return new Quaternion(this.a - B, this.b, this.c, this.d); }
-    public Quaternion mul(double B) { return new Quaternion(this.a * B, this.b * B, this.c * B, this.d * B); }
-    public Quaternion div(double B) { return new Quaternion(this.a / B, this.b / B, this.c / B, this.d / B); }
-    public Quaternion mul(Quaternion B) { Quaternion A = this; return new Quaternion(
-            (A.a*B.a - A.b*B.b - A.c*B.c - A.d*B.d),
-            (A.a*B.b + A.b*B.a + A.c*B.d - A.d*B.c),
-            (A.a*B.c - A.b*B.d + A.c*B.a + A.d*B.b),
-            (A.a*B.d + A.b*B.c - A.c*B.b + A.d*B.a)
-    ); }
-    public Quaternion inverse() { return new Quaternion(this.a, -this.b, -this.c, -this.d); }
 
-    public Double length() { return Math.sqrt(Math.pow(this.a, 2)+Math.pow(this.b, 2)+Math.pow(this.c, 2)+Math.pow(this.d, 2));}
+
+    public QuaternionIota asIota() { return new QuaternionIota(this); }
+    public List<Iota> asActionResult() { return List.of(new QuaternionIota(this)); }
+    public Quaternion fixNaN() {
+        return new Quaternion(fixNAN(this.w), fixNAN(this.x), fixNAN(this.y), fixNAN(this.z));
+    }
+    public Quaternion Qadd(Quaternion that) {return (Quaternion) super.add(that);}
+    public Quaternion Qsub(Quaternion that) {return (Quaternion) super.difference(that);}
+    public Quaternion Qmul(Double that) {return (Quaternion) super.mul(that);}
+    public Quaternion Qmul(Quaternion that) {return (Quaternion) super.mul(that);}
+    public Quaternion Qdiv(Double that) {return (Quaternion) super.mul(1/that);}
+    public Quaternion Qinvert() {return (Quaternion) super.invert();}
 }

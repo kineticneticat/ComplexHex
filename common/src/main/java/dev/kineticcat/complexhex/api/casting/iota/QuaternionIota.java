@@ -13,15 +13,17 @@ import net.minecraft.server.level.ServerLevel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static dev.kineticcat.complexhex.api.FunniesKt.*;
+
 public class QuaternionIota extends Iota {
     public QuaternionIota(Quaternion A) {
         super(ComplexHexIotaTypes.QUATERNION, A);
     }
-    public Quaternion getQuaternion() {return Quaternion.fixNaN((Quaternion) this.payload); }
+    public Quaternion getQuaternion() {return ((Quaternion) this.payload).fixNaN(); }
     @Override
     public boolean isTruthy() {
         Quaternion Q = this.getQuaternion();
-        return !( Q.a==0 && Q.b==0 && Q.c==0 && Q.d==0);
+        return !( Q.w==0 && Q.x==0 && Q.y==0 && Q.z==0);
     }
 
     @Override
@@ -32,23 +34,23 @@ public class QuaternionIota extends Iota {
     }
 
     private boolean tolerates(Quaternion QA, Quaternion QB) {
-        return     DoubleIota.tolerates(QA.a, QB.a)
-                && DoubleIota.tolerates(QA.b, QB.b)
-                && DoubleIota.tolerates(QA.c, QB.c)
-                && DoubleIota.tolerates(QA.d, QB.d);
+        return     DoubleIota.tolerates(QA.w, QB.w)
+                && DoubleIota.tolerates(QA.x, QB.x)
+                && DoubleIota.tolerates(QA.y, QB.y)
+                && DoubleIota.tolerates(QA.z, QB.z);
     }
 
     @Override
     public @NotNull Tag serialize() {
         CompoundTag ctag = new CompoundTag();
-        ctag.putDouble("a", this.getQuaternion().a);
-        ctag.putDouble("b", this.getQuaternion().b);
-        ctag.putDouble("c", this.getQuaternion().c);
-        ctag.putDouble("d", this.getQuaternion().d);
+        ctag.putDouble("w", this.getQuaternion().w);
+        ctag.putDouble("x", this.getQuaternion().x);
+        ctag.putDouble("y", this.getQuaternion().y);
+        ctag.putDouble("z", this.getQuaternion().z);
         return ctag;
     }
 
-    public static IotaType<QuaternionIota> TYPE =  new IotaType<QuaternionIota>() {
+    public static IotaType<QuaternionIota> TYPE = new IotaType<QuaternionIota>() {
         @Nullable
         @Override
         public QuaternionIota deserialize(Tag tag, ServerLevel world) throws IllegalArgumentException {
@@ -69,22 +71,22 @@ public class QuaternionIota extends Iota {
     public static QuaternionIota deserialize(Tag tag) {
         CompoundTag ctag = HexUtils.downcast(tag, CompoundTag.TYPE);
         return new Quaternion(
-                ctag.getDouble("a"),
-                ctag.getDouble("b"),
-                ctag.getDouble("c"),
-                ctag.getDouble("d")
+                ctag.getDouble("w"),
+                ctag.getDouble("x"),
+                ctag.getDouble("y"),
+                ctag.getDouble("z")
         ).asIota();
     }
     public static ChatFormatting QuaternionColour = ChatFormatting.DARK_BLUE;
     public static Component display(Quaternion Q) {
         String text = "";
-        text += Q.a==0 ? "" : String.format("%.2f", Q.a);
-        text += text.equals("") ? ( Q.b==0 ? "" : String.format("%.2f", Q.b)+"i" )
-                                : ( Q.b==0 ? "" : " " + (Q.b<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.b)) + "i" );
-        text += text.equals("") ? ( Q.c==0 ? "" : String.format("%.2f", Q.c)+"j" )
-                                : ( Q.c==0 ? "" : " " + (Q.b<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.c)) + "j" );
-        text += text.equals("") ? ( Q.d==0 ? "" : String.format("%.2f", Q.d)+"k" )
-                                : ( Q.d==0 ? "" : " " + (Q.b<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.d)) + "k" );
+        text += Q.w==0 ? "" : String.format("%.2f", Q.w);
+        text += text.equals("") ? ( Q.x==0 ? "" : String.format("%.2f", Q.x)+"i" )
+                                : ( Q.x==0 ? "" : " " + (Q.x<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.x)) + "i" );
+        text += text.equals("") ? ( Q.y==0 ? "" : String.format("%.2f", Q.y)+"j" )
+                                : ( Q.y==0 ? "" : " " + (Q.y<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.y)) + "j" );
+        text += text.equals("") ? ( Q.z==0 ? "" : String.format("%.2f", Q.z)+"k" )
+                                : ( Q.z==0 ? "" : " " + (Q.z<0?"-":"+") + " " + String.format("%.2f", Math.abs(Q.z)) + "k" );
         text = text.equals("") ? String.format("%.2f", 0.0d) : text;
         return Component.literal(text).withStyle(QuaternionColour);
     }

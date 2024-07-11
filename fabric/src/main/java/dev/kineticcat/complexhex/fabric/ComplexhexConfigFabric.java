@@ -53,30 +53,5 @@ public class ComplexhexConfigFabric extends PartitioningSerializer.GlobalData {
 
     @Config(name = "server")
     private static class Server implements ConfigData, ComplexhexConfig.ServerConfigAccess {
-
-        @ConfigEntry.Gui.CollapsibleObject
-        private Costs costs = new Costs();
-
-        @Override
-        public void validatePostLoad() throws ValidationException {
-            this.costs.signumCost = ComplexhexConfig.bound(this.costs.signumCost, DEF_MIN_COST, DEF_MAX_COST);
-            this.costs.congratsCost = ComplexhexConfig.bound(this.costs.congratsCost, DEF_MIN_COST, DEF_MAX_COST);
-        }
-
-        @Override
-        public int getSignumCost() {
-            return (int) (costs.signumCost * MediaConstants.DUST_UNIT);
-        }
-
-        @Override
-        public int getCongratsCost() {
-            return (int) (costs.congratsCost * MediaConstants.DUST_UNIT);
-        }
-
-        static class Costs {
-            // costs of actions
-            double signumCost = DEFAULT_SIGNUM_COST;
-            double congratsCost = DEFAULT_CONGRATS_COST;
-        }
     }
 }

@@ -17,10 +17,19 @@ subprojects {
     apply plugin: "org.jetbrains.kotlin.jvm"
     apply plugin: "dev.architectury.loom"
 
-    // Uncomment to silence the mojmap license warning
-    // loom {
-    //     silentMojangMappingsLicense()
-    // }
+    archivesBaseName = "${project.modID}-${project.platform}-${project.minecraftVersion}"
+
+    loom {
+        // Uncomment to silence the mojmap license warning
+        //silentMojangMappingsLicense()
+
+        mixin {
+            // the default name includes both archivesName and the subproject, resulting in the platform showing up twice
+            // default: complexhex-common-1.20.1-common-refmap.json
+            // fixed:   complexhex-common.refmap.json
+            defaultRefmapName = "${project.modID}-${project.platform}.refmap.json"
+        }
+    }
 
     dependencies {
         minecraft "com.mojang:minecraft:${project.minecraftVersion}"
@@ -155,8 +164,6 @@ allprojects {
     }
 }
 
-ext.getArtifactId = { platform -> return "$modID-$platform-$minecraftVersion" }
-
 ext.getLatestChangelog = {
     Collection<String> lines = file("$rootDir/CHANGELOG.md").readLines()
     String changelog = ""
@@ -178,3 +185,5 @@ tasks.register("viewLatestChangelog") {
         println(getLatestChangelog())
     }
 }
+
+
