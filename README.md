@@ -1,6 +1,7 @@
 # Complex Hex
 
-... is an addon for Hexcasting with whatever I feel like adding lol.
+... is an addon for Hexcasting with whatever I feel like adding lol. \
+[wiki](https://complexhex.hexxy.media)
 
 ## features
 complex numbers - exactly what it says on the tin lmao \
