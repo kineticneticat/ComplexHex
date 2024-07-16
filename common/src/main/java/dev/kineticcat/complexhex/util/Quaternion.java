@@ -1,12 +1,9 @@
-package dev.kineticcat.complexhex.stuff;
+package dev.kineticcat.complexhex.util;
 
 import at.petrak.hexcasting.api.casting.iota.Iota;
-import at.petrak.hexcasting.api.utils.HexUtils;
 import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Quaterniond;
-import org.joml.Quaterniondc;
-import org.joml.Quaternionf;
 
 import java.util.List;
 

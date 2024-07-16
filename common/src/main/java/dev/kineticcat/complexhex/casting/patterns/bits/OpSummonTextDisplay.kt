@@ -7,12 +7,15 @@ import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.getVec3
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.misc.MediaConstants
+import com.mojang.math.Transformation
+import dev.kineticcat.complexhex.mixin.BITInvokers.BlockDisplayInvoker
 import dev.kineticcat.complexhex.mixin.BITInvokers.ItemDisplayInvoker
 import dev.kineticcat.complexhex.mixin.BITInvokers.TextDisplayInvoker
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Display
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.phys.Vec3
+import org.joml.Vector3f
 import ram.talia.moreiotas.api.getString
 
 
@@ -39,6 +42,7 @@ object OpSummonTextDisplay : SpellAction {
                 setPos(pos.x, pos.y, pos.z);
             }
             (textdisplay as TextDisplayInvoker).invokeSetText(Component.literal(text))
+            (textdisplay as TextDisplayInvoker).invokeSetTransformation(Transformation(Vector3f(-0.5f, -0.5f, -0.5f), null, null, null))
             env.world.addFreshEntity(textdisplay)
             textdisplay.tick()
         }

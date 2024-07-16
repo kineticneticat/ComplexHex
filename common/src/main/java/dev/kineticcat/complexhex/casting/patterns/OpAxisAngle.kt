@@ -5,9 +5,7 @@ import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.getDouble
 import at.petrak.hexcasting.api.casting.getVec3
 import at.petrak.hexcasting.api.casting.iota.Iota
-import dev.kineticcat.complexhex.stuff.Quaternion
-import org.joml.Quaterniond
-import org.joml.Quaternionf
+import dev.kineticcat.complexhex.util.Quaternion
 
 
 object OpAxisAngle : ConstMediaAction {

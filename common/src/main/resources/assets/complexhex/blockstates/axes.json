@@ -1,0 +1,57 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "complexhex:block/axes_core"
+      }
+    },
+    {
+      "apply": {
+        "model": "complexhex:block/axes_px"
+      },
+      "when": {
+        "positive_x": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "complexhex:block/axes_py"
+      },
+      "when": {
+        "positive_y": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "complexhex:block/axes_pz"
+      },
+      "when": {
+        "positive_z": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "complexhex:block/axes_nx"
+      },
+      "when": {
+        "negative_x": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "complexhex:block/axes_ny"
+      },
+      "when": {
+        "negative_y": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "complexhex:block/axes_nz"
+      },
+      "when": {
+        "negative_z": "true"
+      }
+    }
+  ]
+}

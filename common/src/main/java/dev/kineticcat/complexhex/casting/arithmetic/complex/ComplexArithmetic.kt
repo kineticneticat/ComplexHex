@@ -15,7 +15,7 @@ import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
 import dev.kineticcat.complexhex.api.casting.iota.ComplexHexIotaTypes
 import dev.kineticcat.complexhex.api.casting.iota.ComplexNumberIota
 import dev.kineticcat.complexhex.casting.ComplexhexPatternRegistry.*
-import dev.kineticcat.complexhex.stuff.ComplexNumber
+import dev.kineticcat.complexhex.util.ComplexNumber
 
 // paraphrased from hexmod source lmao
 

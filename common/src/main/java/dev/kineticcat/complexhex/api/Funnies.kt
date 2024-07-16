@@ -4,8 +4,7 @@ import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
 import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota
-import dev.kineticcat.complexhex.stuff.Quaternion
-import org.joml.Quaterniond
+import dev.kineticcat.complexhex.util.Quaternion
 
 // stolen from hexcasting lmao
 fun List<Iota>.getQuaternion(idx: Int, argc: Int = 0): Quaternion {

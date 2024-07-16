@@ -4,7 +4,7 @@ import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
-import dev.kineticcat.complexhex.stuff.Quaternion
+import dev.kineticcat.complexhex.util.Quaternion
 import ram.talia.moreiotas.api.getMatrix
 import kotlin.math.sqrt
 

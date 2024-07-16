@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "complexhex:block/axes",
+		"particle": "complexhex:block/axes"
+	},
+	"elements": [
+		{
+			"name": "nx",
+			"from": [-7, 7, 7],
+			"to": [9, 9, 9],
+			"faces": {
+				"north": {"uv": [3, 1, 4, 9], "rotation": 90, "texture": "#0"},
+				"east": {"uv": [3, 1.5, 4, 2.5], "texture": "#0"},
+				"south": {"uv": [3, 1, 4, 9], "rotation": 270, "texture": "#0"},
+				"west": {"uv": [3, 0, 4, 1], "texture": "#0"},
+				"up": {"uv": [3, 1, 4, 9], "rotation": 270, "texture": "#0"},
+				"down": {"uv": [3, 1, 4, 9], "rotation": 270, "texture": "#0"}
+			}
+		}
+	]
+}

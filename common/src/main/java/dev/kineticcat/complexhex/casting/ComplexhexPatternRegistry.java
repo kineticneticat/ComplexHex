@@ -16,12 +16,11 @@ import dev.kineticcat.complexhex.casting.patterns.OpBubbleIota;
 import dev.kineticcat.complexhex.casting.patterns.OpMatrixToQuaternion;
 import dev.kineticcat.complexhex.casting.patterns.OpQuaternionToMatrix;
 import dev.kineticcat.complexhex.casting.patterns.bits.*;
-import dev.kineticcat.complexhex.stuff.ComplexNumber;
-import dev.kineticcat.complexhex.stuff.Quaternion;
+import dev.kineticcat.complexhex.util.ComplexNumber;
+import dev.kineticcat.complexhex.util.Quaternion;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Display;
-import org.apache.commons.codec.binary.Hex;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

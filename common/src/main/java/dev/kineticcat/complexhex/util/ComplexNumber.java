@@ -1,4 +1,4 @@
-package dev.kineticcat.complexhex.stuff;
+package dev.kineticcat.complexhex.util;
 
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.utils.HexUtils;
@@ -7,7 +7,6 @@ import dev.kineticcat.complexhex.api.casting.iota.ComplexNumberIota;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ComplexNumber {

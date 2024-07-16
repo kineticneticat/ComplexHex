@@ -8,31 +8,8 @@ import at.petrak.hexcasting.api.casting.getEntity
 import at.petrak.hexcasting.api.casting.getVec3
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapBadEntity
-import at.petrak.hexcasting.api.misc.MediaConstants
-import com.mojang.math.Transformation
-import dev.kineticcat.complexhex.Complexhex
-import dev.kineticcat.complexhex.api.getQuaternion
-import dev.kineticcat.complexhex.casting.mishap.MishapBadString
-import dev.kineticcat.complexhex.mixin.BITInvokers.BlockDisplayInvoker
-import dev.kineticcat.complexhex.mixin.BITInvokers.DisplayInvoker
-import dev.kineticcat.complexhex.mixin.BITInvokers.ItemDisplayInvoker
-import dev.kineticcat.complexhex.mixin.BITInvokers.TextDisplayInvoker
-import dev.kineticcat.complexhex.stuff.Quaternion
-import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.network.chat.Component
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.Display
-import net.minecraft.world.entity.Display.BlockDisplay
-import net.minecraft.world.entity.Display.TextDisplay
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.Vec3
-import org.joml.Vector3d
-import org.joml.Vector3f
-import ram.talia.moreiotas.api.getEntityType
-import ram.talia.moreiotas.api.getString
 
 
 object OpTranslateBIT : SpellAction {

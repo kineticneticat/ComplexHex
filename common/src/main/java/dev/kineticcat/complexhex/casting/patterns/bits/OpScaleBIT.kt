@@ -8,27 +8,11 @@ import at.petrak.hexcasting.api.casting.getEntity
 import at.petrak.hexcasting.api.casting.getVec3
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapBadEntity
-import at.petrak.hexcasting.api.misc.MediaConstants
 import com.mojang.math.Transformation
-import dev.kineticcat.complexhex.Complexhex
-import dev.kineticcat.complexhex.api.getQuaternion
-import dev.kineticcat.complexhex.casting.mishap.MishapBadString
-import dev.kineticcat.complexhex.mixin.BITInvokers.BlockDisplayInvoker
 import dev.kineticcat.complexhex.mixin.BITInvokers.DisplayInvoker
-import dev.kineticcat.complexhex.stuff.Quaternion
-import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.network.chat.Component
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.Display
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.Vec3
-import org.joml.Quaterniond
-import org.joml.Quaternionf
-import ram.talia.moreiotas.api.getEntityType
-import ram.talia.moreiotas.api.getString
+import org.joml.Vector3f
 
 
 object OpScaleBIT : SpellAction {
@@ -58,7 +42,7 @@ object OpScaleBIT : SpellAction {
 
             val oldRotation = BIT.entityData.get((BIT as DisplayInvoker).GetLeftRoatationDataID())
 
-            (BIT as DisplayInvoker).invokeSetTransformation(Transformation(null, oldRotation, vec.toVector3f(), null))
+            (BIT as DisplayInvoker).invokeSetTransformation(Transformation(Vector3f(-0.5f, -0.5f, -0.5f), oldRotation, vec.toVector3f(), null))
             BIT.tick() //??????
         }
     }

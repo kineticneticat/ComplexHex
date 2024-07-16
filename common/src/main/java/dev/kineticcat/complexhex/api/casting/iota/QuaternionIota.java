@@ -4,7 +4,7 @@ import at.petrak.hexcasting.api.casting.iota.DoubleIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.iota.IotaType;
 import at.petrak.hexcasting.api.utils.HexUtils;
-import dev.kineticcat.complexhex.stuff.Quaternion;
+import dev.kineticcat.complexhex.util.Quaternion;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -12,8 +12,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import static dev.kineticcat.complexhex.api.FunniesKt.*;
 
 public class QuaternionIota extends Iota {
     public QuaternionIota(Quaternion A) {
