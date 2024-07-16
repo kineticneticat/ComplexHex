@@ -3,9 +3,14 @@ package dev.kineticcat.complexhex;
 import dev.kineticcat.complexhex.api.casting.iota.ComplexHexIotaTypes;
 import dev.kineticcat.complexhex.casting.ComplexhexPatternRegistry;
 import dev.kineticcat.complexhex.casting.arithmetic.ComplexHexArithmetic;
+import dev.kineticcat.complexhex.client.render.ComplexHexGaslighting;
+import dev.kineticcat.complexhex.client.render.CoolerGaslightingTracker;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.function.BiConsumer;
 
 /**
  * This is effectively the loading entrypoint for most of your code, at least
@@ -23,14 +28,15 @@ public class Complexhex {
         ComplexHexIotaTypes.init();
         ComplexhexPatternRegistry.init();
         ComplexHexArithmetic.init();
+        ComplexHexGaslighting.init();
 
         LOGGER.info(ComplexhexAbstractions.getConfigDirectory().toAbsolutePath().normalize().toString());
     }
 
-    /**
-     * Shortcut for identifiers specific to this mod.
-     */
     public static ResourceLocation id(String string) {
         return new ResourceLocation(MOD_ID, string);
+    }
+    private static <T> BiConsumer<T, ResourceLocation> bind(Registry<T> registry) {
+        return (t, resourceLocation) -> Registry.register(registry, resourceLocation, t);
     }
 }

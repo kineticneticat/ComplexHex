@@ -9,7 +9,8 @@
     "BITInvokers.BlockDisplayInvoker",
     "BITInvokers.ItemDisplayInvoker",
     "BITInvokers.TextDisplayInvoker",
-    "BITInvokers.DisplayInvoker"
+    "BITInvokers.DisplayInvoker",
+    "ClientTickCounterMixin"
   ],
   "injectors": {
     "defaultRequire": 1

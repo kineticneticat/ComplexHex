@@ -28,7 +28,7 @@ public class ComplexHexItems {
     private static final Map<ResourceLocation, Item> ITEMS = new LinkedHashMap<>();
     private static final Map<CreativeModeTab, List<TabEntry>> ITEM_TABS = new LinkedHashMap<>();
 
-    public static final Item BURNT_AMETHYST = make("burnt_amethyst_shard", new Item(new Item.Properties()));
+    public static final Item BURNT_AMETHYST_SHARD = make("burnt_amethyst_shard", new Item(new Item.Properties()));
 
 
     public static <T extends Item> T make(String name, T item, CreativeModeTab tab) {
