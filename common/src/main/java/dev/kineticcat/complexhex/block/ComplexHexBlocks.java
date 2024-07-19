@@ -42,6 +42,15 @@ public class ComplexHexBlocks {
 
     public static final AxesBlock AXES = blockItem("axes", new AxesBlock(BlockBehaviour.Properties.copy(Blocks.BARRIER)), new Item.Properties(), ComplexHexCreativeTabs.COMPLEXHEX);
 
+    private static BlockBehaviour.Properties burnt() {
+        return BlockBehaviour.Properties
+                .copy(Blocks.AMETHYST_BLOCK)
+                .lightLevel($ -> 4)
+                .noOcclusion();
+    }
+
+    public static final BlockBurntAmethyst BURNT_AMETHYST = blockItem("burnt_amethyst_block", new BlockBurntAmethyst(burnt()), new Item.Properties(), ComplexHexCreativeTabs.COMPLEXHEX);
+
 
     public static <T extends Block> T block(String name, T block) {
         Block old = BLOCKS.put(id(name), block);

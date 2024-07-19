@@ -8,15 +8,19 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CoolerGaslightingTracker {
-    public static final Map<ResourceLocation, CoolerGaslightingTracker> GASLIGHTS = new LinkedHashMap<>();
+    public static Map<ResourceLocation, CoolerGaslightingTracker> GASLIGHTS = new LinkedHashMap<>();
+    public static CoolerGaslightingTracker getTracker(ResourceLocation resLoc) {
+        return GASLIGHTS.get(resLoc);
+    }
     private int GASLIGHTING_AMOUNT = 0;
     private int LOOKING_COOLDOWN_MAX;
     private int LOOKING_COOLDOWN;
     public ResourceLocation GASLIGHTING_PRED;
-    public CoolerGaslightingTracker(int maxCooldown, ResourceLocation reLoc) {
+    public CoolerGaslightingTracker(ResourceLocation reLoc, int maxCooldown) {
         this.LOOKING_COOLDOWN_MAX = maxCooldown;
         this.LOOKING_COOLDOWN = this.LOOKING_COOLDOWN_MAX;
         this.GASLIGHTING_PRED = reLoc;
+        GASLIGHTS.put(reLoc, this);
     }
     public int getGaslightingAmount() {
         LOOKING_COOLDOWN = LOOKING_COOLDOWN_MAX;

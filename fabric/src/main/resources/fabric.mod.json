@@ -22,13 +22,17 @@
       }
     ],
     "client": [
-      "dev.kineticcat.complexhex.fabric.ComplexhexClientFabric"
+      {
+        "adapter": "kotlin",
+        "value": "dev.kineticcat.complexhex.fabric.ComplexhexClientFabric"
+      }
     ]
   },
   "mixins": [
     "complexhex-common.mixins.json",
     "complexhex-fabric.mixins.json"
   ],
+  "accessWidener": "fabriccomplexhex.accesswidener",
   "depends": {
     "minecraft": ">=${minecraftVersion}",
     "fabricloader": ">=${fabricLoaderVersion}",

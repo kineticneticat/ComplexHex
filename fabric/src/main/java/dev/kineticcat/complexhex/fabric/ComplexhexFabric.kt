@@ -2,6 +2,7 @@ package dev.kineticcat.complexhex.fabric;
 
 import dev.kineticcat.complexhex.Complexhex;
 import dev.kineticcat.complexhex.block.ComplexHexBlocks
+import dev.kineticcat.complexhex.block.entity.ComplexHexBlockEntities
 import dev.kineticcat.complexhex.item.ComplexHexCreativeTabs
 import dev.kineticcat.complexhex.item.ComplexHexItems
 import net.fabricmc.api.ModInitializer;
@@ -32,6 +33,7 @@ object ComplexhexFabric : ModInitializer {
         ComplexHexBlocks.registerBlockItems(bind(BuiltInRegistries.ITEM))
         ComplexHexItems.registerItems(bind(BuiltInRegistries.ITEM))
         ComplexHexCreativeTabs.registerCreativeTabs(bind(BuiltInRegistries.CREATIVE_MODE_TAB))
+        ComplexHexBlockEntities.registerTiles(bind(BuiltInRegistries.BLOCK_ENTITY_TYPE))
     }
     private fun <T> bind(registry: Registry<in T>): BiConsumer<T, ResourceLocation> =
         BiConsumer<T, ResourceLocation> { t, id -> Registry.register(registry, id, t) }

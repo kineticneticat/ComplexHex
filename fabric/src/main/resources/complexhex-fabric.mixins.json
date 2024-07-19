@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "FabricModelManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
