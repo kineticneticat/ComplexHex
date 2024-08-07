@@ -90,5 +90,10 @@
   "hexcasting.mishap.invalid_value.class.complexnumber": "a complex number",
   "hexcasting.mishap.invalid_value.class.bubble": "a bubble",
   "hexcasting.mishap.invalid_value.class.bit": "a BIT",
-  "hexcasting.mishap.bad_item.bit": "a BIT"
+  "hexcasting.mishap.bad_item.bit": "a BIT",
+
+  "itemGroup.complexhex": "Complex Hex",
+  "item.complexhex.burnt_amethyst_shard": "Burnt Amethyst Shard",
+  "block.complexhex.burnt_amethyst_block": "Burnt Amethyst Block",
+  "item.complexhex.multifact": "Multifact"
 }

@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
 
 public class BlockEntityBurntAmethystRenderer implements BlockEntityRenderer<BlockEntityBurntAmethyst> {
@@ -22,13 +23,12 @@ public class BlockEntityBurntAmethystRenderer implements BlockEntityRenderer<Blo
         this.ctx = ctx;
     }
 
-    private static void doRender(BlockBurntAmethyst block, BlockRenderDispatcher dispatcher, PoseStack ps, MultiBufferSource bufSource,
+    private static void doRender(Block block, BlockRenderDispatcher dispatcher, PoseStack ps, MultiBufferSource bufSource,
                                  int packedLight, int packedOverlay) {
         var buffer = bufSource.getBuffer(RenderType.translucent());
         var pose = ps.last();
 
         var idx = Math.abs(ComplexHexGaslighting.BURNT_AMETHYST_GASLIGHT.getGaslightingAmount() % 3);
-        Complexhex.LOGGER.info(RegisterClientStuff.BURNT_AMETHYST_VARIANTS);
         var model = RegisterClientStuff.BURNT_AMETHYST_VARIANTS.get(BuiltInRegistries.BLOCK.getKey(block)).get(idx);
 
         dispatcher.getModelRenderer().renderModel(pose, buffer, null, model, 1f, 1f, 1f, packedLight, packedOverlay);
@@ -43,7 +43,7 @@ public class BlockEntityBurntAmethystRenderer implements BlockEntityRenderer<Blo
         var pos = blockEntity.getBlockPos();
         var aabb = new AABB(pos.offset(-1, 0, -1), pos.offset(1, 1, 1));
         if (IClientXplatAbstractions.INSTANCE.fabricAdditionalQuenchFrustumCheck(aabb)) {
-            doRender((BlockBurntAmethyst) blockEntity.getBlockState().getBlock(), this.ctx.getBlockRenderDispatcher(), poseStack, bufferSource, packedLight, packedOverlay);
+            doRender((Block) blockEntity.getBlockState().getBlock(), this.ctx.getBlockRenderDispatcher(), poseStack, bufferSource, packedLight, packedOverlay);
         }
     }
 

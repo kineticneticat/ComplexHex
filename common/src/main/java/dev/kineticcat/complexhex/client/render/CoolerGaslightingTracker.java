@@ -1,6 +1,7 @@
 package dev.kineticcat.complexhex.client.render;
 
 import at.petrak.hexcasting.client.render.GaslightingTracker;
+import dev.kineticcat.complexhex.Complexhex;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 
@@ -24,6 +25,7 @@ public class CoolerGaslightingTracker {
     }
     public int getGaslightingAmount() {
         LOOKING_COOLDOWN = LOOKING_COOLDOWN_MAX;
+//        Complexhex.LOGGER.info(GASLIGHTING_AMOUNT % 3);
         return GASLIGHTING_AMOUNT;
     }
     public void postFrameCheckRendered() {

@@ -19,7 +19,6 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockBurntAmethyst extends Block implements EntityBlock {
-    public static final int VARIANTS = 3;
 
     public BlockBurntAmethyst(Properties properties) {
         super(properties);

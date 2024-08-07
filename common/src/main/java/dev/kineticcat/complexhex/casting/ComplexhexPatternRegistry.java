@@ -11,11 +11,8 @@ import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntitiesBy;
 import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntityAt;
 import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.complexhex.Complexhex;
-import dev.kineticcat.complexhex.casting.patterns.OpAxisAngle;
-import dev.kineticcat.complexhex.casting.patterns.OpBubbleIota;
-import dev.kineticcat.complexhex.casting.patterns.OpMatrixToQuaternion;
-import dev.kineticcat.complexhex.casting.patterns.OpQuaternionToMatrix;
-import dev.kineticcat.complexhex.casting.patterns.bits.*;
+import dev.kineticcat.complexhex.casting.actions.*;
+import dev.kineticcat.complexhex.casting.actions.bits.*;
 import dev.kineticcat.complexhex.util.ComplexNumber;
 import dev.kineticcat.complexhex.util.Quaternion;
 import net.minecraft.core.Registry;
@@ -91,8 +88,14 @@ public class ComplexhexPatternRegistry {
     public static final HexPattern GET_ENTITY$NOT_BIT = make("eewwqwqwqwqwqwweewaqaaww", HexDir.NORTH_EAST, "zone_entity/not_bit",
             new OpGetEntitiesBy(e -> e instanceof Display, false));
 
+    // Bubble
     public static final HexPattern BUBBLE = make("qdqdqdqdqdq", HexDir.SOUTH_EAST, "bubble",
             OpBubbleIota.INSTANCE);
+
+    // Multifact
+    public static final HexPattern MAKE_MULTIFACT = make("wqwaqdqdqawqw", HexDir.SOUTH_EAST, "make_multifact",
+            OpMakeMultifact.INSTANCE);
+
 
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {

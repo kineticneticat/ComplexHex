@@ -52,7 +52,11 @@ public class BubbleIota extends Iota {
     @Override
     public boolean executable() { return true; }
     @Override
-    public Iterable<Iota> subIotas() { return List.of(this.getContainedIota()); }
+    public Iterable<Iota> subIotas() {
+        if (this.getContainedIota() instanceof BubbleIota bubble) {
+            return bubble.subIotas();
+        } else return List.of(this.getContainedIota());
+    }
 
     // what the fuck lmao
     @Override

@@ -28,6 +28,13 @@ public class ComplexHexBlockEntities {
             "burnt_amethyst_block", BlockEntityBurntAmethyst.fromKnownBlock(ComplexHexBlocks.BURNT_AMETHYST), ComplexHexBlocks.BURNT_AMETHYST
     );
 
+    public static BlockEntityType<BlockEntityBurntAmethyst> typeForQuenchedAllay(Block block) {
+        if (block.equals(ComplexHexBlocks.BURNT_AMETHYST)) {
+            return BURNT_AMETHYST_BLOCK;
+        }
+        return null;
+    }
+
     private static <T extends BlockEntity> BlockEntityType<T> register(String id,
             BiFunction<BlockPos, BlockState, T> func, Block... blocks) {
         var ret = IXplatAbstractions.INSTANCE.createBlockEntityType(func, blocks);

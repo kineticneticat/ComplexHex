@@ -1,0 +1,15 @@
+{
+  "type": "hexcasting:brainsweep",
+  "blockIn": {
+    "type": "block",
+    "block": "complexhex:burnt_amethyst_block"
+  },
+  "cost": 50000000,
+  "entityIn": {
+    "type": "villager",
+    "minLevel": 5
+  },
+  "result": {
+    "name": "complexhex:awakened_result"
+  }
+}

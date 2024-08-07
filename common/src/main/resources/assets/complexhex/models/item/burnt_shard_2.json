@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "complexhex:item/burnt_shard_2"
+  }
+}

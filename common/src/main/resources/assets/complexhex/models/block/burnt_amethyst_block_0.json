@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "complexhex:block/burnt_amethyst_block_0"
-  }
-}

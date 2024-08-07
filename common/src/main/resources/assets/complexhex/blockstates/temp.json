@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "complexhex:block/awakened_burnt_cluster",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "complexhex:block/awakened_burnt_cluster",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "complexhex:block/awakened_burnt_cluster",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "complexhex:block/awakened_burnt_cluster",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "complexhex:block/awakened_burnt_cluster"
+    },
+    "facing=west": {
+      "model": "complexhex:block/awakened_burnt_cluster",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

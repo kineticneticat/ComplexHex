@@ -40,16 +40,36 @@ public class ComplexHexBlocks {
     private static final Map<ResourceLocation, Pair<Block, Item.Properties>> BLOCK_ITEMS = new LinkedHashMap<>();
     private static final Map<CreativeModeTab, List<Block>> BLOCK_TABS = new LinkedHashMap<>();
 
-    public static final AxesBlock AXES = blockItem("axes", new AxesBlock(BlockBehaviour.Properties.copy(Blocks.BARRIER)), new Item.Properties(), ComplexHexCreativeTabs.COMPLEXHEX);
+    public static final AxesBlock AXES = blockItem(
+            "axes",
+            new AxesBlock(
+                    BlockBehaviour.Properties.copy(Blocks.BARRIER)
+            ),
+            new Item.Properties(),
+            ComplexHexCreativeTabs.COMPLEXHEX
+    );
 
-    private static BlockBehaviour.Properties burnt() {
+    private static BlockBehaviour.Properties burnt(Block block) {
         return BlockBehaviour.Properties
-                .copy(Blocks.AMETHYST_BLOCK)
+                .copy(block)
                 .lightLevel($ -> 4)
                 .noOcclusion();
     }
 
-    public static final BlockBurntAmethyst BURNT_AMETHYST = blockItem("burnt_amethyst_block", new BlockBurntAmethyst(burnt()), new Item.Properties(), ComplexHexCreativeTabs.COMPLEXHEX);
+    public static final BlockBurntAmethyst BURNT_AMETHYST = blockItem(
+            "burnt_block",
+            new BlockBurntAmethyst(
+                    burnt(Blocks.AMETHYST_BLOCK)
+            ),
+            new Item.Properties(),
+            ComplexHexCreativeTabs.COMPLEXHEX
+    );
+    public static final BlockAwakenedBurntBrainsweepResult AWAKENED_RESULT = block(
+            "awakened_result",
+            new BlockAwakenedBurntBrainsweepResult(
+                    BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)
+            )
+    );
 
 
     public static <T extends Block> T block(String name, T block) {

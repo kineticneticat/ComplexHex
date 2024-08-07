@@ -1,5 +1,6 @@
 package dev.kineticcat.complexhex.item;
 
+import dev.kineticcat.complexhex.item.magic.ItemMultifact;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -28,8 +29,9 @@ public class ComplexHexItems {
     private static final Map<ResourceLocation, Item> ITEMS = new LinkedHashMap<>();
     private static final Map<CreativeModeTab, List<TabEntry>> ITEM_TABS = new LinkedHashMap<>();
 
-    public static final Item BURNT_AMETHYST_SHARD = make("burnt_amethyst_shard", new Item(new Item.Properties()));
-
+    public static final Item BURNT_SHARD = make("burnt_shard", new Item(new Item.Properties()));
+    public static final ItemAwakenedBurntShard AWAKENED_BURNT_SHARD = make("awakened_burnt_shard", new ItemAwakenedBurntShard(new Item.Properties()));
+    public static final ItemMultifact MULTIFACT = make("multifact", new ItemMultifact(new Item.Properties()));
 
     public static <T extends Item> T make(String name, T item, CreativeModeTab tab) {
         Item old = ITEMS.put(id(name), item);

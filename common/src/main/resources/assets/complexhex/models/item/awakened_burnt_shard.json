@@ -1,0 +1,22 @@
+{
+  "overrides": [
+    {
+      "model": "complexhex:item/burnt_shard_0",
+      "predicate": {
+        "complexhex:burnt_variants": 0.0
+      }
+    },
+    {
+      "model": "complexhex:item/burnt_shard_1",
+      "predicate": {
+        "complexhex:burnt_variants": 1.0
+      }
+    },
+    {
+      "model": "complexhex:item/burnt_shard_2",
+      "predicate": {
+        "complexhex:burnt_variants": 2.0
+      }
+    }
+  ]
+}
