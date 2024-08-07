@@ -56,20 +56,20 @@ public class ComplexHexBlocks {
                 .noOcclusion();
     }
 
-    public static final BlockBurntAmethyst BURNT_AMETHYST = blockItem(
+    public static final BlockBurnt BURNT = blockItem(
             "burnt_block",
-            new BlockBurntAmethyst(
+            new BlockBurnt(
                     burnt(Blocks.AMETHYST_BLOCK)
             ),
-            new Item.Properties(),
-            ComplexHexCreativeTabs.COMPLEXHEX
+            new Item.Properties()
     );
-    public static final BlockAwakenedBurntBrainsweepResult AWAKENED_RESULT = block(
-            "awakened_result",
-            new BlockAwakenedBurntBrainsweepResult(
+    public static final BlockAwakenedBurnt AWAKENED_BURNT = block(
+            "awakened_burnt",
+            new BlockAwakenedBurnt(
                     BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK)
             )
     );
+
 
 
     public static <T extends Block> T block(String name, T block) {
@@ -91,4 +91,5 @@ public class ComplexHexBlocks {
     public static <T extends Block> T blockItem(String name, T block, Item.Properties props) {
         return blockItem(name, block, props, ComplexHexCreativeTabs.COMPLEXHEX);
     }
+
 }

@@ -15,7 +15,7 @@ import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
 import dev.kineticcat.complexhex.api.casting.iota.ComplexHexIotaTypes
 import dev.kineticcat.complexhex.api.casting.iota.ComplexNumberIota
 import dev.kineticcat.complexhex.casting.ComplexhexPatternRegistry.*
-import dev.kineticcat.complexhex.util.ComplexNumber
+import dev.kineticcat.complexhex.api.util.ComplexNumber
 
 // paraphrased from hexmod source lmao
 
@@ -29,7 +29,6 @@ object ComplexArithmetic : Arithmetic {
         SUB,
         MUL,
         DIV,
-        COMPLEXMUL,
         ABS,
         CNARG,
         REAL,
@@ -41,16 +40,15 @@ object ComplexArithmetic : Arithmetic {
 
     override fun getOperator(pattern: HexPattern): Operator {
         return when (pattern) {
-            ADD        -> CDorCbinaryC({ a, b -> a.add(b) }, {a, b -> a.add(b)})
-            SUB        -> CDorCbinaryC({ a, b -> a.sub(b) }, {a, b -> a.sub(b)})
-            MUL        -> CDbinaryC    { a, b -> a.mul(b) }
-            DIV        -> CDbinaryC    { a, b -> a.scalarDiv(b) }
-            COMPLEXMUL -> CCbinaryC    { a, b -> a.mul(b) }
-            ABS        -> CunaryD      { a -> a.modulus() }
-            CNARG      -> CunaryD      { a -> a.argument() }
-            REAL       -> CunaryD      { a -> a.real }
-            IMAGINARY  -> CunaryD      { a -> a.imag }
-            CONJUGATE  -> CunaryC      { a -> a.conjugate() }
+            ADD        -> CDorCCbinaryC({ a, b -> a.add(b) }, {a, b -> a.add(b)})
+            SUB        -> CDorCCbinaryC({ a, b -> a.sub(b) }, {a, b -> a.sub(b)})
+            MUL        -> CDorCCbinaryC({ a, b -> a.mul(b) }, {a, b -> a.mul(b)})
+            DIV        -> CDorCCbinaryC({ a, b -> a.div(b) }, {a, b -> a.div(b)})
+            ABS        -> CunaryD       { a -> a.modulus() }
+            CNARG      -> CunaryD       { a -> a.argument() }
+            REAL       -> CunaryD       { a -> a.real }
+            IMAGINARY  -> CunaryD       { a -> a.imag }
+            CONJUGATE  -> CunaryC       { a -> a.conjugate() }
             else -> throw InvalidOperatorException("$pattern is not a valid operator in complex arithmetic")
         }
     }
@@ -67,7 +65,7 @@ object ComplexArithmetic : Arithmetic {
     private fun CDbinaryC(op: (ComplexNumber, Double) -> (ComplexNumber)) = OperatorBinary(ACCEPTS_CD)
         {i: Iota, j: Iota -> ComplexNumberIota(op(Operator.downcast(i, ComplexHexIotaTypes.COMPLEXNUMBER).complex, Operator.downcast(j, HexIotaTypes.DOUBLE).double)) }
     // what the fuck is this
-    fun CDorCbinaryC(opA:(ComplexNumber, ComplexNumber) -> (ComplexNumber), opB:(ComplexNumber, Double) -> (ComplexNumber)) = OperatorBinary(ACCEPTS_CCorCD)
+    fun CDorCCbinaryC(opA:(ComplexNumber, ComplexNumber) -> (ComplexNumber), opB:(ComplexNumber, Double) -> (ComplexNumber)) = OperatorBinary(ACCEPTS_CCorCD)
         {i: Iota, j:Iota -> if (j is ComplexNumberIota) {
             ComplexNumberIota(opA(Operator.downcast(i, ComplexHexIotaTypes.COMPLEXNUMBER).complex, Operator.downcast(j, ComplexHexIotaTypes.COMPLEXNUMBER).complex))
         } else if (j is DoubleIota) {

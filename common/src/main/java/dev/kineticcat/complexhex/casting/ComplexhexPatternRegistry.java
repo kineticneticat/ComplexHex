@@ -13,8 +13,8 @@ import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.complexhex.Complexhex;
 import dev.kineticcat.complexhex.casting.actions.*;
 import dev.kineticcat.complexhex.casting.actions.bits.*;
-import dev.kineticcat.complexhex.util.ComplexNumber;
-import dev.kineticcat.complexhex.util.Quaternion;
+import dev.kineticcat.complexhex.api.util.ComplexNumber;
+import dev.kineticcat.complexhex.api.util.Quaternion;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Display;
@@ -34,7 +34,6 @@ public class ComplexhexPatternRegistry {
             Action.makeConstantOp(new ComplexNumber(1, 0).asIota()));
     public static final HexPattern CONST$COMPLEX$I$ = make("wqq", HexDir.SOUTH_WEST, "const/complex/i",
             Action.makeConstantOp(new ComplexNumber(0, 1).asIota()));
-    public static final HexPattern COMPLEXMUL = make("wqqewaqaw", HexDir.SOUTH_WEST, "cmul");
     public static final HexPattern REAL = make("wqqq", HexDir.SOUTH_WEST, "real");
     public static final HexPattern IMAGINARY = make("wqqe", HexDir.SOUTH_WEST, "imaginary");
     public static final HexPattern CONJUGATE = make("wqqd", HexDir.SOUTH_WEST, "conjugate");
@@ -49,7 +48,6 @@ public class ComplexhexPatternRegistry {
             Action.makeConstantOp(new Quaternion(0, 0, 1, 0).asIota()));
     public static final HexPattern CONST$QUAT$K$ = make("waqqqqqed", HexDir.SOUTH_EAST, "const/quaternion/k",
             Action.makeConstantOp(new Quaternion(0, 0, 0, 1).asIota()));
-    public static final HexPattern QMUL = make("waqqqqqewaqaw", HexDir.SOUTH_EAST, "qmul");
     public static final HexPattern QINVERT = make("waqqqqqew", HexDir.SOUTH_EAST, "qinvert");
     public static final HexPattern QW = make("wdeeeeeqa", HexDir.SOUTH_EAST, "qw");
     public static final HexPattern QX = make("wdeeeeeqq", HexDir.SOUTH_EAST, "qx");

@@ -1,4 +1,4 @@
-package dev.kineticcat.complexhex.util;
+package dev.kineticcat.complexhex.api.util;
 
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.utils.HexUtils;
@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 public class ComplexNumber {
-    private static final Logger LOGGER = LogManager.getLogger(Complexhex.MOD_ID);
     public double real;
     public double imag;
     public ComplexNumber(double real, double imag) {
@@ -39,13 +38,20 @@ public class ComplexNumber {
     public ComplexNumber mul(double S) {
         return new ComplexNumber(this.real * S, this.imag * S);
     }
-    public ComplexNumber scalarDiv(double S) {
+    public ComplexNumber div(double S) {
         return new ComplexNumber(this.real / S, this.imag / S);
     }
     public ComplexNumber mul(ComplexNumber B) {
         return new ComplexNumber(
             this.real*B.real - this.imag + B.imag,
             this.real*B.imag + this.imag * B.real);
+    }
+    public ComplexNumber div(ComplexNumber that) {
+        double deno = Math.pow(that.real, 2) + Math.pow(that.imag,2);
+        return new ComplexNumber(
+                (this.real*that.real+this.imag*that.imag)/deno,
+                (this.imag*that.real-this.real*that.imag)/deno
+        );
     }
     public ComplexNumber conjugate() { return  new ComplexNumber(this.real, -this.imag);}
     public double modulus() {

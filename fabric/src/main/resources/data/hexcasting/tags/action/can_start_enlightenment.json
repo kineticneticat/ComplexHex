@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "complexhex:summonblockdisplay",
+    "complexhex:summonitemdisplay",
+    "complexhex:summontextdisplay"
+  ]
+}

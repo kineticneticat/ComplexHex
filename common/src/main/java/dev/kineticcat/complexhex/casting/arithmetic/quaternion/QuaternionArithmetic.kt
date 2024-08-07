@@ -13,8 +13,12 @@ import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
 import dev.kineticcat.complexhex.api.casting.iota.ComplexHexIotaTypes
+import dev.kineticcat.complexhex.api.casting.iota.ComplexNumberIota
+import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota
+import dev.kineticcat.complexhex.api.util.ComplexNumber
 import dev.kineticcat.complexhex.casting.ComplexhexPatternRegistry.*
-import dev.kineticcat.complexhex.util.Quaternion
+import dev.kineticcat.complexhex.api.util.Quaternion
+import dev.kineticcat.complexhex.casting.arithmetic.complex.ComplexArithmetic
 import net.minecraft.world.phys.Vec3
 import kotlin.math.sqrt
 
@@ -34,7 +38,6 @@ object QuaternionArithmetic : Arithmetic {
             MUL,
             DIV,
             ABS,
-            QMUL,
             QINVERT,
             QW,
             QX,
@@ -49,16 +52,22 @@ object QuaternionArithmetic : Arithmetic {
         val out =  when (pattern) {
             ADD     -> QQbinaryQ      { a, b -> a.Qadd(b) }
             SUB     -> QQbinaryQ      { a, b -> a.Qsub(b) }
-            MUL     -> QDbinaryQ      { a, b -> a.Qmul(b) }
+            MUL     -> QDorQQbinaryQ( { a, b -> a.Qmul(b) }, { a, b -> a.Qmul(b) })
             DIV     -> QDbinaryQ      { a, b -> a.Qdiv(b) }
             ABS     -> QunaryD        { a    -> sqrt(a.lengthSquared()) }
-            QMUL    -> QQbinaryQ      { a, b -> a.Qmul(b) }
             QINVERT -> QunaryQ        { a    -> a.Qinvert() }
             QW      -> QunaryD        { a    -> a.w }
             QX      -> QunaryD        { a    -> a.x }
             QY      -> QunaryD        { a    -> a.y }
             QZ      -> QunaryD        { a    -> a.z }
-            QMAKE   -> DVbinaryQ      { d, v -> Quaternion(d, v.x, v.y, v.z) }
+            QMAKE   -> DVbinaryQ      { d, v ->
+                Quaternion(
+                    d,
+                    v.x,
+                    v.y,
+                    v.z
+                )
+            }
             QUNMAKE -> OpQunmake
             else -> throw InvalidOperatorException("$pattern is not a valid operator in quaternion arithmetic")
         }
@@ -75,5 +84,13 @@ object QuaternionArithmetic : Arithmetic {
         {i: Iota, j: Iota -> op(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion, Operator.downcast(j, HexIotaTypes.DOUBLE).double).asIota() }
     private fun DVbinaryQ(op: (Double, Vec3) -> Quaternion) = OperatorBinary(ACCEPTS_DV)
         {i: Iota, j:Iota -> op(Operator.downcast(i, HexIotaTypes.DOUBLE).double, Operator.downcast(j, HexIotaTypes.VEC3).vec3).asIota()}
-
+    fun QDorQQbinaryQ(opA:(Quaternion, Quaternion) -> (Quaternion), opB:(Quaternion, Double) -> (Quaternion)) = OperatorBinary(ACCEPTS_QQorQD)
+    {i: Iota, j:Iota -> if (j is QuaternionIota) {
+        QuaternionIota(opA(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion, Operator.downcast(j, ComplexHexIotaTypes.QUATERNION).quaternion))
+    } else if (j is DoubleIota) {
+        QuaternionIota(opB(Operator.downcast(i, ComplexHexIotaTypes.QUATERNION).quaternion, Operator.downcast(j, HexIotaTypes.DOUBLE).double))
+    } else {
+        throw InvalidOperatorException("i did an oopsie, report this pls :) (${j::class})")
+    }
+    }
 }

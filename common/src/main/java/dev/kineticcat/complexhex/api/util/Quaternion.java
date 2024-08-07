@@ -1,4 +1,4 @@
-package dev.kineticcat.complexhex.util;
+package dev.kineticcat.complexhex.api.util;
 
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota;

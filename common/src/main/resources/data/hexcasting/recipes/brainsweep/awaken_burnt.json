@@ -2,7 +2,7 @@
   "type": "hexcasting:brainsweep",
   "blockIn": {
     "type": "block",
-    "block": "complexhex:burnt_amethyst_block"
+    "block": "complexhex:burnt_block"
   },
   "cost": 50000000,
   "entityIn": {
@@ -10,6 +10,6 @@
     "minLevel": 5
   },
   "result": {
-    "name": "complexhex:awakened_result"
+    "name": "complexhex:awakened_burnt"
   }
 }

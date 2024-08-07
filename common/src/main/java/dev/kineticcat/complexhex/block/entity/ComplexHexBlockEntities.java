@@ -25,11 +25,11 @@ public class ComplexHexBlockEntities {
     private static final Map<ResourceLocation, BlockEntityType<?>> BLOCK_ENTITIES = new LinkedHashMap<>();
 
     public static final BlockEntityType<BlockEntityBurntAmethyst> BURNT_AMETHYST_BLOCK = register(
-            "burnt_amethyst_block", BlockEntityBurntAmethyst.fromKnownBlock(ComplexHexBlocks.BURNT_AMETHYST), ComplexHexBlocks.BURNT_AMETHYST
+            "burnt_amethyst_block", BlockEntityBurntAmethyst.fromKnownBlock(ComplexHexBlocks.BURNT), ComplexHexBlocks.BURNT
     );
 
     public static BlockEntityType<BlockEntityBurntAmethyst> typeForQuenchedAllay(Block block) {
-        if (block.equals(ComplexHexBlocks.BURNT_AMETHYST)) {
+        if (block.equals(ComplexHexBlocks.BURNT)) {
             return BURNT_AMETHYST_BLOCK;
         }
         return null;

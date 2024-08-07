@@ -2,8 +2,6 @@ package dev.kineticcat.complexhex.client.render.be;
 
 import at.petrak.hexcasting.xplat.IClientXplatAbstractions;
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.kineticcat.complexhex.Complexhex;
-import dev.kineticcat.complexhex.block.BlockBurntAmethyst;
 import dev.kineticcat.complexhex.block.entity.BlockEntityBurntAmethyst;
 import dev.kineticcat.complexhex.client.render.ComplexHexGaslighting;
 import dev.kineticcat.complexhex.client.RegisterClientStuff;

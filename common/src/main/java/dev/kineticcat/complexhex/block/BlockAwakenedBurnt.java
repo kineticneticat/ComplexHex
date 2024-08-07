@@ -3,7 +3,6 @@ package dev.kineticcat.complexhex.block;
 import dev.kineticcat.complexhex.item.ComplexHexItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -11,8 +10,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public class BlockAwakenedBurntBrainsweepResult extends Block {
-    public BlockAwakenedBurntBrainsweepResult(Properties properties) {
+public class BlockAwakenedBurnt extends Block {
+    public BlockAwakenedBurnt(Properties properties) {
         super(properties);
     }
 
@@ -26,5 +25,4 @@ public class BlockAwakenedBurntBrainsweepResult extends Block {
             level.setBlockAndUpdate(position, Blocks.AIR.defaultBlockState());
         }
     }
-
 }

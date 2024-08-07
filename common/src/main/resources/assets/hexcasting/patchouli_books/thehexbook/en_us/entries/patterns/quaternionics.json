@@ -74,7 +74,7 @@
       "type": "hexcasting:pattern",
       "op_id": "hexcasting:mul",
       "anchor": "hexcasting:mul",
-      "input": "quaternion, num",
+      "input": "quat, num | quat, quat",
       "output": "quaternion",
       "text": "complexhex.page.quaternionics.mul"
     },
@@ -85,14 +85,6 @@
       "input": "quaternion, num",
       "output": "quaternion",
       "text": "complexhex.page.quaternionics.div"
-    },
-    {
-      "type": "hexcasting:pattern",
-      "op_id": "complexhex:qmul",
-      "anchor": "complexhex:qmul",
-      "input": "quaternion, quat",
-      "output": "quaternion",
-      "text": "complexhex.page.quaternionics.qmul"
     },
     {
       "type": "hexcasting:pattern",

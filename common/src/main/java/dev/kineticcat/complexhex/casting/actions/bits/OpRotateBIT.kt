@@ -11,7 +11,7 @@ import at.petrak.hexcasting.api.misc.MediaConstants
 import com.mojang.math.Transformation
 import dev.kineticcat.complexhex.api.getQuaternion
 import dev.kineticcat.complexhex.mixin.BITInvokers.DisplayInvoker
-import dev.kineticcat.complexhex.util.Quaternion
+import dev.kineticcat.complexhex.api.util.Quaternion
 import net.minecraft.world.entity.Display
 import org.joml.Quaternionf
 import org.joml.Vector3f

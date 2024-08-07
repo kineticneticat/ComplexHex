@@ -1,6 +1,5 @@
 package dev.kineticcat.complexhex.block;
 
-import at.petrak.hexcasting.common.blocks.BlockQuenchedAllay;
 import at.petrak.hexcasting.common.particles.ConjureParticleOptions;
 import dev.kineticcat.complexhex.block.entity.BlockEntityBurntAmethyst;
 import net.minecraft.core.BlockPos;
@@ -13,14 +12,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockBurntAmethyst extends Block implements EntityBlock {
+public class BlockBurnt extends Block implements EntityBlock {
 
-    public BlockBurntAmethyst(Properties properties) {
+    public BlockBurnt(Properties properties) {
         super(properties);
     }
 

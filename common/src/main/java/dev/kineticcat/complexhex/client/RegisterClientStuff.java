@@ -1,11 +1,7 @@
 package dev.kineticcat.complexhex.client;
 
-import at.petrak.hexcasting.client.render.GaslightingTracker;
 import at.petrak.hexcasting.xplat.IClientXplatAbstractions;
-import at.petrak.hexcasting.xplat.IXplatAbstractions;
-import dev.kineticcat.complexhex.Complexhex;
 import dev.kineticcat.complexhex.block.ComplexHexBlocks;
-import dev.kineticcat.complexhex.block.entity.BlockEntityBurntAmethyst;
 import dev.kineticcat.complexhex.block.entity.ComplexHexBlockEntities;
 import dev.kineticcat.complexhex.client.render.ComplexHexGaslighting;
 import dev.kineticcat.complexhex.client.render.CoolerGaslightingTracker;
@@ -30,19 +26,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import static dev.kineticcat.complexhex.Complexhex.LOGGER;
 import static dev.kineticcat.complexhex.Complexhex.id;
 
 public class RegisterClientStuff {
     public static Map<ResourceLocation, List<BakedModel>> BURNT_AMETHYST_VARIANTS = new HashMap<>();
     public static final List<Block> BURNT_AMETHYST_TYPES = List.of(
-            ComplexHexBlocks.BURNT_AMETHYST
+            ComplexHexBlocks.BURNT
     );
     public static void init() {
         registerGaslight3(ComplexHexItems.BURNT_SHARD);
-        registerGaslight3(ComplexHexBlocks.BURNT_AMETHYST.asItem());
+        registerGaslight3(ComplexHexBlocks.BURNT.asItem());
         registerGaslight3(ComplexHexItems.AWAKENED_BURNT_SHARD);
-        IClientXplatAbstractions.INSTANCE.setRenderLayer(ComplexHexBlocks.BURNT_AMETHYST, RenderType.translucent());
+        IClientXplatAbstractions.INSTANCE.setRenderLayer(ComplexHexBlocks.BURNT, RenderType.translucent());
     }
     private static void registerGaslight3(Item item) {
         IClientXplatAbstractions.INSTANCE.registerItemProperty(item,
