@@ -1,0 +1,23 @@
+{
+  "name": "complexhex.entry.burnt",
+  "category": "hexcasting:items",
+  "icon": "complexhex:burnt_shard",
+  "sortnum": 9,
+  "advancement": "hexcasting:root",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "complexhex.page.burnt"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "complexhex:burnt_shard",
+      "text": "complexhex.page.burnt.crafting.shard"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "complexhex:burnt_block",
+      "text": "complexhex.page.burnt.crafting.block"
+    }
+  ]
+}

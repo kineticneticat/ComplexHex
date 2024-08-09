@@ -4,7 +4,6 @@
   "icon": "minecraft:heart_of_the_sea",
   "sortnum": 10,
   "advancement": "hexcasting:root",
-  "read_by_default": true,
   "pages": [
     {
       "type": "hexcasting:pattern",
