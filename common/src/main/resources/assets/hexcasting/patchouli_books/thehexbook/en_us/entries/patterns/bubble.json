@@ -4,7 +4,6 @@
     "icon": "minecraft:glass_bottle",
     "sortnum": 13,
     "advancement": "hexcasting:root",
-    "read_by_default": true,
     "pages": [
       {
         "type": "hexcasting:pattern",

@@ -4,7 +4,6 @@
   "icon": "minecraft:phantom_membrane",
   "sortnum": 10,
   "advancement": "hexcasting:root",
-  "read_by_default": true,
   "pages": [
     {
       "type": "hexcasting:pattern",

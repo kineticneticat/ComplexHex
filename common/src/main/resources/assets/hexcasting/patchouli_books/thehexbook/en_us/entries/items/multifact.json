@@ -1,0 +1,30 @@
+{
+  "name": "complexhex.entry.multifact",
+  "category": "hexcasting:items",
+  "icon": "complexhex:multifact",
+  "sortnum": 9,
+  "advancement": "hexcasting:enlightenment",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "complexhex.page.multifact.1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "complexhex.page.multifact.2"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "complexhex:multifact",
+      "text": "complexhex.page.multifact.crafting"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:make_multifact",
+      "anchor": "complexhex:make_multifact",
+      "input": "entity, [pattern] | [pattern]",
+      "output": "",
+      "text": "complexhex.page.multifact.pattern"
+    }
+  ]
+}

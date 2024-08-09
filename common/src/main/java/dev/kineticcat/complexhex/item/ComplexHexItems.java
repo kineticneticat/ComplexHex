@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -31,8 +32,8 @@ public class ComplexHexItems {
     private static final Map<CreativeModeTab, List<TabEntry>> ITEM_TABS = new LinkedHashMap<>();
 
     public static final Item BURNT_SHARD = make("burnt_shard", new Item(new Item.Properties()));
-    public static final ItemAwakenedBurntShard AWAKENED_BURNT_SHARD = make("awakened_burnt_shard", new ItemAwakenedBurntShard(ComplexHexBlocks.AWAKENED_BURNT,new Item.Properties()));
-    public static final ItemMultifact MULTIFACT = make("multifact", new ItemMultifact(new Item.Properties()));
+    public static final ItemAwakenedBurntShard AWAKENED_BURNT_SHARD = make("awakened_burnt_shard", new ItemAwakenedBurntShard(ComplexHexBlocks.AWAKENED_BURNT,new Item.Properties().rarity(Rarity.RARE)));
+    public static final ItemMultifact MULTIFACT = make("multifact", new ItemMultifact(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
 
     public static <T extends Item> T make(String name, T item, CreativeModeTab tab) {
         Item old = ITEMS.put(id(name), item);

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "complexhex:awakened_burnt_shard"
+    },
+    "A": {
+      "item": "hexcasting:charged_amethyst"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "D": {
+      "tag": "minecraft:music_discs"
+    }
+  },
+  "pattern": [
+    " B ",
+    "GAG",
+    " D "
+  ],
+  "result": {
+    "item": "complexhex:multifact"
+  }
+}

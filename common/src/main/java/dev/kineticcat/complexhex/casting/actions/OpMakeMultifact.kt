@@ -44,6 +44,7 @@ object OpMakeMultifact : VarargSpellAction {
             throw  MishapBadOffhandItem.of(stack, hand, "iota.write")
         }
 
+        if ((stack as ItemMultifact).getAmount(stack) >= 10) throw MishapBadOffhandItem.of(stack, hand, "multifact.too_many")
 
         if (argc == 2 && (stack.item as ItemMultifact).hasHex(stack)) {
             throw MishapBadOffhandItem.of(stack, hand, "multifact.already_init")

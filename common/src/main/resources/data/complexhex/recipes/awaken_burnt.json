@@ -4,10 +4,10 @@
     "type": "block",
     "block": "complexhex:burnt_block"
   },
-  "cost": 50000000,
+  "cost": 10000000,
   "entityIn": {
     "type": "villager",
-    "minLevel": 5
+    "minLevel": 4
   },
   "result": {
     "name": "complexhex:awakened_burnt"

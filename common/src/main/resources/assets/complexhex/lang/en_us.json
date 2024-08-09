@@ -89,7 +89,25 @@
   "hexcasting.mishap.bad_item.bit": "a BIT",
 
   "itemGroup.complexhex": "Complex Hex",
-  "item.complexhex.burnt_amethyst_shard": "Burnt Amethyst Shard",
-  "block.complexhex.burnt_amethyst_block": "Burnt Amethyst Block",
-  "item.complexhex.multifact": "Multifact"
+  "item.complexhex.burnt_shard": "Burnt Shard",
+  "block.complexhex.burnt_block": "Burnt Block",
+  "item.complexhex.awakened_burnt_shard": "Awakened Burnt Shard",
+
+  "complexhex.entry.burnt": "Burning Amethyst",
+  "complexhex.page.burnt": "When a shard of amethyst is heated - such as during smelting - it starts to act completely differently; It seems \"unhappy\", \"violent\" almost. Ontop of that, this material (henceforth labeled \"Burnt\") has had quite the color change, and interestingly, it seems to cycle colors whenever I am not looking",
+  "complexhex.page.burnt.crafting.shard": "",
+  "complexhex.page.burnt.crafting.block": "As with amethyst, Burnt can also be fashioned into blocks, sharing the same odd optical phenomenon",
+
+  "complexhex.entry.awakened_burnt": "Burnt's Awakening",
+  "complexhex.page.awakened_burnt": "With a mind to guide it, the Burnt is much less violent, but much more controlling; It seems to be influencing the media around it, pulling said media into fractalline swirls around itself.$(br) Interestingly, it seems that a full block of Awakened Burnt is rather unstable, quickly breaking apart until only a stable shard remains.",
+  "complexhex.page.awakened_burnt.crafting": "The level of fidelity to rein in the Burnt requires quite the skilled mind. It also requires quite a lot of media to work the mind into place, just over 100 $(l:items/amethyst)$(item)Charged Amethyst/$ should do it.",
+
+  "item.complexhex.multifact": "Multifact",
+  "complexhex.entry.multifact": "Multifact",
+  "complexhex.page.multifact.1": "This little doohickey is basically multiple artifacts in one, with the advantage being that the stack (but not the ravenmind) is preserved between used until it is reset once the sequence is complete.$(br)However, there are a couple downsides compared to a normal artifact:$(br)For one, the hexes contained can only be cast in order, no jumping about.$(br)And Secondly, each subesquent hex added requires exponentially more media (till a max of 10 hexes)",
+  "complexhex.page.multifact.2": "Whilst a mind alone may have the ability to control the media finely enough for this to work, it would have no spare thoughts with which to store the stack. However, with the inclusion of Burnt to assist controlling the media, the mind is free to remember the stack.",
+  "complexhex.page.multifact.crafting": "*slaps multifact* this bad-boy can fit so many hexes in it!",
+  "complexhex.page.multifact.pattern": "When the first hex is being inserted, there must also be an item entity provided to be the battery, similar to other casting devices. But with subsequent additions, an entity is not required. $(br)The cost of adding hexes increases exponentially, 10 Charged for the first, 20 for the second, 40, 80,... etc."
+
+
 }

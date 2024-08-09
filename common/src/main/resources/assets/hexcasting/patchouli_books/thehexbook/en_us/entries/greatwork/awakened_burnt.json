@@ -1,0 +1,18 @@
+{
+  "name": "complexhex.entry.awakened_burnt",
+  "category": "hexcasting:greatwork",
+  "icon": "complexhex:awakened_burnt_shard",
+  "sortnum": 7,
+  "advancement": "hexcasting:enlightenment",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "complexhex.page.awakened_burnt"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "complexhex:awakened_burnt",
+      "text": "complexhex.page.awakened_burnt.crafting"
+    }
+  ]
+}
