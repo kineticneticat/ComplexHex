@@ -28,6 +28,7 @@ public class BlockBurnt extends Block implements EntityBlock {
         return new BlockEntityBurntAmethyst(this, pos, state);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.INVISIBLE;

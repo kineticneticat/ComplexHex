@@ -12,6 +12,7 @@ import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntityAt;
 import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.complexhex.Complexhex;
 import dev.kineticcat.complexhex.casting.actions.*;
+import dev.kineticcat.complexhex.casting.actions.assemblies.OpBeginAssembly;
 import dev.kineticcat.complexhex.casting.actions.bits.*;
 import dev.kineticcat.complexhex.api.util.ComplexNumber;
 import dev.kineticcat.complexhex.api.util.Quaternion;
@@ -93,6 +94,10 @@ public class ComplexhexPatternRegistry {
     // Multifact
     public static final HexPattern MAKE_MULTIFACT = make("wqwaqdqdqawqw", HexDir.SOUTH_EAST, "make_multifact",
             OpMakeMultifact.INSTANCE);
+
+    // Assemblies
+    public static final HexPattern BEGIN_ASSEMBLY = make("wdeddedw", HexDir.SOUTH_EAST, "assembly/begin",
+            OpBeginAssembly.INSTANCE);
 
 
     public static void init() {
