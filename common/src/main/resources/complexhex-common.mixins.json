@@ -6,11 +6,12 @@
   "client": [
   ],
   "mixins": [
+    "ClientTickCounterMixin",
+    "RemoveAssemblyManagerMixin",
     "BITInvokers.BlockDisplayInvoker",
-    "BITInvokers.ItemDisplayInvoker",
-    "BITInvokers.TextDisplayInvoker",
     "BITInvokers.DisplayInvoker",
-    "ClientTickCounterMixin"
+    "BITInvokers.ItemDisplayInvoker",
+    "BITInvokers.TextDisplayInvoker"
   ],
   "injectors": {
     "defaultRequire": 1

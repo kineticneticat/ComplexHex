@@ -13,6 +13,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class AssemblyManagerEntity extends Entity {
 
     private final String TAG_NODES = "Nodes";
 
-    private List<Vec3> Nodes = new ArrayList<Vec3>();
+    private List<Vec3> Nodes = new ArrayList<>();
 
     public AssemblyManagerEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
@@ -37,8 +38,7 @@ public class AssemblyManagerEntity extends Entity {
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag compoundTag) {
-        Complexhex.LOGGER.info(compoundTag);
+    protected void readAdditionalSaveData(@NotNull CompoundTag compoundTag) {
         ListTag NodesTag = NBTHelper.getList(compoundTag, TAG_NODES, Tag.TAG_LIST);
         NodesTag = NodesTag == null ? new ListTag() : NodesTag;
         List<Vec3> out = new ArrayList<>();
@@ -54,7 +54,7 @@ public class AssemblyManagerEntity extends Entity {
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag compoundTag) {
+    protected void addAdditionalSaveData(@NotNull CompoundTag compoundTag) {
         ListTag NodesTag = new ListTag();
         for (Vec3 vec : Nodes) {
             CompoundTag ctag = new CompoundTag();
@@ -64,7 +64,10 @@ public class AssemblyManagerEntity extends Entity {
             NodesTag.add(ctag);
         }
         compoundTag.put(TAG_NODES, NodesTag);
-        Complexhex.LOGGER.info(compoundTag);
+    }
+
+    public void triggerAssembly() {
 
     }
+
 }
