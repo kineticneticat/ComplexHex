@@ -16,7 +16,7 @@ import net.minecraft.world.phys.Vec3
 
 object OpBeginAssembly : SpellAction {
 
-    public const val managerPosTag = "AssemblyManagerPos"
+    public const val managerUUIDTag = "AssemblyManagerUUID"
 
     override val argc = 0
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
@@ -31,19 +31,20 @@ object OpBeginAssembly : SpellAction {
         if (env !is CircleCastEnv) throw MishapNoSpellCircle()
         val circleState = env.circleState()
         val pos = circleState.currentPos.center
-//        userData.put(managerPosTag, utilStuffLmao.Vec3ToCompoundTag(pos))
+
+        val manager = AssemblyManagerEntity(ComplexHexEntities.ASSEMBLY_MANAGER, env.world)
+
+        userData.putUUID(managerUUIDTag, manager.uuid)
 
         return SpellAction.Result(
-            Spell(pos),
+            Spell(manager, pos),
             MediaConstants.CRYSTAL_UNIT,
             listOf()
         )
     }
-    private data class Spell(val pos: Vec3) : RenderedSpell {
+    private data class Spell(val manager: AssemblyManagerEntity, val pos: Vec3) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
-            val manager = AssemblyManagerEntity(ComplexHexEntities.ASSEMBLY_MANAGER, env.world)
             manager.setPos(pos)
-            Complexhex.LOGGER.info(manager)
             env.world.addFreshEntity(manager)
         }
     }

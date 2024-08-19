@@ -1,14 +1,9 @@
 package dev.kineticcat.complexhex.entity;
 
 import at.petrak.hexcasting.api.utils.NBTHelper;
-import dev.kineticcat.complexhex.Complexhex;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.NumericTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializer;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
@@ -20,17 +15,25 @@ import java.util.List;
 
 public class AssemblyManagerEntity extends Entity {
 
-    private final String TAG_NODES = "Nodes";
+    private final String TAG_VERTICES = "Vertices";
 
-    private List<Vec3> Nodes = new ArrayList<>();
+    private List<Vec3> Vertices = new ArrayList<>();
 
     public AssemblyManagerEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
 
-    public void addNode(Vec3 vec) {
-        Complexhex.LOGGER.info(vec);
-        Nodes.add(vec);
+    public void addVertex(Vec3 vec) {
+        Vertices.add(vec);
+        setPos(centre());
+    }
+
+    public Vec3 centre() {
+        Vec3 total = Vec3.ZERO;
+        for (Vec3 vert : Vertices) {
+            total = total.add(vert);
+        }
+        return total.scale(1f /Vertices.size());
     }
 
     @Override
@@ -39,7 +42,7 @@ public class AssemblyManagerEntity extends Entity {
 
     @Override
     protected void readAdditionalSaveData(@NotNull CompoundTag compoundTag) {
-        ListTag NodesTag = NBTHelper.getList(compoundTag, TAG_NODES, Tag.TAG_LIST);
+        ListTag NodesTag = NBTHelper.getList(compoundTag, TAG_VERTICES, Tag.TAG_LIST);
         NodesTag = NodesTag == null ? new ListTag() : NodesTag;
         List<Vec3> out = new ArrayList<>();
         for (Tag tag : NodesTag) {
@@ -50,20 +53,20 @@ public class AssemblyManagerEntity extends Entity {
                     ctag.getDouble("Z")
             ));
         }
-        Nodes = out;
+        Vertices = out;
     }
 
     @Override
     protected void addAdditionalSaveData(@NotNull CompoundTag compoundTag) {
         ListTag NodesTag = new ListTag();
-        for (Vec3 vec : Nodes) {
+        for (Vec3 vec : Vertices) {
             CompoundTag ctag = new CompoundTag();
             ctag.putDouble("X", vec.x);
             ctag.putDouble("Y", vec.y);
             ctag.putDouble("Z", vec.z);
             NodesTag.add(ctag);
         }
-        compoundTag.put(TAG_NODES, NodesTag);
+        compoundTag.put(TAG_VERTICES, NodesTag);
     }
 
     public void triggerAssembly() {
