@@ -9,14 +9,14 @@ import org.jetbrains.annotations.NotNull;
 import static dev.kineticcat.complexhex.Complexhex.id;
 
 public class HexalWispRenderer extends EntityRenderer<AssemblyManagerEntity> {
-    private static final ResourceLocation WISP = id("textures/entity/wisp.png");
+    private static final ResourceLocation WISP = new ResourceLocation("hexcasting", "textures/particle/cloud.png");
 
     public HexalWispRenderer (EntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation (@NotNull AssemblyManagerEntity baseWisp) {
+    public @NotNull ResourceLocation getTextureLocation (@NotNull AssemblyManagerEntity manager) {
         return WISP;
     }
 }

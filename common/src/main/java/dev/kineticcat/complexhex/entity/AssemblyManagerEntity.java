@@ -1,9 +1,17 @@
 package dev.kineticcat.complexhex.entity;
 
+import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.api.utils.NBTHelper;
+import at.petrak.hexcasting.common.particles.ConjureParticleOptions;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.ParticleStatus;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
@@ -13,11 +21,18 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import static dev.kineticcat.complexhex.api.FunniesKt.nextColour;
+
 public class AssemblyManagerEntity extends Entity {
 
-    private final String TAG_VERTICES = "Vertices";
+    private static final String TAG_VERTICES = "vertices";
+    private static final String TAG_PIGMENT = "pigment";
+
+    private static final EntityDataAccessor<CompoundTag> PIGMENT =
+            SynchedEntityData.defineId(AssemblyManagerEntity.class, EntityDataSerializers.COMPOUND_TAG);
 
     private List<Vec3> Vertices = new ArrayList<>();
+    private FrozenPigment Pigment;
 
     public AssemblyManagerEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
@@ -38,6 +53,7 @@ public class AssemblyManagerEntity extends Entity {
 
     @Override
     protected void defineSynchedData() {
+        entityData.define(PIGMENT, FrozenPigment.DEFAULT.get().serializeToNBT());
     }
 
     @Override
@@ -54,6 +70,7 @@ public class AssemblyManagerEntity extends Entity {
             ));
         }
         Vertices = out;
+        entityData.set(PIGMENT, compoundTag.getCompound(TAG_PIGMENT));
     }
 
     @Override
@@ -67,10 +84,55 @@ public class AssemblyManagerEntity extends Entity {
             NodesTag.add(ctag);
         }
         compoundTag.put(TAG_VERTICES, NodesTag);
+        NBTHelper.putCompound(compoundTag, TAG_PIGMENT, entityData.get(PIGMENT));
     }
 
-    public void triggerAssembly() {
-
+    public FrozenPigment setPigment(FrozenPigment pigment) {
+        entityData.set(PIGMENT, pigment.serializeToNBT());
+        return pigment;
     }
+
+    public void playWispParticles(FrozenPigment pigment) {
+        int radius = 1;
+
+//        val repeats = switch ((ParticleStatus) Minecraft.getInstance().options.particles().get()) {
+//            case ParticleStatus.ALL: 50
+//            ParticleStatus.DECREASED -> 20
+//            ParticleStatus.MINIMAL -> 5
+//        }
+        int repeats;
+        switch ( (ParticleStatus) Minecraft.getInstance().options.particles().get() ) {
+            case ALL: repeats = 50;
+            case DECREASED: repeats = 20;
+            case MINIMAL: repeats = 5;
+            default: repeats = 0;
+        }
+
+        for (Vec3 vert : Vertices) {
+            for (int i = 0; i <= repeats; i++) {
+                int colour = nextColour(pigment, random);
+
+                level().addParticle(
+                        new ConjureParticleOptions(colour),
+                        (vert.x + radius * random.nextGaussian()),
+                        (vert.y + radius * random.nextGaussian()),
+                        (vert.z + radius * random.nextGaussian()),
+                        0.0125 * (random.nextDouble() - 0.5),
+                        0.0125 * (random.nextDouble() - 0.5),
+                        0.0125 * (random.nextDouble() - 0.5)
+                );
+            }
+        }
+    }
+
+    @Override
+    public void tick() {
+        if (level().isClientSide) {
+            FrozenPigment pigment = FrozenPigment.fromNBT(entityData.get(PIGMENT));
+            playWispParticles(pigment);
+        }
+    }
+
+    public void triggerAssembly() {}
 
 }
