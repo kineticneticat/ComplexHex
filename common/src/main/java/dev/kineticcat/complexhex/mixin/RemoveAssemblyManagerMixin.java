@@ -19,6 +19,7 @@ import static dev.kineticcat.complexhex.casting.actions.assemblies.OpBeginAssemb
 public class RemoveAssemblyManagerMixin {
     @Shadow(remap = false)
     public CastingImage currentImage;
+
     @SuppressWarnings("DataFlowIssue")
     @Inject(
             method = "tick(Lat/petrak/hexcasting/api/casting/circles/BlockEntityAbstractImpetus;)Z",

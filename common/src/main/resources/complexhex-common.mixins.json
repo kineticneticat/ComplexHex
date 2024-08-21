@@ -8,6 +8,7 @@
   "mixins": [
     "ClientTickCounterMixin",
     "RemoveAssemblyManagerMixin",
+    "EntityDataSerialisersMixin",
     "BITInvokers.BlockDisplayInvoker",
     "BITInvokers.DisplayInvoker",
     "BITInvokers.ItemDisplayInvoker",

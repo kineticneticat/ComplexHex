@@ -5,6 +5,7 @@ import dev.kineticcat.complexhex.casting.ComplexhexPatternRegistry;
 import dev.kineticcat.complexhex.casting.arithmetic.ComplexHexArithmetic;
 import dev.kineticcat.complexhex.client.render.ComplexHexGaslighting;
 import dev.kineticcat.complexhex.client.render.CoolerGaslightingTracker;
+import dev.kineticcat.complexhex.entity.AssemblyManagerEntity;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -29,6 +30,7 @@ public class Complexhex {
         ComplexhexPatternRegistry.init();
         ComplexHexArithmetic.init();
         ComplexHexGaslighting.init();
+        AssemblyManagerEntity.registerthestupidthing();
 
         LOGGER.info(ComplexhexAbstractions.getConfigDirectory().toAbsolutePath().normalize().toString());
     }
