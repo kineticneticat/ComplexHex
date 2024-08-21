@@ -3,8 +3,10 @@ package dev.kineticcat.complexhex.entity;
 import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.api.utils.NBTHelper;
 import at.petrak.hexcasting.common.particles.ConjureParticleOptions;
+import com.mojang.math.Axis;
 import dev.kineticcat.complexhex.Complexhex;
 import dev.kineticcat.complexhex.mixin.EntityDataSerialisersMixin;
+import net.fabricmc.loader.impl.lib.sat4j.core.Vec;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.ParticleStatus;
 import net.minecraft.core.particles.ParticleOptions;
@@ -21,6 +23,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Matrix3d;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +66,8 @@ public class AssemblyManagerEntity extends Entity {
 
     public List<Vec3> getVertices() { return tagAsVerts(entityData.get(VERTICES));}
     public void setVertices(List<Vec3> verts) { entityData.set(VERTICES, vertsAsTag(verts));}
+    public FrozenPigment getPigment() { return FrozenPigment.fromNBT(entityData.get(PIGMENT));}
+    public void setPigment(FrozenPigment pigment) { entityData.set(PIGMENT, pigment.serializeToNBT());}
 
     public AssemblyManagerEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
@@ -81,6 +86,10 @@ public class AssemblyManagerEntity extends Entity {
             total = total.add(vert);
         }
         return total.scale(1f /getVertices().size());
+    }
+
+    public Vec3 normToCentre(Vec3 vec) {
+        return centre().subtract(vec).normalize();
     }
 
     @Override
@@ -125,10 +134,7 @@ public class AssemblyManagerEntity extends Entity {
         compoundTag.put(TAG_PIGMENT, entityData.get(PIGMENT));
     }
 
-    public FrozenPigment setPigment(FrozenPigment pigment) {
-        entityData.set(PIGMENT, pigment.serializeToNBT());
-        return pigment;
-    }
+
 
     public void playVertexParticles(FrozenPigment pigment, List<Vec3> verts) {
         double radius = 0.1;
@@ -140,14 +146,22 @@ public class AssemblyManagerEntity extends Entity {
         };
 
         for (Vec3 vert : verts) {
+            Vec3 stretch = normToCentre(vert);
             for (int i = 0; i <= repeats; i++) {
                 int colour = nextColour(pigment, random);
+                Vec3 gauss = new Vec3(random.nextGaussian(), random.nextGaussian(), random.nextGaussian());
+                // component of gauss along stretch
+                Vec3 proj = stretch.scale(gauss.dot(stretch));
+                // components perp to stretch
+                Vec3 perp = gauss.subtract(proj);
+                // scale the parallel component and add it back to the perps
+                Vec3 stretched = proj.scale(2).add(perp.scale(.5));
 
                 level().addParticle(
                         new ConjureParticleOptions(colour),
-                        (vert.x + radius * random.nextGaussian()),
-                        (vert.y + radius * random.nextGaussian()),
-                        (vert.z + radius * random.nextGaussian()),
+                        (vert.x + radius * stretched.x),
+                        (vert.y + radius * stretched.y),
+                        (vert.z + radius * stretched.z),
                         0.0125 * (random.nextDouble() - 0.5),
                         0.0125 * (random.nextDouble() - 0.5),
                         0.0125 * (random.nextDouble() - 0.5)
@@ -159,8 +173,7 @@ public class AssemblyManagerEntity extends Entity {
     @Override
     public void tick() {
         if (level().isClientSide) {
-            FrozenPigment pigment = FrozenPigment.fromNBT(entityData.get(PIGMENT));
-            playVertexParticles(pigment, getVertices());
+            playVertexParticles(getPigment(), getVertices());
         }
     }
 
