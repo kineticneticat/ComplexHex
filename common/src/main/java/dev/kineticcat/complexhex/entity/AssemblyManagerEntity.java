@@ -61,24 +61,26 @@ public class AssemblyManagerEntity extends Entity {
     private static final EntityDataAccessor<ListTag> VERTICES =
             SynchedEntityData.defineId(AssemblyManagerEntity.class, LIST_TAG);
 
-    private List<Vec3> Vertices = new ArrayList<>();
+    public List<Vec3> getVertices() { return tagAsVerts(entityData.get(VERTICES));}
+    public void setVertices(List<Vec3> verts) { entityData.set(VERTICES, vertsAsTag(verts));}
 
     public AssemblyManagerEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
 
     public void addVertex(Vec3 vec) {
-        Vertices.add(vec);
+        List<Vec3> verts = getVertices();
+        verts.add(vec);
+        setVertices(verts);
         setPos(centre());
-        entityData.set(VERTICES, vertsAsTag(Vertices));
     }
 
     public Vec3 centre() {
         Vec3 total = Vec3.ZERO;
-        for (Vec3 vert : Vertices) {
+        for (Vec3 vert : getVertices()) {
             total = total.add(vert);
         }
-        return total.scale(1f /Vertices.size());
+        return total.scale(1f /getVertices().size());
     }
 
     @Override
@@ -113,18 +115,14 @@ public class AssemblyManagerEntity extends Entity {
 
     @Override
     protected void readAdditionalSaveData(@NotNull CompoundTag compoundTag) {
-        ListTag NodesTag = NBTHelper.getList(compoundTag, TAG_VERTICES, Tag.TAG_LIST);
-        NodesTag = NodesTag == null ? new ListTag() : NodesTag;
-        Vertices = tagAsVerts(NodesTag);
         entityData.set(PIGMENT, compoundTag.getCompound(TAG_PIGMENT));
-        entityData.set(VERTICES, NodesTag);
+        entityData.set(VERTICES, compoundTag.getList(TAG_VERTICES, Tag.TAG_COMPOUND));
     }
 
     @Override
     protected void addAdditionalSaveData(@NotNull CompoundTag compoundTag) {
         compoundTag.put(TAG_VERTICES, entityData.get(VERTICES));
-        NBTHelper.putCompound(compoundTag, TAG_PIGMENT, entityData.get(PIGMENT));
-        Complexhex.LOGGER.info(compoundTag);
+        compoundTag.put(TAG_PIGMENT, entityData.get(PIGMENT));
     }
 
     public FrozenPigment setPigment(FrozenPigment pigment) {
@@ -162,8 +160,7 @@ public class AssemblyManagerEntity extends Entity {
     public void tick() {
         if (level().isClientSide) {
             FrozenPigment pigment = FrozenPigment.fromNBT(entityData.get(PIGMENT));
-            List<Vec3> verts = tagAsVerts(entityData.get(VERTICES));
-            playVertexParticles(pigment, verts);
+            playVertexParticles(pigment, getVertices());
         }
     }
 

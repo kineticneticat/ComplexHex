@@ -7,6 +7,7 @@ import at.petrak.hexcasting.api.casting.eval.env.CircleCastEnv
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.circle.MishapNoSpellCircle
 import at.petrak.hexcasting.api.misc.MediaConstants
+import at.petrak.hexcasting.api.pigment.FrozenPigment
 import dev.kineticcat.complexhex.Complexhex
 import dev.kineticcat.complexhex.api.util.utilStuffLmao
 import dev.kineticcat.complexhex.entity.AssemblyManagerEntity
@@ -37,14 +38,15 @@ object OpBeginAssembly : SpellAction {
         userData.putUUID(managerUUIDTag, manager.uuid)
 
         return SpellAction.Result(
-            Spell(manager, pos),
+            Spell(manager, pos, env.pigment),
             MediaConstants.CRYSTAL_UNIT,
             listOf()
         )
     }
-    private data class Spell(val manager: AssemblyManagerEntity, val pos: Vec3) : RenderedSpell {
+    private data class Spell(val manager: AssemblyManagerEntity, val pos: Vec3, val pigment: FrozenPigment) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
             manager.setPos(pos)
+            manager.setPigment(pigment)
             env.world.addFreshEntity(manager)
         }
     }

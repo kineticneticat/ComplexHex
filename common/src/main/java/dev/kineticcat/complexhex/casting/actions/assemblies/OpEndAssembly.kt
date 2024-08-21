@@ -23,7 +23,6 @@ object OpEndAssembly : SpellAction {
 
     override fun executeWithUserdata(args: List<Iota>, env: CastingEnvironment, userData: CompoundTag): SpellAction.Result {
         if (env !is CircleCastEnv) throw MishapNoSpellCircle()
-        Complexhex.LOGGER.info((userData))
         if (!userData.hasUUID(managerUUIDTag)) throw MishapPredecessorMissing.of("assembly/begin")
         val manager = env.world.getEntity(userData.getUUID(managerUUIDTag)) as AssemblyManagerEntity
         userData.remove(managerUUIDTag) // remove tag so the impetus mixin doesn't kill the manager
