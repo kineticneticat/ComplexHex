@@ -7,8 +7,6 @@ import at.petrak.hexcasting.api.casting.eval.env.CircleCastEnv
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.circle.MishapNoSpellCircle
 import at.petrak.hexcasting.api.misc.MediaConstants
-import at.petrak.hexcasting.api.utils.hasCompound
-import dev.kineticcat.complexhex.Complexhex
 import dev.kineticcat.complexhex.casting.actions.assemblies.OpBeginAssembly.managerUUIDTag
 import dev.kineticcat.complexhex.casting.mishap.MishapBadAssembly
 import dev.kineticcat.complexhex.casting.mishap.MishapPredecessorMissing

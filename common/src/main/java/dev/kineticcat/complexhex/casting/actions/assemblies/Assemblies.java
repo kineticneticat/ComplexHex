@@ -1,16 +1,15 @@
 package dev.kineticcat.complexhex.casting.actions.assemblies;
 
-import kotlin.Pair;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static dev.kineticcat.complexhex.Complexhex.id;
 
+@SuppressWarnings("unused")
 public class Assemblies {
 
     public static Map<ResourceLocation, AssemblyController> ASSEMBLIES = new HashMap<>();

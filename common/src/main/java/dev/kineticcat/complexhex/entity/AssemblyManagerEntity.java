@@ -3,18 +3,9 @@ package dev.kineticcat.complexhex.entity;
 import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.api.utils.NBTHelper;
 import at.petrak.hexcasting.common.particles.ConjureParticleOptions;
-import com.mojang.math.Axis;
-import com.sun.tools.jconsole.JConsoleContext;
 import dev.kineticcat.complexhex.Complexhex;
-import dev.kineticcat.complexhex.casting.actions.assemblies.Assemblies;
-import dev.kineticcat.complexhex.casting.actions.assemblies.AssemblyController;
-import dev.kineticcat.complexhex.casting.mishap.MishapBadAssembly;
 import dev.kineticcat.complexhex.mixin.EntityDataSerialisersMixin;
-import kotlin.Pair;
-import net.fabricmc.loader.impl.lib.sat4j.core.Vec;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.ParticleStatus;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -23,37 +14,36 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Matrix3d;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static dev.kineticcat.complexhex.api.FunniesKt.nextColour;
 
+@SuppressWarnings("unused")
 public class AssemblyManagerEntity extends Entity {
 
-    public static EntityDataSerializer<ListTag> LIST_TAG = new EntityDataSerializer<ListTag>() {
+    public static EntityDataSerializer<ListTag> LIST_TAG = new EntityDataSerializer<>() {
         @Override
-        public void write(FriendlyByteBuf friendlyByteBuf, ListTag ltag) {
+        public void write(FriendlyByteBuf friendlyByteBuf, @NotNull ListTag ltag) {
             CompoundTag ctag = new CompoundTag();
             ctag.put("data", ltag);
             friendlyByteBuf.writeNbt(ctag);
         }
 
         @Override
-        public ListTag read(FriendlyByteBuf friendlyByteBuf) {
+        public @NotNull ListTag read(FriendlyByteBuf friendlyByteBuf) {
+            //noinspection DataFlowIssue
             return friendlyByteBuf.readNbt().getList("data", Tag.TAG_COMPOUND);
         }
 
         @Override
-        public ListTag copy(ListTag ltag) {
+        public @NotNull ListTag copy(ListTag ltag) {
             return ltag.copy();
         }
     };
@@ -196,6 +186,7 @@ public class AssemblyManagerEntity extends Entity {
         }
     }
 
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     public void genEdges(List<Vec3> verts) {
         List<Edge> possibleEdges = new ArrayList<>();
         for (int i=0;i<=verts.size();i++) {
@@ -214,7 +205,7 @@ public class AssemblyManagerEntity extends Entity {
         }
     }
 
-    public void triggerAssembly(String controller) throws MishapBadAssembly {
+    public void triggerAssembly(String controller) {
         entityData.set(CONTROLLER, controller);
         Complexhex.LOGGER.info(controller);
     }

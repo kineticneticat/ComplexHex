@@ -12,7 +12,7 @@ class AssemblyController(val test: (verts: List<Vec3>) -> Boolean) {
             fun test(verts: List<Vec3>): Boolean {
                 if (verts.size != vertCount) return false
 
-                val centre = AssemblyManagerEntity.centre(verts);
+                val centre = AssemblyManagerEntity.centre(verts)
                 val dists = verts.map {v -> v.subtract(centre).length() }
                 val avgdist = dists.reduce{a, b -> a+b} / dists.size
                 val sd = sqrt(dists.map{a -> (a - avgdist).pow(2.0) }.reduce{ a, b -> a+b} / dists.size)
