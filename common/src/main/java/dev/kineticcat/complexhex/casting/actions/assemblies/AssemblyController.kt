@@ -5,10 +5,10 @@ import net.minecraft.world.phys.Vec3
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-class AssemblyController(val test: (verts: List<Vec3>) -> Boolean) {
+class AssemblyController(val test: (verts: List<Vec3>) -> Boolean, val edgesPerVertex: Int) {
 
     companion object {
-        fun simple(vertCount: Int): AssemblyController {
+        fun simple(vertCount: Int, edgesPerVertex: Int): AssemblyController {
             fun test(verts: List<Vec3>): Boolean {
                 if (verts.size != vertCount) return false
 
@@ -19,7 +19,7 @@ class AssemblyController(val test: (verts: List<Vec3>) -> Boolean) {
                 return sd <= 1
 
             }
-            return AssemblyController {l -> test(l)}
+            return AssemblyController({l -> test(l)}, edgesPerVertex)
         }
     }
 

@@ -14,8 +14,8 @@ public class Assemblies {
 
     public static Map<ResourceLocation, AssemblyController> ASSEMBLIES = new HashMap<>();
 
-    public static AssemblyController CUBE = assembly("cube", AssemblyController.Companion.simple(6));
-    public static AssemblyController TRIANGLE = assembly("triangle", AssemblyController.Companion.simple(3));
+    public static AssemblyController CUBE = assembly("cube", AssemblyController.Companion.simple(6, 3));
+    public static AssemblyController TRIANGLE = assembly("triangle", AssemblyController.Companion.simple(3, 2));
 
     private static AssemblyController assembly(String name, AssemblyController controller) {
         ASSEMBLIES.put(id(name), controller);
