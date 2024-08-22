@@ -4,8 +4,13 @@ import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.api.utils.NBTHelper;
 import at.petrak.hexcasting.common.particles.ConjureParticleOptions;
 import com.mojang.math.Axis;
+import com.sun.tools.jconsole.JConsoleContext;
 import dev.kineticcat.complexhex.Complexhex;
+import dev.kineticcat.complexhex.casting.actions.assemblies.Assemblies;
+import dev.kineticcat.complexhex.casting.actions.assemblies.AssemblyController;
+import dev.kineticcat.complexhex.casting.mishap.MishapBadAssembly;
 import dev.kineticcat.complexhex.mixin.EntityDataSerialisersMixin;
+import kotlin.Pair;
 import net.fabricmc.loader.impl.lib.sat4j.core.Vec;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.ParticleStatus;
@@ -18,6 +23,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
@@ -27,6 +33,7 @@ import org.joml.Matrix3d;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static dev.kineticcat.complexhex.api.FunniesKt.nextColour;
 
@@ -56,18 +63,33 @@ public class AssemblyManagerEntity extends Entity {
         EntityDataSerialisersMixin.invokeRegisterSerializer(LIST_TAG);
     }
 
+    private record Edge (int A, int B) {}
+
     private static final String TAG_VERTICES = "vertices";
+    private static final String TAG_EDGES = "edges";
     private static final String TAG_PIGMENT = "pigment";
+    private static final String TAG_TRIGGERED = "triggered";
+    private static final String TAG_CONTROLLER = "controller";
 
     private static final EntityDataAccessor<CompoundTag> PIGMENT =
             SynchedEntityData.defineId(AssemblyManagerEntity.class, EntityDataSerializers.COMPOUND_TAG);
+    private static final EntityDataAccessor<Boolean> TRIGGERED =
+            SynchedEntityData.defineId(AssemblyManagerEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<String> CONTROLLER =
+            SynchedEntityData.defineId(AssemblyManagerEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<ListTag> VERTICES =
+            SynchedEntityData.defineId(AssemblyManagerEntity.class, LIST_TAG);
+    private static final EntityDataAccessor<ListTag> EDGES =
             SynchedEntityData.defineId(AssemblyManagerEntity.class, LIST_TAG);
 
     public List<Vec3> getVertices() { return tagAsVerts(entityData.get(VERTICES));}
     public void setVertices(List<Vec3> verts) { entityData.set(VERTICES, vertsAsTag(verts));}
     public FrozenPigment getPigment() { return FrozenPigment.fromNBT(entityData.get(PIGMENT));}
     public void setPigment(FrozenPigment pigment) { entityData.set(PIGMENT, pigment.serializeToNBT());}
+    public Boolean isTriggered() { return entityData.get(TRIGGERED);}
+    public void setController(String name) {entityData.set(CONTROLLER, name);}
+    public String getController() {return entityData.get(CONTROLLER);}
+
 
     public AssemblyManagerEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
@@ -80,12 +102,15 @@ public class AssemblyManagerEntity extends Entity {
         setPos(centre());
     }
 
-    public Vec3 centre() {
+    public static Vec3 centre(List<Vec3> verts) {
         Vec3 total = Vec3.ZERO;
-        for (Vec3 vert : getVertices()) {
+        for (Vec3 vert : verts) {
             total = total.add(vert);
         }
-        return total.scale(1f /getVertices().size());
+        return total.scale(1f /verts.size());
+    }
+    private Vec3 centre() {
+        return centre(getVertices());
     }
 
     public Vec3 normToCentre(Vec3 vec) {
@@ -96,6 +121,7 @@ public class AssemblyManagerEntity extends Entity {
     protected void defineSynchedData() {
         entityData.define(PIGMENT, FrozenPigment.DEFAULT.get().serializeToNBT());
         entityData.define(VERTICES, new ListTag());
+        entityData.define(CONTROLLER, "");
     }
 
     private ListTag vertsAsTag(List<Vec3> verts) {
@@ -126,15 +152,15 @@ public class AssemblyManagerEntity extends Entity {
     protected void readAdditionalSaveData(@NotNull CompoundTag compoundTag) {
         entityData.set(PIGMENT, compoundTag.getCompound(TAG_PIGMENT));
         entityData.set(VERTICES, compoundTag.getList(TAG_VERTICES, Tag.TAG_COMPOUND));
+        entityData.set(CONTROLLER, compoundTag.getString(TAG_CONTROLLER));
     }
 
     @Override
     protected void addAdditionalSaveData(@NotNull CompoundTag compoundTag) {
         compoundTag.put(TAG_VERTICES, entityData.get(VERTICES));
         compoundTag.put(TAG_PIGMENT, entityData.get(PIGMENT));
+        compoundTag.putString(TAG_CONTROLLER, entityData.get(CONTROLLER));
     }
-
-
 
     public void playVertexParticles(FrozenPigment pigment, List<Vec3> verts) {
         double radius = 0.1;
@@ -170,6 +196,17 @@ public class AssemblyManagerEntity extends Entity {
         }
     }
 
+    public void genEdges(List<Vec3> verts) {
+        List<Edge> possibleEdges = new ArrayList<>();
+        for (int i=0;i<=verts.size();i++) {
+            for (int j=0;j<=verts.size();j++) {
+                if (i == j) continue;
+                possibleEdges.add(new Edge(i, j));
+            }
+        }
+
+    }
+
     @Override
     public void tick() {
         if (level().isClientSide) {
@@ -177,6 +214,9 @@ public class AssemblyManagerEntity extends Entity {
         }
     }
 
-    public void triggerAssembly() {}
+    public void triggerAssembly(String controller) throws MishapBadAssembly {
+        entityData.set(CONTROLLER, controller);
+        Complexhex.LOGGER.info(controller);
+    }
 
 }

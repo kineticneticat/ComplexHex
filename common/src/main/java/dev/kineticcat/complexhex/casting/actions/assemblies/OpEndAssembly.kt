@@ -10,6 +10,7 @@ import at.petrak.hexcasting.api.misc.MediaConstants
 import at.petrak.hexcasting.api.utils.hasCompound
 import dev.kineticcat.complexhex.Complexhex
 import dev.kineticcat.complexhex.casting.actions.assemblies.OpBeginAssembly.managerUUIDTag
+import dev.kineticcat.complexhex.casting.mishap.MishapBadAssembly
 import dev.kineticcat.complexhex.casting.mishap.MishapPredecessorMissing
 import dev.kineticcat.complexhex.entity.AssemblyManagerEntity
 import net.minecraft.nbt.CompoundTag
@@ -27,16 +28,19 @@ object OpEndAssembly : SpellAction {
         val manager = env.world.getEntity(userData.getUUID(managerUUIDTag)) as AssemblyManagerEntity
         userData.remove(managerUUIDTag) // remove tag so the impetus mixin doesn't kill the manager
 
+        val controller = Assemblies.findController(manager.vertices)
+            ?: throw MishapBadAssembly.of("not_assembly")
+
         val circleState = env.circleState()
         return SpellAction.Result(
-            Spell(circleState.currentPos.center, manager),
+            Spell(circleState.currentPos.center, manager, controller),
             MediaConstants.CRYSTAL_UNIT,
             listOf()
         )
     }
-    private data class Spell(val pos: Vec3, val manager: AssemblyManagerEntity) : RenderedSpell {
+    private data class Spell(val pos: Vec3, val manager: AssemblyManagerEntity, val controller: String) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
-            manager.triggerAssembly()
+            manager.triggerAssembly(controller)
             manager.tick() // ???
         }
     }
