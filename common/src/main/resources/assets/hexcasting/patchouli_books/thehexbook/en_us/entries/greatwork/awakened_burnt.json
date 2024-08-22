@@ -10,7 +10,7 @@
       "text": "complexhex.page.awakened_burnt"
     },
     {
-      "type": "patchouli:crafting",
+      "type": "hexcasting:brainsweep",
       "recipe": "complexhex:awakened_burnt",
       "text": "complexhex.page.awakened_burnt.crafting"
     }
