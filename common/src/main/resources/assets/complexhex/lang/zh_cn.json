@@ -6,11 +6,9 @@
   "complexhex.page.complexities.const.1": "将 1 + 0i 压入栈顶。",
   "complexhex.page.complexities.add": "执行加法，num 视作 num + 0i。",
   "complexhex.page.complexities.sub": "执行减法，num 视作 num + 0i。",
-  "complexhex.page.complexities.mul": "执行标量乘法。",
-  "complexhex.page.complexities.div": "执行标量除法。",
+  "complexhex.page.complexities.mul": "根据参数类型执行标量乘法或复数乘法。",
+  "complexhex.page.complexities.div": "根据参数类型执行标量除法或复数除法。",
   "complexhex.page.complexities.abs": "返回模（即模长）。",
-  "hexcasting.action.complexhex:cmul": "复数乘法",
-  "complexhex.page.complexities.cmul": "执行复数乘法。",
   "hexcasting.action.complexhex:real": "实化复数",
   "complexhex.page.complexities.real": "返回复数实部。",
   "hexcasting.action.complexhex:imaginary": "虚化复数",
@@ -33,11 +31,9 @@
   "complexhex.page.quaternionics.const.k": "将 0 + 0i + 0j + 1k 压入栈顶。",
   "complexhex.page.quaternionics.add": "执行加法。",
   "complexhex.page.quaternionics.sub": "执行减法。",
-  "complexhex.page.quaternionics.mul": "执行标量乘法。",
+  "complexhex.page.quaternionics.mul": "$(br)根据参数类型执行标量乘法或四元数乘法。",
   "complexhex.page.quaternionics.div": "执行标量除法。",
   "complexhex.page.quaternionics.abs": "返回模（即模长）。",
-  "hexcasting.action.complexhex:qmul": "四元数乘法",
-  "complexhex.page.quaternionics.qmul": "执行四元数乘法。",
   "hexcasting.action.complexhex:qw": "四元数之纯化：1",
   "complexhex.page.quaternionics.qw": "返回 1 的系数。",
   "hexcasting.action.complexhex:qx": "四元数之纯化：i",
@@ -90,5 +86,28 @@
   "hexcasting.mishap.invalid_value.class.complexnumber": "一个复数",
   "hexcasting.mishap.invalid_value.class.bubble": "一个封泡",
   "hexcasting.mishap.invalid_value.class.bit": "一个BIT",
-  "hexcasting.mishap.bad_item.bit": "一个BIT"
+  "hexcasting.mishap.bad_item.bit": "一个BIT",
+
+  "itemGroup.complexhex": "Complex Hex",
+  "item.complexhex.burnt_shard": "灼炼晶碎片",
+  "block.complexhex.burnt_block": "灼炼晶块",
+  "item.complexhex.awakened_burnt_shard": "觉醒灼炼晶碎片",
+
+  "complexhex.entry.burnt": "烧灼紫水晶",
+  "complexhex.page.burnt": "加热紫水晶碎片时（比如烧炼），它的外在会产生急剧变化；甚至可以用“不悦”“暴躁”来形容。并且，此类材料的颜色也发生了较大变化，因此称作“灼炼晶”。有趣的是，它似乎会在我的视线之外改变颜色。",
+  "complexhex.page.burnt.crafting.shard": "",
+  "complexhex.page.burnt.crafting.block": "与紫水晶一样，灼炼晶也可制成方块，此时会保留灼炼晶的奇异光学现象。",
+
+  "complexhex.entry.awakened_burnt": "灼炼晶的觉醒",
+  "complexhex.page.awakened_burnt": "若是使用意识引导灼炼晶，它的暴躁程度会大大减轻，但同时会变得极具控制欲；它似乎会影响其周围的媒质，并将其拉扯成围绕自身的分形状涡旋。$(br)奇妙的是，觉醒灼炼晶的完整方块不太稳定：它会迅速碎裂，直至留下单个稳定的碎片。",
+  "complexhex.page.awakened_burnt.crafting": "精确控制灼炼晶需要经过许多训练的意识。把意识塞入其中也需要大量媒质，差不多 100 个$(l:items/amethyst)$(item)充能紫水晶/$应该就可以了。",
+
+  "item.complexhex.multifact": "多重造物",
+  "complexhex.entry.multifact": "多重造物",
+  "complexhex.page.multifact.1": "这个小物什可以看做合成一体的多个造物，它们在顺序执行中会保持栈，但不会保持渡鸦之思；执行完成后则会重置。$(br)然而相对普通的造物而言，它们也有一些缺点：$(br)比如，多重核心中的咒术只能顺序执行，无法跳过。$(br)再比如，每多存入一个咒术，所需的媒质量会极速增长，直至上限 10 个咒术为止。",
+  "complexhex.page.multifact.2": "精确控制媒质以供其使用这件事，尽管单独的意识可能做得到，但如此它就没法再存储栈了。不过要是加入灼炼晶来协助控制，意识就省去了重担，可以保持栈了。",
+  "complexhex.page.multifact.crafting": "*拍个多重核心上去*这家伙里面可塞得下好多好多的咒术！",
+  "complexhex.page.multifact.pattern": "存入第一个咒术时，必须同时提供用作媒质储池的物品实体，这和其他施法设备类似。后续的存储无需物品实体。$(br)存入咒术的消耗会指数级增长，首个需要 10 个充能紫水晶，第二个需要 20 个，再后续需要 40 个、80 个，如此推算即可。"
+
+
 }
