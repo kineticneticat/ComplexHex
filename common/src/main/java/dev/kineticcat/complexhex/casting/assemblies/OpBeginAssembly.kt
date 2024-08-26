@@ -1,4 +1,4 @@
-package dev.kineticcat.complexhex.casting.actions.assemblies
+package dev.kineticcat.complexhex.casting.assemblies
 
 import at.petrak.hexcasting.api.casting.RenderedSpell
 import at.petrak.hexcasting.api.casting.castables.SpellAction

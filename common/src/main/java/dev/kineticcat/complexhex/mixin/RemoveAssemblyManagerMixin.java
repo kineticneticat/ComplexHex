@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static dev.kineticcat.complexhex.casting.actions.assemblies.OpBeginAssembly.managerUUIDTag;
+import static dev.kineticcat.complexhex.casting.assemblies.OpBeginAssembly.managerUUIDTag;
 
 @Mixin(CircleExecutionState.class)
 public class RemoveAssemblyManagerMixin {

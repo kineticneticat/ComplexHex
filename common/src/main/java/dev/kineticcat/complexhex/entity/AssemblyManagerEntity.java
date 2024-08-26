@@ -3,10 +3,9 @@ package dev.kineticcat.complexhex.entity;
 import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.api.utils.NBTHelper;
 import at.petrak.hexcasting.common.particles.ConjureParticleOptions;
-import com.mojang.datafixers.util.Pair;
-import dev.kineticcat.complexhex.Complexhex;
-import dev.kineticcat.complexhex.casting.actions.assemblies.Assemblies;
-import dev.kineticcat.complexhex.casting.actions.assemblies.AssemblyController;
+import dev.kineticcat.complexhex.casting.assemblies.AbstractAssemblyController;
+import dev.kineticcat.complexhex.casting.assemblies.AbstractAssemblyController.Edge;
+import dev.kineticcat.complexhex.casting.assemblies.Assemblies;
 import dev.kineticcat.complexhex.mixin.EntityDataSerialisersMixin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
@@ -56,40 +55,6 @@ public class AssemblyManagerEntity extends Entity {
         EntityDataSerialisersMixin.invokeRegisterSerializer(LIST_TAG);
     }
 
-    private record Edge (int A, int B) {
-        public CompoundTag asTag() {
-            CompoundTag ctag = new CompoundTag();
-            ctag.putInt("A", A);
-            ctag.putInt("B", B);
-            return ctag;
-        }
-        public static Edge fromTag(CompoundTag ctag) {
-            return new Edge(ctag.getInt("A"), ctag.getInt("B"));
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            Edge edge = (Edge) o;
-
-            if (A != edge.A) return false;
-            return B == edge.B;
-        }
-        public boolean hasEndpoint(Integer p) {return A == p || B == p;}
-        public double length(List<Vec3> verts) {return verts.get(A).subtract(verts.get(B)).length();}
-
-        public static ListTag listAsTag(List<Edge> edges) {
-            ListTag ltag = new ListTag();
-            for (Edge edge : edges) {ltag.add(edge.asTag());}
-            return ltag;
-        }
-        public static List<Edge> tagAsList(ListTag ltag) {
-            return ltag.stream().map(tag -> Edge.fromTag((CompoundTag) tag)).toList();
-        }
-    }
-
     private static final String TAG_VERTICES = "vertices";
     private static final String TAG_EDGES = "edges";
     private static final String TAG_PIGMENT = "pigment";
@@ -114,8 +79,8 @@ public class AssemblyManagerEntity extends Entity {
     public Boolean isTriggered() { return entityData.get(TRIGGERED);}
     public void setController(String name) {entityData.set(CONTROLLER, name);}
     public String getControllerName() {return entityData.get(CONTROLLER);}
-    public AssemblyController getController() {return Assemblies.getController(getControllerName());}
-    public List<Edge> getEdges() {return Edge.tagAsList(entityData.get(EDGES));}
+    public AbstractAssemblyController getController() {return Assemblies.getController(getControllerName());}
+    public List<Edge> getEdges() {return Edge.Companion.tagAsList(entityData.get(EDGES));}
 
     public AssemblyManagerEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
@@ -194,12 +159,12 @@ public class AssemblyManagerEntity extends Entity {
         compoundTag.put(TAG_EDGES, entityData.get(EDGES));
     }
 
-    public void playVertexParticles(FrozenPigment pigment, List<Vec3> verts) {
+    public void drawVertices(FrozenPigment pigment, List<Vec3> verts) {
         double radius = 0.1;
 
         int repeats = switch (Minecraft.getInstance().options.particles().get()) {
-            case ALL -> 50;
-            case DECREASED -> 20;
+            case ALL -> 20;
+            case DECREASED -> 10;
             case MINIMAL -> 5;
         };
 
@@ -227,40 +192,47 @@ public class AssemblyManagerEntity extends Entity {
             }
         }
     }
+    public void drawEdges(FrozenPigment pigment, List<Vec3> verts, List<Edge> edges) {
+        int particlesPerBlockLength = switch(Minecraft.getInstance().options.particles().get()) {
+            case ALL -> 3;
+            case DECREASED -> 2;
+            case MINIMAL -> 1;
+        };
+        for (Edge edge : edges) {
+            double length = edge.length(verts);
+            double amt = length * particlesPerBlockLength;
+            for (double i = 0.0; i <= amt; i++) {
 
-    public void genEdges(List<Vec3> verts, Integer edgesPerVertex) {
-        List<Edge> edges = new ArrayList<>();
-        // this as an abomination
-        for (int i=0;i<verts.size();i++) {
-            for (int j = 0; j<edgesPerVertex; j++) {
-                Pair<Double, Edge> shortestEdge = new Pair<>(999999999999999999., null);
-                for (int k = 1; k<verts.size(); k++) {
-                    if (i==k) continue;
-                    Edge edge = new Edge(i, k);
-                    if (edges.contains(edge)) continue;
-                    double length = edge.length(verts);
-                    if (length > shortestEdge.getFirst()) {
-                        shortestEdge = new Pair<>(length, edge);
-                    }
-                }
-                edges.add(shortestEdge.getSecond());
+                int colour = nextColour(pigment, random);
+
+                Vec3 pos = edge.lerp(verts, (i/amt)+random.nextDouble()/10.0);
+                level().addParticle(
+                        new ConjureParticleOptions(colour),
+                        (pos.x),
+                        (pos.y),
+                        (pos.z),
+                        0.0125 * (random.nextDouble() - 0.5),
+                        0.0125 * (random.nextDouble() - 0.5),
+                        0.0125 * (random.nextDouble() - 0.5)
+                );
             }
         }
-        entityData.set(EDGES, Edge.listAsTag(edges));
     }
 
     @Override
     public void tick() {
         if (level().isClientSide) {
-            playVertexParticles(getPigment(), getVertices());
-            Complexhex.LOGGER.info(getEdges());
+            drawVertices(getPigment(), getVertices());
+            if (isTriggered()) {
+                drawEdges(getPigment(), getVertices(), getEdges());
+            }
         }
     }
 
     public void triggerAssembly(String controller) {
         entityData.set(CONTROLLER, controller);
         entityData.set(TRIGGERED, true);
-        genEdges(getVertices(), getController().getEdgesPerVertex());
+        entityData.set(EDGES, Edge.Companion.listAsTag(getController().genEdges(getVertices())));
     }
 
 }

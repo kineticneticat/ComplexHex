@@ -1,4 +1,4 @@
-package dev.kineticcat.complexhex.casting.actions.assemblies
+package dev.kineticcat.complexhex.casting.assemblies
 
 import at.petrak.hexcasting.api.casting.RenderedSpell
 import at.petrak.hexcasting.api.casting.castables.SpellAction
@@ -7,7 +7,7 @@ import at.petrak.hexcasting.api.casting.eval.env.CircleCastEnv
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.circle.MishapNoSpellCircle
 import at.petrak.hexcasting.api.misc.MediaConstants
-import dev.kineticcat.complexhex.casting.actions.assemblies.OpBeginAssembly.managerUUIDTag
+import dev.kineticcat.complexhex.casting.assemblies.OpBeginAssembly.managerUUIDTag
 import dev.kineticcat.complexhex.casting.mishap.MishapBadAssembly
 import dev.kineticcat.complexhex.casting.mishap.MishapPredecessorMissing
 import dev.kineticcat.complexhex.entity.AssemblyManagerEntity
