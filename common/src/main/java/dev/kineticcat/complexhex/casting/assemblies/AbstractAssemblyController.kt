@@ -61,6 +61,13 @@ abstract class AbstractAssemblyController {
                     )
                 }.toList()
             }
+            fun countConnectionsToVertex(vert: Int, edges: List<Edge>): Int {
+                var count = 0
+                for (edge in edges) {
+                    if (edge.hasEndpoint(vert)) count++
+                }
+                return count
+            }
         }
     }
 

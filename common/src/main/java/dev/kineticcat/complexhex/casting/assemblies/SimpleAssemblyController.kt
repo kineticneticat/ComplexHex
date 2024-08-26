@@ -13,7 +13,7 @@ class SimpleAssemblyController(val vertCount: Int, val edgesPerVertex: Int) : Ab
         val edges: MutableList<Edge> = ArrayList()
         // this as an abomination
         for (i in verts.indices) {
-            for (j in 0 until edgesPerVertex) {
+            while (Edge.countConnectionsToVertex(i, edges) < edgesPerVertex) {
                 // i sure hope no edge will be longer than this :)
                 var shortestEdge = Pair<Double, Edge?>(1.0E18, null)
                 for (k in verts.indices) {
@@ -21,12 +21,12 @@ class SimpleAssemblyController(val vertCount: Int, val edgesPerVertex: Int) : Ab
                     val edge = Edge(i, k)
                     if (edges.contains(edge)) continue
                     val length = edge.length(verts)
-                    Complexhex.LOGGER.info(edge)
                     if (length < shortestEdge.first) {
                         shortestEdge = Pair(length, edge)
                     }
                 }
                 if (shortestEdge.second != null) {edges.add(shortestEdge.second!!)}
+                Complexhex.LOGGER.info(Edge.countConnectionsToVertex(i, edges))
             }
         }
         return edges

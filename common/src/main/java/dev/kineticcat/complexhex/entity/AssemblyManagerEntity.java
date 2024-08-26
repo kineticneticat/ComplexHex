@@ -198,14 +198,14 @@ public class AssemblyManagerEntity extends Entity {
             case DECREASED -> 2;
             case MINIMAL -> 1;
         };
+        Double blockLengthPerParticle = 1.0 / particlesPerBlockLength;
         for (Edge edge : edges) {
             double length = edge.length(verts);
             double amt = length * particlesPerBlockLength;
             for (double i = 0.0; i <= amt; i++) {
-
                 int colour = nextColour(pigment, random);
-
-                Vec3 pos = edge.lerp(verts, (i/amt)+random.nextDouble()/10.0);
+                double offset = random.nextGaussian()*particlesPerBlockLength;
+                Vec3 pos = edge.lerp(verts, (i/amt)+offset);
                 level().addParticle(
                         new ConjureParticleOptions(colour),
                         (pos.x),
