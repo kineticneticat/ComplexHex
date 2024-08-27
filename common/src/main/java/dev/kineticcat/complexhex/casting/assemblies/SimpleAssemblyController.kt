@@ -8,7 +8,8 @@ import net.minecraft.world.phys.Vec3
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-class SimpleAssemblyController(val vertCount: Int, val edgesPerVertex: Int) : AbstractAssemblyController() {
+class SimpleAssemblyController(val vertCount: Int, val edgesPerVertex: Int, val apply: (Entity) -> Unit) : AbstractAssemblyController() {
+    constructor(vertCount:Int, edgesPerVertex: Int): this(vertCount, edgesPerVertex, {})
     override fun genEdges(verts: List<Vec3>): List<Edge> {
         val edges: MutableList<Edge> = ArrayList()
         // this as an abomination
@@ -40,15 +41,17 @@ class SimpleAssemblyController(val vertCount: Int, val edgesPerVertex: Int) : Ab
         val dists = verts.map {v -> v.subtract(centre).length() }
         val avgdist = dists.reduce{a, b -> a+b} / dists.size
         val sd = sqrt(dists.map{a -> (a - avgdist).pow(2.0) }.reduce{ a, b -> a+b} / dists.size)
+//        Complexhex.LOGGER.info(sd)
+        //TODO: pass sd to mishap to give idea of how far off
         return sd <= 1
 
     }
 
     override fun isEntityWithinBounds(entity: Entity, centre: Vec3, radius: Double): Boolean {
-        return entity.eyePosition.subtract(centre).length() < radius
+        return entity.eyePosition.subtract(centre).lengthSqr() < radius*radius
     }
 
     override fun applyEffectToEntity(entity: Entity) {
-        TODO("Not yet implemented")
+        apply(entity)
     }
 }

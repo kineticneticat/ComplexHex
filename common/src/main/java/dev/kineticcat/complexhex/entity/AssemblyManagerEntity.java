@@ -19,6 +19,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,6 +56,8 @@ public class AssemblyManagerEntity extends Entity {
         EntityDataSerialisersMixin.invokeRegisterSerializer(LIST_TAG);
     }
 
+    private AABB aabb = new AABB(centre(), centre());
+
     private static final String TAG_VERTICES = "vertices";
     private static final String TAG_EDGES = "edges";
     private static final String TAG_PIGMENT = "pigment";
@@ -76,10 +79,10 @@ public class AssemblyManagerEntity extends Entity {
     public void setVertices(List<Vec3> verts) { entityData.set(VERTICES, vertsAsTag(verts));}
     public FrozenPigment getPigment() { return FrozenPigment.fromNBT(entityData.get(PIGMENT));}
     public void setPigment(FrozenPigment pigment) { entityData.set(PIGMENT, pigment.serializeToNBT());}
-    public Boolean isTriggered() { return entityData.get(TRIGGERED);}
+    public Boolean isTriggered() { return entityData.get(TRIGGERED) && getController() != null;}
     public void setController(String name) {entityData.set(CONTROLLER, name);}
     public String getControllerName() {return entityData.get(CONTROLLER);}
-    public AbstractAssemblyController getController() {return Assemblies.getController(getControllerName());}
+    public AbstractAssemblyController getController() {return Assemblies.Companion.getController(getControllerName());}
     public List<Edge> getEdges() {return Edge.Companion.tagAsList(entityData.get(EDGES));}
 
     public AssemblyManagerEntity(EntityType<?> entityType, Level level) {
@@ -102,6 +105,17 @@ public class AssemblyManagerEntity extends Entity {
     }
     private Vec3 centre() {
         return centre(getVertices());
+    }
+
+    public static double radius(Vec3 centre, List<Vec3> vecs) {
+        double rad = 0.0;
+        for (Vec3 vec : vecs) {
+            rad = Math.min(rad, centre.subtract(vec).lengthSqr());
+        }
+        return Math.sqrt(rad);
+    }
+    public double radius() {
+        return radius(centre(), getVertices());
     }
 
     public Vec3 normToCentre(Vec3 vec) {
@@ -141,6 +155,17 @@ public class AssemblyManagerEntity extends Entity {
         return out;
     }
 
+    private static AABB addToAABB(AABB aabb, Vec3 vec) {
+        return new AABB(
+                Math.max(aabb.maxX, vec.x),
+                Math.max(aabb.maxY, vec.y),
+                Math.max(aabb.maxZ, vec.z),
+                Math.min(aabb.minX, vec.x),
+                Math.min(aabb.minY, vec.y),
+                Math.min(aabb.minZ, vec.z)
+        );
+    }
+
     @Override
     protected void readAdditionalSaveData(@NotNull CompoundTag compoundTag) {
         entityData.set(PIGMENT, compoundTag.getCompound(TAG_PIGMENT));
@@ -148,6 +173,10 @@ public class AssemblyManagerEntity extends Entity {
         entityData.set(CONTROLLER, compoundTag.getString(TAG_CONTROLLER));
         entityData.set(TRIGGERED, compoundTag.getBoolean(TAG_TRIGGERED));
         entityData.set(EDGES, compoundTag.getList(TAG_EDGES, Tag.TAG_COMPOUND));
+        aabb = new AABB(centre(), centre());
+        for (Vec3 vert : getVertices()) {
+            aabb = addToAABB(aabb, vert);
+        }
     }
 
     @Override
@@ -226,6 +255,10 @@ public class AssemblyManagerEntity extends Entity {
             if (isTriggered()) {
                 drawEdges(getPigment(), getVertices(), getEdges());
             }
+        }
+        if (isTriggered()) {
+            List<Entity> got = level().getEntities((Entity) null, aabb, (Entity e) -> getController().isEntityWithinBounds(e, centre(), radius()));
+            for (Entity entity : got) getController().applyEffectToEntity(entity);
         }
     }
 
