@@ -17,16 +17,25 @@ public class ComplexHexEntities {
             r.accept(e.getValue(), e.getKey());
         }
     }
-
     private static final Map<ResourceLocation, EntityType<?>> ENTITIES = new LinkedHashMap<>();
 
     public static final EntityType<AssemblyManagerEntity> ASSEMBLY_MANAGER  = register(
             "assembly/manager",
-            EntityType.Builder.of((EntityType.EntityFactory<AssemblyManagerEntity>) AssemblyManagerEntity::new, MobCategory.MISC)
+            EntityType.Builder.of(AssemblyManagerEntity::new, MobCategory.MISC)
                     .sized(0.5f, 0.5f)
                     .clientTrackingRange(32)
                     .updateInterval(1)
-                    .build(id("assembly/manager").toString()));
+                    .build(id("assembly/manager").toString())
+    );
+    public static final EntityType<NixEntity> NIX = register(
+            "nix",
+            EntityType.Builder.of(NixEntity::new, MobCategory.MISC)
+                    .sized(.25f, 0.25f)
+                    .clientTrackingRange(32)
+                    .updateInterval(1)
+                    .build(id("nix").toString())
+    );
+
 
     private static <T extends Entity> EntityType<T> register (String id, EntityType<T> type) {
         var old = ENTITIES.put(id(id), type);

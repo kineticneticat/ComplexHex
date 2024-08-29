@@ -105,6 +105,10 @@ public class ComplexhexPatternRegistry {
     public static final HexPattern END_ASSEMBLY = make("ewdeddedw", HexDir.EAST, "assembly/end",
             OpEndAssembly.INSTANCE);
 
+    // Nix
+    public static final HexPattern SUMMON_NIX = make("eeeee", HexDir.EAST, "summon_nix",
+            OpSummonNix.INSTANCE);
+
 
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {
