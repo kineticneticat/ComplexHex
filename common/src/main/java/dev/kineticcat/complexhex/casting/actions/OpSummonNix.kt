@@ -40,6 +40,8 @@ object OpSummonNix : SpellAction {
     private data class Spell(val pos: Vec3) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
             val nix = NixEntity(ComplexHexEntities.NIX, env.world)
+            nix.pigment = env.pigment
+            nix.setPos(pos)
             env.world.addFreshEntity(nix)
         }
     }

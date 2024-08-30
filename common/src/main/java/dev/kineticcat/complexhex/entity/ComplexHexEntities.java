@@ -30,7 +30,7 @@ public class ComplexHexEntities {
     public static final EntityType<NixEntity> NIX = register(
             "nix",
             EntityType.Builder.of(NixEntity::new, MobCategory.MISC)
-                    .sized(.25f, 0.25f)
+                    .sized(.25f, .25f)
                     .clientTrackingRange(32)
                     .updateInterval(1)
                     .build(id("nix").toString())
