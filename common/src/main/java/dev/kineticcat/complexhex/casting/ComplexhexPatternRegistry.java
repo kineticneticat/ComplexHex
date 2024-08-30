@@ -21,6 +21,7 @@ import dev.kineticcat.complexhex.api.util.Quaternion;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Display;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -106,8 +107,10 @@ public class ComplexhexPatternRegistry {
             OpEndAssembly.INSTANCE);
 
     // Nix
-    public static final HexPattern SUMMON_NIX = make("eeeee", HexDir.EAST, "summon_nix",
+    public static final HexPattern SUMMON_NIX = make("dwdadwdadwdwddedwdwd", HexDir.NORTH_EAST, "nix/summon",
             OpSummonNix.INSTANCE);
+    public static final HexPattern ACCELERATE_NIX = make("dedwwdadwdadwe", HexDir.SOUTH_EAST, "nix/accelerate",
+            OpSetNixAcceleration.INSTANCE);
 
 
     public static void init() {

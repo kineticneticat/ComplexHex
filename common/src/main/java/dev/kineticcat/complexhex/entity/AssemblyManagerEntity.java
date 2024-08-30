@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static dev.kineticcat.complexhex.api.FunniesKt.nextColour;
+import static dev.kineticcat.complexhex.api.util.utilStuffLmao.tagAsVec3s;
+import static dev.kineticcat.complexhex.api.util.utilStuffLmao.vec3sAsTag;
 
 @SuppressWarnings("unused")
 public class AssemblyManagerEntity extends Entity {
@@ -75,8 +77,8 @@ public class AssemblyManagerEntity extends Entity {
     private static final EntityDataAccessor<ListTag> EDGES =
             SynchedEntityData.defineId(AssemblyManagerEntity.class, LIST_TAG);
 
-    public List<Vec3> getVertices() { return tagAsVerts(entityData.get(VERTICES));}
-    public void setVertices(List<Vec3> verts) { entityData.set(VERTICES, vertsAsTag(verts));}
+    public List<Vec3> getVertices() { return tagAsVec3s(entityData.get(VERTICES));}
+    public void setVertices(List<Vec3> verts) { entityData.set(VERTICES, vec3sAsTag(verts));}
     public FrozenPigment getPigment() { return FrozenPigment.fromNBT(entityData.get(PIGMENT));}
     public void setPigment(FrozenPigment pigment) { entityData.set(PIGMENT, pigment.serializeToNBT());}
     public Boolean isTriggered() { return entityData.get(TRIGGERED) && getController() != null;}
@@ -129,30 +131,6 @@ public class AssemblyManagerEntity extends Entity {
         entityData.define(CONTROLLER, "");
         entityData.define(TRIGGERED, false);
         entityData.define(EDGES, new ListTag());
-    }
-
-    private ListTag vertsAsTag(List<Vec3> verts) {
-        ListTag ltag = new ListTag();
-        for (Vec3 vec : verts) {
-            CompoundTag ctag = new CompoundTag();
-            ctag.putDouble("X", vec.x);
-            ctag.putDouble("Y", vec.y);
-            ctag.putDouble("Z", vec.z);
-            ltag.add(ctag);
-        }
-        return ltag;
-    }
-    private List<Vec3> tagAsVerts(ListTag ltag) {
-        List<Vec3> out = new ArrayList<>();
-        for (Tag tag : ltag) {
-            CompoundTag ctag = NBTHelper.getAsCompound(tag);
-            out.add(new Vec3(
-                    ctag.getDouble("X"),
-                    ctag.getDouble("Y"),
-                    ctag.getDouble("Z")
-            ));
-        }
-        return out;
     }
 
     private static AABB addToAABB(AABB aabb, Vec3 vec) {

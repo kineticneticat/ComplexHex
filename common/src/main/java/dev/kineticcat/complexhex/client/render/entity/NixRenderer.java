@@ -14,7 +14,6 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
@@ -35,68 +34,32 @@ public class NixRenderer extends EntityRenderer<NixEntity> {
 
     @Override
     public void render(NixEntity nix, float yaw, float partialTick, PoseStack ps, MultiBufferSource multiBufferSource, int packedLight) {
-        RandomSource levelRandom = nix.level().random;
         int colour = nix.getPigment().getColorProvider().getColor(nix.level().getGameTime()/*/4000F*/, nix.position().add(new Vec3(nix.level().getGameTime()/100f, 0, 0)));
         int black = 0;
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
-        Vector3f outer = new Vector3f(.25f, .25f, .25f);
-        Vector3f inner = new Vector3f(.125f, .125f, .125f);
+
+
+        float outer = 4f / 16f;
+        float inner = 3.5f / 16f;
+        float hitboxSize = 4f / 16f;
+
+        Vector3f outerSize = new Vector3f(outer, outer, outer);
+        Vector3f innerSize = new Vector3f(inner, inner, inner);
 
         ps.pushPose();
 
         ps.mulPose(Axis.YP.rotationDegrees(180f - yaw));
+//        ps.mulPose(Axis.XP.rotationDegrees(180 - nix.getXRot()));
         ps.mulPose(Axis.ZP.rotationDegrees(180f));
+
+        nix.getLookAngle();
 
         int light = LevelRenderer.getLightColor(nix.level(), BlockPos.containing(nix.position()));
 
-        {
-            ps.pushPose();
-            // X is right, Y is down, Z is *in*
-            // Our origin will be the lower-left corner of the scroll touching the wall
-            // (so it has "negative" thickness)
-            ps.translate(-3 / 2f, -3 / 2f, 1/32f);
+        drawCube(nix, outerSize, new Vector3f(-outerSize.x / 2f, -outerSize.y / 2f - hitboxSize / 2f, outerSize.z / 2f), ps, multiBufferSource, light, colour, true);
+        drawCube(nix, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f - hitboxSize / 2f, innerSize.z / 2f), ps, multiBufferSource, light, black, false);
 
-            float dx = outer.x, dy = outer.y, dz = -outer.z;
-            var last = ps.last();
-            var mat = last.pose();
-            var norm = last.normal();
-
-            var verts = multiBufferSource.getBuffer(RenderType.entityCutout(this.getTextureLocation(nix)));
-            // Remember: CCW
-            // Front face
-            vertex(mat, norm, light, verts, colour, 0, 0, dz, 0, 0, 0, 0, 1);
-            vertex(mat, norm, light, verts, colour, 0, dy, dz, 0, 1, 0, 0, 1);
-            vertex(mat, norm, light, verts, colour, dx, dy, dz, 1, 1, 0, 0, 1);
-            vertex(mat, norm, light, verts, colour, dx, 0, dz, 1, 0, 0, 0, 1);
-            // Back face
-            vertex(mat, norm, light, verts, colour, 0, 0, 0, 0, 0, 0, 0, -1);
-            vertex(mat, norm, light, verts, colour, dx, 0, 0, 1, 0, 0, 0, -1);
-            vertex(mat, norm, light, verts, colour, dx, dy, 0, 1, 1, 0, 0, -1);
-            vertex(mat, norm, light, verts, colour, 0, dy, 0, 0, 1, 0, 0, -1);
-            // Top face
-            vertex(mat, norm, light, verts, colour, 0, 0, 0, 0, 0, 0, 1, 0);
-            vertex(mat, norm, light, verts, colour, 0, 0, dz, 0, 0, 0, 1, 0);
-            vertex(mat, norm, light, verts, colour, dx, 0, dz, 1, 0, 0, 1, 0);
-            vertex(mat, norm, light, verts, colour, dx, 0, 0, 1, 0, 0, 1, 0);
-            // Left face
-            vertex(mat, norm, light, verts, colour, 0, 0, 0, 0, 0, 1, 0, 0);
-            vertex(mat, norm, light, verts, colour, 0, dy, 0, 0, 1, 1, 0, 0);
-            vertex(mat, norm, light, verts, colour, 0, dy, dz, 0, 1, 1, 0, 0);
-            vertex(mat, norm, light, verts, colour, 0, 0, dz, 0, 0, 1, 0, 0);
-            // Right face
-            vertex(mat, norm, light, verts, colour, dx, 0, dz, 1, 0, -1, 0, 0);
-            vertex(mat, norm, light, verts, colour, dx, dy, dz, 1, 1, -1, 0, 0);
-            vertex(mat, norm, light, verts, colour, dx, dy, 0, 1, 1, -1, 0, 0);
-            vertex(mat, norm, light, verts, colour, dx, 0, 0, 1, 0, -1, 0, 0);
-            // Bottom face
-            vertex(mat, norm, light, verts, colour, 0, dy, dz, 0, 1, 0, -1, 0);
-            vertex(mat, norm, light, verts, colour, 0, dy, 0, 0, 1, 0, -1, 0);
-            vertex(mat, norm, light, verts, colour, dx, dy, 0, 1, 1, 0, -1, 0);
-            vertex(mat, norm, light, verts, colour, dx, dy, dz, 1, 1, 0, -1, 0);
-
-            ps.popPose();
-        }
         ps.popPose();
         super.render(nix, yaw, partialTick, ps, multiBufferSource, packedLight);
     }
@@ -115,5 +78,64 @@ public class NixRenderer extends EntityRenderer<NixEntity> {
                 .uv(u, v).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light)
                 .normal(normal, nx, ny, nz)
                 .endVertex();
+    }
+
+    private void drawCube(
+            NixEntity nix,
+            Vector3f vec,
+            Vector3f translate,
+            PoseStack ps,
+            MultiBufferSource buffer,
+            int light,
+            int colour,
+            boolean inverseHull
+    ) {
+        ps.pushPose();
+        // X is right, Y is down, Z is *in*
+        // Our origin will be the lower-left corner of the scroll touching the wall
+        // (so it has "negative" thickness)
+        ps.translate(translate.x, translate.y, translate.z);
+
+        float dx = vec.x, dy = vec.y, dz = -vec.z;
+                // inverseHull ? 0 : vec.x
+                // inverseHull ? 0 : vec.y
+                // inverseHull ? 0 : -vec.z
+        var last = ps.last();
+        var mat = last.pose();
+        var norm = last.normal();
+
+        var verts = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(nix)));
+        // Remember: CCW
+        // Front face
+        vertex(mat, norm, light, verts, colour, 0, 0, inverseHull ? 0 : -vec.z, 0, 0, 0, 0, -1);
+        vertex(mat, norm, light, verts, colour, 0, dy, inverseHull ? 0 : -vec.z, 0, 1, 0, 0, -1);
+        vertex(mat, norm, light, verts, colour, dx, dy, inverseHull ? 0 : -vec.z, .5f, 1, 0, 0, -1);
+        vertex(mat, norm, light, verts, colour, dx, 0, inverseHull ? 0 : -vec.z, .5f, 0, 0, 0, -1);
+        // Back face
+        vertex(mat, norm, light, verts, colour, 0, 0, inverseHull ? -vec.z : 0, 0, 0, 0, 0, 1);
+        vertex(mat, norm, light, verts, colour, dx, 0, inverseHull ? -vec.z : 0, .5f, 0, 0, 0, 1);
+        vertex(mat, norm, light, verts, colour, dx, dy, inverseHull ? -vec.z : 0, .5f, 1, 0, 0, 1);
+        vertex(mat, norm, light, verts, colour, 0, dy, inverseHull ? -vec.z : 0, 0, 1, 0, 0, 1);
+        // Top face
+        vertex(mat, norm, light, verts, colour, 0, inverseHull ? vec.y : 0, 0, 0, 0, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, 0, inverseHull ? vec.y : 0, dz, 0, 1, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, dx, inverseHull ? vec.y : 0, dz, .5f, 1, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, dx, inverseHull ? vec.y : 0, 0, .5f, 0, 0, -1, 0);
+        // Left face
+        vertex(mat, norm, light, verts, colour, inverseHull ? vec.x : 0, 0, 0, 0, 0, -1, 0, 0);
+        vertex(mat, norm, light, verts, colour, inverseHull ? vec.x : 0, dy, 0, 0, 1, -1, 0, 0);
+        vertex(mat, norm, light, verts, colour, inverseHull ? vec.x : 0, dy, dz, .5f, 1, -1, 0, 0);
+        vertex(mat, norm, light, verts, colour, inverseHull ? vec.x : 0, 0, dz, .5f, 0, -1, 0, 0);
+        // Right face
+        vertex(mat, norm, light, verts, colour, inverseHull ? 0 : vec.x, 0, dz, 0, 0, 1, 0, 0);
+        vertex(mat, norm, light, verts, colour, inverseHull ? 0 : vec.x, dy, dz, 0, 1, 1, 0, 0);
+        vertex(mat, norm, light, verts, colour, inverseHull ? 0 : vec.x, dy, 0, .5f, 1, 1, 0, 0);
+        vertex(mat, norm, light, verts, colour, inverseHull ? 0 : vec.x, 0, 0, .5f, 0, 1, 0, 0);
+        // Bottom face
+        vertex(mat, norm, light, verts, colour, 0, inverseHull ? 0 : vec.y, dz, 0, 0, 0, 1, 0);
+        vertex(mat, norm, light, verts, colour, 0, inverseHull ? 0 : vec.y, 0, 0, 1, 0, 1, 0);
+        vertex(mat, norm, light, verts, colour, dx, inverseHull ? 0 : vec.y, 0, .5f, 1, 0, 1, 0);
+        vertex(mat, norm, light, verts, colour, dx, inverseHull ? 0 : vec.y, dz, .5f, 0, 0, 1, 0);
+        ps.popPose();
     }
 }
