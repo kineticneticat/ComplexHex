@@ -1,14 +1,19 @@
 package dev.kineticcat.complexhex.entity;
 
 import at.petrak.hexcasting.api.pigment.FrozenPigment;
+import dev.kineticcat.complexhex.Complexhex;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
@@ -52,9 +57,29 @@ public class NixEntity extends Entity {
 
     @Override
     public void tick() {
+        harm();
         move(0.01f);
-
     }
+
+    public void harm() {
+        HitResult hitResult = level().clip(new ClipContext(this.position(), this.getDeltaMovement(), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this ));
+        if (hitResult.getType() != HitResult.Type.ENTITY) {
+            return;
+        }
+        // due to above, it must be an entity therefore shut up
+        //noinspection DataFlowIssue
+        EntityHitResult ehr = (EntityHitResult) hitResult;
+        Entity hit = ehr.getEntity();
+        Complexhex.LOGGER.info(hit);
+        DamageSource damageSource = damageSources().generic();
+        hit.hurt(damageSource, damage());
+    }
+
+    public float damage() {
+        // 1 second of full acceleration per 2 hearts of damage
+        return (float) (getDeltaMovement().length() * 0.1f);
+    }
+
     public void move(double dt) {
         // ds = v*dt + 1/2 * a * dt^2
         setPos(

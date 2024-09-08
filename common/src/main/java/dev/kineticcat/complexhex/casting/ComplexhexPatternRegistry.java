@@ -1,7 +1,6 @@
 package dev.kineticcat.complexhex.casting;
 
 
-
 import at.petrak.hexcasting.api.casting.ActionRegistryEntry;
 import at.petrak.hexcasting.api.casting.castables.Action;
 import at.petrak.hexcasting.api.casting.castables.OperationAction;
@@ -11,20 +10,18 @@ import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntitiesBy;
 import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntityAt;
 import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.complexhex.Complexhex;
+import dev.kineticcat.complexhex.api.util.ComplexNumber;
+import dev.kineticcat.complexhex.api.util.Quaternion;
 import dev.kineticcat.complexhex.casting.actions.*;
+import dev.kineticcat.complexhex.casting.actions.bits.*;
 import dev.kineticcat.complexhex.casting.assemblies.OpBeginAssembly;
 import dev.kineticcat.complexhex.casting.assemblies.OpContinueAssembly;
 import dev.kineticcat.complexhex.casting.assemblies.OpEndAssembly;
-import dev.kineticcat.complexhex.casting.actions.bits.*;
-import dev.kineticcat.complexhex.api.util.ComplexNumber;
-import dev.kineticcat.complexhex.api.util.Quaternion;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Display;
-import org.apache.commons.codec.binary.Hex;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -107,9 +104,9 @@ public class ComplexhexPatternRegistry {
             OpEndAssembly.INSTANCE);
 
     // Nix
-    public static final HexPattern SUMMON_NIX = make("dwdadwdadwdwddedwdwd", HexDir.NORTH_EAST, "nix/summon",
+    public static final HexPattern SUMMON_NIX = make("qdaqwqwqadqawqaawdde", HexDir.NORTH_EAST, "nix/summon",
             OpSummonNix.INSTANCE);
-    public static final HexPattern ACCELERATE_NIX = make("dedwwdadwdadwe", HexDir.SOUTH_EAST, "nix/accelerate",
+    public static final HexPattern ACCELERATE_NIX = make("qdaqwqwqadqaww", HexDir.NORTH_EAST, "nix/accelerate",
             OpSetNixAcceleration.INSTANCE);
 
 
