@@ -3,6 +3,7 @@
   "values": [
     "complexhex:summonblockdisplay",
     "complexhex:summonitemdisplay",
-    "complexhex:summontextdisplay"
+    "complexhex:summontextdisplay",
+    "complexhex:nix/summon"
   ]
 }

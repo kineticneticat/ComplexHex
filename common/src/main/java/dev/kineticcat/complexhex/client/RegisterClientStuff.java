@@ -5,7 +5,10 @@ import dev.kineticcat.complexhex.block.ComplexHexBlocks;
 import dev.kineticcat.complexhex.block.entity.ComplexHexBlockEntities;
 import dev.kineticcat.complexhex.client.render.ComplexHexGaslighting;
 import dev.kineticcat.complexhex.client.render.CoolerGaslightingTracker;
+import dev.kineticcat.complexhex.client.render.entity.HexalWispRenderer;
 import dev.kineticcat.complexhex.client.render.be.BlockEntityBurntAmethystRenderer;
+import dev.kineticcat.complexhex.client.render.entity.NixRenderer;
+import dev.kineticcat.complexhex.entity.ComplexHexEntities;
 import dev.kineticcat.complexhex.item.ComplexHexItems;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -38,6 +41,8 @@ public class RegisterClientStuff {
         registerGaslight3(ComplexHexBlocks.BURNT.asItem());
         registerGaslight3(ComplexHexItems.AWAKENED_BURNT_SHARD);
         IClientXplatAbstractions.INSTANCE.setRenderLayer(ComplexHexBlocks.BURNT, RenderType.translucent());
+        IClientXplatAbstractions.INSTANCE.registerEntityRenderer(ComplexHexEntities.ASSEMBLY_MANAGER, HexalWispRenderer::new);
+        IClientXplatAbstractions.INSTANCE.registerEntityRenderer(ComplexHexEntities.NIX, NixRenderer::new);
     }
     private static void registerGaslight3(Item item) {
         IClientXplatAbstractions.INSTANCE.registerItemProperty(item,
