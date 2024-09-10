@@ -12,7 +12,8 @@
     "BITInvokers.BlockDisplayInvoker",
     "BITInvokers.DisplayInvoker",
     "BITInvokers.ItemDisplayInvoker",
-    "BITInvokers.TextDisplayInvoker"
+    "BITInvokers.TextDisplayInvoker",
+    "BlockSlateMixin"
   ],
   "injectors": {
     "defaultRequire": 1
