@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "complexhex:item/bygone_cypher",
+    "layer1": "complexhex:item/bygone_cypher_overlay"
+  }
+}
