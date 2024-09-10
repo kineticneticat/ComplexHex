@@ -4,7 +4,6 @@ import at.petrak.hexcasting.api.casting.iota.ListIota;
 import at.petrak.hexcasting.api.mod.HexConfig;
 import at.petrak.hexcasting.api.utils.NBTHelper;
 import at.petrak.hexcasting.common.items.magic.ItemPackagedHex;
-import dev.kineticcat.complexhex.Complexhex;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -36,7 +35,7 @@ public class ItemBygoneCypher extends ItemPackagedHex {
             List<Component> tooltip,
             TooltipFlag flag) {
         if (!hasHex(stack)) {super.appendHoverText(stack, level, tooltip, flag); return;}
-        if (level == null || level.isClientSide) {Complexhex.LOGGER.info("why are you clientside :("); return;}
+        if (level == null) {return;}
         tooltip.add(ListIota.TYPE.display(NBTHelper.getList(stack, TAG_PROGRAM, Tag.TAG_COMPOUND)));
         super.appendHoverText(stack, level, tooltip, flag);
     }

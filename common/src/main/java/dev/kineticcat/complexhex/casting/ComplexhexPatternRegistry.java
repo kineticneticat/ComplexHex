@@ -8,6 +8,7 @@ import at.petrak.hexcasting.api.casting.math.HexDir;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntitiesBy;
 import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntityAt;
+import at.petrak.hexcasting.common.casting.actions.spells.OpMakePackagedSpell;
 import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.complexhex.Complexhex;
 import dev.kineticcat.complexhex.api.util.ComplexNumber;
@@ -17,6 +18,7 @@ import dev.kineticcat.complexhex.casting.actions.bits.*;
 import dev.kineticcat.complexhex.casting.assemblies.OpBeginAssembly;
 import dev.kineticcat.complexhex.casting.assemblies.OpContinueAssembly;
 import dev.kineticcat.complexhex.casting.assemblies.OpEndAssembly;
+import dev.kineticcat.complexhex.item.ComplexHexItems;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Display;
@@ -110,6 +112,8 @@ public class ComplexhexPatternRegistry {
                 OpSetNixAcceleration.INSTANCE);
 
         //dev bygone cypher write
+        public static final HexPattern DEV_MAKE_BYGONE_CYPHER = make("wwaqqqqqe", HexDir.EAST, "dev/make_bygone_cypher",
+                new OpMakePackagedSpell<>(ComplexHexItems.BYGONE_CYPHER, 69000));
 
 
         public static void init() {
