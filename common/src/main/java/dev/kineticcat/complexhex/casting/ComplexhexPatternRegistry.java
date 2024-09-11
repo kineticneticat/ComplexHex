@@ -115,7 +115,6 @@ public class ComplexhexPatternRegistry {
         public static final HexPattern DEV_MAKE_BYGONE_CYPHER = make("wwaqqqqqe", HexDir.EAST, "dev/make_bygone_cypher",
                 new OpMakePackagedSpell<>(ComplexHexItems.BYGONE_CYPHER, 69000));
 
-
         public static void init() {
             for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {
                 Registry.register(HexActions.REGISTRY, entry.getKey(), entry.getValue());

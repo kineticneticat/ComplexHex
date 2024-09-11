@@ -48,6 +48,7 @@ public class RegisterClientStuff {
                 (stack, level, holder, holderID) ->
                         ComplexHexItems.BYGONE_CYPHER.hasHex(stack) ? 1f : 0f
         );
+
     }
     private static void registerGaslight3(Item item) {
         IClientXplatAbstractions.INSTANCE.registerItemProperty(item,

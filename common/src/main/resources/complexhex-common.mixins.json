@@ -6,14 +6,14 @@
   "client": [
   ],
   "mixins": [
+    "BlockSlateMixin",
     "ClientTickCounterMixin",
-    "RemoveAssemblyManagerMixin",
     "EntityDataSerialisersMixin",
+    "RemoveAssemblyManagerMixin",
     "BITInvokers.BlockDisplayInvoker",
     "BITInvokers.DisplayInvoker",
     "BITInvokers.ItemDisplayInvoker",
-    "BITInvokers.TextDisplayInvoker",
-    "BlockSlateMixin"
+    "BITInvokers.TextDisplayInvoker"
   ],
   "injectors": {
     "defaultRequire": 1
