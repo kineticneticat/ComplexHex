@@ -71,7 +71,7 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
         verts.vertex(mat, x, y, z)
                 .color(colour)
                 .uv(u, v).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light)
-//                .normal(normal, nx, ny, nz)
+                .normal(normal, nx, ny, nz)
                 .endVertex();
     }
 
@@ -98,8 +98,8 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
         var mat = last.pose();
         var norm = last.normal();
 
-        var verts = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(holdout)));
-//        var verts = buffer.getBuffer(holdout());
+//        var verts = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(holdout)));
+        var verts = buffer.getBuffer(holdout());
 
         // Remember: CCW
         // Top face
@@ -121,11 +121,12 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
 
     private static final RenderType HOLDOUT = RenderType.create(
             id("holdout").toString(),
-            DefaultVertexFormat.BLIT_SCREEN,
+            DefaultVertexFormat.NEW_ENTITY,
             VertexFormat.Mode.QUADS,
             256,
             RenderType.CompositeState.builder()
                     .setTransparencyState(HOLDOUT_TRANSPARENCY)
+                    .setShaderState(RenderStateShard.NO_SHADER)
                     .createCompositeState(false)
     );
 }
