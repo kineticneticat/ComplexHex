@@ -1,14 +1,14 @@
 package dev.kineticcat.complexhex.client.render.entity;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Axis;
 import dev.kineticcat.complexhex.entity.HoldoutEntity;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -40,11 +40,9 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
 
 
 
-        float outer = 4f / 16f;
-        float inner = 3.5f / 16f;
-        float hitboxSize = 4f / 16f;
+        float inner = 1f;
+//        float hitboxSize = 4f / 16f;
 
-        Vector3f outerSize = new Vector3f(outer, outer, outer);
         Vector3f innerSize = new Vector3f(inner, inner, inner);
 
         ps.pushPose();
@@ -55,8 +53,7 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
 
         int light = LevelRenderer.getLightColor(holdout.level(), BlockPos.containing(holdout.position()));
 
-        drawCube(holdout, outerSize, new Vector3f(-outerSize.x / 2f, -outerSize.y / 2f - hitboxSize / 2f, outerSize.z / 2f), ps, multiBufferSource, light, colour, true);
-        drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f - hitboxSize / 2f, innerSize.z / 2f), ps, multiBufferSource, light, black, false);
+        drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f, innerSize.z / 2f), ps, multiBufferSource, light, black);
 
         ps.popPose();
         super.render(holdout, yaw, partialTick, ps, multiBufferSource, packedLight);
@@ -74,7 +71,7 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
         verts.vertex(mat, x, y, z)
                 .color(colour)
                 .uv(u, v).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light)
-                .normal(normal, nx, ny, nz)
+//                .normal(normal, nx, ny, nz)
                 .endVertex();
     }
 
@@ -85,8 +82,7 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
             PoseStack ps,
             MultiBufferSource buffer,
             int light,
-            int colour,
-            boolean inverseHull
+            int colour
     ) {
         ps.pushPose();
         // X is right, Y is down, Z is *in*
@@ -103,37 +99,33 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
         var norm = last.normal();
 
         var verts = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(holdout)));
+//        var verts = buffer.getBuffer(holdout());
+
         // Remember: CCW
-        // Front face
-        vertex(mat, norm, light, verts, colour, 0, 0, inverseHull ? 0 : -vec.z, 0, 0, 0, 0, -1);
-        vertex(mat, norm, light, verts, colour, 0, dy, inverseHull ? 0 : -vec.z, 0, 1, 0, 0, -1);
-        vertex(mat, norm, light, verts, colour, dx, dy, inverseHull ? 0 : -vec.z, .5f, 1, 0, 0, -1);
-        vertex(mat, norm, light, verts, colour, dx, 0, inverseHull ? 0 : -vec.z, .5f, 0, 0, 0, -1);
-        // Back face
-        vertex(mat, norm, light, verts, colour, 0, 0, inverseHull ? -vec.z : 0, 0, 0, 0, 0, 1);
-        vertex(mat, norm, light, verts, colour, dx, 0, inverseHull ? -vec.z : 0, .5f, 0, 0, 0, 1);
-        vertex(mat, norm, light, verts, colour, dx, dy, inverseHull ? -vec.z : 0, .5f, 1, 0, 0, 1);
-        vertex(mat, norm, light, verts, colour, 0, dy, inverseHull ? -vec.z : 0, 0, 1, 0, 0, 1);
         // Top face
-        vertex(mat, norm, light, verts, colour, 0, inverseHull ? vec.y : 0, 0, 0, 0, 0, -1, 0);
-        vertex(mat, norm, light, verts, colour, 0, inverseHull ? vec.y : 0, dz, 0, 1, 0, -1, 0);
-        vertex(mat, norm, light, verts, colour, dx, inverseHull ? vec.y : 0, dz, .5f, 1, 0, -1, 0);
-        vertex(mat, norm, light, verts, colour, dx, inverseHull ? vec.y : 0, 0, .5f, 0, 0, -1, 0);
-        // Left face
-        vertex(mat, norm, light, verts, colour, inverseHull ? vec.x : 0, 0, 0, 0, 0, -1, 0, 0);
-        vertex(mat, norm, light, verts, colour, inverseHull ? vec.x : 0, dy, 0, 0, 1, -1, 0, 0);
-        vertex(mat, norm, light, verts, colour, inverseHull ? vec.x : 0, dy, dz, .5f, 1, -1, 0, 0);
-        vertex(mat, norm, light, verts, colour, inverseHull ? vec.x : 0, 0, dz, .5f, 0, -1, 0, 0);
-        // Right face
-        vertex(mat, norm, light, verts, colour, inverseHull ? 0 : vec.x, 0, dz, 0, 0, 1, 0, 0);
-        vertex(mat, norm, light, verts, colour, inverseHull ? 0 : vec.x, dy, dz, 0, 1, 1, 0, 0);
-        vertex(mat, norm, light, verts, colour, inverseHull ? 0 : vec.x, dy, 0, .5f, 1, 1, 0, 0);
-        vertex(mat, norm, light, verts, colour, inverseHull ? 0 : vec.x, 0, 0, .5f, 0, 1, 0, 0);
-        // Bottom face
-        vertex(mat, norm, light, verts, colour, 0, inverseHull ? 0 : vec.y, dz, 0, 0, 0, 1, 0);
-        vertex(mat, norm, light, verts, colour, 0, inverseHull ? 0 : vec.y, 0, 0, 1, 0, 1, 0);
-        vertex(mat, norm, light, verts, colour, dx, inverseHull ? 0 : vec.y, 0, .5f, 1, 0, 1, 0);
-        vertex(mat, norm, light, verts, colour, dx, inverseHull ? 0 : vec.y, dz, .5f, 0, 0, 1, 0);
+        vertex(mat, norm, light, verts, colour, 0, 0, 0, 0, 0, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, 0, 0, dz, 0, 1, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, dx, 0, dz, 1, 1, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, dx, 0, 0, 1, 0, 0, -1, 0);
         ps.popPose();
     }
+
+    public RenderType holdout() {
+        return HOLDOUT;
+    }
+
+    private static final RenderStateShard.TransparencyStateShard HOLDOUT_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("additive_transparency", () -> {
+        RenderSystem.enableBlend();
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.ZERO, GlStateManager.DestFactor.ZERO);
+    }, () -> {});
+
+    private static final RenderType HOLDOUT = RenderType.create(
+            id("holdout").toString(),
+            DefaultVertexFormat.BLIT_SCREEN,
+            VertexFormat.Mode.QUADS,
+            256,
+            RenderType.CompositeState.builder()
+                    .setTransparencyState(HOLDOUT_TRANSPARENCY)
+                    .createCompositeState(false)
+    );
 }

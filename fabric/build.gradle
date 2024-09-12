@@ -50,8 +50,8 @@ dependencies {
     modImplementation "com.jamieswhiteshirt:reach-entity-attributes:${entityReachVersion}"
     include "com.jamieswhiteshirt:reach-entity-attributes:${entityReachVersion}"
 
-    modImplementation files("${rootProject.rootDir}/lib/serialization-hooks-0.4.99999.jar")
-    include files("${rootProject.rootDir}/lib/serialization-hooks-0.4.99999.jar")
+//    modImplementation files("${rootProject.rootDir}/lib/serialization-hooks-0.4.99999.jar")
+//    include files("${rootProject.rootDir}/lib/serialization-hooks-0.4.99999.jar")
 
     modImplementation files("${rootProject.rootDir}/lib/hexal-fabric-1.20.1-0.3.0-2.jar")
 //    include files("${rootProject.rootDir}/lib/hexal-fabric-1.20.1-0.3.0-2.jar")
