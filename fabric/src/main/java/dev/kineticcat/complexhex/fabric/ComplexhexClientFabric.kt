@@ -1,7 +1,9 @@
 package dev.kineticcat.complexhex.fabric;
 
 import dev.kineticcat.complexhex.ComplexhexClient;
+import dev.kineticcat.complexhex.ComplexhexClient.mse
 import dev.kineticcat.complexhex.client.RegisterClientStuff;
+import ladysnake.satin.api.event.ShaderEffectRenderCallback
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry
@@ -28,6 +30,8 @@ object ComplexhexClientFabric : ClientModInitializer {
             }
         );
         ModelLoadingRegistry.INSTANCE.registerModelProvider(RegisterClientStuff::onModelRegister)
-
+        ShaderEffectRenderCallback.EVENT.register {
+            mse.render(it)
+        }
     }
 }

@@ -8,7 +8,7 @@ import dev.kineticcat.complexhex.client.render.ComplexHexGaslighting;
 import dev.kineticcat.complexhex.client.render.CoolerGaslightingTracker;
 import dev.kineticcat.complexhex.client.render.be.BlockEntityBurntAmethystRenderer;
 import dev.kineticcat.complexhex.client.render.entity.HexalWispRenderer;
-import dev.kineticcat.complexhex.client.render.entity.HoldoutRenderer;
+import dev.kineticcat.complexhex.client.render.entity.holdoutrenderingshenannigans.HoldoutRenderer;
 import dev.kineticcat.complexhex.client.render.entity.NixRenderer;
 import dev.kineticcat.complexhex.entity.ComplexHexEntities;
 import dev.kineticcat.complexhex.item.ComplexHexItems;

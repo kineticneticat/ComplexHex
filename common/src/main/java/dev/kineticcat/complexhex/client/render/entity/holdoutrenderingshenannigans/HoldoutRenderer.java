@@ -1,4 +1,4 @@
-package dev.kineticcat.complexhex.client.render.entity;
+package dev.kineticcat.complexhex.client.render.entity.holdoutrenderingshenannigans;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -8,16 +8,21 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Axis;
 import dev.kineticcat.complexhex.entity.HoldoutEntity;
+import me.x150.renderer.render.Renderer3d;
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+
+import java.awt.*;
 
 import static dev.kineticcat.complexhex.Complexhex.id;
 
@@ -34,28 +39,37 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
 
     @Override
     public void render(HoldoutEntity holdout, float yaw, float partialTick, PoseStack ps, MultiBufferSource multiBufferSource, int packedLight) {
-        int colour = 0xffffffff;
-        int black = 0;
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-
-
-
-        float inner = 1f;
-//        float hitboxSize = 4f / 16f;
-
-        Vector3f innerSize = new Vector3f(inner, inner, inner);
-
-        ps.pushPose();
-
-        ps.mulPose(Axis.YP.rotationDegrees(180f - yaw));
-//        ps.mulPose(Axis.XP.rotationDegrees(180 - nix.getXRot()));
-        ps.mulPose(Axis.ZP.rotationDegrees(180f));
-
-        int light = LevelRenderer.getLightColor(holdout.level(), BlockPos.containing(holdout.position()));
-
-        drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f, innerSize.z / 2f), ps, multiBufferSource, light, black);
-
-        ps.popPose();
+        LaggingMaskFrameBuffer.use(() -> {
+            Renderer3d.renderFilled(ps, Color.WHITE, new Vec3(.5,.5,.5), new Vec3(1,1,1));
+        });
+//        LaggingMaskFrameBuffer.use(() -> {
+//        int colour = 0xffffffff;
+//        int black = 0;
+//        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+//
+//
+//
+//        float inner = 1f;
+////        float hitboxSize = 4f / 16f;
+//
+//        Vector3f innerSize = new Vector3f(inner, inner, inner);
+//
+//        ps.pushPose();
+//
+//        ps.mulPose(Axis.YP.rotationDegrees(180f - yaw));
+////        ps.mulPose(Axis.XP.rotationDegrees(180 - nix.getXRot()));
+//        ps.mulPose(Axis.ZP.rotationDegrees(180f));
+//
+//        int light = LevelRenderer.getLightColor(holdout.level(), BlockPos.containing(holdout.position()));
+//
+//        drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f, innerSize.z / 2f), ps, multiBufferSource, light, black);
+//
+//
+//
+//
+//
+//        ps.popPose();
+//        });
         super.render(holdout, yaw, partialTick, ps, multiBufferSource, packedLight);
     }
 
@@ -98,8 +112,7 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
         var mat = last.pose();
         var norm = last.normal();
 
-//        var verts = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(holdout)));
-        var verts = buffer.getBuffer(holdout());
+        var verts = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(holdout)));
 
         // Remember: CCW
         // Top face
@@ -110,23 +123,40 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
         ps.popPose();
     }
 
-    public RenderType holdout() {
-        return HOLDOUT;
-    }
-
-    private static final RenderStateShard.TransparencyStateShard HOLDOUT_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("additive_transparency", () -> {
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.ZERO, GlStateManager.DestFactor.ZERO);
-    }, () -> {});
-
-    private static final RenderType HOLDOUT = RenderType.create(
-            id("holdout").toString(),
-            DefaultVertexFormat.NEW_ENTITY,
-            VertexFormat.Mode.QUADS,
-            256,
-            RenderType.CompositeState.builder()
-                    .setTransparencyState(HOLDOUT_TRANSPARENCY)
-                    .setShaderState(RenderStateShard.NO_SHADER)
-                    .createCompositeState(false)
-    );
+//    public RenderType holdout() {
+//        return COPY;
+//    }
+//
+//    private static final RenderStateShard.TransparencyStateShard HOLDOUT_TRANSPARENCY =
+//            new RenderStateShard.TransparencyStateShard("holdout_transparency", () -> {
+//        RenderSystem.enableBlend();
+//        RenderSystem.blendFunc(GlStateManager.SourceFactor.ZERO, GlStateManager.DestFactor.ONE);
+//    }, () -> {});
+//
+//    private static final RenderType HOLDOUT = RenderType.create(
+//            id("holdout").toString(),
+//            DefaultVertexFormat.NEW_ENTITY,
+//            VertexFormat.Mode.QUADS,
+//            256,
+//            RenderType.CompositeState.builder()
+//                    .setTransparencyState(HOLDOUT_TRANSPARENCY)
+//                    .setShaderState(RenderStateShard.NO_SHADER)
+//                    .createCompositeState(false)
+//    );
+//    private static final RenderType COPY =
+//            RenderType.create(
+//                    "holdout",
+//                    DefaultVertexFormat.NEW_ENTITY,
+//                    VertexFormat.Mode.QUADS,
+//                    256,
+//                    true,
+//                    false,
+//                    RenderType.CompositeState.builder()
+//                            .setShaderState(RenderType.RENDERTYPE_TEXT_SEE_THROUGH_SHADER)
+//                            .setTextureState( new RenderStateShard.TextureStateShard(tex, false, false))
+//                            .setTransparencyState(HOLDOUT_TRANSPARENCY)
+//                            .setLightmapState(RenderType.NO_LIGHTMAP)
+//                            .setOverlayState(RenderType.NO_OVERLAY)
+//                            .createCompositeState(true)
+//            );
 }
