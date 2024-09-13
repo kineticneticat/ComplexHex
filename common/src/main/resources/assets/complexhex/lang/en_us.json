@@ -104,10 +104,13 @@
 
   "item.complexhex.multifact": "Multifact",
   "complexhex.entry.multifact": "Multifact",
-  "complexhex.page.multifact.1": "This little doohickey is basically multiple artifacts in one, with the advantage being that the stack (but not the ravenmind) is preserved between used until it is reset once the sequence is complete.$(br)However, there are a couple downsides compared to a normal artifact:$(br)For one, the hexes contained can only be cast in order, no jumping about.$(br)And Secondly, each subesquent hex added requires exponentially more media (till a max of 10 hexes)",
+  "complexhex.page.multifact.1": "This little doohickey is basically multiple artifacts in one, with the advantage being that the stack (but not the ravenmind) is preserved between used until it is reset once the sequence is complete.$(br)However, there are a couple downsides compared to a normal artifact:$(br)For one, the hexes contained can only be cast in order, no jumping about.$(br)And Secondly, each subsequent hex added requires exponentially more media (till a max of 10 hexes)",
   "complexhex.page.multifact.2": "Whilst a mind alone may have the ability to control the media finely enough for this to work, it would have no spare thoughts with which to store the stack. However, with the inclusion of Burnt to assist controlling the media, the mind is free to remember the stack.",
   "complexhex.page.multifact.crafting": "*slaps multifact* this bad-boy can fit so many hexes in it!",
-  "complexhex.page.multifact.pattern": "When the first hex is being inserted, there must also be an item entity provided to be the battery, similar to other casting devices. But with subsequent additions, an entity is not required. $(br)The cost of adding hexes increases exponentially, 10 Charged for the first, 20 for the second, 40, 80,... etc."
-
+  "complexhex.page.multifact.pattern": "When the first hex is being inserted, there must also be an item entity provided to be the battery, similar to other casting devices. But with subsequent additions, an entity is not required. $(br)The cost of adding hexes increases exponentially, 10 Charged for the first, 20 for the second, 40, 80,... etc.",
+  "complexhex.entry.the_nothing": "The Nothing",
+  "complexhex.page.the_nothing.1": "I've done it!  I have broken reality itself and created a hole to the outside. However, it seems this new world (which I have come to call the Nothing) is a world of $(#ff9900)endless paradoxes$(#9900ff)absolute reason$(), as the Nothing is always $(l)$(#ff9900)not$(#9900ff)exactly$() what you describe it as.$(br)The crack looks odd, as if the world itself $(#ff9900)has no idea$(#9900ff)knows exactly$() what to show",
+  "complexhex.page.the_nothing.2": "Whilst it is a $(#ff9900)black void$(#9900ff)plentiful land$(), it seems that neither I, nor anything physical or media can pass through, though whether this is a boon, I do not know.$(br)The Nothing seems to be $(#9900ff)devoid of life$(#ff9900)home to some equally paradoxical beings$(), I would hope any and all beings out there are equally $(#ff9900)un$(#9900ff)able$() to pass through.",
+  "complexhex.page.the_nothing.3": "If I concentrate I can s$(k)sdddsf dd $(#ff9900)dadadawd$(#9900ff)dwadadwawa$()$(br2)$(#ff9900)I have seen too much$(#9900ff)I must see more$()$(br2)This cannot be undone."
 
 }
