@@ -1,16 +1,12 @@
 package dev.kineticcat.complexhex.client.render.entity.holdoutrenderingshenannigans;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Axis;
 import dev.kineticcat.complexhex.entity.HoldoutEntity;
-import me.x150.renderer.render.Renderer3d;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -21,8 +17,6 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
-
-import java.awt.*;
 
 import static dev.kineticcat.complexhex.Complexhex.id;
 
@@ -39,36 +33,37 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
 
     @Override
     public void render(HoldoutEntity holdout, float yaw, float partialTick, PoseStack ps, MultiBufferSource multiBufferSource, int packedLight) {
-        LaggingMaskFrameBuffer.use(() -> {
-            Renderer3d.renderFilled(ps, Color.WHITE, new Vec3(.5,.5,.5), new Vec3(1,1,1));
-        });
+        Vec3 pos = holdout.position();
+//        LaggingMaskFrameBuffer.draw();
+
+        if (!(multiBufferSource instanceof MultiBufferSource.BufferSource buffer)) return;
+
 //        LaggingMaskFrameBuffer.use(() -> {
-//        int colour = 0xffffffff;
-//        int black = 0;
-//        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-//
-//
-//
-//        float inner = 1f;
-////        float hitboxSize = 4f / 16f;
-//
-//        Vector3f innerSize = new Vector3f(inner, inner, inner);
-//
-//        ps.pushPose();
-//
-//        ps.mulPose(Axis.YP.rotationDegrees(180f - yaw));
-////        ps.mulPose(Axis.XP.rotationDegrees(180 - nix.getXRot()));
-//        ps.mulPose(Axis.ZP.rotationDegrees(180f));
-//
-//        int light = LevelRenderer.getLightColor(holdout.level(), BlockPos.containing(holdout.position()));
-//
-//        drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f, innerSize.z / 2f), ps, multiBufferSource, light, black);
-//
-//
-//
-//
-//
-//        ps.popPose();
+//            Renderer3d.renderFilled(ps, Color.WHITE, new Vec3(0, 70, 0), new Vec3(2, 2, 2));
+
+
+            int colour = 0xffffffff;
+            int black = 0;
+
+
+
+            float inner = 1f;
+    //        float hitboxSize = 4f / 16f;
+
+            Vector3f innerSize = new Vector3f(inner, inner, inner);
+
+            ps.pushPose();
+
+            ps.mulPose(Axis.YP.rotationDegrees(180f - yaw));
+    //        ps.mulPose(Axis.XP.rotationDegrees(180 - nix.getXRot()));
+            ps.mulPose(Axis.ZP.rotationDegrees(180f));
+
+            int light = LevelRenderer.getLightColor(holdout.level(), BlockPos.containing(holdout.position()));
+
+            drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f, innerSize.z / 2f), ps, buffer, light, black);
+
+            ps.popPose();
+//            LaggingMaskFrameBuffer.draw();
 //        });
         super.render(holdout, yaw, partialTick, ps, multiBufferSource, packedLight);
     }
@@ -94,7 +89,7 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
             Vector3f vec,
             Vector3f translate,
             PoseStack ps,
-            MultiBufferSource buffer,
+            MultiBufferSource.BufferSource buffer,
             int light,
             int colour
     ) {
@@ -113,7 +108,6 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
         var norm = last.normal();
 
         var verts = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(holdout)));
-
         // Remember: CCW
         // Top face
         vertex(mat, norm, light, verts, colour, 0, 0, 0, 0, 0, 0, -1, 0);
@@ -121,6 +115,9 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
         vertex(mat, norm, light, verts, colour, dx, 0, dz, 1, 1, 0, -1, 0);
         vertex(mat, norm, light, verts, colour, dx, 0, 0, 1, 0, 0, -1, 0);
         ps.popPose();
+
+        buffer.endLastBatch();
+
     }
 
 //    public RenderType holdout() {

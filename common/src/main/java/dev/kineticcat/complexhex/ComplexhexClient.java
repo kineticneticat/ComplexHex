@@ -11,7 +11,7 @@ import static dev.kineticcat.complexhex.Complexhex.id;
  */
 public class ComplexhexClient {
 
-    public static ManagedShaderEffect mse = ShaderEffectManager.getInstance().manage(id("shaders/post/bruhhrubruh.json"));
+    public static ManagedShaderEffect mse = ShaderEffectManager.getInstance().manage(id("shaders/post/laggingmask.json"));
     public static void init() {
         // what the fuck am i doing
         RegisterClientStuff.init();

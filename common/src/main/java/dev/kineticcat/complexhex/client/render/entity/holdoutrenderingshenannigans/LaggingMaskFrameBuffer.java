@@ -1,13 +1,16 @@
 package dev.kineticcat.complexhex.client.render.entity.holdoutrenderingshenannigans;
 
+import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;;
-import dev.kineticcat.complexhex.Complexhex;
+import com.mojang.blaze3d.systems.RenderSystem;
 import dev.kineticcat.complexhex.ComplexhexClient;
 import net.minecraft.client.Minecraft;
-import com.mojang.blaze3d.pipeline.RenderTarget;
 import org.lwjgl.opengl.GL30C;
 
+;
+
+
+// this whole thing and associated files only exist due to the help of "0x150" on the fabric dc server lmao
 public class LaggingMaskFrameBuffer extends RenderTarget {
     private static LaggingMaskFrameBuffer instance;
 

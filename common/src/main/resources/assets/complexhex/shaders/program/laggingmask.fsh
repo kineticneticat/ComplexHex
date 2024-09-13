@@ -11,9 +11,10 @@ out vec4 fragColor;
 
 void main() {
     float radiusMul = texture(Mask, texCoord).a;
-    if (radiusMul == 0) {
-        fragColor = texture(DiffuseSampler, texCoord);
-        return;
-    }
-    fragColor = texture(PrevFb, texCoord);
+//    if (radiusMul == 0) {
+//        fragColor = texture(DiffuseSampler, texCoord);
+//        return;
+//    }
+//    fragColor = texture(PrevFb, texCoord);
+    fragColor = texture(Mask, texCoord);
 }
