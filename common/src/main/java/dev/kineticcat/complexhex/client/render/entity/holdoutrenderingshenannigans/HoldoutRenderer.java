@@ -34,11 +34,11 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
     @Override
     public void render(HoldoutEntity holdout, float yaw, float partialTick, PoseStack ps, MultiBufferSource multiBufferSource, int packedLight) {
         Vec3 pos = holdout.position();
-        LaggingMaskFrameBuffer.draw();
+        LaggingMaskRenderTarget.draw(holdout.level().getGameTime());
 
         if (!(multiBufferSource instanceof MultiBufferSource.BufferSource buffer)) return;
 
-        LaggingMaskFrameBuffer.use(() -> {
+        LaggingMaskRenderTarget.use(() -> {
 //            Renderer3d.renderFilled(ps, Color.WHITE, new Vec3(0, 70, 0), new Vec3(2, 2, 2));
 
 
@@ -60,10 +60,10 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
 
             int light = LevelRenderer.getLightColor(holdout.level(), BlockPos.containing(holdout.position()));
 
-            drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f, innerSize.z / 2f), ps, buffer, light, 0xff_ffffff);
+            drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f, innerSize.z / 2f), ps, buffer, 16, 0x00_ffffff);
 
             ps.popPose();
-            LaggingMaskFrameBuffer.draw();
+
         });
         super.render(holdout, yaw, partialTick, ps, multiBufferSource, packedLight);
     }
@@ -100,20 +100,45 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
         ps.translate(translate.x, translate.y, translate.z);
 
         float dx = vec.x, dy = vec.y, dz = -vec.z;
-        // inverseHull ? 0 : vec.x
-        // inverseHull ? 0 : vec.y
-        // inverseHull ? 0 : -vec.z
+        // vec.x
+        // vec.y
+        // -vec.z
         var last = ps.last();
         var mat = last.pose();
         var norm = last.normal();
 
         var verts = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(holdout)));
         // Remember: CCW
+        // Front face
+        vertex(mat, norm, light, verts, colour, 0, 0, dz, 0, 0, 0, 0, -1);
+        vertex(mat, norm, light, verts, colour, 0, dy, dz, 0, 1, 0, 0, -1);
+        vertex(mat, norm, light, verts, colour, dx, dy, dz, .5f, 1, 0, 0, -1);
+        vertex(mat, norm, light, verts, colour, dx, 0, dz, .5f, 0, 0, 0, -1);
+        // Back face
+        vertex(mat, norm, light, verts, colour, 0, 0, 0, 0, 0, 0, 0, 1);
+        vertex(mat, norm, light, verts, colour, dx, 0, 0, .5f, 0, 0, 0, 1);
+        vertex(mat, norm, light, verts, colour, dx, dy, 0, .5f, 1, 0, 0, 1);
+        vertex(mat, norm, light, verts, colour, 0, dy, 0, 0, 1, 0, 0, 1);
         // Top face
         vertex(mat, norm, light, verts, colour, 0, 0, 0, 0, 0, 0, -1, 0);
         vertex(mat, norm, light, verts, colour, 0, 0, dz, 0, 1, 0, -1, 0);
-        vertex(mat, norm, light, verts, colour, dx, 0, dz, 1, 1, 0, -1, 0);
-        vertex(mat, norm, light, verts, colour, dx, 0, 0, 1, 0, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, dx, 0, dz, .5f, 1, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, dx, 0, 0, .5f, 0, 0, -1, 0);
+        // Left face
+        vertex(mat, norm, light, verts, colour, 0, 0, 0, 0, 0, -1, 0, 0);
+        vertex(mat, norm, light, verts, colour, 0, dy, 0, 0, 1, -1, 0, 0);
+        vertex(mat, norm, light, verts, colour, 0, dy, dz, .5f, 1, -1, 0, 0);
+        vertex(mat, norm, light, verts, colour, 0, 0, dz, .5f, 0, -1, 0, 0);
+        // Right face
+        vertex(mat, norm, light, verts, colour, dx, 0, dz, 0, 0, 1, 0, 0);
+        vertex(mat, norm, light, verts, colour, dx, dy, dz, 0, 1, 1, 0, 0);
+        vertex(mat, norm, light, verts, colour, dx, dy, 0, .5f, 1, 1, 0, 0);
+        vertex(mat, norm, light, verts, colour, dx, 0, 0, .5f, 0, 1, 0, 0);
+        // Bottom face
+        vertex(mat, norm, light, verts, colour, 0, dy, dz, 0, 0, 0, 1, 0);
+        vertex(mat, norm, light, verts, colour, 0, dy, 0, 0, 1, 0, 1, 0);
+        vertex(mat, norm, light, verts, colour, dx, dy, 0, .5f, 1, 0, 1, 0);
+        vertex(mat, norm, light, verts, colour, dx, dy, dz, .5f, 0, 0, 1, 0);
         ps.popPose();
 
         buffer.endLastBatch();
