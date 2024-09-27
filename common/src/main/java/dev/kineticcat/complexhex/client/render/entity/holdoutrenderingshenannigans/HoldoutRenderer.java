@@ -34,11 +34,11 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
     @Override
     public void render(HoldoutEntity holdout, float yaw, float partialTick, PoseStack ps, MultiBufferSource multiBufferSource, int packedLight) {
         Vec3 pos = holdout.position();
-//        LaggingMaskFrameBuffer.draw();
+        LaggingMaskFrameBuffer.draw();
 
         if (!(multiBufferSource instanceof MultiBufferSource.BufferSource buffer)) return;
 
-//        LaggingMaskFrameBuffer.use(() -> {
+        LaggingMaskFrameBuffer.use(() -> {
 //            Renderer3d.renderFilled(ps, Color.WHITE, new Vec3(0, 70, 0), new Vec3(2, 2, 2));
 
 
@@ -60,11 +60,11 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
 
             int light = LevelRenderer.getLightColor(holdout.level(), BlockPos.containing(holdout.position()));
 
-            drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f, innerSize.z / 2f), ps, buffer, light, black);
+            drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f, innerSize.z / 2f), ps, buffer, light, 0xff_ffffff);
 
             ps.popPose();
-//            LaggingMaskFrameBuffer.draw();
-//        });
+            LaggingMaskFrameBuffer.draw();
+        });
         super.render(holdout, yaw, partialTick, ps, multiBufferSource, packedLight);
     }
 

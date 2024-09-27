@@ -3,6 +3,7 @@ package dev.kineticcat.complexhex.client.render.entity.holdoutrenderingshenannig
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import dev.kineticcat.complexhex.Complexhex;
 import dev.kineticcat.complexhex.ComplexhexClient;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL30C;
