@@ -6,9 +6,11 @@
   "client": [
   ],
   "mixins": [
+    "BlockSlateMixin",
     "ClientTickCounterMixin",
-    "RemoveAssemblyManagerMixin",
     "EntityDataSerialisersMixin",
+    "RemoveAssemblyManagerMixin",
+    "ToggleParticlesMixin",
     "BITInvokers.BlockDisplayInvoker",
     "BITInvokers.DisplayInvoker",
     "BITInvokers.ItemDisplayInvoker",

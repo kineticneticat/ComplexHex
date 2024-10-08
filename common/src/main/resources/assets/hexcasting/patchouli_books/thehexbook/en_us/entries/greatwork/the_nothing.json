@@ -1,0 +1,21 @@
+{
+  "name": "complexhex.entry.the_nothing",
+  "category": "hexcasting:greatwork",
+  "icon": "minecraft:black_concrete",
+  "sortnum": 5,
+  "advancement": "hexcasting:enlightenment",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "complexhex.page.the_nothing.1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "complexhex.page.the_nothing.2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "complexhex.page.the_nothing.3"
+    }
+  ]
+}

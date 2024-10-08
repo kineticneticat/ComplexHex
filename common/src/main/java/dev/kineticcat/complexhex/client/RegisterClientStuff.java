@@ -1,12 +1,14 @@
 package dev.kineticcat.complexhex.client;
 
+import at.petrak.hexcasting.common.items.magic.ItemPackagedHex;
 import at.petrak.hexcasting.xplat.IClientXplatAbstractions;
 import dev.kineticcat.complexhex.block.ComplexHexBlocks;
 import dev.kineticcat.complexhex.block.entity.ComplexHexBlockEntities;
 import dev.kineticcat.complexhex.client.render.ComplexHexGaslighting;
 import dev.kineticcat.complexhex.client.render.CoolerGaslightingTracker;
-import dev.kineticcat.complexhex.client.render.entity.HexalWispRenderer;
 import dev.kineticcat.complexhex.client.render.be.BlockEntityBurntAmethystRenderer;
+import dev.kineticcat.complexhex.client.render.entity.HexalWispRenderer;
+import dev.kineticcat.complexhex.client.render.entity.holdoutrenderingshenannigans.HoldoutRenderer;
 import dev.kineticcat.complexhex.client.render.entity.NixRenderer;
 import dev.kineticcat.complexhex.entity.ComplexHexEntities;
 import dev.kineticcat.complexhex.item.ComplexHexItems;
@@ -43,6 +45,12 @@ public class RegisterClientStuff {
         IClientXplatAbstractions.INSTANCE.setRenderLayer(ComplexHexBlocks.BURNT, RenderType.translucent());
         IClientXplatAbstractions.INSTANCE.registerEntityRenderer(ComplexHexEntities.ASSEMBLY_MANAGER, HexalWispRenderer::new);
         IClientXplatAbstractions.INSTANCE.registerEntityRenderer(ComplexHexEntities.NIX, NixRenderer::new);
+        IClientXplatAbstractions.INSTANCE.registerItemProperty(ComplexHexItems.BYGONE_CYPHER, ItemPackagedHex.HAS_PATTERNS_PRED,
+                (stack, level, holder, holderID) ->
+                        ComplexHexItems.BYGONE_CYPHER.hasHex(stack) ? 1f : 0f
+        );
+        IClientXplatAbstractions.INSTANCE.registerEntityRenderer(ComplexHexEntities.HOLDOUT, HoldoutRenderer::new);
+
     }
     private static void registerGaslight3(Item item) {
         IClientXplatAbstractions.INSTANCE.registerItemProperty(item,

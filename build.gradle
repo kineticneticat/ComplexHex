@@ -1,7 +1,7 @@
 plugins {
     id "architectury-plugin" version "3.4.+"
 
-    id "dev.architectury.loom" version "1.5.+" apply false
+    id "dev.architectury.loom" version "1.6.+" apply false
 
     id "org.jetbrains.kotlin.jvm" version "1.8.0" apply false
 
@@ -42,6 +42,12 @@ subprojects {
         annotationProcessor "org.ow2.asm:asm-commons:${project.asmVersion}"
         annotationProcessor "org.ow2.asm:asm-tree:${project.asmVersion}"
         annotationProcessor "org.ow2.asm:asm-util:${project.asmVersion}"
+
+        modImplementation "org.ladysnake:satin:${satin_version}"
+        // Include Satin as a Jar-in-Jar dependency (optional)
+        include "org.ladysnake:satin:${satin_version}"
+//        include modImplementation("io.github.0x3c50.renderer:renderer-fabric:1.2.1")
+        modImplementation( files("${rootProject.rootDir}/lib/renderer-1.1.jar"))
     }
 
     sourceSets.main.kotlin.srcDirs += 'src/main/java'

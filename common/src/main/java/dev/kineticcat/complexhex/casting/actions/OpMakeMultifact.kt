@@ -1,20 +1,19 @@
 package dev.kineticcat.complexhex.casting.actions
 
-import at.petrak.hexcasting.api.casting.*
+import at.petrak.hexcasting.api.casting.ParticleSpray
+import at.petrak.hexcasting.api.casting.RenderedSpell
 import at.petrak.hexcasting.api.casting.castables.SpellAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
+import at.petrak.hexcasting.api.casting.getList
 import at.petrak.hexcasting.api.casting.iota.EntityIota
 import at.petrak.hexcasting.api.casting.iota.Iota
-import at.petrak.hexcasting.api.casting.iota.ListIota
 import at.petrak.hexcasting.api.casting.mishaps.MishapBadItem
 import at.petrak.hexcasting.api.casting.mishaps.MishapBadOffhandItem
-import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
 import at.petrak.hexcasting.api.casting.mishaps.MishapOthersName
 import at.petrak.hexcasting.api.misc.MediaConstants
 import at.petrak.hexcasting.api.utils.extractMedia
 import at.petrak.hexcasting.api.utils.isMediaItem
 import at.petrak.hexcasting.xplat.IXplatAbstractions
-import dev.kineticcat.complexhex.Complexhex
 import dev.kineticcat.complexhex.api.casting.castables.VarargSpellAction
 import dev.kineticcat.complexhex.item.magic.ItemMultifact
 import net.minecraft.server.level.ServerPlayer
@@ -36,21 +35,21 @@ object OpMakeMultifact : VarargSpellAction {
     override fun execute(args: List<Iota>, argc: Int, env: CastingEnvironment): SpellAction.Result {
 
         val (stack, hand) = env.getHeldItemToOperateOn(this::isMultifact)
-            ?: throw MishapBadOffhandItem.of(ItemStack.EMPTY.copy(), null, "multifact")
+            ?: throw MishapBadOffhandItem.of(ItemStack.EMPTY.copy(), "multifact")
         val hexHolder = IXplatAbstractions.INSTANCE.findHexHolder(stack)
         if (stack.item !is ItemMultifact) {
-            throw MishapBadOffhandItem.of(stack, hand, "multifact")
+            throw MishapBadOffhandItem.of(stack, "multifact")
         } else if ( hexHolder == null ) {
-            throw  MishapBadOffhandItem.of(stack, hand, "iota.write")
+            throw  MishapBadOffhandItem.of(stack, "iota.write")
         }
 
-        if ((stack as ItemMultifact).getAmount(stack) >= 10) throw MishapBadOffhandItem.of(stack, hand, "multifact.too_many")
+        if ((stack as ItemMultifact).getAmount(stack) >= 10) throw MishapBadOffhandItem.of(stack, "multifact.too_many")
 
         if (argc == 2 && (stack.item as ItemMultifact).hasHex(stack)) {
-            throw MishapBadOffhandItem.of(stack, hand, "multifact.already_init")
+            throw MishapBadOffhandItem.of(stack, "multifact.already_init")
         }
         if (argc == 1 && !(stack.item as ItemMultifact).hasHex(stack)) {
-            throw MishapBadOffhandItem.of(stack, hand, "multifact.not_init")
+            throw MishapBadOffhandItem.of(stack, "multifact.not_init")
         }
 
         val hex:List<Iota>

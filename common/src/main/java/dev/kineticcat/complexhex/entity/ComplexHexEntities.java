@@ -36,7 +36,14 @@ public class ComplexHexEntities {
                     .build(id("nix").toString())
     );
 
-
+    public static final EntityType<HoldoutEntity> HOLDOUT = register(
+            "holdout",
+            EntityType.Builder.of(HoldoutEntity::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(32)
+                    .updateInterval(1)
+                    .build(id("holdout").toString())
+    );
     private static <T extends Entity> EntityType<T> register (String id, EntityType<T> type) {
         var old = ENTITIES.put(id(id), type);
         if (old != null) {
