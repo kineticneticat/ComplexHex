@@ -1,5 +1,6 @@
 package dev.kineticcat.complexhex.client.render.entity.holdoutrenderingshenannigans;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -34,10 +35,11 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
     @Override
     public void render(HoldoutEntity holdout, float yaw, float partialTick, PoseStack ps, MultiBufferSource multiBufferSource, int packedLight) {
         Vec3 pos = holdout.position();
+        RenderSystem.enableDepthTest();
         LaggingMaskRenderTarget.draw(holdout.level().getGameTime());
 
         if (!(multiBufferSource instanceof MultiBufferSource.BufferSource buffer)) return;
-
+        RenderSystem.enableDepthTest();
         LaggingMaskRenderTarget.use(() -> {
 //            Renderer3d.renderFilled(ps, Color.WHITE, new Vec3(0, 70, 0), new Vec3(2, 2, 2));
 
@@ -59,13 +61,15 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
             ps.mulPose(Axis.ZP.rotationDegrees(180f));
 
             int light = LevelRenderer.getLightColor(holdout.level(), BlockPos.containing(holdout.position()));
-
+            RenderSystem.enableDepthTest();
             drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f, innerSize.z / 2f), ps, buffer, 16, 0x00_ffffff);
-
+            RenderSystem.enableDepthTest();
             ps.popPose();
 
         });
+        RenderSystem.enableDepthTest();
         super.render(holdout, yaw, partialTick, ps, multiBufferSource, packedLight);
+        RenderSystem.enableDepthTest();
     }
 
     private static void vertex(
