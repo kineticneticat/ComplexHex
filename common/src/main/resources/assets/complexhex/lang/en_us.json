@@ -79,8 +79,10 @@
   "hexcasting.action.complexhex:killbit": "Kill BIT",
   "complexhex.page.killbit": "Kills & removes the given BIT.$(br2)Costs about one $(l:items/amethyst)$(item)Amethyst Dust/$.",
 
-  "complexhex.mishap.bad_string.blockid": "a blockID",
-  "complexhex.mishap.bad_string.itemid": "an itemID",
+  "hexcasting.action.complexhex:make_multifact": "Multifact",
+
+  "complexhex.mishap.bad_string.blockid": "a block ID",
+  "complexhex.mishap.bad_string.itemid": "an item ID",
   "hexcasting.mishap.bad_string": "needs %s but got %s",
   "hexcasting.mishap.invalid_value.class.quaternion": "a quaternion",
   "hexcasting.mishap.invalid_value.class.complexnumber": "a complex number",
@@ -108,6 +110,8 @@
   "complexhex.page.multifact.2": "Whilst a mind alone may have the ability to control the media finely enough for this to work, it would have no spare thoughts with which to store the stack. However, with the inclusion of Burnt to assist controlling the media, the mind is free to remember the stack.",
   "complexhex.page.multifact.crafting": "*slaps multifact* this bad-boy can fit so many hexes in it!",
   "complexhex.page.multifact.pattern": "When the first hex is being inserted, there must also be an item entity provided to be the battery, similar to other casting devices. But with subsequent additions, an entity is not required. $(br)The cost of adding hexes increases exponentially, 10 Charged for the first, 20 for the second, 40, 80,... etc.",
+
+
   "complexhex.entry.the_nothing": "The Nothing",
   "complexhex.page.the_nothing.1": "I've done it!  I have broken reality itself and created a hole to the outside. However, it seems this new world (which I have come to call the Nothing) is a world of $(#ff9900)endless paradoxes$(#9900ff)absolute reason$(), as the Nothing is always $(l)$(#ff9900)not$(#9900ff)exactly$() what you describe it as.$(br)The crack looks odd, as if the world itself $(#ff9900)has no idea$(#9900ff)knows exactly$() what to show",
   "complexhex.page.the_nothing.2": "Whilst it is a $(#ff9900)black void$(#9900ff)plentiful land$(), it seems that neither I, nor anything physical or media can pass through, though whether this is a boon, I do not know.$(br)The Nothing seems to be $(#9900ff)devoid of life$(#ff9900)home to some equally paradoxical beings$(), I would hope any and all beings out there are equally $(#ff9900)un$(#9900ff)able$() to pass through.",

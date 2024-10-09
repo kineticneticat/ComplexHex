@@ -10,7 +10,7 @@
       "text": "complexhex.page.burnt"
     },
     {
-      "type": "patchouli:crafting",
+      "type": "patchouli:smelting",
       "recipe": "complexhex:burnt_shard",
       "text": "complexhex.page.burnt.crafting.shard"
     },
