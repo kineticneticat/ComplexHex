@@ -79,6 +79,8 @@
   "hexcasting.action.complexhex:killbit": "清除 BIT",
   "complexhex.page.killbit": "清理并移除给定 BIT。$(br2)消耗大约 1 个$(l:items/amethyst)$(item)紫水晶粉/$。",
 
+  "hexcasting.action.complexhex:make_multifact": "多重造物",
+
   "complexhex.mishap.bad_string.blockid": "一个方块ID",
   "complexhex.mishap.bad_string.itemid": "一个物品ID",
   "hexcasting.mishap.bad_string": "本应提供%s，而实际为%s",
@@ -96,7 +98,7 @@
   "complexhex.entry.burnt": "烧灼紫水晶",
   "complexhex.page.burnt": "加热紫水晶碎片时（比如烧炼），它的外在会产生急剧变化；甚至可以用“不悦”“暴躁”来形容。并且，此类材料的颜色也发生了较大变化，因此称作“灼炼晶”。有趣的是，它似乎会在我的视线之外改变颜色。",
   "complexhex.page.burnt.crafting.shard": "",
-  "complexhex.page.burnt.crafting.block": "与紫水晶一样，灼炼晶也可制成方块，此时会保留灼炼晶的奇异光学现象。",
+  "complexhex.page.burnt.crafting.block": "与紫水晶一样，灼炼晶也可制成方块，其奇异光学现象不会因此改变。",
 
   "complexhex.entry.awakened_burnt": "灼炼晶的觉醒",
   "complexhex.page.awakened_burnt": "若是使用意识引导灼炼晶，它的暴躁程度会大大减轻，但同时会变得极具控制欲；它似乎会影响其周围的媒质，并将其拉扯成围绕自身的分形状涡旋。$(br)奇妙的是，觉醒灼炼晶的完整方块不太稳定：它会迅速碎裂，直至留下单个稳定的碎片。",
@@ -107,7 +109,12 @@
   "complexhex.page.multifact.1": "这个小物什可以看做合成一体的多个造物，它们在顺序执行中会保持栈，但不会保持渡鸦之思；执行完成后则会重置。$(br)然而相对普通的造物而言，它们也有一些缺点：$(br)比如，多重核心中的咒术只能顺序执行，无法跳过。$(br)再比如，每多存入一个咒术，所需的媒质量会极速增长，直至上限 10 个咒术为止。",
   "complexhex.page.multifact.2": "精确控制媒质以供其使用这件事，尽管单独的意识可能做得到，但如此它就没法再存储栈了。不过要是加入灼炼晶来协助控制，意识就省去了重担，可以保持栈了。",
   "complexhex.page.multifact.crafting": "*拍个多重核心上去*这家伙里面可塞得下好多好多的咒术！",
-  "complexhex.page.multifact.pattern": "存入第一个咒术时，必须同时提供用作媒质储池的物品实体，这和其他施法设备类似。后续的存储无需物品实体。$(br)存入咒术的消耗会指数级增长，首个需要 10 个充能紫水晶，第二个需要 20 个，再后续需要 40 个、80 个，如此推算即可。"
+  "complexhex.page.multifact.pattern": "存入第一个咒术时，必须同时提供用作媒质储池的物品实体，这和其他施法设备类似。后续的存储无需物品实体。$(br)存入咒术的消耗会指数级增长，首个需要 10 个充能紫水晶，第二个需要 20 个，再后续需要 40 个、80 个，如此推算即可。",
 
+
+  "complexhex.entry.the_nothing": "空无",
+  "complexhex.page.the_nothing.1": "我成功了！我撕裂了现实本身，造出了一个通往现实之外的洞。不过，这个新世界（我称作“空无”）似乎是$(#ff9900)无尽的悖论$(#9900ff)绝对的秩序$()，因为空无总与我的描述$(l)$(#ff9900)相悖$(#9900ff)一致$()。$(br)这道裂隙也很奇怪，就好像世界对要展示什么$(#ff9900)毫无头绪$(#9900ff)了如指掌$()。",
+  "complexhex.page.the_nothing.2": "虽然那片空间是$(#ff9900)纯黑的虚空$(#9900ff)丰饶的乐园$()，我、任何物体，乃至媒质却都无法通过。我并不清楚这究竟是祸还是福。$(br)空无中似乎$(#9900ff)完全没有生命$(#ff9900)有着某种悖论般的存在$()，我希望那些存在同样$(#ff9900)不$(#9900ff)能$()穿过这道裂隙。",
+  "complexhex.page.the_nothing.3": "若是集中精神，我就能$(k)sdddsf dd $(#ff9900)dadadawd$(#9900ff)dwadadwawa$()$(br2)$(#ff9900)我看到的过多了$(#9900ff)我必须目睹更多$()$(br2)没有回头路可走。"
 
 }
