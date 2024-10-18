@@ -28,37 +28,56 @@ public class NixEntity extends Entity {
 
     private static final String TAG_PIGMENT = "pigment";
     private static final String TAG_ACCELERATION = "acceleration";
+    private static final String TAG_AGE = "age";
     private static final EntityDataAccessor<CompoundTag> PIGMENT =
             SynchedEntityData.defineId(NixEntity.class, EntityDataSerializers.COMPOUND_TAG);
     private static final EntityDataAccessor<Vector3f> ACCELERATION =
             SynchedEntityData.defineId(NixEntity.class, EntityDataSerializers.VECTOR3);
+    private static final EntityDataAccessor<Integer> AGE =
+            SynchedEntityData.defineId(NixEntity.class, EntityDataSerializers.INT);
+
     public FrozenPigment getPigment() {return FrozenPigment.fromNBT(entityData.get(PIGMENT));}
     public void setPigment(FrozenPigment pigment) {entityData.set(PIGMENT, pigment.serializeToNBT());}
     public Vec3 getAcceleration() {return new Vec3(entityData.get(ACCELERATION));}
     public void setAcceleration(Vec3 acc) {entityData.set(ACCELERATION, acc.toVector3f());}
 
+    public Integer getAge() {return entityData.get(AGE);}
+    public void setAge(Integer age) {entityData.set(AGE, age);}
+
     @Override
     protected void defineSynchedData() {
         entityData.define(PIGMENT, FrozenPigment.DEFAULT.get().serializeToNBT());
         entityData.define(ACCELERATION, Vec3.ZERO.toVector3f());
+        entityData.define(AGE, 0);
     }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag compoundTag) {
         entityData.set(PIGMENT, compoundTag.getCompound(TAG_PIGMENT));
         entityData.set(ACCELERATION, tagAsVec3(compoundTag.getCompound(TAG_ACCELERATION)).toVector3f());
+        entityData.set(AGE, compoundTag.getInt(TAG_AGE));
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compoundTag) {
         compoundTag.put(TAG_PIGMENT, entityData.get(PIGMENT));
         compoundTag.put(TAG_ACCELERATION, vec3AsTag(new Vec3(entityData.get(ACCELERATION))));
+        compoundTag.putInt(TAG_AGE, entityData.get(AGE));
     }
 
     @Override
     public void tick() {
+        age();
         harm();
         move(0.01f);
+    }
+
+    public void age() {
+        Integer current = getAge();
+        setAge(current+1);
+        if (current+1 > 300) {
+            this.kill();
+        }
     }
 
     public void harm() {

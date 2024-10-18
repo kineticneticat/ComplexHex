@@ -107,10 +107,10 @@ public class NixRenderer extends EntityRenderer<NixEntity> {
         var verts = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(nix)));
         // Remember: CCW
         // Front face
-        vertex(mat, norm, light, verts, colour, 0, 0, inverseHull ? 0 : -vec.z, 0, 0, 0, 0, -1);
-        vertex(mat, norm, light, verts, colour, 0, dy, inverseHull ? 0 : -vec.z, 0, 1, 0, 0, -1);
-        vertex(mat, norm, light, verts, colour, dx, dy, inverseHull ? 0 : -vec.z, .5f, 1, 0, 0, -1);
-        vertex(mat, norm, light, verts, colour, dx, 0, inverseHull ? 0 : -vec.z, .5f, 0, 0, 0, -1);
+        vertex(mat, norm, light, verts, 0xffffffff, 0, 0, inverseHull ? 0 : -vec.z, 0, 0, 0, 0, -1);
+        vertex(mat, norm, light, verts, 0xffffffff, 0, dy, inverseHull ? 0 : -vec.z, 0, 1, 0, 0, -1);
+        vertex(mat, norm, light, verts, 0xffffffff, dx, dy, inverseHull ? 0 : -vec.z, .5f, 1, 0, 0, -1);
+        vertex(mat, norm, light, verts, 0xffffffff, dx, 0, inverseHull ? 0 : -vec.z, .5f, 0, 0, 0, -1);
         // Back face
         vertex(mat, norm, light, verts, colour, 0, 0, inverseHull ? -vec.z : 0, 0, 0, 0, 0, 1);
         vertex(mat, norm, light, verts, colour, dx, 0, inverseHull ? -vec.z : 0, .5f, 0, 0, 0, 1);

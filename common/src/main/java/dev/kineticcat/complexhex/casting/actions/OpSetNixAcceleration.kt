@@ -34,6 +34,7 @@ object OpSetNixAcceleration : SpellAction {
     private data class Spell(val nix: NixEntity, val acc: Vec3) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
             nix.acceleration = acc
+            nix.age = 0
             nix.tick()
         }
     }
