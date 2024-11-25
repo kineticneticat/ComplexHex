@@ -74,7 +74,8 @@ public class NixEntity extends Entity {
 
     public void age() {
         Integer current = getAge();
-        setAge(current+1);
+        // so you can have it sit there untill you use it
+        if (getAcceleration().lengthSqr() != 0) {setAge(current+1);}
         if (current+1 > 300) {
             this.kill();
         }

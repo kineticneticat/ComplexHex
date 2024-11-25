@@ -8,8 +8,6 @@ import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.circle.MishapNoSpellCircle
 import at.petrak.hexcasting.api.misc.MediaConstants
 import at.petrak.hexcasting.api.pigment.FrozenPigment
-import dev.kineticcat.complexhex.Complexhex
-import dev.kineticcat.complexhex.api.util.utilStuffLmao
 import dev.kineticcat.complexhex.entity.AssemblyManagerEntity
 import dev.kineticcat.complexhex.entity.ComplexHexEntities
 import net.minecraft.nbt.CompoundTag

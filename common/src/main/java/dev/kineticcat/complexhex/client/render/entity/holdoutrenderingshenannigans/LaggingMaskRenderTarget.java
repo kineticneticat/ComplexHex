@@ -5,7 +5,6 @@ import com.mojang.blaze3d.platform.GlConst;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.TextureUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
-import dev.kineticcat.complexhex.ComplexhexClient;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL30C;
 
@@ -113,10 +112,10 @@ public class LaggingMaskRenderTarget extends RenderTarget {
         RenderTarget mainBuffer = Minecraft.getInstance().getMainRenderTarget();
         LaggingMaskRenderTarget buffer = obtain();
 
-        ComplexhexClient.mse.setSamplerUniform("Mask", buffer);
-        ComplexhexClient.mse.setUniformValue("time", time);
-
-        ComplexhexClient.mse.render(Minecraft.getInstance().getDeltaFrameTime());
+//        ComplexhexClient.mse.setSamplerUniform("Mask", buffer);
+//        ComplexhexClient.mse.setUniformValue("time", time);
+//
+//        ComplexhexClient.mse.render(Minecraft.getInstance().getDeltaFrameTime());
 
         buffer.clear(false);
 
