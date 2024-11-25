@@ -3,6 +3,7 @@ package dev.kineticcat.complexhex.client.render.entity;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.kineticcat.complexhex.entity.LaTeXEntity;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -19,7 +20,7 @@ import static dev.kineticcat.complexhex.Complexhex.id;
 
 public class LaTeXRenderer extends EntityRenderer<LaTeXEntity> {
 
-//    private DynamicTexture texture;
+    private Res
     protected LaTeXRenderer(EntityRendererProvider.Context context) {
         super(context);
     }
@@ -40,7 +41,7 @@ public class LaTeXRenderer extends EntityRenderer<LaTeXEntity> {
                 for (int x = 0; x < bufImg.getWidth(); x++)
                     wawa.setPixelRGBA(x, y, bufImg.getRGB(x, y));
             DynamicTexture texture = new DynamicTexture(wawa);
-            ResourceLocation resLoc = TextureManager.register("", texture);
+            ResourceLocation resLoc = Minecraft.getInstance().getTextureManager().register("latex", texture);
         }
 
     }
