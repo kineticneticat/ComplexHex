@@ -44,6 +44,15 @@ public class ComplexHexEntities {
                     .updateInterval(1)
                     .build(id("holdout").toString())
     );
+    public static final EntityType<LaTeXEntity> LATEX = register(
+            "latex",
+            EntityType.Builder.of(LaTeXEntity::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(32)
+                    .updateInterval(1)
+                    .build(id("latex").toString())
+
+    );
     private static <T extends Entity> EntityType<T> register (String id, EntityType<T> type) {
         var old = ENTITIES.put(id(id), type);
         if (old != null) {
