@@ -7,8 +7,9 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
 import org.scilab.forge.jlatexmath.TeXFormula;
 
 import java.awt.*;
@@ -18,7 +19,7 @@ import static dev.kineticcat.complexhex.Complexhex.id;
 
 public class LaTeXRenderer extends EntityRenderer<LaTeXEntity> {
 
-    private DynamicTexture texture;
+//    private DynamicTexture texture;
     protected LaTeXRenderer(EntityRendererProvider.Context context) {
         super(context);
     }
@@ -30,11 +31,18 @@ public class LaTeXRenderer extends EntityRenderer<LaTeXEntity> {
 
     @Override
     public void render(LaTeXEntity latexEntity, float yaw, float partialTick, PoseStack ps, MultiBufferSource multiBufferSource, int packedLight) {
-        String LaTeX = latexEntity.getLaTeX();
-        TeXFormula formula = new TeXFormula(LaTeX);
-        BufferedImage image = (BufferedImage) formula.createBufferedImage(TeXFormula.SANSSERIF, 10, Color.BLACK, null);
-        DynamicTexture tex = new DynamicTexture(new NativeImage(image.getWidth(), image.getHeight(), false));
-        tex.
+        if (texture == null) {
+            String LaTeX = latexEntity.getLaTeX();
+            TeXFormula formula = new TeXFormula(LaTeX);
+            BufferedImage bufImg = (BufferedImage) formula.createBufferedImage(TeXFormula.SANSSERIF, 10, Color.BLACK, null);
+            NativeImage wawa = new NativeImage(bufImg.getWidth(), bufImg.getHeight(), true);
+            for (int y = 0; y < bufImg.getHeight(); y++)
+                for (int x = 0; x < bufImg.getWidth(); x++)
+                    wawa.setPixelRGBA(x, y, bufImg.getRGB(x, y));
+            DynamicTexture texture = new DynamicTexture(wawa);
+            ResourceLocation resLoc = TextureManager.register("", texture);
+        }
+
     }
 
 }
