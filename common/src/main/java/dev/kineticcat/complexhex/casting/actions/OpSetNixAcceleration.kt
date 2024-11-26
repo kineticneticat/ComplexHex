@@ -19,7 +19,9 @@ object OpSetNixAcceleration : SpellAction {
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         val nix = args.getEntity(0, argc)
         // force acc to be mag 1
-        val acc = args.getVec3(1, argc).normalize()
+        var acc = args.getVec3(1, argc)
+
+        acc = if (acc.lengthSqr() <25) acc else acc.normalize().scale(5.0)
 
         if ( nix !is NixEntity) throw MishapBadEntity.of(nix, "nix")
         env.assertEntityInRange(nix)

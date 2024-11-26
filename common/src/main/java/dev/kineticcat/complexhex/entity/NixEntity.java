@@ -10,10 +10,9 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
@@ -25,6 +24,8 @@ public class NixEntity extends Entity {
         super(entityType, level);
         noPhysics = false;
     }
+
+    private static final double dt = 0.01;
 
     private static final String TAG_PIGMENT = "pigment";
     private static final String TAG_ACCELERATION = "acceleration";
@@ -67,9 +68,9 @@ public class NixEntity extends Entity {
 
     @Override
     public void tick() {
-        age();
+//        age();
         harm();
-        move(0.01f);
+        move();
     }
 
     public void age() {
@@ -82,17 +83,29 @@ public class NixEntity extends Entity {
     }
 
     public void harm() {
-        HitResult hitResult = level().clip(new ClipContext(this.position(), this.getDeltaMovement(), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this ));
-        if (hitResult.getType() != HitResult.Type.ENTITY) {
-            return;
-        }
-        // due to above, it must be an entity therefore shut up
-        //noinspection DataFlowIssue
-        EntityHitResult ehr = (EntityHitResult) hitResult;
+//        HitResult hitResult = level().clip(new ClipContext(this.position(), this.getDeltaMovement(), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this ));
+//        Complexhex.LOGGER.info(hitResult);
+//        if (hitResult.getType() != HitResult.Type.ENTITY) {
+//            return;
+//        }
+//        // due to above, it must be an entity therefore shut up
+//        //noinspection DataFlowIssue
+//        EntityHitResult ehr = (EntityHitResult) hitResult;
+
+        EntityHitResult ehr = ProjectileUtil.getEntityHitResult(
+                this.level(),
+                this,
+                this.position(),
+                this.position().add(this.getDeltaMovement().scale(dt)),
+                this.getBoundingBox().expandTowards(this.getDeltaMovement().scale(dt)).inflate(1.0),
+                Entity::canBeHitByProjectile);
+        if (ehr == null) return;
         Entity hit = ehr.getEntity();
         Complexhex.LOGGER.info(hit);
         DamageSource damageSource = damageSources().generic();
-        hit.hurt(damageSource, damage());
+        float amt = damage();
+        Complexhex.LOGGER.info("amt: %f, speed: %f".formatted(amt, this.getDeltaMovement().scale(dt).length()));
+        hit.hurt(damageSource, amt);
     }
 
     public float damage() {
@@ -100,7 +113,7 @@ public class NixEntity extends Entity {
         return (float) (getDeltaMovement().length() * 0.1f);
     }
 
-    public void move(double dt) {
+    public void move() {
         // ds = v*dt + 1/2 * a * dt^2
         setPos(
               position().add(

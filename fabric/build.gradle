@@ -42,6 +42,8 @@ dependencies {
         exclude module: "phosphor"
     }
 
+    modApi "com.samsthenerd.inline:inline-fabric:$minecraftVersion-$inlineVersion"
+
     modImplementation "at.petra-k.paucal:paucal-fabric-${minecraftVersion}:${paucalVersion}"
     modImplementation "vazkii.patchouli:Patchouli:${minecraftVersion}-${patchouliVersion}-FABRIC"
 
