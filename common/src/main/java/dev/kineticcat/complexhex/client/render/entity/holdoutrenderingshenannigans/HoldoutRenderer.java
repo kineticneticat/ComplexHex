@@ -37,10 +37,10 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
         Vec3 pos = holdout.position();
 
         RenderSystem.enableDepthTest();
-        LaggingMaskRenderTarget.draw(holdout.level().getGameTime());
+//        LaggingMaskRenderTarget.draw(holdout.level().getGameTime());
 
         if (!(multiBufferSource instanceof MultiBufferSource.BufferSource buffer)) return;
-        LaggingMaskRenderTarget.use(() -> {
+//        LaggingMaskRenderTarget.use(() -> {
 //            Renderer3d.renderFilled(ps, Color.WHITE, new Vec3(0, 70, 0), new Vec3(2, 2, 2));
 
 
@@ -64,7 +64,7 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
             drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f, innerSize.z / 2f), ps, buffer, 16, 0x00_ffffff);
             ps.popPose();
 
-        });
+//        });
 
         super.render(holdout, yaw, partialTick, ps, multiBufferSource, packedLight);
     }
@@ -98,7 +98,7 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
         // X is right, Y is down, Z is *in*
         // Our origin will be the lower-left corner of the scroll touching the wall
         // (so it has "negative" thickness)
-        ps.translate(translate.x, translate.y, translate.z);
+        ps.translate(translate.x, translate.y-0.5, translate.z);
 
         float dx = vec.x, dy = vec.y, dz = -vec.z;
         // vec.x
