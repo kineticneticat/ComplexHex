@@ -4,6 +4,7 @@ import dev.kineticcat.complexhex.block.ComplexHexBlocks;
 import dev.kineticcat.complexhex.item.magic.ItemBygoneCypher;
 import dev.kineticcat.complexhex.item.magic.ItemMultifact;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -36,6 +37,7 @@ public class ComplexHexItems {
     public static final ItemAwakenedBurntShard AWAKENED_BURNT_SHARD = make("awakened_burnt_shard", new ItemAwakenedBurntShard(ComplexHexBlocks.AWAKENED_BURNT,new Item.Properties().rarity(Rarity.RARE)));
     public static final ItemMultifact MULTIFACT = make("multifact", new ItemMultifact(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
     public static final ItemBygoneCypher BYGONE_CYPHER = make("bygone_cypher", new ItemBygoneCypher(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final PigmentDebug PIGMENT_DEBUG = make("pigment_debug", new PigmentDebug(new Item.Properties()));
 
     public static <T extends Item> T make(String name, T item, CreativeModeTab tab) {
         Item old = ITEMS.put(id(name), item);
