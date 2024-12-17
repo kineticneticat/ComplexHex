@@ -121,6 +121,11 @@ public class ComplexhexPatternRegistry {
         public static final HexPattern UNZIP = make("qeqdwdqeq", HexDir.NORTH_EAST, "unzip",
                 OpUnzip.INSTANCE);
 
+        // toggles
+
+        public static final HexPattern TOGGLE$PARTICLE = make("qqaqqq", HexDir.EAST, "toggle/particle",
+                OpToggleParticles.INSTANCE);
+
         public static void init() {
             for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {
                 Registry.register(HexActions.REGISTRY, entry.getKey(), entry.getValue());
