@@ -36,7 +36,7 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
     @Override
     public void render(HoldoutEntity holdout, float yaw, float partialTick, PoseStack ps, MultiBufferSource multiBufferSource, int packedLight) {
         Vec3 pos = holdout.position();
-        Complexhex.LOGGER.info(holdout.TrailTValues);
+        Complexhex.LOGGER.info(holdout.getTrailTValues());
 
         RenderSystem.enableDepthTest();
 //        LaggingMaskRenderTarget.draw(holdout.level().getGameTime());

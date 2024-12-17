@@ -39,9 +39,9 @@ public class HoldoutEntity extends Entity {
     private static final String TAG_TRAILCURVES = "TrailCurves";
     private static final String TAG_TRAILSTARTDIRECTIONS = "TrailStartDirections";
 
-    public List<Float> TrailTValues;
-    public List<Vec3> TrailCurves;
-    public List<Vec3> TrailStartDirections;
+    public List<Float> getTrailTValues() {return entityData.get(TRAILTVALUES).stream().map(NBTHelper::getAsFloat).toList();}
+    public List<Vec3> getTrailCurves() { return tagAsVec3s(entityData.get(TRAILCURVES));}
+    public List<Vec3> getTrailStartDirections() { return tagAsVec3s(entityData.get(TRAILSTARTDIRECTIONS)); }
 
     @Override
     protected void defineSynchedData() {
@@ -55,9 +55,7 @@ public class HoldoutEntity extends Entity {
         entityData.set(TRAILTVALUES, compoundTag.getList(TAG_TRAILTVALUES, Tag.TAG_FLOAT));
         entityData.set(TRAILCURVES, compoundTag.getList(TAG_TRAILCURVES, Tag.TAG_COMPOUND));
         entityData.set(TRAILSTARTDIRECTIONS, compoundTag.getList(TAG_TRAILSTARTDIRECTIONS, Tag.TAG_FLOAT));
-        TrailTValues = entityData.get(TRAILTVALUES).stream().map(NBTHelper::getAsFloat).toList();
-        TrailCurves = tagAsVec3s(entityData.get(TRAILCURVES));
-        TrailStartDirections = tagAsVec3s(entityData.get(TRAILSTARTDIRECTIONS));
+
     }
 
     @Override
@@ -70,6 +68,6 @@ public class HoldoutEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
-        TrailTValues = TrailTValues.stream().map(x-> x+TrailDt).toList();
+//        TrailTValues = TrailTValues.stream().map(x-> x+TrailDt).toList();
     }
 }
