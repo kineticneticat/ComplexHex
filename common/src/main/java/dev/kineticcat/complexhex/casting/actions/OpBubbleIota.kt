@@ -1,4 +1,4 @@
-package dev.kineticcat.complexhex.casting.patterns
+package dev.kineticcat.complexhex.casting.actions
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment

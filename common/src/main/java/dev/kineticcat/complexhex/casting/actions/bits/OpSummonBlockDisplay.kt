@@ -1,4 +1,4 @@
-package dev.kineticcat.complexhex.casting.patterns.bits
+package dev.kineticcat.complexhex.casting.actions.bits
 
 import at.petrak.hexcasting.api.casting.ParticleSpray
 import at.petrak.hexcasting.api.casting.RenderedSpell
@@ -13,7 +13,6 @@ import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.Display
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.Vec3
 import ram.talia.moreiotas.api.getString
