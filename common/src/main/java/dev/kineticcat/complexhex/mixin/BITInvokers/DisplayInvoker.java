@@ -16,7 +16,9 @@ public interface DisplayInvoker {
     @Accessor("renderState")
     Display.RenderState getRenderState();
     @Accessor("DATA_LEFT_ROTATION_ID")
-    EntityDataAccessor<Quaternionf> GetLeftRoatationDataID();
+    EntityDataAccessor<Quaternionf> GetLeftRotationDataID();
     @Accessor("DATA_SCALE_ID")
     EntityDataAccessor<Vector3f> GetScaleDataID();
+    @Accessor("DATA_TRANSLATION_ID")
+    EntityDataAccessor<Vector3f> GetTranslationDataID();
 }
