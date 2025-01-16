@@ -16,6 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BubbleIota extends Iota {
@@ -60,7 +61,12 @@ public class BubbleIota extends Iota {
 
         Iota push = this.getContainedIota();
         List<Iota> stack = vm.getImage().getStack();
+
+        if (stack.isEmpty()) {
+            stack = new ArrayList<>();
+        }
         stack.add(push);
+
         CastingImage image2 = vm.getImage().copy(
                 stack,
                 vm.getImage().getParenCount(),
