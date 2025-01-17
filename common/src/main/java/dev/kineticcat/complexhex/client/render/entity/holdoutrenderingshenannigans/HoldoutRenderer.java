@@ -39,10 +39,10 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
         Complexhex.LOGGER.info(holdout.getTrailTValues());
 
         RenderSystem.enableDepthTest();
-//        LaggingMaskRenderTarget.draw(holdout.level().getGameTime());
+        LaggingMaskRenderTarget.draw(holdout.level().getGameTime());
 
         if (!(multiBufferSource instanceof MultiBufferSource.BufferSource buffer)) return;
-//        LaggingMaskRenderTarget.use(() -> {
+        LaggingMaskRenderTarget.use(() -> {
 //            Renderer3d.renderFilled(ps, Color.WHITE, new Vec3(0, 70, 0), new Vec3(2, 2, 2));
 
 
@@ -66,7 +66,7 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
             drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f, innerSize.z / 2f), ps, buffer, 16, 0x00_ffffff);
             ps.popPose();
 
-//        });
+        });
 
         super.render(holdout, yaw, partialTick, ps, multiBufferSource, packedLight);
     }
@@ -112,36 +112,45 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
 
         var verts = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(holdout)));
         // Remember: CCW
-        // Front face
-        vertex(mat, norm, light, verts, colour, 0, 0, dz, 0, 0, 0, 0, -1);
-        vertex(mat, norm, light, verts, colour, 0, dy, dz, 0, 1, 0, 0, -1);
-        vertex(mat, norm, light, verts, colour, dx, dy, dz, .5f, 1, 0, 0, -1);
-        vertex(mat, norm, light, verts, colour, dx, 0, dz, .5f, 0, 0, 0, -1);
-        // Back face
-        vertex(mat, norm, light, verts, colour, 0, 0, 0, 0, 0, 0, 0, 1);
-        vertex(mat, norm, light, verts, colour, dx, 0, 0, .5f, 0, 0, 0, 1);
-        vertex(mat, norm, light, verts, colour, dx, dy, 0, .5f, 1, 0, 0, 1);
-        vertex(mat, norm, light, verts, colour, 0, dy, 0, 0, 1, 0, 0, 1);
-        // Top face
+        // Front face +z
+        vertex(mat, norm, light, verts, colour, 0, 0, dz, 0, 0, 0, 0, 1);
+        vertex(mat, norm, light, verts, colour, 0, dy, dz, 0, 1, 0, 0, 1);
+        vertex(mat, norm, light, verts, colour, dx, dy, dz, .5f, 1, 0, 0, 1);
+        vertex(mat, norm, light, verts, colour, dx, 0, dz, .5f, 0, 0, 0, 1);
+        // Back face -z
+        vertex(mat, norm, light, verts, colour, 0, 0, 0, 0, 0, 0, 0, -1);
+        vertex(mat, norm, light, verts, colour, dx, 0, 0, .5f, 0, 0, 0, -1);
+        vertex(mat, norm, light, verts, colour, dx, dy, 0, .5f, 1, 0, 0, -1);
+        vertex(mat, norm, light, verts, colour, 0, dy, 0, 0, 1, 0, 0, -1);
+        // Top face +y
         vertex(mat, norm, light, verts, colour, 0, 0, 0, 0, 0, 0, -1, 0);
         vertex(mat, norm, light, verts, colour, 0, 0, dz, 0, 1, 0, -1, 0);
         vertex(mat, norm, light, verts, colour, dx, 0, dz, .5f, 1, 0, -1, 0);
         vertex(mat, norm, light, verts, colour, dx, 0, 0, .5f, 0, 0, -1, 0);
-        // Left face
+        // testing face
+        vertex(mat, norm, light, verts, colour, 1, 1, 1, 0, 0, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, 1, 1, dz+1, 0, 1, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, dx+1, 1, dz+1, .5f, 1, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, dx+1, 1, 1, .5f, 0, 0, -1, 0);
+        // Left face -x
         vertex(mat, norm, light, verts, colour, 0, 0, 0, 0, 0, -1, 0, 0);
         vertex(mat, norm, light, verts, colour, 0, dy, 0, 0, 1, -1, 0, 0);
         vertex(mat, norm, light, verts, colour, 0, dy, dz, .5f, 1, -1, 0, 0);
         vertex(mat, norm, light, verts, colour, 0, 0, dz, .5f, 0, -1, 0, 0);
-        // Right face
-        vertex(mat, norm, light, verts, colour, dx, 0, dz, 0, 0, 1, 0, 0);
-        vertex(mat, norm, light, verts, colour, dx, dy, dz, 0, 1, 1, 0, 0);
-        vertex(mat, norm, light, verts, colour, dx, dy, 0, .5f, 1, 1, 0, 0);
-        vertex(mat, norm, light, verts, colour, dx, 0, 0, .5f, 0, 1, 0, 0);
-        // Bottom face
-        vertex(mat, norm, light, verts, colour, 0, dy, dz, 0, 0, 0, 1, 0);
-        vertex(mat, norm, light, verts, colour, 0, dy, 0, 0, 1, 0, 1, 0);
-        vertex(mat, norm, light, verts, colour, dx, dy, 0, .5f, 1, 0, 1, 0);
-        vertex(mat, norm, light, verts, colour, dx, dy, dz, .5f, 0, 0, 1, 0);
+        // Right face +x
+        vertex(mat, norm, light, verts, colour, dx, 0, dz, 0, 0, -1, 0, 0);
+        vertex(mat, norm, light, verts, colour, dx, dy, dz, 0, 1, -1, 0, 0);
+        vertex(mat, norm, light, verts, colour, dx, dy, 0, .5f, 1, -1, 0, 0);
+        vertex(mat, norm, light, verts, colour, dx, 0, 0, .5f, 0, -1, 0, 0);
+        // Bottom face -y
+        vertex(mat, norm, light, verts, colour, 0, dy, dz, 0, 0, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, 0, dy, 0, 0, 1, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, dx, dy, 0, .5f, 1, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, dx, dy, dz, .5f, 0, 0, -1, 0);
+
+
+
+
         ps.popPose();
 
         buffer.endLastBatch();
