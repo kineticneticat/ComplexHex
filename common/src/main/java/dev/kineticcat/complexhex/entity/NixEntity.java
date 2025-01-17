@@ -1,7 +1,6 @@
 package dev.kineticcat.complexhex.entity;
 
 import at.petrak.hexcasting.api.pigment.FrozenPigment;
-import dev.kineticcat.complexhex.Complexhex;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -101,10 +100,10 @@ public class NixEntity extends Entity {
                 Entity::canBeHitByProjectile);
         if (ehr == null) return;
         Entity hit = ehr.getEntity();
-        Complexhex.LOGGER.info(hit);
+//        Complexhex.LOGGER.info(hit);
         DamageSource damageSource = damageSources().generic();
         float amt = damage();
-        Complexhex.LOGGER.info("amt: %f, speed: %f".formatted(amt, this.getDeltaMovement().scale(dt).length()));
+//        Complexhex.LOGGER.info("amt: %f, speed: %f".formatted(amt, this.getDeltaMovement().scale(dt).length()));
         hit.hurt(damageSource, amt);
     }
 
