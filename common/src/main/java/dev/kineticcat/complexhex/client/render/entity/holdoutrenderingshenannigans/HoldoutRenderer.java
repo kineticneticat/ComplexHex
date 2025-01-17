@@ -127,21 +127,16 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
         vertex(mat, norm, light, verts, colour, 0, 0, dz, 0, 1, 0, -1, 0);
         vertex(mat, norm, light, verts, colour, dx, 0, dz, .5f, 1, 0, -1, 0);
         vertex(mat, norm, light, verts, colour, dx, 0, 0, .5f, 0, 0, -1, 0);
-        // testing face
-        vertex(mat, norm, light, verts, colour, 1, 1, 1, 0, 0, 0, -1, 0);
-        vertex(mat, norm, light, verts, colour, 1, 1, dz+1, 0, 1, 0, -1, 0);
-        vertex(mat, norm, light, verts, colour, dx+1, 1, dz+1, .5f, 1, 0, -1, 0);
-        vertex(mat, norm, light, verts, colour, dx+1, 1, 1, .5f, 0, 0, -1, 0);
         // Left face -x
-        vertex(mat, norm, light, verts, colour, 0, 0, 0, 0, 0, -1, 0, 0);
-        vertex(mat, norm, light, verts, colour, 0, dy, 0, 0, 1, -1, 0, 0);
-        vertex(mat, norm, light, verts, colour, 0, dy, dz, .5f, 1, -1, 0, 0);
-        vertex(mat, norm, light, verts, colour, 0, 0, dz, .5f, 0, -1, 0, 0);
+        vertex(mat, norm, light, verts, colour, 0, 0, 0, 0, 0, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, 0, dy, 0, 0, 1, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, 0, dy, dz, .5f, 1, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, 0, 0, dz, .5f, 0, 0, -1, 0);
         // Right face +x
-        vertex(mat, norm, light, verts, colour, dx, 0, dz, 0, 0, -1, 0, 0);
-        vertex(mat, norm, light, verts, colour, dx, dy, dz, 0, 1, -1, 0, 0);
-        vertex(mat, norm, light, verts, colour, dx, dy, 0, .5f, 1, -1, 0, 0);
-        vertex(mat, norm, light, verts, colour, dx, 0, 0, .5f, 0, -1, 0, 0);
+        vertex(mat, norm, light, verts, colour, dx, 0, dz, 0, 0, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, dx, dy, dz, 0, 1, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, dx, dy, 0, .5f, 1, 0, -1, 0);
+        vertex(mat, norm, light, verts, colour, dx, 0, 0, .5f, 0, 0, -1, 0);
         // Bottom face -y
         vertex(mat, norm, light, verts, colour, 0, dy, dz, 0, 0, 0, -1, 0);
         vertex(mat, norm, light, verts, colour, 0, dy, 0, 0, 1, 0, -1, 0);

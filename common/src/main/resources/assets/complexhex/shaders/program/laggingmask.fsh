@@ -17,8 +17,8 @@ void main() {
 //            fragColor = vec4(1, 1, 1, 1);
             return;
         }
-//        fragColor = texture(PrevFb, texCoord);
-        fragColor = vec4(0, 0, 0, 1);
+        fragColor = texture(PrevFb, texCoord);
+//        fragColor = vec4(0, 0, 0, 1);
 
 //    float sine = step(sin(time/50), texCoord.x);
 //    if (sine <= 0) {
