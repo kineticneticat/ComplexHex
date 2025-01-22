@@ -11,10 +11,7 @@ import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntitiesBy;
 import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntityAt;
 import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.complexhex.Complexhex;
-import dev.kineticcat.complexhex.casting.actions.OpAxisAngle;
-import dev.kineticcat.complexhex.casting.actions.OpBubbleIota;
-import dev.kineticcat.complexhex.casting.actions.OpMatrixToQuaternion;
-import dev.kineticcat.complexhex.casting.actions.OpQuaternionToMatrix;
+import dev.kineticcat.complexhex.casting.actions.*;
 import dev.kineticcat.complexhex.casting.actions.bits.*;
 import dev.kineticcat.complexhex.stuff.ComplexNumber;
 import dev.kineticcat.complexhex.stuff.Quaternion;
@@ -93,6 +90,13 @@ public class ComplexhexPatternRegistry {
 
     public static final HexPattern BUBBLE = make("qdqdqdqdqdq", HexDir.SOUTH_EAST, "bubble",
             OpBubbleIota.INSTANCE);
+
+    // quaternion tp
+    public static final HexPattern GETQUATPOS = make("qqaqq", HexDir.EAST, "quattp/getpos",
+            OpGetQuaternionPosition.INSTANCE);
+    public static final HexPattern TPQUAT = make("qqaqqw", HexDir.EAST, "quattp/quattp",
+            OpQuaternionTp.INSTANCE);
+
 
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {
