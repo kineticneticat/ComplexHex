@@ -139,7 +139,7 @@
       "op_id": "complexhex:qinvert",
       "anchor": "complexhex:qinvert",
       "input": "quaternion",
-      "output": "num",
+      "output": "quat",
       "text": "complexhex.page.quaternionics.qinvert"
     },
     {
