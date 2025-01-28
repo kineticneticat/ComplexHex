@@ -52,7 +52,7 @@ object QuaternionArithmetic : Arithmetic {
         val out =  when (pattern) {
             ADD     -> QDorQQbinaryQ( { a, b -> a.Qadd(b) }, { a, b -> a.Qadd(b) })
             SUB     -> QDorQQbinaryQ( { a, b -> a.Qsub(b) }, { a, b -> a.Qsub(b) })
-            MUL     -> QDbinaryQ      { a, b -> a.Qmul(b) }
+            MUL     -> QDorQQbinaryQ( { a, b -> a.Qmul(b) }, { a, b -> a.Qmul(b) })
             DIV     -> QDbinaryQ      { a, b -> a.Qdiv(b) }
             ABS     -> QunaryD        { a    -> sqrt(a.lengthSquared()) }
             QINVERT -> QunaryQ        { a    -> a.Qinvert() }
