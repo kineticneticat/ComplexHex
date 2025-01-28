@@ -17,8 +17,9 @@ fun List<Iota>.getQuaternion(idx: Int, argc: Int = 0): Quaternion {
     }
 }
 
+// yoinked from https://math.toronto.edu/mathnet/questionCorner/complexexp.html
 fun CNpow(a: Double, power: ComplexNumber): ComplexNumber {
-    var b = power.real
-    var c = power.imag
+    val b = power.real
+    val c = power.imag
     return ComplexNumber.polar(Math.pow(a,b), c * Math.log(a))
 }
