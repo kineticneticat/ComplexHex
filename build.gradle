@@ -107,6 +107,7 @@ allprojects {
         }
 
         // Add any other repositories with your cross-platform dependency mods
+        mavenCentral()
     }
 
     tasks.withType(JavaCompile) {
