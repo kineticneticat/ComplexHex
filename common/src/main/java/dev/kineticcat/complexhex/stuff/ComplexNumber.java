@@ -18,7 +18,7 @@ public class ComplexNumber {
         this.real = real;
         this.imag = imag;
     }
-    public static ComplexNumber eToTheIPI(double mod, double arg) {
+    public static ComplexNumber polar(double mod, double arg) {
         return new ComplexNumber(Math.cos(arg), Math.sin(arg)).mul(mod);
     }
     public static ComplexNumber fixNaN(ComplexNumber cn) {

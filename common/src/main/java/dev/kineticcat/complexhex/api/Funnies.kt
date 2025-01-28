@@ -4,8 +4,8 @@ import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
 import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota
+import dev.kineticcat.complexhex.stuff.ComplexNumber
 import dev.kineticcat.complexhex.stuff.Quaternion
-import org.joml.Quaterniond
 
 // stolen from hexcasting lmao
 fun List<Iota>.getQuaternion(idx: Int, argc: Int = 0): Quaternion {
@@ -17,4 +17,8 @@ fun List<Iota>.getQuaternion(idx: Int, argc: Int = 0): Quaternion {
     }
 }
 
-
+fun CNpow(a: Double, power: ComplexNumber): ComplexNumber {
+    var b = power.real
+    var c = power.imag
+    return ComplexNumber.polar(Math.pow(a,b), c * Math.log(a))
+}

@@ -12,6 +12,7 @@ import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
+import dev.kineticcat.complexhex.api.CNpow
 import dev.kineticcat.complexhex.api.casting.iota.ComplexHexIotaTypes
 import dev.kineticcat.complexhex.api.casting.iota.ComplexNumberIota
 import dev.kineticcat.complexhex.casting.ComplexhexPatternRegistry.*
@@ -36,7 +37,8 @@ object ComplexArithmetic : Arithmetic {
         CNARG,
         REAL,
         IMAGINARY,
-        CONJUGATE
+        CONJUGATE,
+        POW
     )
 
     override fun opTypes() = OPS
@@ -52,6 +54,7 @@ object ComplexArithmetic : Arithmetic {
             REAL       -> CunaryD      { a -> a.real }
             IMAGINARY  -> CunaryD      { a -> a.imag }
             CONJUGATE  -> CunaryC      { a -> a.conjugate() }
+            POW        -> DCbinaryC    {a, b -> CNpow(a, b)}
             else -> throw InvalidOperatorException("$pattern is not a valid operator in complex arithmetic")
         }
     }
@@ -99,4 +102,7 @@ object ComplexArithmetic : Arithmetic {
             throw InvalidOperatorException("i did an oopsie, report this pls :) (${j::class})")
         }
     }
+
+    fun DCbinaryC(op:(Double, ComplexNumber) -> (ComplexNumber)) = OperatorBinary(IotaMultiPredicate.pair(IotaPredicate.ofType(HexIotaTypes.DOUBLE), IotaPredicate.ofType(ComplexHexIotaTypes.COMPLEXNUMBER)))
+        { i:Iota, j:Iota -> ComplexNumberIota(op(Operator.downcast(i, HexIotaTypes.DOUBLE).double, Operator.downcast(j, ComplexHexIotaTypes.COMPLEXNUMBER).complex))}
 }
