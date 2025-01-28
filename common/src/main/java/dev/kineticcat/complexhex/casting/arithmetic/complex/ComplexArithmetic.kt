@@ -78,11 +78,6 @@ object ComplexArithmetic : Arithmetic {
         )
     }
 
-    fun CCbinaryC(op: (ComplexNumber, ComplexNumber) -> (ComplexNumber)) = OperatorBinary(ACCEPTS_C)
-        {i: Iota, j: Iota -> CC(i, j, op) }
-    fun CCbinaryD(op: (ComplexNumber, ComplexNumber) -> (Double)) = OperatorBinary(ACCEPTS_C)
-        {i: Iota, j: Iota -> DoubleIota(op(Operator.downcast(i, ComplexHexIotaTypes.COMPLEXNUMBER).complex, Operator.downcast(j, ComplexHexIotaTypes.COMPLEXNUMBER).complex))}
-
     private fun CDbinaryC(op: (ComplexNumber, Double) -> (ComplexNumber)) = OperatorBinary(ACCEPTS_CCorCD)
         { i: Iota, j: Iota -> if (i is DoubleIota && j is ComplexNumberIota) {
             CD(j, i, op)

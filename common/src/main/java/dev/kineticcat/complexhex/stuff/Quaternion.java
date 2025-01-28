@@ -5,8 +5,6 @@ import at.petrak.hexcasting.api.utils.HexUtils;
 import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Quaterniond;
-import org.joml.Quaterniondc;
-import org.joml.Quaternionf;
 
 import java.util.List;
 
@@ -37,7 +35,9 @@ public class Quaternion extends Quaterniond {
         return new Quaternion(fixNAN(this.w), fixNAN(this.x), fixNAN(this.y), fixNAN(this.z));
     }
     public Quaternion Qadd(Quaternion that) {return (Quaternion) super.add(that);}
+    public Quaternion Qadd(Double that) {return (Quaternion) super.add(new Quaternion(that,0,0,0));}
     public Quaternion Qsub(Quaternion that) {return (Quaternion) super.difference(that);}
+    public Quaternion Qsub(Double that) {return (Quaternion) super.difference(new Quaternion(that,0,0,0));}
     public Quaternion Qmul(Double that) {return (Quaternion) super.mul(that);}
     public Quaternion Qmul(Quaternion that) {return (Quaternion) super.mul(that);}
     public Quaternion Qdiv(Double that) {return (Quaternion) super.mul(1/that);}
