@@ -1,0 +1,20 @@
+{
+  "parent": "hexcasting:root",
+  "display": {
+    "icon": {
+      "item": "minecraft:glass_bottle"
+    },
+    "title": {
+      "translate": "complexhex.advancements.embedding.title"
+    },
+    "description": {
+      "translate": "complexhex.advancements.embedding.description"
+    },
+    "frame": "goal"
+  },
+  "criteria": {
+    "embedded_an_iota": {
+      "trigger": "complexhex:embedding"
+    }
+  }
+}

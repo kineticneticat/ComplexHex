@@ -6,10 +6,11 @@
   "client": [
   ],
   "mixins": [
+    "EmbeddingAdvancementTriggerMixin",
     "BITInvokers.BlockDisplayInvoker",
+    "BITInvokers.DisplayInvoker",
     "BITInvokers.ItemDisplayInvoker",
-    "BITInvokers.TextDisplayInvoker",
-    "BITInvokers.DisplayInvoker"
+    "BITInvokers.TextDisplayInvoker"
   ],
   "injectors": {
     "defaultRequire": 1

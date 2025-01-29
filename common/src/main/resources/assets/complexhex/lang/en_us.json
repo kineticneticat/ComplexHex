@@ -87,5 +87,8 @@
   "hexcasting.mishap.invalid_value.class.complexnumber": "a complex number",
   "hexcasting.mishap.invalid_value.class.bubble": "a bubble",
   "hexcasting.mishap.invalid_value.class.bit": "a BIT",
-  "hexcasting.mishap.bad_item.bit": "a BIT"
+  "hexcasting.mishap.bad_item.bit": "a BIT",
+
+  "complexhex.advancements.embedding.title": "Embedded",
+  "complexhex.advancements.embedding.description": "wowee"
 }
