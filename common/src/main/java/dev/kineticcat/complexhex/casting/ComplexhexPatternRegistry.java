@@ -38,7 +38,7 @@ public class ComplexhexPatternRegistry {
     public static final HexPattern CONST$COMPLEX$I$ = make("wqq", HexDir.SOUTH_WEST, "const/complex/i",
             Action.makeConstantOp(new ComplexNumber(0, 1).asIota()));
     public static final HexPattern COMPLEXMUL = make("wqqewaqaw", HexDir.SOUTH_WEST, "cmul");
-    public static final HexPattern REAL = make("wqqq", HexDir.SOUTH_WEST, "real");
+    public static final HexPattern REAL = make("wqqd", HexDir.SOUTH_WEST, "real");
     public static final HexPattern IMAGINARY = make("wqqe", HexDir.SOUTH_WEST, "imaginary");
     public static final HexPattern CONJUGATE = make("wqqd", HexDir.SOUTH_WEST, "conjugate");
     public static final HexPattern CNARG = make("waqqqqqeww", HexDir.SOUTH_EAST, "cnarg");
