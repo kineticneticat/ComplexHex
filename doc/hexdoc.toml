@@ -28,7 +28,7 @@ author = "kineticcat"
 show_landing_text = false
 
 [extra.hexcasting]
-_pattern_regex = { "!Raw"='HexPattern[\s\S]+?make\(\"(?P<signature>[qweasd]+)\", HexDir\.(?P<startdir>(?:NORTH|SOUTH)_(?:EAST|WEST)), \"(?P<name>[^\"]+?)\"' }
+_pattern_regex = { "!Raw"='HexPattern[\s\S]+?make\(\"(?P<signature>[qweasd]+)\", HexDir\.(?P<startdir>[A-Z_]+), \"(?P<name>[^\"]+?)\"' }
 
 [[extra.hexcasting.pattern_stubs]]
 path = "{^^^_common.package}/casting/ComplexhexPatternRegistry.java"
