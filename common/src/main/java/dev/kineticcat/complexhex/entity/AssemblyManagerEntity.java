@@ -1,7 +1,6 @@
 package dev.kineticcat.complexhex.entity;
 
 import at.petrak.hexcasting.api.pigment.FrozenPigment;
-import at.petrak.hexcasting.api.utils.NBTHelper;
 import at.petrak.hexcasting.common.particles.ConjureParticleOptions;
 import dev.kineticcat.complexhex.casting.assemblies.AbstractAssemblyController;
 import dev.kineticcat.complexhex.casting.assemblies.AbstractAssemblyController.Edge;
@@ -16,6 +15,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
@@ -23,7 +23,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static dev.kineticcat.complexhex.api.FunniesKt.nextColour;
@@ -58,7 +57,7 @@ public class AssemblyManagerEntity extends Entity {
         EntityDataSerialisersMixin.invokeRegisterSerializer(LIST_TAG);
     }
 
-    private AABB aabb = new AABB(centre(), centre());
+    private AABB aabb = new AABB(getCentre(), getCentre());
 
     private static final String TAG_VERTICES = "vertices";
     private static final String TAG_EDGES = "edges";
@@ -95,7 +94,7 @@ public class AssemblyManagerEntity extends Entity {
         List<Vec3> verts = getVertices();
         verts.add(vec);
         setVertices(verts);
-        setPos(centre());
+        setPos(getCentre());
     }
 
     public static Vec3 centre(List<Vec3> verts) {
@@ -105,7 +104,7 @@ public class AssemblyManagerEntity extends Entity {
         }
         return total.scale(1f /verts.size());
     }
-    private Vec3 centre() {
+    public Vec3 getCentre() {
         return centre(getVertices());
     }
 
@@ -117,11 +116,11 @@ public class AssemblyManagerEntity extends Entity {
         return Math.sqrt(rad);
     }
     public double radius() {
-        return radius(centre(), getVertices());
+        return radius(getCentre(), getVertices());
     }
 
     public Vec3 normToCentre(Vec3 vec) {
-        return centre().subtract(vec).normalize();
+        return getCentre().subtract(vec).normalize();
     }
 
     @Override
@@ -151,7 +150,7 @@ public class AssemblyManagerEntity extends Entity {
         entityData.set(CONTROLLER, compoundTag.getString(TAG_CONTROLLER));
         entityData.set(TRIGGERED, compoundTag.getBoolean(TAG_TRIGGERED));
         entityData.set(EDGES, compoundTag.getList(TAG_EDGES, Tag.TAG_COMPOUND));
-        aabb = new AABB(centre(), centre());
+        aabb = new AABB(getCentre(), getCentre());
         for (Vec3 vert : getVertices()) {
             aabb = addToAABB(aabb, vert);
         }
@@ -235,8 +234,8 @@ public class AssemblyManagerEntity extends Entity {
             }
         }
         if (isTriggered()) {
-            List<Entity> got = level().getEntities((Entity) null, aabb, (Entity e) -> getController().isEntityWithinBounds(e, centre(), radius()));
-            for (Entity entity : got) getController().applyEffectToEntity(entity);
+            List<Entity> got = level().getEntities((Entity) null, aabb, (Entity e) -> getController().isEntityWithinBounds(e, getCentre(), radius()));
+//            for (Entity entity : got) getController().applyEffectToEntity(entity);
         }
     }
 
@@ -244,6 +243,8 @@ public class AssemblyManagerEntity extends Entity {
         entityData.set(CONTROLLER, controller);
         entityData.set(TRIGGERED, true);
         entityData.set(EDGES, Edge.Companion.listAsTag(getController().genEdges(getVertices())));
+
+        getController().getComplex().begin(this, (ServerLevel) level());
     }
 
 }

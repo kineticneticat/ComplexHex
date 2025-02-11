@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import dev.kineticcat.complexhex.Complexhex;
 import dev.kineticcat.complexhex.entity.HoldoutEntity;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -36,7 +35,7 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
     @Override
     public void render(HoldoutEntity holdout, float yaw, float partialTick, PoseStack ps, MultiBufferSource multiBufferSource, int packedLight) {
         Vec3 pos = holdout.position();
-        Complexhex.LOGGER.info(holdout.getTrailTValues());
+//        Complexhex.LOGGER.info(holdout.getTrailTValues());
 
         RenderSystem.enableDepthTest();
         LaggingMaskRenderTarget.draw(holdout.level().getGameTime());

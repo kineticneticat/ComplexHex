@@ -1,12 +1,13 @@
 package dev.kineticcat.complexhex.casting.assemblies
 
+import dev.kineticcat.complexhex.casting.assemblies.complex.AssemblyComplex
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.ListTag
 import net.minecraft.nbt.Tag
-import net.minecraft.world.phys.Vec3
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.phys.Vec3
 
-abstract class AbstractAssemblyController {
+abstract class AbstractAssemblyController(var complex: AssemblyComplex) {
 
     @JvmRecord
     data class Edge(val A: Int, val B: Int) {
@@ -77,5 +78,4 @@ abstract class AbstractAssemblyController {
     abstract fun testVertices(verts: List<Vec3>): Boolean
 
     abstract fun isEntityWithinBounds(entity: Entity, centre: Vec3, radius: Double): Boolean
-    abstract fun applyEffectToEntity(entity: Entity)
 }

@@ -69,5 +69,7 @@ public class HoldoutEntity extends Entity {
     public void tick() {
         super.tick();
 //        TrailTValues = TrailTValues.stream().map(x-> x+TrailDt).toList();
+        if (level().getGameTime() % (30*20) == 0) {
+        }
     }
 }

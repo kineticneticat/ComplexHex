@@ -2,14 +2,14 @@ package dev.kineticcat.complexhex.casting.assemblies
 
 import com.mojang.datafixers.util.Pair
 import dev.kineticcat.complexhex.Complexhex
+import dev.kineticcat.complexhex.casting.assemblies.complex.AssemblyComplex
 import dev.kineticcat.complexhex.entity.AssemblyManagerEntity
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.phys.Vec3
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-class SimpleAssemblyController(val vertCount: Int, val edgesPerVertex: Int, val apply: (Entity) -> Unit) : AbstractAssemblyController() {
-    constructor(vertCount:Int, edgesPerVertex: Int): this(vertCount, edgesPerVertex, {})
+class PlatonicAssemblyController(val vertCount: Int, val edgesPerVertex: Int, complex: AssemblyComplex) : AbstractAssemblyController(complex) {
     override fun genEdges(verts: List<Vec3>): List<Edge> {
         val edges: MutableList<Edge> = ArrayList()
         // this as an abomination
@@ -51,7 +51,4 @@ class SimpleAssemblyController(val vertCount: Int, val edgesPerVertex: Int, val 
         return entity.eyePosition.subtract(centre).lengthSqr() < radius*radius
     }
 
-    override fun applyEffectToEntity(entity: Entity) {
-        apply(entity)
-    }
 }
