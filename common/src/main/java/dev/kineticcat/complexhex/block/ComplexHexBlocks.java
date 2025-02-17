@@ -1,5 +1,6 @@
 package dev.kineticcat.complexhex.block;
 
+import at.petrak.hexcasting.common.lib.HexBlocks;
 import com.mojang.datafixers.util.Pair;
 import dev.kineticcat.complexhex.item.ComplexHexCreativeTabs;
 import net.minecraft.resources.ResourceLocation;
@@ -70,7 +71,20 @@ public class ComplexHexBlocks {
             )
     );
 
+    public static final RecordBlock.Inert INERT_RECORD = block(
+            "inert_record",
+            new RecordBlock.Inert(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK))
+    );
+    public static final RecordBlock.Quenched QUENCHED_RECORD = block(
+            "quenched_record",
+            new RecordBlock.Quenched(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK))
+    );
 
+    public static final HexboxBlock HEXBOX = blockItem(
+            "hexbox",
+            new HexboxBlock(BlockBehaviour.Properties.copy(HexBlocks.SLATE_BLOCK)),
+            new Item.Properties()
+    );
 
     public static <T extends Block> T block(String name, T block) {
         Block old = BLOCKS.put(id(name), block);

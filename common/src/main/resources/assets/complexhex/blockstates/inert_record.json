@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "complexhex:block/inert_record"
+    }
+  }
+}
