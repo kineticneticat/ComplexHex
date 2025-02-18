@@ -1,16 +1,7 @@
 {
   "variants": {
-    "activated=false,disc=0": {
-      "model": "complexhex:block/hexbox_nodisc_armoff"
-    },
-    "activated=true,disc=0": {
-      "model": "complexhex:block/hexbox_nodisc_armon"
-    },
-    "activated=false,disc=2": {
-      "model": "complexhex:block/hexbox_yesdisc_armoff"
-    },
-    "activated=true,disc=2": {
-      "model": "complexhex:block/hexbox_yesdisc_armon"
+    "": {
+      "model": "complexhex:block/hexbox"
     }
   }
 }
