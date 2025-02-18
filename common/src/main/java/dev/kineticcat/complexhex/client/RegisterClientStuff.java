@@ -2,18 +2,22 @@ package dev.kineticcat.complexhex.client;
 
 import at.petrak.hexcasting.common.items.magic.ItemPackagedHex;
 import at.petrak.hexcasting.xplat.IClientXplatAbstractions;
+import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.kineticcat.complexhex.block.ComplexHexBlocks;
 import dev.kineticcat.complexhex.block.entity.ComplexHexBlockEntities;
 import dev.kineticcat.complexhex.client.render.ComplexHexGaslighting;
 import dev.kineticcat.complexhex.client.render.CoolerGaslightingTracker;
 import dev.kineticcat.complexhex.client.render.be.BlockEntityBurntAmethystRenderer;
+import dev.kineticcat.complexhex.client.render.be.HexboxBlockEntityRenderer;
 import dev.kineticcat.complexhex.client.render.entity.HexalWispRenderer;
 import dev.kineticcat.complexhex.client.render.entity.NixRenderer;
 import dev.kineticcat.complexhex.client.render.entity.holdoutrenderingshenannigans.HoldoutRenderer;
 import dev.kineticcat.complexhex.entity.ComplexHexEntities;
 import dev.kineticcat.complexhex.item.ComplexHexItems;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -35,6 +39,7 @@ import static dev.kineticcat.complexhex.Complexhex.id;
 
 public class RegisterClientStuff {
     public static Map<ResourceLocation, List<BakedModel>> BURNT_AMETHYST_VARIANTS = new HashMap<>();
+//    public static BakedModel HEXBOX_MODEL;
     public static final List<Block> BURNT_AMETHYST_TYPES = List.of(
             ComplexHexBlocks.BURNT
     );
@@ -50,7 +55,8 @@ public class RegisterClientStuff {
                         ComplexHexItems.BYGONE_CYPHER.hasHex(stack) ? 1f : 0f
         );
         IClientXplatAbstractions.INSTANCE.registerEntityRenderer(ComplexHexEntities.HOLDOUT, HoldoutRenderer::new);
-
+//        BlockEntityRendererRegistry.register(ComplexHexBlockEntities.HEXBOX, HexboxBlockEntityRenderer::new);
+        BlockEntityRenderers.register(ComplexHexBlockEntities.HEXBOX, HexboxBlockEntityRenderer::new);
     }
     private static void registerGaslight3(Item item) {
         IClientXplatAbstractions.INSTANCE.registerItemProperty(item,

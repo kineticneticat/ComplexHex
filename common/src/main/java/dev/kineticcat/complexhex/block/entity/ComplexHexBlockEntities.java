@@ -27,13 +27,18 @@ public class ComplexHexBlockEntities {
     public static final BlockEntityType<BlockEntityBurntAmethyst> BURNT_AMETHYST_BLOCK = register(
             "burnt_amethyst_block", BlockEntityBurntAmethyst.fromKnownBlock(ComplexHexBlocks.BURNT), ComplexHexBlocks.BURNT
     );
-
     public static BlockEntityType<BlockEntityBurntAmethyst> typeForQuenchedAllay(Block block) {
         if (block.equals(ComplexHexBlocks.BURNT)) {
             return BURNT_AMETHYST_BLOCK;
         }
         return null;
     }
+
+    public static final BlockEntityType<HexboxBlockEntity> HEXBOX = register(
+            "hexbox",
+            HexboxBlockEntity::new,
+            ComplexHexBlocks.HEXBOX
+    );
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String id,
             BiFunction<BlockPos, BlockState, T> func, Block... blocks) {
