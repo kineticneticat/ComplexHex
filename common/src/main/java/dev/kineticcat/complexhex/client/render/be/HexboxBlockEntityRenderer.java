@@ -2,6 +2,7 @@ package dev.kineticcat.complexhex.client.render.be;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import dev.kineticcat.complexhex.block.HexboxBlock;
 import dev.kineticcat.complexhex.block.entity.HexboxBlockEntity;
 import net.minecraft.client.model.geom.ModelPart;
@@ -49,6 +50,7 @@ public class HexboxBlockEntityRenderer implements BlockEntityRenderer<HexboxBloc
         poseStack.pushPose();
         int discType = box.getBlockState().getValue(HexboxBlock.DISC_TYPE);
         if (discType !=0) {
+            poseStack.mulPose(Axis.YP.rotationDegrees(Math.floorMod(box.getLevel().getGameTime(), 360L)));
             ResourceLocation RecordTexture = discType == 1 ? InertRecordTexture : QuenchedRecordTexture;
             VertexConsumer recordConsumer = bufferSource.getBuffer(RenderType.entityCutout(RecordTexture));
             record.render(poseStack, recordConsumer, light, overlay);
