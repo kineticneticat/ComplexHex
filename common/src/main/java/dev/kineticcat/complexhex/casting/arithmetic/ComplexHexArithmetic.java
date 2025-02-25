@@ -26,6 +26,7 @@ public class ComplexHexArithmetic {
 
     public static ComplexArithmetic COMPLEX = make(ComplexArithmetic.INSTANCE.arithName(), ComplexArithmetic.INSTANCE);
     public static QuaternionArithmetic QUATERNION = make(QuaternionArithmetic.INSTANCE.arithName(), QuaternionArithmetic.INSTANCE);
+    public static FieldArithmetic FIELD = make(FieldArithmetic.INSTANCE.arithName(), FieldArithmetic.INSTANCE);
 
     private static <T extends Arithmetic> T make(String name, T arithmetic) {
         var old = ARITHMETICS.put(new ResourceLocation(Complexhex.MOD_ID, name), arithmetic);

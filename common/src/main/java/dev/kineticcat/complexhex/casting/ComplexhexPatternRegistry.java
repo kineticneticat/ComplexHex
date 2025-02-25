@@ -15,6 +15,8 @@ import dev.kineticcat.complexhex.api.util.ComplexNumber;
 import dev.kineticcat.complexhex.api.util.Quaternion;
 import dev.kineticcat.complexhex.casting.actions.*;
 import dev.kineticcat.complexhex.casting.actions.bits.*;
+import dev.kineticcat.complexhex.casting.actions.fields.OpDevPrintField;
+import dev.kineticcat.complexhex.casting.actions.fields.OpMakeField;
 import dev.kineticcat.complexhex.casting.assemblies.OpBeginAssembly;
 import dev.kineticcat.complexhex.casting.assemblies.OpContinueAssembly;
 import dev.kineticcat.complexhex.casting.assemblies.OpEndAssembly;
@@ -125,6 +127,13 @@ public class ComplexhexPatternRegistry {
 
         public static final HexPattern TOGGLE$PARTICLE = make("qqaqqq", HexDir.EAST, "toggle/particle",
                 OpToggleParticles.INSTANCE);
+
+
+        // fields
+        public static final HexPattern MAKE_FIELD = make("wdeddedw", HexDir.SOUTH_EAST, "field/make",
+                OpMakeField.INSTANCE);
+        public static final HexPattern PRINT_FIELD = make("wwdeddedww", HexDir.SOUTH_EAST, "field/print",
+                OpDevPrintField.INSTANCE);
 
         public static void init() {
             for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {
