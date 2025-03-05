@@ -26,6 +26,8 @@ dependencies {
     modCompileOnly files("${rootProject.rootDir}/lib/moreiotas-fabric-1.20.1-0.1.0-4.jar")
     implementation group: "org.jblas", name: "jblas", version: "1.2.5"
 
+    implementation files("${rootProject.rootDir}/lib/SymJava.jar")
+
 }
 
 publishing {
