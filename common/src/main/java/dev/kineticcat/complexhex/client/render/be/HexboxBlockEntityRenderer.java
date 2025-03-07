@@ -39,7 +39,7 @@ public class HexboxBlockEntityRenderer implements BlockEntityRenderer<HexboxBloc
         root.addOrReplaceChild(
                 "record",
                 CubeListBuilder.create().texOffs(5, 1).addBox(1, 14.5f, 1, 14, 0.1f, 14),
-                PartPose.ZERO
+                PartPose.offsetAndRotation(8, 0, 8, -8, 14, -8)
         );
         return LayerDefinition.create(mesh, 16, 16);
     }
@@ -48,9 +48,11 @@ public class HexboxBlockEntityRenderer implements BlockEntityRenderer<HexboxBloc
     @Override
     public void render(HexboxBlockEntity box, float tickDelta, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         poseStack.pushPose();
+        if (box.getBlockState().getValue(HexboxBlock.ACTIVATED)) {
+            poseStack.mulPose(Axis.YP.rotationDegrees(Math.floorMod(box.getLevel().getGameTime(), 360L)));
+        }
         int discType = box.getBlockState().getValue(HexboxBlock.DISC_TYPE);
         if (discType !=0) {
-            poseStack.mulPose(Axis.YP.rotationDegrees(Math.floorMod(box.getLevel().getGameTime(), 360L)));
             ResourceLocation RecordTexture = discType == 1 ? InertRecordTexture : QuenchedRecordTexture;
             VertexConsumer recordConsumer = bufferSource.getBuffer(RenderType.entityCutout(RecordTexture));
             record.render(poseStack, recordConsumer, light, overlay);
