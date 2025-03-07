@@ -4,10 +4,12 @@ import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
 import at.petrak.hexcasting.api.pigment.FrozenPigment
+import dev.kineticcat.complexhex.api.casting.iota.ExprIota
 import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota
 import dev.kineticcat.complexhex.api.util.Quaternion
 import net.minecraft.util.RandomSource
 import net.minecraft.world.phys.Vec3
+import symjava.symbolic.Expr
 
 // stolen from hexcasting lmao
 fun List<Iota>.getQuaternion(idx: Int, argc: Int = 0): Quaternion {
@@ -30,5 +32,10 @@ fun nextColour(pigment:FrozenPigment, random: RandomSource): Int {
     )
 }
 
-
+fun Expr.asIota(): ExprIota {
+    return ExprIota(this);
+}
+fun Expr.asActionResult(): List<ExprIota> {
+    return listOf(ExprIota(this));
+}
 

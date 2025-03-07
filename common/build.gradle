@@ -27,6 +27,7 @@ dependencies {
     implementation group: "org.jblas", name: "jblas", version: "1.2.5"
 
     implementation files("${rootProject.rootDir}/lib/SymJava.jar")
+    include files("${rootProject.rootDir}/lib/SymJava.jar")
 
 }
 

@@ -23,7 +23,7 @@ public class ComplexHexIotaTypes {
     public static final IotaType<QuaternionIota> QUATERNION = type("quaternion", QuaternionIota.TYPE);
     public static final IotaType<BubbleIota> BUBBLE = type("bubble", BubbleIota.TYPE);
     public static final IotaType<FieldIota> FIELD = type("field", FieldIota.TYPE);
-
+    public static final IotaType<ExprIota> EXPR = type("expr", ExprIota.TYPE);
 
     private static <U extends Iota, T extends IotaType<U>> T type(String name, T type) {
         IotaType<?> old = TYPES.put(new ResourceLocation(Complexhex.MOD_ID, name), type);

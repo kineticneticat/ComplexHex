@@ -15,6 +15,7 @@ import dev.kineticcat.complexhex.api.util.ComplexNumber;
 import dev.kineticcat.complexhex.api.util.Quaternion;
 import dev.kineticcat.complexhex.casting.actions.*;
 import dev.kineticcat.complexhex.casting.actions.bits.*;
+import dev.kineticcat.complexhex.casting.actions.expr.OpNewSymbol;
 import dev.kineticcat.complexhex.casting.actions.fields.OpDevPrintField;
 import dev.kineticcat.complexhex.casting.actions.fields.OpMakeField;
 import dev.kineticcat.complexhex.casting.assemblies.OpBeginAssembly;
@@ -134,6 +135,11 @@ public class ComplexhexPatternRegistry {
                 OpMakeField.INSTANCE);
         public static final HexPattern PRINT_FIELD = make("wwdeddedww", HexDir.SOUTH_EAST, "field/print",
                 OpDevPrintField.INSTANCE);
+
+        // exprs
+
+        public static final HexPattern NEW_SYMBOL = make("wdwdd", HexDir.SOUTH_EAST, "new_symbol",
+                OpNewSymbol.INSTANCE);
 
         public static void init() {
             for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {
