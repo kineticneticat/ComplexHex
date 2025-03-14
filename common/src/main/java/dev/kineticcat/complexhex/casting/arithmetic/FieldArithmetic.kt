@@ -72,6 +72,7 @@ object FieldArithmetic : Arithmetic {
             // uhh ill deal with it later
             throw MishapInvalidOperatorArgs(listOf(i,j))
         }
+        DataStorage.getServerData(env.world.server).setDirty()
         i
     }
 }

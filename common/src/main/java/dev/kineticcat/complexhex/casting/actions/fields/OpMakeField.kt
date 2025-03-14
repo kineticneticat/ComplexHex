@@ -26,6 +26,7 @@ object OpMakeField : ConstMediaAction {
                 else iota.double.toInt()
         }
         DataStorage.setField(env.world, name, Field.Zeros(shape))
+        DataStorage.getServerData(env.world.server).setDirty()
         return listOf(FieldIota(Pair(name, shape)))
     }
 
