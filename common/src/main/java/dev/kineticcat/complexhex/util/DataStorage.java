@@ -8,15 +8,18 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.DimensionDataStorage;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static dev.kineticcat.complexhex.Complexhex.id;
+
 public class DataStorage extends SavedData {
     public Map<String, CompoundTag> Fields = new HashMap<>();
     @Override
-    public CompoundTag save(CompoundTag ctag) {
+    public @NotNull CompoundTag save(CompoundTag ctag) {
         Fields.forEach(ctag::put);
         return ctag;
     }
@@ -29,8 +32,8 @@ public class DataStorage extends SavedData {
         return data;
     }
     public static DataStorage getServerData(MinecraftServer server) {
-        DimensionDataStorage dds = Objects.requireNonNull(server.getLevel(Level.OVERWORLD)).getDataStorage();
-        return dds.computeIfAbsent(DataStorage::createFromTag, DataStorage::new, Complexhex.MOD_ID);
+        DimensionDataStorage dds = server.overworld().getDataStorage();
+        return dds.computeIfAbsent(DataStorage::createFromTag, DataStorage::new, id("fields").toString());
     }
     public static void setField(ServerLevel level, String name, Field field) {
         DataStorage ds = getServerData(level.getServer());

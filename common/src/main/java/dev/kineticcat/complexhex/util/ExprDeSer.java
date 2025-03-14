@@ -1,6 +1,7 @@
 package dev.kineticcat.complexhex.util;
 
 import dev.kineticcat.complexhex.Complexhex;
+import dev.kineticcat.complexhex.api.util.Field;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -240,14 +241,6 @@ public class ExprDeSer {
     }
 
     public static void main(String[] args) {
-        Expr expr = new Sqrt(new Add(new Pow(x, Expr.valueOf(2)), new Pow(x, Expr.valueOf(2))), Expr.valueOf(2));
-        System.out.println("original expr:");
-        System.out.println(expr);
-        CompoundTag ser = serialise(expr);
-        System.out.println("serialised:");
-        System.out.println(ser);
-        Expr deser = deserialise(ser);
-        System.out.println("deserialised:");
-        System.out.println(deser);
+
     }
 }
