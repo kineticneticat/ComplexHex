@@ -131,7 +131,7 @@ public class ComplexhexPatternRegistry {
 
 
         // fields
-        public static final HexPattern MAKE_FIELD = make("wdeddedw", HexDir.SOUTH_EAST, "field/make",
+        public static final HexPattern MAKE_FIELD = make("qeqeqaqeqeqedeqeqeqaqeqeqedeqeqeqaqeqeq", HexDir.SOUTH_EAST, "field/make",
                 OpMakeField.INSTANCE);
         public static final HexPattern PRINT_FIELD = make("wwdeddedww", HexDir.SOUTH_EAST, "field/print",
                 OpDevPrintField.INSTANCE);
