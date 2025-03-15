@@ -1,7 +1,6 @@
 package dev.kineticcat.complexhex.casting;
 
 
-
 import at.petrak.hexcasting.api.casting.ActionRegistryEntry;
 import at.petrak.hexcasting.api.casting.castables.Action;
 import at.petrak.hexcasting.api.casting.castables.OperationAction;
@@ -16,14 +15,15 @@ import dev.kineticcat.complexhex.casting.actions.OpBubbleIota;
 import dev.kineticcat.complexhex.casting.actions.OpMatrixToQuaternion;
 import dev.kineticcat.complexhex.casting.actions.OpQuaternionToMatrix;
 import dev.kineticcat.complexhex.casting.actions.bits.*;
+import dev.kineticcat.complexhex.casting.actions.chloe.OpNewChloe;
 import dev.kineticcat.complexhex.stuff.ComplexNumber;
 import dev.kineticcat.complexhex.stuff.Quaternion;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Display;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -91,6 +91,12 @@ public class ComplexhexPatternRegistry {
 
     public static final HexPattern BUBBLE = make("qdqdqdqdqdq", HexDir.SOUTH_EAST, "bubble",
             OpBubbleIota.INSTANCE);
+
+
+    // chloe's iotas
+    public static final HexPattern MAKE_CHLOE = make("", HexDir.SOUTH_EAST, "chloe/make",
+            OpNewChloe.INSTANCE);
+    public static final HexPattern COPY_CHLOE = make("")
 
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {
