@@ -15,13 +15,13 @@ import dev.kineticcat.complexhex.casting.actions.OpBubbleIota;
 import dev.kineticcat.complexhex.casting.actions.OpMatrixToQuaternion;
 import dev.kineticcat.complexhex.casting.actions.OpQuaternionToMatrix;
 import dev.kineticcat.complexhex.casting.actions.bits.*;
+import dev.kineticcat.complexhex.casting.actions.chloe.OpCopyChloe;
 import dev.kineticcat.complexhex.casting.actions.chloe.OpNewChloe;
 import dev.kineticcat.complexhex.stuff.ComplexNumber;
 import dev.kineticcat.complexhex.stuff.Quaternion;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Display;
-import org.apache.commons.codec.binary.Hex;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -94,9 +94,10 @@ public class ComplexhexPatternRegistry {
 
 
     // chloe's iotas
-    public static final HexPattern MAKE_CHLOE = make("", HexDir.SOUTH_EAST, "chloe/make",
+    public static final HexPattern MAKE_CHLOE = make("weedqeaaeqdeew", HexDir.NORTH_WEST, "chloe/make",
             OpNewChloe.INSTANCE);
-    public static final HexPattern COPY_CHLOE = make("")
+    public static final HexPattern COPY_CHLOE = make("aaeqdeeeweeedq", HexDir.SOUTH_WEST, "chloe/copy",
+            OpCopyChloe.INSTANCE);
 
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {
