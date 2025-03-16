@@ -12,18 +12,8 @@ import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds
 import net.minecraft.nbt.CompoundTag
 
-/**
- * ======  yoinked from hexal! =====
- *
- * An action that has some affect on the world, and takes a variable number of arguments depending on what's on the stack.
- */
 interface VarargSpellAction : Action {
-    /**
-     * The number of arguments that should be accepted from the stack, given the current state of the stack.
-     * If there are not enough args for it to be possible, return the smallest number that could be acceptable.
-     * [stack] is the reversed stack, so at index 0 is what's on top of the stack, at index 1 is second from the top,
-     * etc.
-     */
+
     fun argc(stack: List<Iota>): Int
 
     fun hasCastingSound(env: CastingEnvironment): Boolean = true

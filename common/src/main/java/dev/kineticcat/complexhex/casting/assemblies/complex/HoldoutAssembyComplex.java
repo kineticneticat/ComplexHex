@@ -6,13 +6,11 @@ import dev.kineticcat.complexhex.entity.HoldoutEntity;
 import net.minecraft.server.level.ServerLevel;
 
 public class HoldoutAssembyComplex extends AssemblyComplex {
-
     @Override
-    public void begin(AssemblyManagerEntity manager, ServerLevel level) {
+    public Boolean begin(AssemblyManagerEntity manager, ServerLevel level) {
         HoldoutEntity holdout = new HoldoutEntity(ComplexHexEntities.HOLDOUT, level);
         holdout.setPos(manager.getCentre());
-
-
         level.addFreshEntity(holdout);
+        return false;
     }
 }
