@@ -1,4 +1,4 @@
-package dev.kineticcat.complexhex.casting.arithmetic.complex
+package dev.kineticcat.complexhex.casting.arithmetic
 
 import at.petrak.hexcasting.api.casting.arithmetic.Arithmetic
 import at.petrak.hexcasting.api.casting.arithmetic.Arithmetic.*
@@ -15,34 +15,31 @@ import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
 import dev.kineticcat.complexhex.api.CNpow
 import dev.kineticcat.complexhex.api.casting.iota.ComplexHexIotaTypes
 import dev.kineticcat.complexhex.api.casting.iota.ComplexNumberIota
-import dev.kineticcat.complexhex.casting.ComplexhexPatternRegistry.*
 import dev.kineticcat.complexhex.stuff.ComplexNumber
 
 // paraphrased from hexmod source lmao
 
 object ComplexArithmetic : Arithmetic {
-    private val ACCEPTS_C: IotaMultiPredicate = IotaMultiPredicate.all(IotaPredicate.ofType(ComplexHexIotaTypes.COMPLEXNUMBER))
-    private val ACCEPTS_CD: IotaMultiPredicate = IotaMultiPredicate.either(
-        IotaMultiPredicate.pair(IotaPredicate.ofType(ComplexHexIotaTypes.COMPLEXNUMBER), IotaPredicate.ofType(HexIotaTypes.DOUBLE)),
-        IotaMultiPredicate.pair(IotaPredicate.ofType(HexIotaTypes.DOUBLE), IotaPredicate.ofType(ComplexHexIotaTypes.COMPLEXNUMBER))
-    )
-    private val ACCEPTS_CCorCD: IotaMultiPredicate = IotaMultiPredicate.either(ACCEPTS_C, ACCEPTS_CD)
+    private val C = IotaPredicate.ofType(ComplexHexIotaTypes.COMPLEXNUMBER)
+    private val D = IotaPredicate.ofType(HexIotaTypes.DOUBLE)
+    private val ACCEPTS_C: IotaMultiPredicate = IotaMultiPredicate.all(C)
+//    private val ACCEPTS_CC: IotaMultiPredicate = IotaMultiPredicate.pair(C, C)
+//    private val ACCEPTS_CD: IotaMultiPredicate = IotaMultiPredicate.either(
+//        IotaMultiPredicate.pair(C, D),
+//        IotaMultiPredicate.pair(D, C)
+//    )
+    private val ACCEPTS_CCorCD: IotaMultiPredicate = IotaMultiPredicate.any(C, D)
     override fun arithName() = "complex_maths"
     private val OPS = listOf(
         ADD,
-        SUB,
+//        SUB,
         MUL,
         DIV,
         ABS,
-        CNARG,
-        REAL,
-        IMAGINARY,
-        CONJUGATE,
         POW
     )
 
     override fun opTypes() = OPS
-
     override fun getOperator(pattern: HexPattern): Operator {
         return when (pattern) {
             ADD        -> CDorCCbinaryC({ a, b -> a.add(b) }, {a, b -> a.add(b)})
@@ -50,17 +47,11 @@ object ComplexArithmetic : Arithmetic {
             MUL        -> CDorCCbinaryC({ a, b -> a.mul(b) }, {a, b -> a.mul(b)})
             DIV        -> CDbinaryC    { a, b -> a.scalarDiv(b) }
             ABS        -> CunaryD      { a -> a.modulus() }
-            CNARG      -> CunaryD      { a -> a.argument() }
-            REAL       -> CunaryD      { a -> a.real }
-            IMAGINARY  -> CunaryD      { a -> a.imag }
-            CONJUGATE  -> CunaryC      { a -> a.conjugate() }
             POW        -> DCbinaryC    {a, b -> CNpow(a, b)}
             else -> throw InvalidOperatorException("$pattern is not a valid operator in complex arithmetic")
         }
     }
 
-    fun CunaryC(op: (ComplexNumber) -> (ComplexNumber)) = OperatorUnary(ACCEPTS_C)
-    {i: Iota -> ComplexNumberIota(op(Operator.downcast(i, ComplexHexIotaTypes.COMPLEXNUMBER).complex)) }
     fun CunaryD(op: (ComplexNumber) -> (Double)) = OperatorUnary(ACCEPTS_C)
     {i: Iota -> DoubleIota(op(Operator.downcast(i, ComplexHexIotaTypes.COMPLEXNUMBER).complex))}
 
@@ -91,7 +82,9 @@ object ComplexArithmetic : Arithmetic {
         }
     }
     // what the fuck is this
-    fun CDorCCbinaryC(opA:(ComplexNumber, ComplexNumber) -> (ComplexNumber), opB:(ComplexNumber, Double) -> (ComplexNumber)) = OperatorBinary(ACCEPTS_CCorCD)
+    fun CDorCCbinaryC(opA:(ComplexNumber, ComplexNumber) -> (ComplexNumber), opB:(ComplexNumber, Double) -> (ComplexNumber)) = OperatorBinary(
+        ACCEPTS_CCorCD
+    )
         {i: Iota, j:Iota -> if (i is ComplexNumberIota && j is ComplexNumberIota) {
             CC(i, j, opA)
         } else if (i is DoubleIota && j is ComplexNumberIota) {

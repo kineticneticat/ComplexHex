@@ -1,4 +1,4 @@
-package dev.kineticcat.complexhex.casting.arithmetic.quaternion
+package dev.kineticcat.complexhex.casting.actions.mathematics.quaternion
 
 import at.petrak.hexcasting.api.casting.arithmetic.operator.OperatorBasic
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
@@ -6,6 +6,7 @@ import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.iota.Vec3Iota
 import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota
+import dev.kineticcat.complexhex.casting.arithmetic.QuaternionArithmetic
 import net.minecraft.world.phys.Vec3
 
 object OpQunmake : OperatorBasic(1, QuaternionArithmetic.ACCEPTS_Q) {
