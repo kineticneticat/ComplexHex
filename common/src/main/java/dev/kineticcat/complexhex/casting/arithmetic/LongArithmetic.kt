@@ -5,6 +5,7 @@ import at.petrak.hexcasting.api.casting.arithmetic.Arithmetic.*
 import at.petrak.hexcasting.api.casting.arithmetic.engine.InvalidOperatorException
 import at.petrak.hexcasting.api.casting.arithmetic.operator.Operator
 import at.petrak.hexcasting.api.casting.arithmetic.operator.OperatorBinary
+import at.petrak.hexcasting.api.casting.arithmetic.operator.OperatorUnary
 import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaMultiPredicate
 import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaPredicate
 import at.petrak.hexcasting.api.casting.iota.Iota
@@ -21,16 +22,23 @@ object LongArithmetic : Arithmetic {
         ADD,
         SUB,
         MUL,
-        DIV
+        DIV,
+        AND,
+        OR,
+        XOR,
+        NOT
     )
     override fun opTypes() = OPS
 
     override fun getOperator(pattern: HexPattern?): Operator {
         return when (pattern) {
             ADD -> LLbinaryL {a, b -> a+b}
-            ADD -> LLbinaryL {a, b -> a-b}
-            ADD -> LLbinaryL {a, b -> a*b}
-            ADD -> LLbinaryL {a, b -> a/b}
+            SUB -> LLbinaryL {a, b -> a-b}
+            MUL -> LLbinaryL {a, b -> a*b}
+            DIV -> LLbinaryL {a, b -> a/b}
+            AND -> LLbinaryL {a, b -> a.and(b)}
+            OR -> LLbinaryL {a, b -> a.or(b)}
+            NOT -> LunaryL {a -> a.inv()}
             else -> throw InvalidOperatorException("$pattern is not a valid operator in complex arithmetic")
         }
     }
@@ -40,6 +48,13 @@ object LongArithmetic : Arithmetic {
             op(
                 Operator.downcast(i, ComplexHexIotaTypes.LONG).long,
                 Operator.downcast(j, ComplexHexIotaTypes.LONG).long
+            )
+        )
+    }
+    private fun LunaryL(op: (Long)-> (Long)) = OperatorUnary(ACCEPTS_L) { i:Iota ->
+        LongIota(
+            op(
+                Operator.downcast(i, ComplexHexIotaTypes.LONG).long
             )
         )
     }

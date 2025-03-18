@@ -10,13 +10,14 @@ import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntitiesBy;
 import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntityAt;
 import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.complexhex.Complexhex;
-import dev.kineticcat.complexhex.casting.actions.OpAxisAngle;
-import dev.kineticcat.complexhex.casting.actions.OpBubbleIota;
-import dev.kineticcat.complexhex.casting.actions.OpMatrixToQuaternion;
-import dev.kineticcat.complexhex.casting.actions.OpQuaternionToMatrix;
+import dev.kineticcat.complexhex.casting.actions.*;
 import dev.kineticcat.complexhex.casting.actions.bits.*;
 import dev.kineticcat.complexhex.casting.actions.chloe.OpCopyChloe;
 import dev.kineticcat.complexhex.casting.actions.chloe.OpNewChloe;
+import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpArgument;
+import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpConjugate;
+import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpImaginary;
+import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpReal;
 import dev.kineticcat.complexhex.stuff.ComplexNumber;
 import dev.kineticcat.complexhex.stuff.Quaternion;
 import net.minecraft.core.Registry;
@@ -32,15 +33,21 @@ public class ComplexhexPatternRegistry {
     public static final Logger LOGGER = LogManager.getLogger(Complexhex.MOD_ID);
     private static final Map<ResourceLocation, ActionRegistryEntry> PATTERNS = new LinkedHashMap<>();
 
+
+
     //Complex Arithmetic
     public static final HexPattern CONST$COMPLEX$1$ = make("wqqa", HexDir.SOUTH_WEST, "const/complex/1",
             Action.makeConstantOp(new ComplexNumber(1, 0).asIota()));
     public static final HexPattern CONST$COMPLEX$I$ = make("wqq", HexDir.SOUTH_WEST, "const/complex/i",
             Action.makeConstantOp(new ComplexNumber(0, 1).asIota()));
-    public static final HexPattern REAL = make("deew", HexDir.SOUTH_EAST, "real");
-    public static final HexPattern IMAGINARY = make("eew", HexDir.WEST, "imaginary");
-    public static final HexPattern CONJUGATE = make("wqqd", HexDir.SOUTH_WEST, "conjugate");
-    public static final HexPattern CNARG = make("waqqqqqeww", HexDir.SOUTH_EAST, "cnarg");
+    public static final HexPattern REAL = make("deew", HexDir.SOUTH_EAST, "real",
+            OpReal.INSTANCE);
+    public static final HexPattern IMAGINARY = make("eew", HexDir.WEST, "imaginary",
+            OpImaginary.INSTANCE);
+    public static final HexPattern CONJUGATE = make("wqqd", HexDir.SOUTH_WEST, "conjugate",
+            OpConjugate.INSTANCE);
+    public static final HexPattern CNARG = make("waqqqqqeww", HexDir.SOUTH_EAST, "cnarg",
+            OpArgument.INSTANCE);
 
     // Quaternion Arithmetic
     public static final HexPattern CONST$QUAT$1$ = make("waqqqqqea", HexDir.SOUTH_EAST, "const/quaternion/1",
@@ -98,6 +105,13 @@ public class ComplexhexPatternRegistry {
             OpNewChloe.INSTANCE);
     public static final HexPattern COPY_CHLOE = make("aaeqdeeeweeedq", HexDir.SOUTH_WEST, "chloe/copy",
             OpCopyChloe.INSTANCE);
+
+    // ASCII
+
+    public static final HexPattern TO_ASCII = make("eawdwa", HexDir.EAST, "ascii/to",
+            new OpASCII(true));
+    public static final HexPattern FROM_ASCII = make("awdwae", HexDir.SOUTH_EAST, "ascii/from",
+            new OpASCII(false));
 
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {

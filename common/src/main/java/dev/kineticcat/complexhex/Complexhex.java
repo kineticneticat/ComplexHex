@@ -2,7 +2,6 @@ package dev.kineticcat.complexhex;
 
 import dev.kineticcat.complexhex.api.casting.iota.ComplexHexIotaTypes;
 import dev.kineticcat.complexhex.casting.ComplexhexPatternRegistry;
-import dev.kineticcat.complexhex.casting.arithmetic.ComplexHexArithmetic;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,7 +21,8 @@ public class Complexhex {
         ComplexhexAbstractions.initPlatformSpecific();
         ComplexHexIotaTypes.init();
         ComplexhexPatternRegistry.init();
-        ComplexHexArithmetic.init();
+//        ComplexHexArithmetic.init();
+//        ComplexHexSpecialHandlers.init();
 
         LOGGER.info(ComplexhexAbstractions.getConfigDirectory().toAbsolutePath().normalize().toString());
     }
