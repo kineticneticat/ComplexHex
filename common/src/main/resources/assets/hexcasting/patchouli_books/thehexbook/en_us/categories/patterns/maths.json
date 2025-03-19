@@ -1,0 +1,7 @@
+{
+  "name": "complexhex.category.maths",
+  "icon": "hexcasting:abacus",
+  "description": "complexhex.category.maths.desc",
+  "parent": "hexcasting:patterns",
+  "sortnum": 0
+}

@@ -1,0 +1,129 @@
+{
+  "name": "complexhex.entry.longs",
+  "category": "hexcasting:patterns/maths",
+  "icon": "minecraft:phantom_membrane",
+  "sortnum": 10,
+  "advancement": "hexcasting:root",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "complexhex.page.longs.intro"
+    },
+    {
+      "type": "hexcasting:manual_pattern",
+      "op_id": "complexhex:long",
+      "anchor": "complexhex:long",
+      "input": "",
+      "output": "long",
+      "text": "complexhex.page.longs.special",
+      "patterns": [
+        {
+          "startdir": "SOUTH_EAST",
+          "signature": "awdedwaaw"
+        }, {
+          "startdir": "NORTH_EAST",
+          "signature": "dwaqawddw",
+          "q": 3
+        }
+      ]
+    },
+    {
+      "type": "hexcasting:manual_pattern_nosig",
+      "header": "complexhex.page.longs.example.43.header",
+      "text": "complexhex.page.longs.example.43",
+      "patterns": {
+        "startdir": "SOUTH_EAST",
+        "signature": "awdedwaaweewaw"
+      }
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:add",
+      "anchor": "hexcasting:add",
+      "input": "long, long",
+      "output": "long",
+      "text": "complexhex.page.longs.add"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:sub",
+      "anchor": "hexcasting:sub",
+      "input": "long, long",
+      "output": "long",
+      "text": "complexhex.page.longs.sub"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:mul",
+      "anchor": "hexcasting:mul",
+      "input": "long, long",
+      "output": "long",
+      "text": "complexhex.page.longs.mul"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:div",
+      "anchor": "hexcasting:div",
+      "input": "long, long",
+      "output": "long",
+      "text": "complexhex.page.longs.div"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:and",
+      "anchor": "hexcasting:and",
+      "input": "long, long",
+      "output": "long",
+      "text": "complexhex.page.longs.and"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:or",
+      "anchor": "hexcasting:or",
+      "input": "long, long",
+      "output": "long",
+      "text": "complexhex.page.longs.or"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:not",
+      "anchor": "hexcasting:not",
+      "input": "long, long",
+      "output": "long",
+      "text": "complexhex.page.longs.not"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:xor",
+      "anchor": "hexcasting:xor",
+      "input": "long, long",
+      "output": "long",
+      "text": "complexhex.page.longs.xor"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:shift/left",
+      "anchor": "complexhex:shift/left",
+      "input": "long, num",
+      "output": "long",
+      "text": "complexhex.page.longs.lshift"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:shift/right/logical",
+      "anchor": "complexhex:shift/right/logical",
+      "input": "long, num",
+      "output": "long",
+      "text": "complexhex.page.longs.rshift.logical"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:shift/right/arithmetic",
+      "anchor": "complexhex:shift/right/arithmetic",
+      "input": "long, num",
+      "output": "long",
+      "text": "complexhex.page.longs.rshift.arithmetic"
+    }
+  ]
+}
