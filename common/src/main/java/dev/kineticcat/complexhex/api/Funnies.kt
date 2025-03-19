@@ -33,7 +33,7 @@ fun List<Iota>.getLong(idx: Int, argc: Int = 0): Long {
     if (x is LongIota) {
         return x.long
     } else {
-        throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "quaternion")
+        throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "long")
     }
 }
 
