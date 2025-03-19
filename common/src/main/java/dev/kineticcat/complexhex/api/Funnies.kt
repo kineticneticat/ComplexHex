@@ -28,6 +28,14 @@ fun List<Iota>.getQuaternion(idx: Int, argc: Int = 0): Quaternion {
         throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "quaternion")
     }
 }
+fun List<Iota>.getLong(idx: Int, argc: Int = 0): Long {
+    val x = this.getOrElse(idx) { throw MishapNotEnoughArgs(idx + 1, this.size) }
+    if (x is LongIota) {
+        return x.long
+    } else {
+        throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "quaternion")
+    }
+}
 
 // yoinked from https://math.toronto.edu/mathnet/questionCorner/complexexp.html
 fun CNpow(a: Double, power: ComplexNumber): ComplexNumber {
