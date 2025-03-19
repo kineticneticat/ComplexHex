@@ -18,6 +18,9 @@ import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpArgument;
 import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpConjugate;
 import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpImaginary;
 import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpReal;
+import dev.kineticcat.complexhex.casting.actions.mathematics.longs.OpArithmeticRightBitshift;
+import dev.kineticcat.complexhex.casting.actions.mathematics.longs.OpLeftBitshift;
+import dev.kineticcat.complexhex.casting.actions.mathematics.longs.OpLogicalRightBitshift;
 import dev.kineticcat.complexhex.stuff.ComplexNumber;
 import dev.kineticcat.complexhex.stuff.Quaternion;
 import net.minecraft.core.Registry;
@@ -112,6 +115,14 @@ public class ComplexhexPatternRegistry {
             new OpASCII(true));
     public static final HexPattern FROM_ASCII = make("awdwae", HexDir.SOUTH_EAST, "ascii/from",
             new OpASCII(false));
+
+    // Longs
+    public static final HexPattern SHIFT$LEFT = make("qqae", HexDir.SOUTH_WEST, "shift/left",
+            OpLeftBitshift.INSTANCE);
+    public static final HexPattern SHIFT$RIGHT$LOGICAL = make("eaqqdee", HexDir.SOUTH_EAST, "shift/right/logical",
+            OpLogicalRightBitshift.INSTANCE);
+    public static final HexPattern SHIFT$RIGHT$ARITHMETIC = make("eaqq", HexDir.SOUTH_EAST, "shift/right/arithmetic",
+            OpArithmeticRightBitshift.INSTANCE);
 
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {
