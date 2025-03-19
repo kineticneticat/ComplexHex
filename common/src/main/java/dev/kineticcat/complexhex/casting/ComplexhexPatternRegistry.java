@@ -19,6 +19,11 @@ import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpReal;
 import dev.kineticcat.complexhex.casting.actions.mathematics.longs.OpArithmeticRightBitshift;
 import dev.kineticcat.complexhex.casting.actions.mathematics.longs.OpLeftBitshift;
 import dev.kineticcat.complexhex.casting.actions.mathematics.longs.OpLogicalRightBitshift;
+import dev.kineticcat.complexhex.casting.actions.mathematics.longs.OpNumLong;
+import dev.kineticcat.complexhex.casting.actions.mathematics.quaternion.OpGetQuaternionComponent;
+import dev.kineticcat.complexhex.casting.actions.mathematics.quaternion.OpQInvert;
+import dev.kineticcat.complexhex.casting.actions.mathematics.quaternion.OpQMake;
+import dev.kineticcat.complexhex.casting.actions.mathematics.quaternion.OpQUnmake;
 import dev.kineticcat.complexhex.stuff.ComplexNumber;
 import dev.kineticcat.complexhex.stuff.Quaternion;
 import net.minecraft.core.Registry;
@@ -59,13 +64,20 @@ public class ComplexhexPatternRegistry {
             Action.makeConstantOp(new Quaternion(0, 0, 1, 0).asIota()));
     public static final HexPattern CONST$QUAT$K$ = make("waqqqqqed", HexDir.SOUTH_EAST, "const/quaternion/k",
             Action.makeConstantOp(new Quaternion(0, 0, 0, 1).asIota()));
-    public static final HexPattern QINVERT = make("waqqqqqew", HexDir.SOUTH_EAST, "qinvert");
-    public static final HexPattern QW = make("wdeeeeeqa", HexDir.SOUTH_EAST, "qw");
-    public static final HexPattern QX = make("wdeeeeeqq", HexDir.SOUTH_EAST, "qx");
-    public static final HexPattern QY = make("wdeeeeeqe", HexDir.SOUTH_EAST, "qy");
-    public static final HexPattern QZ = make("wdeeeeeqd", HexDir.SOUTH_EAST, "qz");
-    public static final HexPattern QMAKE = make("waqqqqqe", HexDir.SOUTH_EAST, "qmake");
-    public static final HexPattern QUNMAKE = make("wdeeeeeq", HexDir.SOUTH_EAST, "qunmake");
+    public static final HexPattern QINVERT = make("waqqqqqew", HexDir.SOUTH_EAST, "qinvert",
+            OpQInvert.INSTANCE);
+    public static final HexPattern QW = make("wdeeeeeqa", HexDir.SOUTH_EAST, "qw",
+            new OpGetQuaternionComponent(OpGetQuaternionComponent.Component.W));
+    public static final HexPattern QX = make("wdeeeeeqq", HexDir.SOUTH_EAST, "qx",
+            new OpGetQuaternionComponent(OpGetQuaternionComponent.Component.X));
+    public static final HexPattern QY = make("wdeeeeeqe", HexDir.SOUTH_EAST, "qy",
+            new OpGetQuaternionComponent(OpGetQuaternionComponent.Component.Y));
+    public static final HexPattern QZ = make("wdeeeeeqd", HexDir.SOUTH_EAST, "qz",
+            new OpGetQuaternionComponent(OpGetQuaternionComponent.Component.Z));
+    public static final HexPattern QMAKE = make("waqqqqqe", HexDir.SOUTH_EAST, "qmake",
+            OpQMake.INSTANCE);
+    public static final HexPattern QUNMAKE = make("wdeeeeeq", HexDir.SOUTH_EAST, "qunmake",
+            OpQUnmake.INSTANCE);
     public static final HexPattern QUATTOMAT = make("wdeeeeeqeawwaeaww", HexDir.SOUTH_EAST, "quattomat",
             OpQuaternionToMatrix.INSTANCE);
     public static final HexPattern MATTOQUAT = make("waqqqqqeeawwaeaww", HexDir.SOUTH_EAST, "mattoquat",

@@ -45,3 +45,4 @@ fun CNpow(a: Double, power: ComplexNumber): ComplexNumber {
 }
 
 inline val Long.asActionResult get() = listOf(LongIota(this))
+inline val Quaternion.asActionResult get() = listOf(QuaternionIota(this))

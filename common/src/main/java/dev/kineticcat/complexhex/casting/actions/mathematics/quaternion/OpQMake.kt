@@ -1,4 +1,4 @@
-package dev.kineticcat.complexhex.casting.actions
+package dev.kineticcat.complexhex.casting.actions.mathematics.quaternion
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
@@ -8,14 +8,11 @@ import at.petrak.hexcasting.api.casting.iota.Iota
 import dev.kineticcat.complexhex.api.asActionResult
 import dev.kineticcat.complexhex.stuff.Quaternion
 
-
-object OpAxisAngle : ConstMediaAction {
+object OpQMake : ConstMediaAction {
     override val argc = 2
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
-        val axis = args.getVec3(0, argc)
-        val angle = args.getDouble(1, argc)
-
-        return Quaternion(axis, angle).asActionResult
-
+        val D = args.getDouble(0, argc)
+        val V = args.getVec3(1, argc)
+        return Quaternion(D, V.x, V.y, V.z).asActionResult
     }
 }

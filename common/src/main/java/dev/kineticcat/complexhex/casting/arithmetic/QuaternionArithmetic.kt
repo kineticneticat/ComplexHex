@@ -14,8 +14,6 @@ import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
 import dev.kineticcat.complexhex.api.casting.iota.ComplexHexIotaTypes
 import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota
-import dev.kineticcat.complexhex.casting.ComplexhexPatternRegistry.*
-import dev.kineticcat.complexhex.casting.actions.mathematics.quaternion.OpQunmake
 import dev.kineticcat.complexhex.stuff.Quaternion
 import net.minecraft.world.phys.Vec3
 import kotlin.math.sqrt
@@ -39,33 +37,32 @@ object QuaternionArithmetic : Arithmetic {
             MUL,
             DIV,
             ABS,
-            QINVERT,
-            QW,
-            QX,
-            QY,
-            QZ,
-            QMAKE,
-            QUNMAKE
+//            QINVERT,
+//            QW,
+//            QX,
+//            QY,
+//            QZ,
+//            QMAKE,
+//            QUNMAKE
     )
     override fun opTypes() = OPS
 
     override fun getOperator(pattern: HexPattern?): Operator {
-        val out =  when (pattern) {
+        return when (pattern) {
             ADD     -> QDorQQbinaryQ( { a, b -> a.Qadd(b) }, { a, b -> a.Qadd(b) })
             SUB     -> QDorQQbinaryQ( { a, b -> a.Qsub(b) }, { a, b -> a.Qsub(b) })
             MUL     -> QDorQQbinaryQ( { a, b -> a.Qmul(b) }, { a, b -> a.Qmul(b) })
             DIV     -> QDbinaryQ      { a, b -> a.Qdiv(b) }
             ABS     -> QunaryD        { a    -> sqrt(a.lengthSquared()) }
-            QINVERT -> QunaryQ        { a    -> a.Qinvert() }
-            QW      -> QunaryD        { a    -> a.w }
-            QX      -> QunaryD        { a    -> a.x }
-            QY      -> QunaryD        { a    -> a.y }
-            QZ      -> QunaryD        { a    -> a.z }
-            QMAKE   -> DVbinaryQ      { d, v -> Quaternion(d, v.x, v.y, v.z) }
-            QUNMAKE -> OpQunmake
+//            QINVERT -> QunaryQ        { a    -> a.Qinvert() }
+//            QW      -> QunaryD        { a    -> a.w }
+//            QX      -> QunaryD        { a    -> a.x }
+//            QY      -> QunaryD        { a    -> a.y }
+//            QZ      -> QunaryD        { a    -> a.z }
+//            QMAKE   -> DVbinaryQ      { d, v -> Quaternion(d, v.x, v.y, v.z) }
+//            QUNMAKE -> OpQUnmake
             else -> throw InvalidOperatorException("$pattern is not a valid operator in quaternion arithmetic")
         }
-        return out
     }
 
     fun QunaryQ(op: (Quaternion) -> (Quaternion)) = OperatorUnary(ACCEPTS_Q)
