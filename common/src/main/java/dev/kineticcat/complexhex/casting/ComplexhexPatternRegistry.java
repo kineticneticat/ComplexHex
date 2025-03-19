@@ -12,8 +12,6 @@ import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.complexhex.Complexhex;
 import dev.kineticcat.complexhex.casting.actions.*;
 import dev.kineticcat.complexhex.casting.actions.bits.*;
-import dev.kineticcat.complexhex.casting.actions.chloe.OpCopyChloe;
-import dev.kineticcat.complexhex.casting.actions.chloe.OpNewChloe;
 import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpArgument;
 import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpConjugate;
 import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpImaginary;
@@ -104,10 +102,10 @@ public class ComplexhexPatternRegistry {
 
 
     // chloe's iotas
-    public static final HexPattern MAKE_CHLOE = make("weedqeaaeqdeew", HexDir.NORTH_WEST, "chloe/make",
-            OpNewChloe.INSTANCE);
-    public static final HexPattern COPY_CHLOE = make("aaeqdeeeweeedq", HexDir.SOUTH_WEST, "chloe/copy",
-            OpCopyChloe.INSTANCE);
+//    public static final HexPattern MAKE_CHLOE = make("weedqeaaeqdeew", HexDir.NORTH_WEST, "chloe/make",
+//            OpNewChloe.INSTANCE);
+//    public static final HexPattern COPY_CHLOE = make("aaeqdeeeweeedq", HexDir.SOUTH_WEST, "chloe/copy",
+//            OpCopyChloe.INSTANCE);
 
     // ASCII
 
