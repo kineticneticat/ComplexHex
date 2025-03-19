@@ -10,11 +10,11 @@ import ram.talia.moreiotas.api.asActionResult
 import ram.talia.moreiotas.api.getString
 import kotlin.math.roundToInt
 
-class OpASCII(val toASCII: Boolean) : ConstMediaAction {
+class OpASCIIValue(val toASCIIValue: Boolean) : ConstMediaAction {
     override val argc = 1
 
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
-        if (toASCII) {
+        if (toASCIIValue) {
             val string = args.getString(0, argc)
             if (string.length != 1) throw MishapInvalidIota.of(args[0], 0, "not_char")
             return (string.toCharArray()[0].code).asActionResult
