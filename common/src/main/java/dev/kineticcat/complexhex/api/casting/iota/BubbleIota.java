@@ -24,6 +24,7 @@ public class BubbleIota extends Iota {
     public BubbleIota(Iota iota) {
         super(ComplexHexIotaTypes.BUBBLE, iota);
     }
+    @SuppressWarnings("unchecked")
     public <T extends Iota> T getContainedIota() {
         return (T) this.payload;
     }
