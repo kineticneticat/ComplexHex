@@ -1,6 +1,6 @@
 {
   "name": "complexhex.entry.complexities",
-  "category": "hexcasting:patterns",
+  "category": "hexcasting:patterns/maths",
   "icon": "minecraft:phantom_membrane",
   "sortnum": 10,
   "advancement": "hexcasting:root",

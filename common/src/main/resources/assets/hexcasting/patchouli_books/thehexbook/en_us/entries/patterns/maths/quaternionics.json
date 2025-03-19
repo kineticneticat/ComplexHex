@@ -1,6 +1,6 @@
 {
   "name": "complexhex.entry.quaternionics",
-  "category": "hexcasting:patterns",
+  "category": "hexcasting:patterns/maths",
   "icon": "minecraft:heart_of_the_sea",
   "sortnum": 10,
   "advancement": "hexcasting:root",
