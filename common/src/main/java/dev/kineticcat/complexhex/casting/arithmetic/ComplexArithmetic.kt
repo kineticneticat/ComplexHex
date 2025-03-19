@@ -32,7 +32,7 @@ object ComplexArithmetic : Arithmetic {
     override fun arithName() = "complex_maths"
     private val OPS = listOf(
         ADD,
-//        SUB,
+        SUB,
         MUL,
         DIV,
         ABS,
