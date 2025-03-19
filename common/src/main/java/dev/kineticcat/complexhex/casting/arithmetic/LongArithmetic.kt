@@ -39,7 +39,8 @@ object LongArithmetic : Arithmetic {
             AND -> LLbinaryL {a, b -> a.and(b)}
             OR -> LLbinaryL {a, b -> a.or(b)}
             NOT -> LunaryL {a -> a.inv()}
-            else -> throw InvalidOperatorException("$pattern is not a valid operator in complex arithmetic")
+            XOR -> LLbinaryL {a, b -> a.xor(b)}
+            else -> throw InvalidOperatorException("$pattern is not a valid operator in long arithmetic")
         }
     }
 

@@ -10,6 +10,6 @@ import dev.kineticcat.complexhex.api.getLong
 object OpLeftBitshift  : ConstMediaAction {
     override val argc = 2
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
-        return args.getLong(1, argc).shl(args.getPositiveInt(0, argc)).asActionResult
+        return args.getLong(0, argc).shl(args.getPositiveInt(1, argc)).asActionResult
     }
 }

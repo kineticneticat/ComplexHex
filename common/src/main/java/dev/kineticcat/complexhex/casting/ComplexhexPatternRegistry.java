@@ -122,11 +122,13 @@ public class ComplexhexPatternRegistry {
     // ASCII
 
     public static final HexPattern TO_ASCII = make("eawdwa", HexDir.EAST, "ascii/to",
-            new OpASCII(true));
+            new OpASCIIValue(true));
     public static final HexPattern FROM_ASCII = make("awdwae", HexDir.SOUTH_EAST, "ascii/from",
-            new OpASCII(false));
+            new OpASCIIValue(false));
 
     // Longs
+    public static final HexPattern TO_LONG = make("wawdedwaaw", HexDir.SOUTH_EAST, "long/convert",
+            new OpNumLong(true));
     public static final HexPattern SHIFT$LEFT = make("qqae", HexDir.SOUTH_WEST, "shift/left",
             OpLeftBitshift.INSTANCE);
     public static final HexPattern SHIFT$RIGHT$LOGICAL = make("eaqqdee", HexDir.SOUTH_EAST, "shift/right/logical",

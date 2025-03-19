@@ -1,7 +1,7 @@
 {
   "name": "complexhex.entry.longs",
   "category": "hexcasting:patterns/maths",
-  "icon": "minecraft:phantom_membrane",
+  "icon": "minecraft:redstone",
   "sortnum": 10,
   "advancement": "hexcasting:root",
   "read_by_default": true,
@@ -29,6 +29,10 @@
       ]
     },
     {
+      "type": "patchouli:text",
+      "text": "complexhex.page.longs.special.explanation"
+    },
+    {
       "type": "hexcasting:manual_pattern_nosig",
       "header": "complexhex.page.longs.example.43.header",
       "text": "complexhex.page.longs.example.43",
@@ -36,6 +40,14 @@
         "startdir": "SOUTH_EAST",
         "signature": "awdedwaaweewaw"
       }
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:long/convert",
+      "anchor": "complexhex:long/convert",
+      "input": "num/long",
+      "output": "long/num",
+      "text": "complexhex.page.longs.convert"
     },
     {
       "type": "hexcasting:pattern",

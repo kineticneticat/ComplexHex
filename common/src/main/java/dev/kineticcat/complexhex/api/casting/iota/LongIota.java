@@ -4,7 +4,6 @@ import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.iota.IotaType;
 import at.petrak.hexcasting.api.utils.HexUtils;
 import net.minecraft.ChatFormatting;
-import net.minecraft.nbt.LongArrayTag;
 import net.minecraft.nbt.LongTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -51,8 +50,9 @@ public class LongIota extends Iota {
         }
 
         @Override
+        @SuppressWarnings("ConstantConditions")
         public int color() {
-            return 0;
+            return ChatFormatting.DARK_GREEN.getColor();
         }
     };
     public static LongIota deserialise(Tag tag) {
