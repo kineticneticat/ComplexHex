@@ -121,10 +121,8 @@ public class ComplexhexPatternRegistry {
 
     // ASCII
 
-    public static final HexPattern TO_ASCII = make("eawdwa", HexDir.EAST, "ascii/to",
-            new OpASCIIValue(true));
-    public static final HexPattern FROM_ASCII = make("awdwae", HexDir.SOUTH_EAST, "ascii/from",
-            new OpASCIIValue(false));
+    public static final HexPattern TO_ASCII = make("eawdwae", HexDir.EAST, "ascii",
+            OpASCIIValue.INSTANCE);
 
     // Longs
     public static final HexPattern TO_LONG = make("wawdedwaaw", HexDir.SOUTH_EAST, "long/convert",
