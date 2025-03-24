@@ -1,4 +1,4 @@
-# hexdoc-net
+# hexdoc-complexhex
 
 Python web book docgen and [hexdoc](https://pypi.org/project/hexdoc) plugin for Complex Hex.
 

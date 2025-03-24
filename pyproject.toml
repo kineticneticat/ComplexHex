@@ -8,11 +8,11 @@ build-backend = "hatchling.build"
 # project metadata
 
 [project]
-name = "hexdoc-net"
+name = "hexdoc-complexhex"
 description = "Python web book docgen and hexdoc plugin for Complex Hex."
 readme = "doc/README.md"
 authors = [
-    { name="net" },
+    { name="kineticcat" },
 ]
 keywords = ["hexdoc"]
 requires-python = ">=3.11"
