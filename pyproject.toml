@@ -58,7 +58,7 @@ sources = ["doc/src"]
 # hexdoc entry points
 
 [project.entry-points.hexdoc]
-net = "hexdoc_complexhex._hooks:ComplexhexPlugin"
+complexhex = "hexdoc_complexhex._hooks:ComplexhexPlugin"
 
 # linting
 

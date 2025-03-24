@@ -32,9 +32,9 @@ pip install -e .[dev]
 
 For local testing, create a file called `.env` in the repo root following this template:
 ```sh
-GITHUB_REPOSITORY=net/Complex-Hex
+GITHUB_REPOSITORY=complexhex/Complex-Hex
 GITHUB_SHA=main
-GITHUB_PAGES_URL=https://net.github.io/Complex-Hex
+GITHUB_PAGES_URL=https://complexhex.github.io/Complex-Hex
 ```
 
 Useful commands:
