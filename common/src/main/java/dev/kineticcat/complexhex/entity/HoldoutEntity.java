@@ -9,7 +9,9 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -71,5 +73,10 @@ public class HoldoutEntity extends Entity {
 //        TrailTValues = TrailTValues.stream().map(x-> x+TrailDt).toList();
         if (level().getGameTime() % (30*20) == 0) {
         }
+    }
+
+    @Override
+    public @NotNull AABB getBoundingBoxForCulling() {
+        return this.getBoundingBox().inflate(5);
     }
 }

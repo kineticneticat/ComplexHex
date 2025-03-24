@@ -16,6 +16,7 @@ void main() {
             fragColor = texture(DiffuseSampler, texCoord);
             return;
         }
-        vec4 pix = texture(PrevFb, texCoord);
-        fragColor = vec4(1-pix.r, 1-pix.g, 1-pix.b, pix.a);
+        fragColor = texture(PrevFb, texCoord);
+//        vec4 pix = texture(PrevFb, texCoord);
+//        fragColor = vec4(1-pix.r, 1-pix.g, 1-pix.b, pix.a);
 }
