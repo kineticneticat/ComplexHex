@@ -7,19 +7,11 @@
   "read_by_default": true,
   "pages": [
     {
-      "type": "hexcasting:pattern",
-      "op_id": "complexhex:ascii/to",
-      "anchor": "complexhex:ascii/to",
-      "input": "num",
-      "output": "string",
-      "text": "complexhex.page.misc.ascii.to"
-    },{
-      "type": "hexcasting:pattern",
-      "op_id": "complexhex:ascii/from",
-      "anchor": "complexhex:ascii/from",
-      "input": "string",
-      "output": "num",
-      "text": "complexhex.page.misc.ascii.from"
+      "op_id": "complexhex:ascii",
+      "anchor": "complexhex:ascii",
+      "input": "num/string",
+      "output": "string/num",
+      "text": "complexhex.page.misc.ascii"
     }
   ]
 }
