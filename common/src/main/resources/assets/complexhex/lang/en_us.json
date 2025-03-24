@@ -89,6 +89,7 @@
   "hexcasting.mishap.invalid_value.class.bit": "a BIT",
   "hexcasting.mishap.invalid_value.class.long": "a long",
   "hexcasting.mishap.invalid_value.not_char": "a single character",
+  "hexcasting.mishap.invalid_value.char_or_num": "a single character or a number",
   "hexcasting.mishap.bad_item.bit": "a BIT",
 
   "complexhex.category.maths": "Complex Mathematics",
@@ -119,8 +120,7 @@
   "complexhex.page.longs.rshift.arithmetic": "Shifts all the bits to the right num times while preserving the sign",
 
   "complexhex.entry.misc": "Miscellaneous Complexes",
-  "hexcasting.action.complexhex:ascii/to": "ASCII Purification",
-  "complexhex.page.misc.ascii.to": "Pops a string containing a $(italics)single character$() and returns its ASCII Value",
-  "hexcasting.action.complexhex:ascii/from": "Character Purification",
-  "complexhex.page.misc.ascii.from": "Returns the character corresponding to the given ASCII value$(br)The value must be a positive integer"
+
+  "hexcasting.action.complexhex:ascii": "UTF Purification",
+  "complexhex.page.misc.ascii": "Swaps between a string of a $(italics)single character$() and an integer representing that character.<br>Uses the $(thing)UTF-16$() character map."
 }
