@@ -7,6 +7,7 @@
   "read_by_default": true,
   "pages": [
     {
+      "type": "hexcasting:pattern",
       "op_id": "complexhex:ascii",
       "anchor": "complexhex:ascii",
       "input": "num/string",
