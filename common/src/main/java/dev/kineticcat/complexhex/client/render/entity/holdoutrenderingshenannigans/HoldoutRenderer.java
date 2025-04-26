@@ -17,7 +17,10 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
+
+import java.util.function.BiFunction;
 
 import static dev.kineticcat.complexhex.Complexhex.id;
 
@@ -44,30 +47,112 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
         LaggingMaskRenderTarget.use(() -> {
 //            Renderer3d.renderFilled(ps, Color.WHITE, new Vec3(0, 70, 0), new Vec3(2, 2, 2));
 
-
-            int colour = 0xffffffff;
-            int black = 0;
-
-
-
             float inner = 1f;
-    //        float hitboxSize = 4f / 16f;
 
             Vector3f innerSize = new Vector3f(inner, inner, inner);
 
             ps.pushPose();
 
-            ps.mulPose(Axis.YP.rotationDegrees(180f - yaw));
-    //        ps.mulPose(Axis.XP.rotationDegrees(180 - nix.getXRot()));
-            ps.mulPose(Axis.ZP.rotationDegrees(180f));
+                ps.mulPose(Axis.YP.rotationDegrees(180f - yaw));
+                //        ps.mulPose(Axis.XP.rotationDegrees(180 - nix.getXRot()));
+                ps.mulPose(Axis.ZP.rotationDegrees(180f));
 
-            int light = LevelRenderer.getLightColor(holdout.level(), BlockPos.containing(holdout.position()));
-            drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f, innerSize.z / 2f), ps, buffer, 16, 0x00_ffffff);
+                int light = LevelRenderer.getLightColor(holdout.level(), BlockPos.containing(holdout.position()));
+                drawCube(holdout, innerSize, new Vector3f(-innerSize.x / 2f, -innerSize.y / 2f, innerSize.z / 2f), ps, buffer, 16, 0x00_ffffff);
             ps.popPose();
 
         });
 
+//        List<Entity> players = holdout.level().getEntities((Entity) null, holdout.getBoundingBoxForCulling().inflate(30), e -> e instanceof Player);
+//        Vec3 axis = players.size() > 0 ? players.get(0).getEyePosition().subtract(holdout.position()).normalize() : new Vec3(0, 1, 0);
+//        double radius = players.size() > 0 ? players.get(0).getEyePosition().distanceTo(holdout.position()) : 2;
+        Vec3 axis = new Vec3(0, 1, 0);
+
+        ps.pushPose();
+//            Quaternion quat = new Quaternion(new Vec3(0,1,0).cross(axis), Math.acos(new Vec3(0,1,0).dot(axis)));
+
+//            ps.mulPose(quat.quaternionf());
+
+            VertexConsumer verts = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(holdout)));
+
+            ring(ps, axis, (holdout.level().getGameTime()+partialTick)/10, 2, 0.25, packedLight, 0, verts);
+
+        ps.popPose();
+
         super.render(holdout, yaw, partialTick, ps, multiBufferSource, packedLight);
+    }
+
+    private static void ring(PoseStack ps, Vec3 axis, double angle, double radius, double height, int light, int colour, VertexConsumer verts) {
+//        Vec3 X;
+//        Vec3 Y = axis.normalize();
+//        Vec3 Z;
+//        // imprecision, what's that
+//        if (axis.normalize().equals(new Vec3(0, 1, 0))) {
+//            X = new Vec3(1, 0, 0);
+//            Z = new Vec3(0, 0, 1);
+//        } else {
+//            X = new Vec3(0, 1, 0).cross(axis).normalize();
+//            Z = X.cross(axis).normalize();
+//        }
+
+        Vec3 X = new Vec3(1, 0, 0);
+        Vec3 Y = new Vec3(0, 1, 0);
+        Vec3 Z = new Vec3(0, 0, 1);
+
+        BiFunction<Double, Integer, Vec3> getRingVertex = (Double ringOffset, Integer index) ->
+                             X.scale(Math.cos(Math.PI/2*index + angle))
+                        .add(Z.scale(Math.sin(Math.PI/2*index + angle)))
+                        .scale(radius)
+                        .add(Y.scale(ringOffset))
+                        .add(0, 0.5-ringOffset, 0);
+
+        doubleSidedQuad(ps, light, colour, verts,
+            getRingVertex.apply(height, 0),
+            getRingVertex.apply(height, 1),
+            getRingVertex.apply(-height, 1),
+            getRingVertex.apply(-height, 0)
+        );
+        doubleSidedQuad(ps, light, colour, verts,
+                getRingVertex.apply(height, 1),
+                getRingVertex.apply(height, 2),
+                getRingVertex.apply(-height, 2),
+                getRingVertex.apply(-height, 1)
+        );
+        doubleSidedQuad(ps, light, colour, verts,
+                getRingVertex.apply(height, 2),
+                getRingVertex.apply(height, 3),
+                getRingVertex.apply(-height, 3),
+                getRingVertex.apply(-height, 2)
+        );
+        doubleSidedQuad(ps, light, colour, verts,
+                getRingVertex.apply(height, 3),
+                getRingVertex.apply(height, 0),
+                getRingVertex.apply(-height, 0),
+                getRingVertex.apply(-height, 3)
+        );
+        doubleSidedQuad(ps, light, colour, verts,
+                new Vec3(0,0,0),
+                new Vec3(1,0,0),
+                new Vec3(1,0,1),
+                new Vec3(0,0,1)
+        );
+
+    }
+
+    private static void doubleSidedQuad(PoseStack ps, int light, int colour, VertexConsumer verts, Vec3 A, Vec3 B, Vec3 C, Vec3 D) {
+        PoseStack.Pose last = ps.last();
+        Matrix4f mat = last.pose();
+        Matrix3f norm = last.normal();
+
+        vertex(mat, norm, light, verts, colour, A.toVector3f(), new Vector2f(0, 0), new Vector3f(0, -1, 0));
+        vertex(mat, norm, light, verts, colour, B.toVector3f(), new Vector2f(0, 1), new Vector3f(0, -1, 0));
+        vertex(mat, norm, light, verts, colour, C.toVector3f(), new Vector2f(1, 1), new Vector3f(0, -1, 0));
+        vertex(mat, norm, light, verts, colour, D.toVector3f(), new Vector2f(1, 0), new Vector3f(0, -1, 0));
+
+        vertex(mat, norm, light, verts, colour, A.toVector3f(), new Vector2f(0, 0), new Vector3f(0, -1, 0));
+        vertex(mat, norm, light, verts, colour, D.toVector3f(), new Vector2f(0, 1), new Vector3f(0, -1, 0));
+        vertex(mat, norm, light, verts, colour, C.toVector3f(), new Vector2f(1, 1), new Vector3f(0, -1, 0));
+        vertex(mat, norm, light, verts, colour, B.toVector3f(), new Vector2f(1, 0), new Vector3f(0, -1, 0));
     }
 
     private static void vertex(
@@ -84,6 +169,17 @@ public class HoldoutRenderer extends EntityRenderer<HoldoutEntity> {
                 .uv(u, v).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light)
                 .normal(normal, nx, ny, nz)
                 .endVertex();
+    }
+    private static void vertex(
+            Matrix4f mat,
+            Matrix3f normal,
+            int light,
+            VertexConsumer verts,
+            int colour,
+            Vector3f pos,
+            Vector2f uv,
+            Vector3f norm) {
+        vertex(mat, normal, light, verts, colour, pos.x, pos.y, pos.z, uv.x, uv.y, norm.x, norm.y, norm.z);
     }
 
     private void drawCube(

@@ -49,7 +49,7 @@ dependencies {
     include "com.jamieswhiteshirt:reach-entity-attributes:${entityReachVersion}"
     modImplementation files("${rootProject.rootDir}/lib/serialization-hooks-0.4.99999.jar")
     include files("${rootProject.rootDir}/lib/serialization-hooks-0.4.99999.jar")
-    modImplementation files("${rootProject.rootDir}/lib/hexal-fabric-1.20.1-0.3.0-2.jar")
+    modImplementation files("${rootProject.rootDir}/lib/hexal-fabric-1.20.1-0.3.0-3-skyevg-unofficial.jar")
 //    include files("${rootProject.rootDir}/lib/hexal-fabric-1.20.1-0.3.0-2.jar")
     modImplementation files("${rootProject.rootDir}/lib/moreiotas-fabric-1.20.1-0.1.0-4.jar")
 //    include files("${rootProject.rootDir}/lib/moreiotas-fabric-1.20.1-0.1.0-4.jar")

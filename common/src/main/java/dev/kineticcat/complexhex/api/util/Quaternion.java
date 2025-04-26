@@ -4,6 +4,7 @@ import at.petrak.hexcasting.api.casting.iota.Iota;
 import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Quaterniond;
+import org.joml.Quaternionf;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class Quaternion extends Quaterniond {
         this.z = axis.z*S;
     }
 
-
+    public Quaternionf quaternionf() {return new Quaternionf(this);}
     public QuaternionIota asIota() { return new QuaternionIota(this); }
     public List<Iota> asActionResult() { return List.of(new QuaternionIota(this)); }
     public Quaternion fixNaN() {
