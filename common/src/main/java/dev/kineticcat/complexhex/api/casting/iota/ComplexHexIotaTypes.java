@@ -22,6 +22,7 @@ public class ComplexHexIotaTypes {
     public static final IotaType<ComplexNumberIota> COMPLEXNUMBER = type("complexnumber", ComplexNumberIota.TYPE);
     public static final IotaType<QuaternionIota> QUATERNION = type("quaternion", QuaternionIota.TYPE);
     public static final IotaType<BubbleIota> BUBBLE = type("bubble", BubbleIota.TYPE);
+
 //    public static final IotaType<ChloeIota> CHLOE = type("chloe", ChloeIota.TYPE);
     public static final IotaType<LongIota> LONG = type("long", LongIota.TYPE);
 

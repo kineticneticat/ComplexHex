@@ -11,6 +11,6 @@
 //    override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
 //        if (args[0] !is ChloeIota) throw MishapInvalidIota.of(args[0], 0, "ichlota")
 //        val ichlota = args[0] as ChloeIota
-//        return listOf(ChloeIota(ichlota.id(), ChloeIota.State.INTERMEDIARY))
+//        return listOf(ChloeIota(ichlota.id(), ChloeIota.State.INTERMEDIATE1))
 //    }
 //}
