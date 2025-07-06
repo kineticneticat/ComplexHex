@@ -2,10 +2,6 @@ package dev.kineticcat.complexhex.forge;
 
 import java.util.Map;
 
-import at.petrak.hexcasting.api.casting.ActionRegistryEntry;
-import at.petrak.hexcasting.api.casting.arithmetic.Arithmetic;
-import at.petrak.hexcasting.api.casting.castables.SpecialHandler;
-import at.petrak.hexcasting.api.casting.iota.IotaType;
 import at.petrak.hexcasting.common.lib.hex.HexActions;
 import at.petrak.hexcasting.common.lib.hex.HexArithmetics;
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes;
@@ -17,6 +13,7 @@ import dev.kineticcat.complexhex.casting.ComplexHexSpecialHandlers;
 import dev.kineticcat.complexhex.casting.ComplexhexPatternRegistry;
 import dev.kineticcat.complexhex.casting.arithmetic.ComplexHexArithmetic;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -35,23 +32,19 @@ public class ComplexhexForge {
         EventBuses.registerModEventBus(Complexhex.MOD_ID, bus);
         bus.addListener(ComplexhexClientForge::init);
 
-        addRegisterListener(bus, HexIotaTypes.REGISTRY, ComplexHexIotaTypes.getTypes());
-        addRegisterListener(bus, HexActions.REGISTRY, ComplexhexPatternRegistry.getPatterns());
-        addRegisterListener(bus, HexArithmetics.REGISTRY, ComplexHexArithmetic.getArithmetics());
-        addRegisterListener(bus, IXplatAbstractions.INSTANCE.getSpecialHandlerRegistry(), ComplexHexSpecialHandlers.getSpecialHandlers());
-
         Complexhex.init();
+
+        bus.addListener((RegisterEvent event) -> {
+            registerAll(event, HexIotaTypes.REGISTRY.key(), ComplexHexIotaTypes.getTypes());
+            registerAll(event, HexActions.REGISTRY.key(), ComplexhexPatternRegistry.getPatterns());
+            registerAll(event, HexArithmetics.REGISTRY.key(), ComplexHexArithmetic.getArithmetics());
+            registerAll(event, IXplatAbstractions.INSTANCE.getSpecialHandlerRegistry().key(), ComplexHexSpecialHandlers.getSpecialHandlers());
+        });
     }
 
-    private static <T> void addRegisterListener(IEventBus bus, Registry<T> registry, Map<ResourceLocation, T> resources) {
-        bus.addListener((RegisterEvent event) -> {
-            if (event.getRegistryKey().equals(registry.key())) {
-                for (Map.Entry<ResourceLocation, T> entry : resources.entrySet()) {
-                    event.register(registry.key(), helper -> 
-                        helper.register(entry.getKey(), entry.getValue())
-                    );
-                }
-            }
-        });        
+    private static <T> void registerAll(RegisterEvent event, ResourceKey<? extends Registry<T>> key, Map<ResourceLocation, T> entries) {
+        if (event.getRegistryKey().equals(key)) {
+            entries.forEach((id, value) -> event.register(key, helper -> helper.register(id, value)));
+        }
     }
 }
