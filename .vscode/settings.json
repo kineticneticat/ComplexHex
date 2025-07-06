@@ -31,4 +31,6 @@
         "*.jcss.jinja": "jinja-css", // for files with a lot of jinja stuff, where the linting isn't useful
         "*.json5.jinja": "json5",
     },
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "interactive",
 }

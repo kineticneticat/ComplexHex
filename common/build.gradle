@@ -1,5 +1,7 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.8.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.8.0'    
+    id "architectury-plugin" version "3.4.+"
+    id "dev.architectury.loom" version "1.6.+"
 }
 
 architectury {
@@ -23,7 +25,7 @@ dependencies {
     modCompileOnly "at.petra-k.hexcasting:hexcasting-fabric-$minecraftVersion:$hexcastingVersion"
     modCompileOnly "vazkii.patchouli:Patchouli-xplat:$minecraftVersion-$patchouliVersion"
     modCompileOnly files("${rootProject.rootDir}/lib/moreiotas-fabric-1.20.1-0.1.0-4.jar")
-    implementation group: "org.jblas", name: "jblas", version: "1.2.5"
+    compileOnly group: "org.jblas", name: "jblas", version: "1.2.5"
     implementation "org.joml:joml:1.10.8"
 }
 

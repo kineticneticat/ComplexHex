@@ -4,6 +4,7 @@ package dev.kineticcat.complexhex.casting;
 import at.petrak.hexcasting.api.casting.ActionRegistryEntry;
 import at.petrak.hexcasting.api.casting.castables.Action;
 import at.petrak.hexcasting.api.casting.castables.OperationAction;
+import at.petrak.hexcasting.api.casting.iota.IotaType;
 import at.petrak.hexcasting.api.casting.math.HexDir;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.common.casting.actions.selectors.OpGetEntitiesBy;
@@ -39,7 +40,9 @@ public class ComplexhexPatternRegistry {
     public static final Logger LOGGER = LogManager.getLogger(Complexhex.MOD_ID);
     private static final Map<ResourceLocation, ActionRegistryEntry> PATTERNS = new LinkedHashMap<>();
 
-
+    public static Map<ResourceLocation, ActionRegistryEntry> getPatterns() {
+        return PATTERNS;
+    }
 
     //Complex Arithmetic
     public static final HexPattern CONST$COMPLEX$1$ = make("wqqa", HexDir.SOUTH_WEST, "const/complex/1",
@@ -133,12 +136,6 @@ public class ComplexhexPatternRegistry {
             OpLogicalRightBitshift.INSTANCE);
     public static final HexPattern SHIFT$RIGHT$ARITHMETIC = make("eaqq", HexDir.SOUTH_EAST, "shift/right/arithmetic",
             OpArithmeticRightBitshift.INSTANCE);
-
-    public static void init() {
-        for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {
-            Registry.register(HexActions.REGISTRY, entry.getKey(), entry.getValue());
-        }
-    }
 
     private static HexPattern make(String signature, HexDir dir, String name, Action act ) {
         PATTERNS.put(

@@ -36,6 +36,13 @@ side = "BOTH"
 [[dependencies.complexhex]]
 modId = "hexcasting"
 mandatory = true
-versionRange = "[${hexcastingVersion},)"
+versionRange = "[0.11.2,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.complexhex]]
+modId = "moreiotas"
+mandatory = true
+versionRange = "[0.1.0-2,)"
 ordering = "NONE"
 side = "BOTH"
