@@ -12,10 +12,8 @@ import java.util.Map;
 public class ComplexHexArithmetic {
     private static final Map<ResourceLocation, Arithmetic> ARITHMETICS = new LinkedHashMap<>();
 
-    public static void init() {
-        for (Map.Entry<ResourceLocation, Arithmetic> entry : ARITHMETICS.entrySet()) {
-            Registry.register(HexArithmetics.REGISTRY, entry.getKey(), entry.getValue());
-        }
+    public static Map<ResourceLocation, Arithmetic> getArithmetics() {
+        return ARITHMETICS;
     }
 
     public static ComplexArithmetic COMPLEX = make(ComplexArithmetic.INSTANCE.arithName(), ComplexArithmetic.INSTANCE);

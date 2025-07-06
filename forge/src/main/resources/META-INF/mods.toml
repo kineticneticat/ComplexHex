@@ -36,6 +36,6 @@ side = "BOTH"
 [[dependencies.complexhex]]
 modId = "hexcasting"
 mandatory = true
-versionRange = "[${hexcastingVersion},)"
+versionRange = "[0.11.2,)"
 ordering = "NONE"
 side = "BOTH"

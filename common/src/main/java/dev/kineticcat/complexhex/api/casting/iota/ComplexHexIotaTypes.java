@@ -13,17 +13,15 @@ import java.util.Map;
 public class ComplexHexIotaTypes {
     private static final Map<ResourceLocation, IotaType<?>> TYPES = new LinkedHashMap<>();
 
-    public static void init() {
-        for (Map.Entry<ResourceLocation, IotaType<?>> entry : TYPES.entrySet()) {
-            Registry.register(HexIotaTypes.REGISTRY, entry.getKey(), entry.getValue());
-        }
+    public static Map<ResourceLocation, IotaType<?>> getTypes() {
+        return TYPES;
     }
 
     public static final IotaType<ComplexNumberIota> COMPLEXNUMBER = type("complexnumber", ComplexNumberIota.TYPE);
     public static final IotaType<QuaternionIota> QUATERNION = type("quaternion", QuaternionIota.TYPE);
     public static final IotaType<BubbleIota> BUBBLE = type("bubble", BubbleIota.TYPE);
 
-//    public static final IotaType<ChloeIota> CHLOE = type("chloe", ChloeIota.TYPE);
+    // public static final IotaType<ChloeIota> CHLOE = type("chloe", ChloeIota.TYPE);
     public static final IotaType<LongIota> LONG = type("long", LongIota.TYPE);
 
 

@@ -40,8 +40,7 @@ public class ComplexhexConfigForge {
         private static ForgeConfigSpec.DoubleValue signumCost;
 
         public Server(ForgeConfigSpec.Builder builder) {
-
-            builder.pop();
+            
         }
 
     }

@@ -14,11 +14,14 @@ import static dev.kineticcat.complexhex.Complexhex.id;
 public class ComplexHexSpecialHandlers {
     private static final Map<ResourceLocation, SpecialHandler.Factory<?>> SPECIAL_HANDLERS = new LinkedHashMap<>();
 
+    public static Map<ResourceLocation, SpecialHandler.Factory<?>> getSpecialHandlers() {
+        return SPECIAL_HANDLERS;
+    }
+
     public static final SpecialHandler.Factory<SpecialHandlerLongLiteral> LONG = make("long",
             new SpecialHandlerLongLiteral.Factory());
 
-    private static <T extends SpecialHandler> SpecialHandler.Factory<T> make(String name,
-                                                                             SpecialHandler.Factory<T> handler) {
+    private static <T extends SpecialHandler> SpecialHandler.Factory<T> make(String name, SpecialHandler.Factory<T> handler) {
         var old = SPECIAL_HANDLERS.put(id(name), handler);
         if (old != null) {
             throw new IllegalArgumentException("Typo? Duplicate id " + name);
@@ -31,9 +34,4 @@ public class ComplexHexSpecialHandlers {
 //            r.accept(e.getValue(), e.getKey());
 //        }
 //    }
-    public static void init() {
-        for (Map.Entry<ResourceLocation, SpecialHandler.Factory<?>> entry : SPECIAL_HANDLERS.entrySet()) {
-            Registry.register(IXplatAbstractions.INSTANCE.getSpecialHandlerRegistry(), entry.getKey(), entry.getValue());
-        }
-    }
 }

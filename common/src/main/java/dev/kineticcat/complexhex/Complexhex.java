@@ -21,10 +21,6 @@ public class Complexhex {
         LOGGER.info("Complex Hex says 'ough'");
 
         ComplexhexAbstractions.initPlatformSpecific();
-        ComplexHexIotaTypes.init();
-        ComplexhexPatternRegistry.init();
-        ComplexHexArithmetic.init();
-        ComplexHexSpecialHandlers.init();
 
         LOGGER.info(ComplexhexAbstractions.getConfigDirectory().toAbsolutePath().normalize().toString());
     }
