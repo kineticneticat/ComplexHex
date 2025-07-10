@@ -1,21 +1,23 @@
 package dev.kineticcat.complexhex.client;
 
+import at.petrak.hexcasting.api.client.ScryingLensOverlayRegistry;
 import at.petrak.hexcasting.common.items.magic.ItemPackagedHex;
 import at.petrak.hexcasting.xplat.IClientXplatAbstractions;
-import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.kineticcat.complexhex.block.ComplexHexBlocks;
 import dev.kineticcat.complexhex.block.entity.ComplexHexBlockEntities;
+import dev.kineticcat.complexhex.block.entity.HexboxBlockEntity;
 import dev.kineticcat.complexhex.client.render.ComplexHexGaslighting;
 import dev.kineticcat.complexhex.client.render.CoolerGaslightingTracker;
 import dev.kineticcat.complexhex.client.render.be.BlockEntityBurntAmethystRenderer;
 import dev.kineticcat.complexhex.client.render.be.HexboxBlockEntityRenderer;
 import dev.kineticcat.complexhex.client.render.entity.HexalWispRenderer;
 import dev.kineticcat.complexhex.client.render.entity.NixRenderer;
+import dev.kineticcat.complexhex.client.render.entity.ParametricLineRenderer;
+import dev.kineticcat.complexhex.client.render.entity.ParametricSurfaceRenderer;
 import dev.kineticcat.complexhex.client.render.entity.holdoutrenderingshenannigans.HoldoutRenderer;
 import dev.kineticcat.complexhex.entity.ComplexHexEntities;
 import dev.kineticcat.complexhex.item.ComplexHexItems;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.resources.model.BakedModel;
@@ -44,12 +46,24 @@ public class RegisterClientStuff {
             ComplexHexBlocks.BURNT
     );
     public static void init() {
+
+        ScryingLensOverlayRegistry.addDisplayer(ComplexHexBlocks.HEXBOX,
+                (lines, state, pos, observer, world, direction) -> {
+                    if (world.getBlockEntity(pos) instanceof HexboxBlockEntity box) {
+                        box.applyScryingLensOverlay(lines, world);
+                    }
+                }
+        );
+
+
         registerGaslight3(ComplexHexItems.BURNT_SHARD);
         registerGaslight3(ComplexHexBlocks.BURNT.asItem());
         registerGaslight3(ComplexHexItems.AWAKENED_BURNT_SHARD);
         IClientXplatAbstractions.INSTANCE.setRenderLayer(ComplexHexBlocks.BURNT, RenderType.translucent());
         IClientXplatAbstractions.INSTANCE.registerEntityRenderer(ComplexHexEntities.ASSEMBLY_MANAGER, HexalWispRenderer::new);
         IClientXplatAbstractions.INSTANCE.registerEntityRenderer(ComplexHexEntities.NIX, NixRenderer::new);
+        IClientXplatAbstractions.INSTANCE.registerEntityRenderer(ComplexHexEntities.PARAMETRIC_LINE, ParametricLineRenderer::new);
+        IClientXplatAbstractions.INSTANCE.registerEntityRenderer(ComplexHexEntities.PARAMETRIC_SURFACE, ParametricSurfaceRenderer::new);
         IClientXplatAbstractions.INSTANCE.registerItemProperty(ComplexHexItems.BYGONE_CYPHER, ItemPackagedHex.HAS_PATTERNS_PRED,
                 (stack, level, holder, holderID) ->
                         ComplexHexItems.BYGONE_CYPHER.hasHex(stack) ? 1f : 0f

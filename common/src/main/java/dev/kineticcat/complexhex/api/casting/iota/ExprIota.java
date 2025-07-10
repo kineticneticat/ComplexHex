@@ -4,6 +4,7 @@ package dev.kineticcat.complexhex.api.casting.iota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.iota.IotaType;
 import dev.kineticcat.complexhex.util.ExprDeSer;
+import dev.kineticcat.complexhex.api.util.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -11,7 +12,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import symjava.symbolic.Expr;
 
 public class ExprIota extends Iota {
     public ExprIota(@NotNull Expr expr) {
@@ -26,7 +26,7 @@ public class ExprIota extends Iota {
     }
 
     @Override
-    protected boolean toleratesOther(Iota that) {return that instanceof ExprIota && ((ExprIota) that).expr().symEquals(expr());}
+    protected boolean toleratesOther(Iota that) {return that instanceof ExprIota && ((ExprIota) that).expr().equals(expr());}
 
     @Override
     public @NotNull Tag serialize() {
@@ -43,7 +43,7 @@ public class ExprIota extends Iota {
 
         @Override
         public Component display(Tag tag) {
-            return Component.literal(deserialise(tag).getLabel()).withStyle(ChatFormatting.GREEN);
+            return Component.literal(deserialise(tag).toString()).withStyle(ChatFormatting.GREEN);
         }
 
         @Override

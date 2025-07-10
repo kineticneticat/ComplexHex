@@ -1,8 +1,14 @@
 package dev.kineticcat.complexhex.block;
 
+import at.petrak.hexcasting.api.addldata.ADIotaHolder;
+import at.petrak.hexcasting.api.casting.iota.ListIota;
+import at.petrak.hexcasting.xplat.IXplatAbstractions;
+import dev.kineticcat.complexhex.block.entity.ComplexHexBlockEntities;
 import dev.kineticcat.complexhex.block.entity.HexboxBlockEntity;
 import dev.kineticcat.complexhex.item.ComplexHexItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -13,6 +19,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -40,9 +48,24 @@ public class HexboxBlock extends Block implements EntityBlock {
         if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
+            if (!(level.getBlockEntity(pos) instanceof HexboxBlockEntity box)) {
+                return InteractionResult.FAIL;
+            }
             if (state.getValue(ACTIVATED)) {
+                if (player.isDiscrete()) {
+                    BlockState newstate = state.setValue(ACTIVATED, false);
+                    level.setBlockAndUpdate(pos, newstate);
+                    box.clearDisplay();
+                    return InteractionResult.SUCCESS;
+                }
                 return InteractionResult.PASS;
             } else {
+                if (player.isDiscrete()) {
+                    BlockState newstate = state.setValue(ACTIVATED, true);
+                    level.setBlockAndUpdate(pos, newstate);
+                    box.setOwner((ServerPlayer) player);
+                    return InteractionResult.SUCCESS;
+                }
                 switch (state.getValue(DISC_TYPE)) {
                     case 0:
                         ItemStack item = player.getItemInHand(hand);
@@ -53,6 +76,9 @@ public class HexboxBlock extends Block implements EntityBlock {
                             return InteractionResult.CONSUME;
                         } else if (item.is(ComplexHexItems.QUENCHED_RECORD)) {
                             BlockState newstate = state.setValue(DISC_TYPE, 2);
+                            ADIotaHolder holder = IXplatAbstractions.INSTANCE.findDataHolder(item);
+                            if (holder == null) { return InteractionResult.FAIL; }
+                            box.setHex((ListIota) holder.readIota((ServerLevel) level));
                             level.setBlockAndUpdate(pos, newstate);
                             item.shrink(1);
                             return InteractionResult.CONSUME;
@@ -61,17 +87,23 @@ public class HexboxBlock extends Block implements EntityBlock {
                         }
                     case 1:
                         Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5, 1.01, 0.5).offsetRandom(level.random, 0.7F);
-                        ItemEntity discItem = new ItemEntity(level, vec3.x, vec3.y, vec3.z, new ItemStack(ComplexHexItems.INERT_RECORD));
+                        ItemEntity discItemEntity = new ItemEntity(level, vec3.x, vec3.y, vec3.z, new ItemStack(ComplexHexItems.INERT_RECORD));
                         BlockState newstate = state.setValue(DISC_TYPE, 0);
                         level.setBlockAndUpdate(pos, newstate);
-                        level.addFreshEntity(discItem);
+                        level.addFreshEntity(discItemEntity);
                         return InteractionResult.SUCCESS;
                     case 2:
                         vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5, 1.01, 0.5).offsetRandom(level.random, 0.7F);
-                        discItem = new ItemEntity(level, vec3.x, vec3.y, vec3.z, new ItemStack(ComplexHexItems.QUENCHED_RECORD));
+                        ItemStack discItem = new ItemStack(ComplexHexItems.QUENCHED_RECORD);
+                        ADIotaHolder holder = IXplatAbstractions.INSTANCE.findDataHolder(discItem);
+                        if (holder == null) {return InteractionResult.FAIL;}
+                        if (box.getHex((ServerLevel) level) != null) {
+                            holder.writeIota(box.getHex((ServerLevel) level), false);
+                        }
+                        box.setHex((ListIota) null);
                         newstate = state.setValue(DISC_TYPE, 0);
                         level.setBlockAndUpdate(pos, newstate);
-                        level.addFreshEntity(discItem);
+                        level.addFreshEntity(new ItemEntity(level, vec3.x, vec3.y, vec3.z, discItem));
                         return InteractionResult.SUCCESS;
                 }
             }
@@ -93,5 +125,57 @@ public class HexboxBlock extends Block implements EntityBlock {
     @Override
     public VoxelShape getOcclusionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return Shapes.empty();
+    }
+
+    @Override
+    public void onRemove(BlockState blockState, Level level, BlockPos pos, BlockState blockState2, boolean bl) {
+        if (!blockState.is(blockState2.getBlock()) && blockState.getValue(DISC_TYPE) != 0) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof HexboxBlockEntity box) {
+                Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5, 1.01, 0.5).offsetRandom(level.random, 0.7F);
+                ItemStack discItem = new ItemStack(ComplexHexItems.INERT_RECORD);
+                if (blockState.getValue(DISC_TYPE) == 2) {
+                    discItem = new ItemStack(ComplexHexItems.QUENCHED_RECORD);
+                    ADIotaHolder holder = IXplatAbstractions.INSTANCE.findDataHolder(discItem);
+                    if (holder == null) {
+                        return;
+                    }
+                    if (box.getHex((ServerLevel) level) != null) {
+                        holder.writeIota(box.getHex((ServerLevel) level), false);
+                    }
+                }
+                level.addFreshEntity(new ItemEntity(level, vec3.x, vec3.y, vec3.z, discItem));
+            }
+        }
+        super.onRemove(blockState, level, pos, blockState2, bl);
+    }
+
+//    @Override
+//    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+//        Complexhex.LOGGER.info("ticked");
+//        if (level.getBlockEntity(pos) instanceof HexboxBlockEntity box && state.getValue(ACTIVATED)) {
+//            box.tick();
+//            Complexhex.LOGGER.info("ticking");
+//        }
+//    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState,
+                                                                  BlockEntityType<T> type) {
+        if (!pLevel.isClientSide) {
+            return createTickerHelper(type, ComplexHexBlockEntities.HEXBOX,
+                    HexboxBlockEntity::serverTick);
+        } else {
+            return null;
+        }
+    }
+
+    // uegh
+    @Nullable
+    @SuppressWarnings("unchecked")
+    protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(
+            BlockEntityType<A> type, BlockEntityType<E> targetType, BlockEntityTicker<? super E> ticker) {
+        return targetType == type ? (BlockEntityTicker<A>) ticker : null;
     }
 }

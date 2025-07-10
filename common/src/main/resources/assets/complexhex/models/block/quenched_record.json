@@ -1,3 +1,7 @@
 {
-  "parent": "complexhex:item/quenched_record"
+  "parent": "complexhex:block/inert_record",
+  "textures": {
+    "0": "complexhex:item/quenched_record",
+    "particle": "complexhex:item/quenched_record"
+  }
 }

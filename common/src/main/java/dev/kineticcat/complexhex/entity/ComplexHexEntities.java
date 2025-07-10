@@ -45,6 +45,23 @@ public class ComplexHexEntities {
                     .build(id("holdout").toString())
     );
 
+    public static final EntityType<ParameticLineEntity> PARAMETRIC_LINE = register(
+            "parametric/line",
+            EntityType.Builder.of(ParameticLineEntity::new, MobCategory.MISC)
+                    .sized(0.5f, 0.5f)
+                    .clientTrackingRange(32)
+                    .updateInterval(1)
+                    .build(id("parametric/line").toString())
+    );
+    public static final EntityType<ParametricSurfaceEntity> PARAMETRIC_SURFACE = register(
+            "parametric/surface",
+            EntityType.Builder.of(ParametricSurfaceEntity::new, MobCategory.MISC)
+                    .sized(0.5f, 0.5f)
+                    .clientTrackingRange(32)
+                    .updateInterval(1)
+                    .build(id("parametric/surface").toString())
+    );
+
     private static <T extends Entity> EntityType<T> register (String id, EntityType<T> type) {
         var old = ENTITIES.put(id(id), type);
         if (old != null) {

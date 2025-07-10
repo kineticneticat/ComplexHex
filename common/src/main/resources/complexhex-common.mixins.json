@@ -10,7 +10,6 @@
     "ClientTickCounterMixin",
     "EntityDataSerialisersMixin",
     "RemoveAssemblyManagerMixin",
-    "ToggleParticlesMixin",
     "BITInvokers.BlockDisplayInvoker",
     "BITInvokers.DisplayInvoker",
     "BITInvokers.ItemDisplayInvoker",

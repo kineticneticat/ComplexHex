@@ -16,6 +16,9 @@ import dev.kineticcat.complexhex.api.util.Quaternion;
 import dev.kineticcat.complexhex.casting.actions.*;
 import dev.kineticcat.complexhex.casting.actions.bits.*;
 import dev.kineticcat.complexhex.casting.actions.expr.OpNewSymbol;
+import dev.kineticcat.complexhex.casting.actions.expr.OpSpawnParametricLine;
+import dev.kineticcat.complexhex.casting.actions.expr.OpSpawnParametricSurface;
+import dev.kineticcat.complexhex.casting.actions.expr.OpSubstitute;
 import dev.kineticcat.complexhex.casting.actions.fields.OpDevPrintField;
 import dev.kineticcat.complexhex.casting.actions.fields.OpMakeField;
 import dev.kineticcat.complexhex.casting.assemblies.OpBeginAssembly;
@@ -140,6 +143,12 @@ public class ComplexhexPatternRegistry {
 
         public static final HexPattern NEW_SYMBOL = make("wdwdd", HexDir.SOUTH_EAST, "new_symbol",
                 OpNewSymbol.INSTANCE);
+        public static final HexPattern SUBSTITUTE = make("wdwddwdw", HexDir.SOUTH_EAST, "substitute",
+                OpSubstitute.INSTANCE);
+        public static final HexPattern SUMMON_LINE = make("wdwddwq", HexDir.SOUTH_EAST, "summon/line",
+                OpSpawnParametricLine.INSTANCE);
+        public static final HexPattern SUMMON_SURFACE = make("wdwddwqq", HexDir.SOUTH_EAST, "summon/surface",
+                OpSpawnParametricSurface.INSTANCE);
 
         public static void init() {
             for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {

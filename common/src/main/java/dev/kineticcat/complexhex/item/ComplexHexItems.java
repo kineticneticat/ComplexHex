@@ -52,6 +52,13 @@ public class ComplexHexItems {
             )
     );
 
+    public static final RecordJacketItem RECORD_JACKET = make(
+            "record_jacket",
+            new RecordJacketItem(
+                    new Item.Properties()
+            )
+    );
+
     public static <T extends Item> T make(String name, T item, CreativeModeTab tab) {
         Item old = ITEMS.put(id(name), item);
         if (old != null) {

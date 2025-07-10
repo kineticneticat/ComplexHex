@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "complexhex:item/quenched_record"
+    "layer0": "complexhex:item/record_jacket"
   }
 }
