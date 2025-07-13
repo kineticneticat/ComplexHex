@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "activated=false": {
       "model": "complexhex:block/hexbox"
+    },
+    "activated=true": {
+      "model": "complexhex:block/hexbox_glowey"
     }
   }
 }

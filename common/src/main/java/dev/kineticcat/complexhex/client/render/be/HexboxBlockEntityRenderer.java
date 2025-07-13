@@ -14,7 +14,6 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
 import static dev.kineticcat.complexhex.Complexhex.id;
@@ -24,17 +23,20 @@ public class HexboxBlockEntityRenderer implements BlockEntityRenderer<HexboxBloc
     public static ResourceLocation InertRecordTexture = id("textures/block/hexbox_inert_record.png");
     public static ResourceLocation QuenchedRecordTexture = id("textures/block/hexbox_quenched_record.png");
     public static ResourceLocation LittleBitsTexture = id("textures/block/hexbox_littlebits.png");
+    public static ResourceLocation TableTexture = id("textures/block/hexbox.png");
+    public static ResourceLocation GloweyTableTexture = id("textures/block/hexbox_glowey.png");
 
-    private static float record_spin = 0.25f;
+    private static final float record_spin = 0.25f;
 
     private final ModelPart root;
+    private final ModelPart table;
     private final ModelPart record;
     private final ModelPart spindle;
     private final ModelPart arm;
-    public HexboxBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
-        this.ctx = ctx;
+    public HexboxBlockEntityRenderer() {
         LayerDefinition layerdef = getLayerDefinition();
         this.root = layerdef.bakeRoot();
+        this.table = root.getChild("base");
         this.record = root.getChild("record");
         this.spindle = root.getChild("spindle");
         this.arm = root.getChild("arm");
@@ -43,6 +45,11 @@ public class HexboxBlockEntityRenderer implements BlockEntityRenderer<HexboxBloc
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
 
+        root.addOrReplaceChild(
+                "base",
+                CubeListBuilder.create().texOffs(0, 0).addBox(0, 0, 0, 16.0f, 14.0f, 16.0f),
+                PartPose.ZERO
+        );
         root.addOrReplaceChild(
                 "record",
                 CubeListBuilder.create().texOffs(5, 1).addBox(1, 14.5f, 1, 14, 0.1f, 14),
@@ -61,7 +68,6 @@ public class HexboxBlockEntityRenderer implements BlockEntityRenderer<HexboxBloc
         return LayerDefinition.create(mesh, 16, 16);
     }
 
-    private final BlockEntityRendererProvider.Context ctx;
     @Override
     public void render(HexboxBlockEntity box, float tickDelta, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         Boolean active = box.getBlockState().getValue(HexboxBlock.ACTIVATED);

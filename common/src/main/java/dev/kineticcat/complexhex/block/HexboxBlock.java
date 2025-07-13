@@ -1,12 +1,16 @@
 package dev.kineticcat.complexhex.block;
 
 import at.petrak.hexcasting.api.addldata.ADIotaHolder;
+import at.petrak.hexcasting.api.casting.circles.ICircleComponent;
+import at.petrak.hexcasting.api.casting.eval.env.CircleCastEnv;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingImage;
 import at.petrak.hexcasting.api.casting.iota.ListIota;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import dev.kineticcat.complexhex.block.entity.ComplexHexBlockEntities;
 import dev.kineticcat.complexhex.block.entity.HexboxBlockEntity;
 import dev.kineticcat.complexhex.item.ComplexHexItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -32,7 +36,9 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class HexboxBlock extends Block implements EntityBlock {
+import java.util.EnumSet;
+
+public class HexboxBlock extends Block implements EntityBlock, ICircleComponent {
     public static final BooleanProperty ACTIVATED = BooleanProperty.create("activated");
     public static final IntegerProperty DISC_TYPE = IntegerProperty.create("disc", 0, 2);
     public HexboxBlock(Properties properties) {
@@ -86,14 +92,15 @@ public class HexboxBlock extends Block implements EntityBlock {
                             return InteractionResult.PASS;
                         }
                     case 1:
-                        Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5, 1.01, 0.5).offsetRandom(level.random, 0.7F);
-                        ItemEntity discItemEntity = new ItemEntity(level, vec3.x, vec3.y, vec3.z, new ItemStack(ComplexHexItems.INERT_RECORD));
+//                        Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5, 1.01, 0.5).offsetRandom(level.random, 0.7F);
+//                        ItemEntity discItemEntity = new ItemEntity(level, vec3.x, vec3.y, vec3.z, );
                         BlockState newstate = state.setValue(DISC_TYPE, 0);
                         level.setBlockAndUpdate(pos, newstate);
-                        level.addFreshEntity(discItemEntity);
+//                        level.addFreshEntity(discItemEntity);
+                        popResourceFromFace(level, pos, Direction.UP, new ItemStack(ComplexHexItems.INERT_RECORD));
                         return InteractionResult.SUCCESS;
                     case 2:
-                        vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5, 1.01, 0.5).offsetRandom(level.random, 0.7F);
+//                        vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5, 1.01, 0.5).offsetRandom(level.random, 0.7F);
                         ItemStack discItem = new ItemStack(ComplexHexItems.QUENCHED_RECORD);
                         ADIotaHolder holder = IXplatAbstractions.INSTANCE.findDataHolder(discItem);
                         if (holder == null) {return InteractionResult.FAIL;}
@@ -103,7 +110,8 @@ public class HexboxBlock extends Block implements EntityBlock {
                         box.setHex((ListIota) null);
                         newstate = state.setValue(DISC_TYPE, 0);
                         level.setBlockAndUpdate(pos, newstate);
-                        level.addFreshEntity(new ItemEntity(level, vec3.x, vec3.y, vec3.z, discItem));
+//                        level.addFreshEntity(new ItemEntity(level, vec3.x, vec3.y, vec3.z, discItem));
+                        popResourceFromFace(level, pos, Direction.UP, discItem);
                         return InteractionResult.SUCCESS;
                 }
             }
@@ -178,4 +186,46 @@ public class HexboxBlock extends Block implements EntityBlock {
             BlockEntityType<A> type, BlockEntityType<E> targetType, BlockEntityTicker<? super E> ticker) {
         return targetType == type ? (BlockEntityTicker<A>) ticker : null;
     }
+
+    @Override
+    public ControlFlow acceptControlFlow(CastingImage imageIn, CircleCastEnv env, Direction enterDir, BlockPos pos, BlockState bs, ServerLevel level) {
+        if (!(level.getBlockEntity(pos) instanceof HexboxBlockEntity box)) return new ControlFlow.Stop();
+        var wawa = possibleExitDirections(pos, bs, level);
+        wawa.remove(enterDir.getOpposite());
+        var exits = wawa.stream().map(dir -> exitPositionFromDirection(pos, dir));
+        var iota = imageIn.getStack().isEmpty() ? null : imageIn.getStack().get(0);
+        box.setIota(iota);
+        return new ControlFlow.Continue(imageIn, exits.toList());
+    }
+
+    @Override
+    public boolean canEnterFromDirection(Direction enterDir, BlockPos pos, BlockState bs, ServerLevel level) {
+        return true;
+    }
+
+    @Override
+    public EnumSet<Direction> possibleExitDirections(BlockPos pos, BlockState bs, Level level) {
+        return EnumSet.allOf(Direction.class);
+    }
+
+    @Override
+    public BlockState startEnergized(BlockPos pos, BlockState bs, Level level) {
+        BlockState newstate = bs.setValue(ACTIVATED, true);
+        level.setBlockAndUpdate(pos, newstate);
+        return newstate;
+    }
+
+    @Override
+    public boolean isEnergized(BlockPos pos, BlockState bs, Level level) {
+        return bs.getValue(ACTIVATED);
+    }
+
+    @Override
+    public BlockState endEnergized(BlockPos pos, BlockState bs, Level level) {
+        BlockState newstate = bs.setValue(ACTIVATED, false);
+        level.setBlockAndUpdate(pos, newstate);
+        return newstate;
+    }
+
+
 }

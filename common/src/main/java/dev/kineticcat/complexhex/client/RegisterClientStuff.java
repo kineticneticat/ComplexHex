@@ -70,7 +70,7 @@ public class RegisterClientStuff {
         );
         IClientXplatAbstractions.INSTANCE.registerEntityRenderer(ComplexHexEntities.HOLDOUT, HoldoutRenderer::new);
 //        BlockEntityRendererRegistry.register(ComplexHexBlockEntities.HEXBOX, HexboxBlockEntityRenderer::new);
-        BlockEntityRenderers.register(ComplexHexBlockEntities.HEXBOX, HexboxBlockEntityRenderer::new);
+        BlockEntityRenderers.register(ComplexHexBlockEntities.HEXBOX, ctx -> new HexboxBlockEntityRenderer());
     }
     private static void registerGaslight3(Item item) {
         IClientXplatAbstractions.INSTANCE.registerItemProperty(item,

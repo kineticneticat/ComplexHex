@@ -39,18 +39,18 @@ class ParametricSurfaceRenderer(val context: EntityRendererProvider.Context): En
                 up = (u+1)/steps
                 vn = v/steps
                 vp = (v+1)/steps
-                minmin = getPosAtUV(para, un, vn) ?: Vec3(un, 0.0, vn)
-                minmax = getPosAtUV(para, un, vp) ?: Vec3(un, 0.0, vp)
-                maxmin = getPosAtUV(para, up, vn) ?: Vec3(up, 0.0, vn)
-                maxmax = getPosAtUV(para, up, vp) ?: Vec3(up, 0.0, vp)
+                minmin = getPosAtUV(para, un, vn, para.position(), para.level().gameTime) ?: Vec3(un, 0.0, vn)
+                minmax = getPosAtUV(para, un, vp, para.position(), para.level().gameTime) ?: Vec3(un, 0.0, vp)
+                maxmin = getPosAtUV(para, up, vn, para.position(), para.level().gameTime) ?: Vec3(up, 0.0, vn)
+                maxmax = getPosAtUV(para, up, vp, para.position(), para.level().gameTime) ?: Vec3(up, 0.0, vp)
                 quad(poseStack, buffer, para.pigment, minmin, minmax, maxmin, maxmax, para.level().gameTime)
             }
         }
     }
-    fun getPosAtUV(para: ParametricSurfaceEntity,u: Double, v: Double): Vec3? {
-        val x = para.xpr("u", u)("v", v).let { if (it is Value) it.x else return null }
-        val y = para.ypr("u", u)("v", v).let { if (it is Value) it.x else return null }
-        val z = para.zpr("u", u)("v", v).let { if (it is Value) it.x else return null }
+    fun getPosAtUV(para: ParametricSurfaceEntity,u: Double, v: Double, origin: Vec3, time: Long): Vec3? {
+        val x = para.xpr("u", u)("v", v)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Value) it.x else return null }
+        val y = para.ypr("u", u)("v", v)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Value) it.x else return null }
+        val z = para.zpr("u", u)("v", v)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Value) it.x else return null }
         return Vec3(x, y, z)
     }
 

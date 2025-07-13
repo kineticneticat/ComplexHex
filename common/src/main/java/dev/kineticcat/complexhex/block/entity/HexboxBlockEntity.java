@@ -3,6 +3,7 @@ package dev.kineticcat.complexhex.block.entity;
 import at.petrak.hexcasting.api.block.HexBlockEntity;
 import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
 import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.IotaType;
 import at.petrak.hexcasting.api.casting.iota.ListIota;
 import at.petrak.hexcasting.api.misc.MediaConstants;
 import at.petrak.hexcasting.api.pigment.FrozenPigment;
@@ -47,6 +48,7 @@ public class HexboxBlockEntity extends HexBlockEntity implements WorldlyContaine
     public static final String TAG_ERROR_DISPLAY = "ErrorDisplay";
     public static final String TAG_OWNER_UUID = "OwnerUUID";
     public static final String TAG_OWNER_NAME = "OwnerName";
+    public static final String TAG_IOTA = "InternalIota";
     public HexboxBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ComplexHexBlockEntities.HEXBOX, blockPos, blockState);
     }
@@ -61,6 +63,8 @@ public class HexboxBlockEntity extends HexBlockEntity implements WorldlyContaine
     protected Component displayMsg = null;
 
     protected ItemStack displayItem = null;
+
+    public CompoundTag iota = null;
 
     public void sync() {
         this.setChanged();
@@ -98,6 +102,12 @@ public class HexboxBlockEntity extends HexBlockEntity implements WorldlyContaine
         if (hexTag == null) return null;
         return ListIota.TYPE.deserialize(hexTag, level);
     }
+    public void setIota(Iota iota) {
+        this.iota = iota != null ? IotaType.serialize(iota): null;
+    }
+    public Iota getIota(ServerLevel level) {
+        return iota != null ? IotaType.deserialize(iota, level) : null;
+    }
     public void setMedia(long media) {
         this.media = media;
         sync();
@@ -124,6 +134,9 @@ public class HexboxBlockEntity extends HexBlockEntity implements WorldlyContaine
             var itemTag = new CompoundTag();
             this.displayItem.save(itemTag);
             ctag.put(TAG_ERROR_DISPLAY, itemTag);
+        }
+        if (iota != null) {
+            ctag.put(TAG_IOTA, iota);
         }
     }
 
@@ -160,6 +173,11 @@ public class HexboxBlockEntity extends HexBlockEntity implements WorldlyContaine
             ownerUUID = null;
             ownerName = null;
         }
+        if (ctag.contains(TAG_IOTA)) {
+            iota = ctag.getCompound(TAG_IOTA);
+        } else {
+            iota = null;
+        }
     }
 
     private void initialise() {
@@ -186,6 +204,15 @@ public class HexboxBlockEntity extends HexBlockEntity implements WorldlyContaine
                 instrs::add
         );
         var vm = CastingVM.empty(env);
+        var iota = box.getIota(slevel);
+        vm.setImage(vm.getImage().copy(
+                iota != null ? List.of(box.getIota(slevel)) : List.of(),
+                vm.getImage().getParenCount(),
+                vm.getImage().getParenthesized(),
+                vm.getImage().getEscapeNext(),
+                vm.getImage().getOpsConsumed(),
+                vm.getImage().getUserData()
+        ));
         vm.queueExecuteAndWrapIotas(instrs, box.fake.serverLevel());
     }
 

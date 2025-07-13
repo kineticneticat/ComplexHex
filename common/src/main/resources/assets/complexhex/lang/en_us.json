@@ -123,6 +123,6 @@
 
   "complexhex.entry.expressions": "Expressions",
   "hexcasting.action.complexhex:new_symbol": "Create Symbol",
-  "complexhex.page.expressions.new": "Creates a new symbol with the given label",
+  "complexhex.page.expressions.new": "Creates a new symbol with the given label"
 
 }
