@@ -1,11 +1,15 @@
 package dev.kineticcat.complexhex.api
 
+import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
 import dev.kineticcat.complexhex.api.casting.iota.ComplexNumberIota
+import dev.kineticcat.complexhex.api.casting.iota.ExprIota
 import dev.kineticcat.complexhex.api.casting.iota.LongIota
 import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota
+import dev.kineticcat.complexhex.api.util.Expr
+import dev.kineticcat.complexhex.api.util.Value
 import dev.kineticcat.complexhex.stuff.ComplexNumber
 import dev.kineticcat.complexhex.stuff.Quaternion
 import kotlin.math.ln
@@ -34,6 +38,23 @@ fun List<Iota>.getLong(idx: Int, argc: Int = 0): Long {
         return x.long
     } else {
         throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "long")
+    }
+}
+
+fun List<Iota>.getExpr(idx: Int, argc: Int = 0): Expr {
+    val x = this.getOrElse(idx) { throw MishapNotEnoughArgs(idx + 1, this.size) }
+    if (x is ExprIota) {
+        return x.expr()
+    } else {
+        throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "expr")
+    }
+}
+fun List<Iota>.getExprOrNum(idx: Int, argc: Int = 0): Expr {
+    val x = this.getOrElse(idx) { throw MishapNotEnoughArgs(idx + 1, this.size) }
+    return when (x) {
+        is ExprIota -> x.expr()
+        is DoubleIota -> Value(x.double)
+        else -> throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "expr_or_num")
     }
 }
 

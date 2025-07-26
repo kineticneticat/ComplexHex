@@ -26,6 +26,7 @@ public class Complexhex {
         ComplexHexArithmetic.init();
         ComplexHexSpecialHandlers.init();
 
+
         LOGGER.info(ComplexhexAbstractions.getConfigDirectory().toAbsolutePath().normalize().toString());
     }
 

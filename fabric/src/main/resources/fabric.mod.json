@@ -16,7 +16,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "dev.kineticcat.complexhex.fabric.ComplexhexFabric"
+      {
+        "adapter": "kotlin",
+        "value": "dev.kineticcat.complexhex.fabric.ComplexhexFabric"
+      }
     ],
     "client": [
       "dev.kineticcat.complexhex.fabric.ComplexhexClientFabric"
