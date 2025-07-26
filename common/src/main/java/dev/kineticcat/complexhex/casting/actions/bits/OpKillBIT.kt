@@ -7,7 +7,10 @@ import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.getEntity
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapBadEntity
+import dev.kineticcat.complexhex.entity.ParametricLineEntity
+import dev.kineticcat.complexhex.entity.ParametricSurfaceEntity
 import net.minecraft.world.entity.Display
+import net.minecraft.world.entity.Entity
 
 
 object OpKillBIT : SpellAction {
@@ -18,9 +21,9 @@ object OpKillBIT : SpellAction {
 
         env.assertEntityInRange(e)
 
-        if (e !is Display) throw MishapBadEntity.of(e, "bit")
+        if (!(e is Display || e is ParametricLineEntity || e is ParametricSurfaceEntity)) throw MishapBadEntity.of(e, "bit_kill")
 
-        val pos = (e as Display).position()
+        val pos = e.position()
 
         return SpellAction.Result(
             Spell(e),
@@ -29,9 +32,8 @@ object OpKillBIT : SpellAction {
         )
     }
 
-    private data class Spell(val BIT: Display) : RenderedSpell {
+    private data class Spell(val BIT: Entity) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
-
             BIT.kill()
         }
     }
