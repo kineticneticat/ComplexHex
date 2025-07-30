@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "complexhex:block/quenched_record",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "complexhex:block/quenched_record",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "complexhex:block/quenched_record",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "complexhex:block/quenched_record",
+      "y": 270
+    }
+  }
+}

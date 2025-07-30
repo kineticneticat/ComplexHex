@@ -12,14 +12,12 @@ import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.complexhex.Complexhex;
 import dev.kineticcat.complexhex.casting.actions.*;
 import dev.kineticcat.complexhex.casting.actions.bits.*;
-import dev.kineticcat.complexhex.casting.actions.expr.OpNewSymbol;
-import dev.kineticcat.complexhex.casting.actions.expr.OpSpawnParametricLine;
-import dev.kineticcat.complexhex.casting.actions.expr.OpSpawnParametricSurface;
-import dev.kineticcat.complexhex.casting.actions.expr.OpSubstitute;
+import dev.kineticcat.complexhex.casting.actions.expr.*;
 import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpArgument;
 import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpConjugate;
 import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpImaginary;
 import dev.kineticcat.complexhex.casting.actions.mathematics.complex.OpReal;
+import dev.kineticcat.complexhex.casting.actions.mathematics.expr.OpExprEquals;
 import dev.kineticcat.complexhex.casting.actions.mathematics.longs.OpArithmeticRightBitshift;
 import dev.kineticcat.complexhex.casting.actions.mathematics.longs.OpLeftBitshift;
 import dev.kineticcat.complexhex.casting.actions.mathematics.longs.OpLogicalRightBitshift;
@@ -144,6 +142,14 @@ public class ComplexhexPatternRegistry {
             OpNewSymbol.INSTANCE);
     public static final HexPattern SUBSTITUTE = make("wdwddwdw", HexDir.SOUTH_EAST, "substitute",
             OpSubstitute.INSTANCE);
+    public static final HexPattern EQUALS = make("wdwddwqad", HexDir.SOUTH_EAST, "equals",
+            OpExprEquals.INSTANCE);
+    public static final HexPattern PIECEWISE = make("wdwddwawdd", HexDir.SOUTH_EAST, "piecewise",
+            OpPiecewise.INSTANCE);
+    public static final HexPattern DERIVATIVE = make("wdwddwewddwdw", HexDir.SOUTH_EAST, "derivative",
+            OpDerivative.INSTANCE);
+    public static final HexPattern MAKE_MATRIX = make("wdwddweawwaeaw", HexDir.SOUTH_EAST, "matrix",
+            OpMakeMatrix.INSTANCE);
     public static final HexPattern SUMMON_LINE = make("wdwddwq", HexDir.SOUTH_EAST, "summon/line",
             OpSpawnParametricLine.INSTANCE);
     public static final HexPattern SUMMON_SURFACE = make("wdwddwqq", HexDir.SOUTH_EAST, "summon/surface",

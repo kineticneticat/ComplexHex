@@ -15,6 +15,7 @@ dependencies {
     // Do NOT use other classes from fabric loader
     modImplementation "net.fabricmc:fabric-loader:${project.fabricLoaderVersion}"
     modApi "dev.architectury:architectury:${project.architecturyVersion}"
+    modApi "net.fabricmc.fabric-api:fabric-api:${fabricApiVersion}"
 
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2' // for @Nonnull

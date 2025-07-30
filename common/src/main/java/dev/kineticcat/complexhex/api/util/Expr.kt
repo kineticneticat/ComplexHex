@@ -15,7 +15,9 @@ abstract class Expr {
         return javaClass == other?.javaClass
     }
     open fun args(): List<Expr>? = null
-    abstract fun diff(wrt: Expr): Expr
+    abstract fun diff(wrt: Symbol): Expr
+
+    abstract fun hasSymbol(sym:Symbol): Boolean
 
     open fun substitute(from: Expr, to: Expr) = if (this == from) to else this
     abstract override fun toString(): String
