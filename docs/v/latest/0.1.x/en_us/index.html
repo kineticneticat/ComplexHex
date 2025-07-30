@@ -77,7 +77,7 @@
       <ul class="nav navbar-nav navbar-right">
             <li>
     <a
-      href="https://github.com/kineticneticat/ComplexHex/tree/21933262ffe7ed2fe698cce89fc58a6d3e08e8ef"
+      href="https://github.com/kineticneticat/ComplexHex/tree/70bd937f7f7a56f3b5413ec1c4b1305b5d5d2c47"
         target="_blank"
       class="navbar-link"
       role="button"
@@ -479,7 +479,7 @@
       <p>Creates a new symbol with the given (single character) label</p>
   </div>
 <br />
-    <p>Many operations that work on numbers can also apply to expressions.<br />The full list is: Addition, Subtraction, Multiplication, Division, Powers, Absolute, Floor, Ceiling, Sine, Cosine, Tangent, Arcsin, Arccos, Arctan, Atan2, Logarithms, and Modulo</p>
+    <p>Many operations that work on numbers can also apply to expressions.<br />The full list is: Addition, Subtraction, Multiplication, Division, Powers, Absolute, Floor, Ceiling, Sine, Cosine, Tangent, Arcsin, Arccos, Arctan, Logarithms, Modulo, Minimus, Minimus II, Maximus, Maximus II, And, Or, and Not<br />In the case of operators that work on booleans, 0 is treated as &#34;false&#34; and any non-zero value is treated as &#34;true&#34;.</p>
 <br />
   <div id="patterns/maths/expressions@complexhex:substitute" class="">
 <h4 class="pattern-title">Substitution Exaltation (expr, expr, expr | num → expr)<a
@@ -535,6 +535,230 @@
       >Your browser does not support visualizing patterns. Pattern code: wdwddwdw</canvas>
   </details>
       <p>Substitutes the third expression/number in place of the second expression within the first.</p>
+  </div>
+<br />
+  <div id="patterns/maths/expressions@complexhex:equals" class="">
+<h4 class="pattern-title">Equality Purification (expr, expr | num → expr)<a
+    href="#patterns/maths/expressions@complexhex:equals"
+    class="permalink small"
+    title="Permalink"
+  ><i class="bi bi-link-45deg"></i></a></h4>
+  <details class="details-collapsible">
+    <summary class="collapse-details collapse-spell"></summary>
+    <div class="dropdown spell-settings-dropdown">
+      <span
+        href=""
+        class="dropdown-toggle spell-settings-toggle"
+        data-toggle="dropdown"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="bi bi-gear-fill"></i>
+      </span>
+      <ul class="dropdown-menu">
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Renders</a>
+          <ul class="dropdown-menu dropdown-menu-left render-dropdowns"></ul>
+        </li>
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Palettes</a>
+          <ul class="dropdown-menu dropdown-menu-left palette-dropdowns"></ul>
+        </li>
+      </ul>
+    </div>
+      <canvas
+        class="spell-viz"
+        width="216"
+        height="216"
+        data-string="wdwddwqad"
+        data-start="south_east"
+        data-per-world="False"
+      >Your browser does not support visualizing patterns. Pattern code: wdwddwqad</canvas>
+  </details>
+      <p>Creates an expression that equals 1 if the two expressions are equal, and 0 otherwise.</p>
+  </div>
+<br />
+  <div id="patterns/maths/expressions@complexhex:piecewise" class="">
+<h4 class="pattern-title">Piecewise Exaltation (expr, expr|num, expr|num → expr)<a
+    href="#patterns/maths/expressions@complexhex:piecewise"
+    class="permalink small"
+    title="Permalink"
+  ><i class="bi bi-link-45deg"></i></a></h4>
+  <details class="details-collapsible">
+    <summary class="collapse-details collapse-spell"></summary>
+    <div class="dropdown spell-settings-dropdown">
+      <span
+        href=""
+        class="dropdown-toggle spell-settings-toggle"
+        data-toggle="dropdown"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="bi bi-gear-fill"></i>
+      </span>
+      <ul class="dropdown-menu">
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Renders</a>
+          <ul class="dropdown-menu dropdown-menu-left render-dropdowns"></ul>
+        </li>
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Palettes</a>
+          <ul class="dropdown-menu dropdown-menu-left palette-dropdowns"></ul>
+        </li>
+      </ul>
+    </div>
+      <canvas
+        class="spell-viz"
+        width="216"
+        height="216"
+        data-string="wdwddwawdd"
+        data-start="south_east"
+        data-per-world="False"
+      >Your browser does not support visualizing patterns. Pattern code: wdwddwawdd</canvas>
+  </details>
+      <p>Creates a piecewise expression that simplifies to the second argument if the first simplifies to 1.0, otherwise simplifies to the third argument.</p>
+  </div>
+<br />
+  <div id="patterns/maths/expressions@complexhex:derivative" class="">
+<h4 class="pattern-title">Derivation Purification (expr, expr → expr)<a
+    href="#patterns/maths/expressions@complexhex:derivative"
+    class="permalink small"
+    title="Permalink"
+  ><i class="bi bi-link-45deg"></i></a></h4>
+  <details class="details-collapsible">
+    <summary class="collapse-details collapse-spell"></summary>
+    <div class="dropdown spell-settings-dropdown">
+      <span
+        href=""
+        class="dropdown-toggle spell-settings-toggle"
+        data-toggle="dropdown"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="bi bi-gear-fill"></i>
+      </span>
+      <ul class="dropdown-menu">
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Renders</a>
+          <ul class="dropdown-menu dropdown-menu-left render-dropdowns"></ul>
+        </li>
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Palettes</a>
+          <ul class="dropdown-menu dropdown-menu-left palette-dropdowns"></ul>
+        </li>
+      </ul>
+    </div>
+      <canvas
+        class="spell-viz"
+        width="216"
+        height="216"
+        data-string="wdwddwewddwdw"
+        data-start="south_east"
+        data-per-world="False"
+      >Your browser does not support visualizing patterns. Pattern code: wdwddwewddwdw</canvas>
+  </details>
+      <p>Takes in an expression and a lone symbol and returns the partial derivative of the expression with respect to the symbol.</p>
+  </div>
+<br />
+  <div id="patterns/maths/expressions@complexhex:matrix" class="">
+<h4 class="pattern-title">Neo&#39;s Exaltation (num, num, expr → matrix)<a
+    href="#patterns/maths/expressions@complexhex:matrix"
+    class="permalink small"
+    title="Permalink"
+  ><i class="bi bi-link-45deg"></i></a></h4>
+  <details class="details-collapsible">
+    <summary class="collapse-details collapse-spell"></summary>
+    <div class="dropdown spell-settings-dropdown">
+      <span
+        href=""
+        class="dropdown-toggle spell-settings-toggle"
+        data-toggle="dropdown"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="bi bi-gear-fill"></i>
+      </span>
+      <ul class="dropdown-menu">
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Renders</a>
+          <ul class="dropdown-menu dropdown-menu-left render-dropdowns"></ul>
+        </li>
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Palettes</a>
+          <ul class="dropdown-menu dropdown-menu-left palette-dropdowns"></ul>
+        </li>
+      </ul>
+    </div>
+      <canvas
+        class="spell-viz"
+        width="216"
+        height="216"
+        data-string="wdwddweawwaeaw"
+        data-start="south_east"
+        data-per-world="False"
+      >Your browser does not support visualizing patterns. Pattern code: wdwddweawwaeaw</canvas>
+  </details>
+      <p>Takes in a width, height and expression and creates a matrix by substituting i &amp; j-values into the expression corresponding to a position in the matrix and putting the result in the matrix.</p>
   </div>
 <br />
   <div id="patterns/maths/expressions@complexhex:summon/line" class="">
