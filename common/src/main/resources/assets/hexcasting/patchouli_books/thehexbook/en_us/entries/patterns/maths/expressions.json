@@ -27,6 +27,38 @@
     },
     {
       "type": "hexcasting:pattern",
+      "op_id": "complexhex:equals",
+      "anchor": "complexhex:equals",
+      "input": "expr, expr | num",
+      "output": "expr",
+      "text": "complexhex.page.expressions.equals"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:piecewise",
+      "anchor": "complexhex:piecewise",
+      "input": "expr, expr|num, expr|num",
+      "output": "expr",
+      "text": "complexhex.page.expressions.piecewise"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:derivative",
+      "anchor": "complexhex:derivative",
+      "input": "expr, expr",
+      "output": "expr",
+      "text": "complexhex.page.expressions.derivative"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:matrix",
+      "anchor": "complexhex:matrix",
+      "input": "num, num, expr",
+      "output": "matrix",
+      "text": "complexhex.page.expressions.matrix"
+    },
+    {
+      "type": "hexcasting:pattern",
       "op_id": "complexhex:summon/line",
       "anchor": "complexhex:summon/line",
       "input": "vec, expr, expr, expr",

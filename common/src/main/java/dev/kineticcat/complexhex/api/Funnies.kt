@@ -9,6 +9,7 @@ import dev.kineticcat.complexhex.api.casting.iota.ExprIota
 import dev.kineticcat.complexhex.api.casting.iota.LongIota
 import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota
 import dev.kineticcat.complexhex.api.util.Expr
+import dev.kineticcat.complexhex.api.util.Symbol
 import dev.kineticcat.complexhex.api.util.Value
 import dev.kineticcat.complexhex.stuff.ComplexNumber
 import dev.kineticcat.complexhex.stuff.Quaternion
@@ -55,6 +56,18 @@ fun List<Iota>.getExprOrNum(idx: Int, argc: Int = 0): Expr {
         is ExprIota -> x.expr()
         is DoubleIota -> Value(x.double)
         else -> throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "expr_or_num")
+    }
+}
+fun List<Iota>.getSymbol(idx: Int, argc: Int = 0): Symbol {
+    val x = this.getOrElse(idx) { throw MishapNotEnoughArgs(idx + 1, this.size) }
+    if (x is ExprIota) {
+        return when (x.expr()) {
+            is Symbol -> x.expr() as Symbol
+            else -> throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "symbol")
+        }
+
+    } else {
+        throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "expr")
     }
 }
 

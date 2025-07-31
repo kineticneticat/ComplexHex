@@ -40,17 +40,25 @@ object ExprArithmetic : Arithmetic {
         ARCTAN,
         ARCTAN2,
         LOG,
-        MOD
+        MOD,
+        AND,
+        OR,
+        XOR,
+        GREATER,
+        GREATER_EQ,
+        LESS,
+        LESS_EQ,
+        NOT
     )
     override fun opTypes() = OPS
 
     override fun getOperator(pattern: HexPattern?): Operator {
         return when (pattern) {
-            ADD -> BinaryEE_ED({a, b -> a.plus(b)}, {a, b -> a.plus(b)})
-            SUB -> BinaryEE_ED({a, b -> a.minus(b)}, {a, b -> a.minus(b)})
-            MUL -> BinaryEE_ED({ a, b -> a.times(b) }, { a, b -> a.times(b) })
-            DIV -> BinaryEE_ED({ a, b -> a.div(b)}, { a, b -> a.div(b)})
-            POW -> BinaryEE_ED(::Pow) { a, b -> Pow(a, Value(b)) }
+            ADD -> BinaryEE_ED(::Add)
+            SUB -> BinaryEE_ED(::Sub)
+            MUL -> BinaryEE_ED(::Mul)
+            DIV -> BinaryEE_ED(::Div)
+            POW -> BinaryEE_ED(::Pow)
             ABS -> UnaryE(::Abs)
             FLOOR -> UnaryE(::Floor)
             CEIL -> UnaryE(::Ceiling)
@@ -60,9 +68,17 @@ object ExprArithmetic : Arithmetic {
             ARCSIN -> UnaryE(::ArcSin)
             ARCCOS -> UnaryE(::ArcCos)
             ARCTAN -> UnaryE(::ArcTan)
-            ARCTAN2 -> BinaryEE_ED(::ArcTan2) {a, b -> ArcTan2(a, Value(b))}
-            LOG -> BinaryEE_ED(::Log) {a, b -> Log(a, Value(b))}
-            MOD -> BinaryEE_ED(::Modulo) {a, b -> Modulo(a, Value(b))}
+            ARCTAN2 -> BinaryEE_ED(::ArcTan2)
+            LOG -> BinaryEE_ED(::Log)
+            MOD -> BinaryEE_ED(::Modulo)
+            AND -> BinaryEE_ED(::And)
+            OR -> BinaryEE_ED(::Or)
+            XOR -> BinaryEE_ED(::Xor)
+            GREATER -> BinaryEE_ED(::GreaterThan)
+            GREATER_EQ -> BinaryEE_ED(::GreaterThanOrEq)
+            LESS -> BinaryEE_ED(::LessThan)
+            LESS_EQ -> BinaryEE_ED(::LessThanOrEq)
+            NOT -> UnaryE(::Not)
             else -> throw InvalidOperatorException("$pattern is not a valid operator for expr arith!")
         }
     }
@@ -70,11 +86,11 @@ object ExprArithmetic : Arithmetic {
     fun UnaryE(op: (Expr) -> (Expr)) = OperatorUnary(ACCEPTS_E) { i:Iota ->
         op(Operator.downcast(i, ComplexHexIotaTypes.EXPR).expr()).asIota()
     }
-    fun BinaryEE_ED(opA: (Expr, Expr) -> (Expr), opB: (Expr, Double) -> (Expr)) = OperatorBinary(ACCEPTS_EE_ED) { i:Iota, j:Iota ->
+    fun BinaryEE_ED(opA: (Expr, Expr) -> (Expr)) = OperatorBinary(ACCEPTS_EE_ED) { i:Iota, j:Iota ->
         if (j is ExprIota) {
             opA(Operator.downcast(i, ComplexHexIotaTypes.EXPR).expr(), Operator.downcast(j, ComplexHexIotaTypes.EXPR).expr()).asIota()
         } else {
-            opB(Operator.downcast(i, ComplexHexIotaTypes.EXPR).expr(), Operator.downcast(j, HexIotaTypes.DOUBLE).double).asIota()
+            opA(Operator.downcast(i, ComplexHexIotaTypes.EXPR).expr(), Value(Operator.downcast(j, HexIotaTypes.DOUBLE).double)).asIota()
         }
     }
 }

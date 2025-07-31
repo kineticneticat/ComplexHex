@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "Q": {
+      "item": "hexcasting:quenched_allay_shard"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "D": {
+      "tag": "minecraft:music_discs"
+    }
+  },
+  "pattern": [
+    "AQA",
+    "QDQ",
+    "AQA"
+  ],
+  "result": {
+    "item": "complexhex:inert_record"
+  }
+}

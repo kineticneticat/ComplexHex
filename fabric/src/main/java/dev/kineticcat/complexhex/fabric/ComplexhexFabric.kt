@@ -1,8 +1,13 @@
 package dev.kineticcat.complexhex.fabric
 
 import dev.kineticcat.complexhex.Complexhex
+import dev.kineticcat.complexhex.block.ComplexHexBlocks
+import dev.kineticcat.complexhex.block.entity.ComplexHexBlockEntities
 import dev.kineticcat.complexhex.entity.ComplexHexEntities
+import dev.kineticcat.complexhex.item.ComplexHexCreativeTabs
+import dev.kineticcat.complexhex.item.ComplexHexItems
 import net.fabricmc.api.ModInitializer
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
@@ -18,9 +23,19 @@ import java.util.function.BiConsumer
  */
 object ComplexhexFabric : ModInitializer {
         override fun onInitialize() {
-        Complexhex.init()
+                Complexhex.init()
 
-        ComplexHexEntities.registerEntities(bind(BuiltInRegistries.ENTITY_TYPE))
+                ItemGroupEvents.MODIFY_ENTRIES_ALL.register { tab, entries ->
+                        ComplexHexBlocks.registerBlockCreativeTab(entries::accept, tab)
+                        ComplexHexItems.registerItemCreativeTab(entries::accept, tab)
+                }
+
+                ComplexHexEntities.registerEntities(bind(BuiltInRegistries.ENTITY_TYPE))
+                ComplexHexItems.registerItems(bind(BuiltInRegistries.ITEM))
+                ComplexHexBlocks.registerBlocks(bind(BuiltInRegistries.BLOCK))
+                ComplexHexBlocks.registerBlockItems(bind(BuiltInRegistries.ITEM))
+                ComplexHexCreativeTabs.registerCreativeTabs(bind(BuiltInRegistries.CREATIVE_MODE_TAB))
+                ComplexHexBlockEntities.registerTiles(bind(BuiltInRegistries.BLOCK_ENTITY_TYPE))
         }
 @Suppress("SameParameterValue")
 private fun <T> bind(registry: Registry<in T>): BiConsumer<T, ResourceLocation> =
