@@ -40,6 +40,12 @@ public class ComplexHexBlockEntities {
             ComplexHexBlocks.HEXBOX
     );
 
+    public static final BlockEntityType<UnknotterBlockEntity> UNKNOTTER = register(
+            "unknotter",
+            UnknotterBlockEntity::new,
+            ComplexHexBlocks.UNKNOTTER
+    );
+
     private static <T extends BlockEntity> BlockEntityType<T> register(String id,
             BiFunction<BlockPos, BlockState, T> func, Block... blocks) {
         var ret = IXplatAbstractions.INSTANCE.createBlockEntityType(func, blocks);

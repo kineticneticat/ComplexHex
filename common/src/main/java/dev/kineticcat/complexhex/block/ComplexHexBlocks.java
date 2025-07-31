@@ -11,14 +11,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-import static dev.kineticcat.complexhex.Complexhex.id;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+
+import static dev.kineticcat.complexhex.Complexhex.id;
 
 public class ComplexHexBlocks {
     public static void registerBlocks(BiConsumer<Block, ResourceLocation> r) {
@@ -83,6 +83,12 @@ public class ComplexHexBlocks {
     public static final HexboxBlock HEXBOX = blockItem(
             "hexbox",
             new HexboxBlock(BlockBehaviour.Properties.copy(HexBlocks.SLATE_BLOCK)),
+            new Item.Properties()
+    );
+
+    public static final UnknotterBlock UNKNOTTER = blockItem(
+            "unknotter",
+            new UnknotterBlock(BlockBehaviour.Properties.copy(HexBlocks.SLATE_BLOCK)),
             new Item.Properties()
     );
 

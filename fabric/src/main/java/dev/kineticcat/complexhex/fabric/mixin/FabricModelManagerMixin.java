@@ -1,5 +1,6 @@
 package dev.kineticcat.complexhex.fabric.mixin;
 
+
 import dev.kineticcat.complexhex.client.RegisterClientStuff;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelBakery;

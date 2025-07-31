@@ -6,7 +6,6 @@
   "client": [
   ],
   "mixins": [
-    "BlockSlateMixin",
     "ClientTickCounterMixin",
     "EntityDataSerialisersMixin",
     "RemoveAssemblyManagerMixin",

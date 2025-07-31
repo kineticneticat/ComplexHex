@@ -10,6 +10,7 @@ import dev.kineticcat.complexhex.client.render.ComplexHexGaslighting;
 import dev.kineticcat.complexhex.client.render.CoolerGaslightingTracker;
 import dev.kineticcat.complexhex.client.render.be.BlockEntityBurntAmethystRenderer;
 import dev.kineticcat.complexhex.client.render.be.HexboxBlockEntityRenderer;
+import dev.kineticcat.complexhex.client.render.be.UnknotterBlockEntityRenderer;
 import dev.kineticcat.complexhex.client.render.entity.HexalWispRenderer;
 import dev.kineticcat.complexhex.client.render.entity.NixRenderer;
 import dev.kineticcat.complexhex.client.render.entity.ParametricLineRenderer;
@@ -71,6 +72,7 @@ public class RegisterClientStuff {
         IClientXplatAbstractions.INSTANCE.registerEntityRenderer(ComplexHexEntities.HOLDOUT, HoldoutRenderer::new);
 //        BlockEntityRendererRegistry.register(ComplexHexBlockEntities.HEXBOX, HexboxBlockEntityRenderer::new);
         BlockEntityRenderers.register(ComplexHexBlockEntities.HEXBOX, ctx -> new HexboxBlockEntityRenderer());
+        BlockEntityRenderers.register(ComplexHexBlockEntities.UNKNOTTER, ctx -> new UnknotterBlockEntityRenderer());
     }
     private static void registerGaslight3(Item item) {
         IClientXplatAbstractions.INSTANCE.registerItemProperty(item,

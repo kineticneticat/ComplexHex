@@ -1,8 +1,8 @@
 package dev.kineticcat.complexhex.fabric;
 
 import dev.kineticcat.complexhex.ComplexhexClient;
+import dev.kineticcat.complexhex.client.RegisterClientStuff
 //import dev.kineticcat.complexhex.ComplexhexClient.mse
-import dev.kineticcat.complexhex.client.RegisterClientStuff;
 import ladysnake.satin.api.event.ShaderEffectRenderCallback
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry
