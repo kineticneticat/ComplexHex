@@ -1,6 +1,7 @@
 package dev.kineticcat.complexhex.api.util
 
 import dev.kineticcat.complexhex.api.log
+import org.joml.Vector3d
 import java.text.DecimalFormat
 import kotlin.math.*
 
@@ -32,38 +33,119 @@ abstract class BinaryOp(open val A: Expr, open val B: Expr): Expr() {
     }
 }
 
-class Value(@JvmField val x: Double): Expr() {
-    val format = DecimalFormat("###,###.##")
-    override fun simplify(): Expr = this
+abstract class Value<T>(@JvmField val value: T): Expr() {
+    override fun equals(other: Any?): Boolean = other is Number && this.value == other.value
+    abstract operator fun plus(that: T): Expr
+    abstract operator fun <S> plus(that: Value<S>): Expr
+    abstract operator fun minus(that: T): Expr
+    abstract operator fun <S> minus(that: Value<S>): Expr
+    abstract operator fun times(that: T): Expr
+    abstract operator fun <S> times(that: Value<S>): Expr
+    abstract operator fun div(that: T): Expr
+    abstract operator fun <S> div(that: Value<S>): Expr
+    abstract fun isZero(): Boolean
+    abstract fun isOne(): Boolean
+    fun equals(that: Value<T>) = this.value == that.value
+    override fun hashCode(): Int {
+        var result = super.hashCode()
+        result = 31 * result + (value?.hashCode() ?: 0)
+        return result
+    }
+}
 
-    override fun equals(other: Any?): Boolean = other is Value && this.x == other.x
+class Number(@JvmField val x: Double): Value<Double>(x) {
+    private val format = DecimalFormat("###,###.##")
+    override fun simplify(): Expr = this
 
     override fun args(): List<Expr> = listOf()
 
-    override fun diff(wrt: Expr): Expr = Value.C0
+    override fun diff(wrt: Expr): Expr = C0
 
     override fun toString(): String = format.format(x)
 
-    override operator fun plus(that: Double): Expr = Value(x + that)
-    operator fun plus(that: Value): Expr = Value(x + that.x)
-    override operator fun minus(that: Double): Expr = Value(x - that)
-    operator fun minus(that: Value): Expr = Value(x - that.x)
-    override operator fun times(that: Double): Expr = Value(x * that)
-    operator fun times(that: Value): Expr = Value(x * that.x)
-    override operator fun div(that: Double): Expr = Value(x / that)
-    operator fun div(that: Value): Expr = Value(x / that.x)
-    override fun hashCode(): Int {
-        var result = super.hashCode()
-        result = 31 * result + x.hashCode()
-        return result
-    }
+    override operator fun plus(that: Double): Expr = Number(x + that)
+    override operator fun <S> plus(that: Value<S>): Expr =
+        when (that.value) {
+            is Double -> Number(x + that.value)
+            else -> Add(this, that)
+        }
+    override operator fun minus(that: Double): Expr = Number(x - that)
+    override operator fun <S> minus(that: Value<S>): Expr =
+        when (that.value) {
+            is Double -> Number(x - that.value)
+            else -> Sub(this, that)
+        }
+    override operator fun times(that: Double): Expr = Number(x * that)
+    override operator fun <S> times(that: Value<S>): Expr =
+        when (that.value) {
+            is Double -> Number(x * that.value)
+            else -> Mul(this, that)
+        }
+    override operator fun div(that: Double): Expr = Number(x / that)
+    override operator fun <S> div(that: Value<S>): Expr =
+        when (that.value) {
+            is Double -> Number(x / that.value)
+            else -> Div(this, that)
+        }
+
+    override fun isZero(): Boolean = x == 0.0
+    override fun isOne(): Boolean = x == 1.0
 
     companion object {
-        val E = Value(Math.E)
-        val PI = Value(Math.PI)
-        val C0 = Value(0.0)
-        val C1 = Value(1.0)
-        val N1 = Value(-1.0)
+        val E = Number(Math.E)
+        val PI = Number(Math.PI)
+        val C0 = Number(0.0)
+        val C1 = Number(1.0)
+        val N1 = Number(-1.0)
+    }
+}
+
+class Vector(@JvmField val vec: Vector3d): Value<Vector3d>(vec) {
+    constructor(x: Double, y: Double, z: Double) : this(Vector3d(x, y, z))
+    override fun plus(that: Vector3d): Expr = Vector(vec.add(that))
+    override fun <S> plus(that: Value<S>): Expr =
+        when (that.value) {
+            is Vector3d -> Vector(vec.add(that.value))
+            is Double -> Vector(vec.add(that.value, that.value, that.value))
+            else -> Add(this, that)
+        }
+
+    override fun minus(that: Vector3d): Expr = Vector(value.sub(that))
+    override fun <S> minus(that: Value<S>): Expr  =
+        when (that.value) {
+            is Vector3d -> Vector(vec.sub(that.value))
+            is Double -> Vector(vec.sub(that.value, that.value, that.value))
+            else -> Add(this, that)
+        }
+
+    override fun times(that: Vector3d): Expr = Vector(value.mul(that))
+    override fun <S> times(that: Value<S>): Expr =
+        when (that.value) {
+            is Vector3d -> Number(vec.dot(that.value))
+            is Double -> Vector(vec.mul(that.value))
+            else -> Add(this, that)
+        }
+
+    override fun div(that: Vector3d): Expr = Vector(value.div(that))
+    override fun <S> div(that: Value<S>): Expr =
+        when (that.value) {
+            is Vector3d -> Vector(vec.cross(that.value))
+            is Double -> Vector(vec.div(that.value))
+            else -> Add(this, that)
+        }
+
+    override fun diff(wrt: Expr): Expr = ZERO
+
+    override fun toString(): String = "( ${vec.x}, ${vec.y}, ${vec.z} )"
+
+    override fun isZero(): Boolean = vec == ZERO.vec
+    override fun isOne(): Boolean = vec == ONE.vec
+    companion object {
+        val ZERO = Vector(0.0, 0.0, 0.0)
+        val ONE = Vector(1.0, 1.0, 1.0)
+        val I = Vector(1.0, 0.0, 0.0)
+        val J = Vector(0.0, 1.0, 0.0)
+        val K = Vector(0.0, 0.0, 1.0)
     }
 }
 
@@ -75,7 +157,7 @@ class Symbol(var label: String): Expr() {
 
     override fun args(): List<Expr> = listOf()
 
-    override fun diff(wrt: Expr): Expr = if (this == wrt) Value.C1 else Value.C0
+    override fun diff(wrt: Expr): Expr = if (this == wrt) Number.C1 else Number.C0
 
     override fun toString(): String = label
     override fun hashCode(): Int {
@@ -100,19 +182,19 @@ class Symbol(var label: String): Expr() {
     }
 }
 class Infinity: Expr() {
-    override fun diff(wrt: Expr): Expr = Value(666666.0)
+    override fun diff(wrt: Expr): Expr = Number(666666.0)
     override fun toString(): String = "oo"
 }
 class Undefined: Expr() {
-    override fun diff(wrt: Expr): Expr = Value(666666.0)
+    override fun diff(wrt: Expr): Expr = Number(666666.0)
     override fun toString(): String = "undef"
 }
 
 class Add(override val A: Expr, override val B: Expr): BinaryOp(A, B) {
     override fun simplify(): Expr = when {
-        (A == Value.C0) -> B.simplify()
-        (B == Value.C0) -> A.simplify()
-        (A is Value && B is Value) -> A + B
+        (A is Value<*> && A.isZero()) -> B.simplify()
+        (B is Value<*> && B.isZero()) -> A.simplify()
+        (A is Value<*> && B is Value<*>) -> A + B
         else -> simplifyIns()
     }
     override fun diff(wrt: Expr): Expr = A.diff(wrt) + B.diff(wrt)
@@ -120,9 +202,9 @@ class Add(override val A: Expr, override val B: Expr): BinaryOp(A, B) {
 }
 class Sub(override val A: Expr, override val B: Expr): BinaryOp(A, B) {
     override fun simplify(): Expr = when {
-        (A == Value.C0) -> B * -1.0
-        (B == Value.C0) -> A
-        (A is Value && B is Value) -> A + B
+        (A is Value<*> && A.isZero()) -> B.simplify() * -1.0
+        (B is Value<*> && B.isZero()) -> A.simplify()
+        (A is Value<*> && B is Value<*>) -> A + B
         else -> simplifyIns()
     }
     override fun diff(wrt: Expr): Expr = A.diff(wrt) - B.diff(wrt)
@@ -130,10 +212,10 @@ class Sub(override val A: Expr, override val B: Expr): BinaryOp(A, B) {
 }
 class Mul(override val A: Expr, override val B: Expr): BinaryOp(A, B) {
     override fun simplify(): Expr = when {
-        (A == Value.C0 || B == Value.C0) -> Value.C0
-        (A == Value.C1) -> B
-        (B == Value.C1) -> A
-        (A is Value && B is Value) -> A * B
+        ((A is Value<*> && A.isZero()) || B is Value<*> && B.isZero()) -> Number.C0
+        (A is Value<*> && A.isOne()) -> B
+        (B is Value<*> && B.isOne()) -> A
+        (A is Value<*> && B is Value<*>) -> A * B
         else -> simplifyIns()
     }
     override fun diff(wrt: Expr): Expr = (A.diff(wrt) * B) + (A * B.diff(wrt))
@@ -141,31 +223,32 @@ class Mul(override val A: Expr, override val B: Expr): BinaryOp(A, B) {
 }
 class Div(override val A: Expr, override val B: Expr): BinaryOp(A, B) {
     override fun simplify(): Expr = when {
-        A == Value.C0 -> Value.C0
-        B == Value.C0 -> Infinity()
-        A == Value.C1 -> A / B
-        B == Value.C1 -> A
-        A is Value && B is Value -> A / B
+        A == Number.C0 -> Number.C0
+        A == Vector.ZERO -> Vector.ZERO
+        B == Number.C0 -> Infinity()
+        B == Vector.ZERO -> Vector.ZERO
+        B == Number.C1 -> A
+        A is Value<*> && B is Value<*> -> A / B
         else -> simplifyIns()
     }
-    override fun diff(wrt: Expr): Expr = ((A.diff(wrt) * B) - (A * B.diff(wrt))) / Pow(B, Value(2.0))
+    override fun diff(wrt: Expr): Expr = ((A.diff(wrt) * B) - (A * B.diff(wrt))) / Pow(B, Number(2.0))
     override fun toString(): String = "$A / $B"
 }
 
 class Pow(override val A: Expr, override val B: Expr): BinaryOp(A, B) {
     override fun simplify(): Expr = when {
-        A == Value.C1 -> Value.C1
-        B == Value.C1 -> A
-        A == Value.C0 -> Value.C0
-        B == Value.C0 -> Value.C1
-        A is Value && B is Value -> Value(A.x.pow(B.x))
+        A == Number.C1 -> Number.C1
+        B == Number.C1 -> A
+        A == Number.C0 -> Number.C0
+        B == Number.C0 -> Number.C1
+        A is Number && B is Number -> Number(A.x.pow(B.x))
         else -> simplifyIns()
     }
     override fun diff(wrt: Expr): Expr {
-        return if (B is Value) {
+        return if (B is Number) {
             B * Pow(A, B - 1.0)
         } else {
-            val log = Log(B, Value.E)
+            val log = Log(B, Number.E)
             val term1 = B.diff(wrt) * log
             val term2 = B * A.diff(wrt) / A
             this * (term1 + term2)
@@ -176,20 +259,20 @@ class Pow(override val A: Expr, override val B: Expr): BinaryOp(A, B) {
 
 class Log(val n: Expr, val base: Expr): BinaryOp(n, base) {
     override fun simplify(): Expr = when {
-        n == Value.C1 -> Value.C0
-        base == Value.C1 -> Infinity()
-        n == Value.C0 -> Infinity()
-        base == Value.C0 -> Infinity()
-        n is Value && base is Value -> Value(log(n.x, base.x))
+        n == Number.C1 -> Number.C0
+        base == Number.C1 -> Infinity()
+        n == Number.C0 -> Infinity()
+        base == Number.C0 -> Infinity()
+        n is Number && base is Number -> Number(log(n.x, base.x))
         else -> simplifyIns()
     }
-    override fun diff(wrt: Expr): Expr = Value.C1 / (base * Log(n, Value.E))
+    override fun diff(wrt: Expr): Expr = Number.C1 / (base * Log(n, Number.E))
     override fun toString(): String = "log_$n($base)"
 }
 
 class Sin(override val A: Expr): UnaryOp(A) {
     override fun simplify(): Expr = when (A) {
-        is Value -> Value(sin(A.x))
+        is Number -> Number(sin(A.x))
         is ArcSin -> A.A
         else -> simplifyIns()
     }
@@ -198,7 +281,7 @@ class Sin(override val A: Expr): UnaryOp(A) {
 }
 class Cos(override val A: Expr): UnaryOp(A) {
     override fun simplify(): Expr = when (A) {
-        is Value -> Value(cos(A.x))
+        is Number -> Number(cos(A.x))
         is ArcCos -> A.A
         else -> simplifyIns()
     }
@@ -207,50 +290,50 @@ class Cos(override val A: Expr): UnaryOp(A) {
 }
 class Tan(override val A: Expr): UnaryOp(A) {
     override fun simplify(): Expr = when (A) {
-        is Value -> Value(tan(A.x))
+        is Number -> Number(tan(A.x))
         is ArcTan -> A.A
         else -> simplifyIns()
     }
-    override fun diff(wrt: Expr): Expr = Value.C1 / Pow(Cos(A), Value(2.0)) * A.diff(wrt)
+    override fun diff(wrt: Expr): Expr = Number.C1 / Pow(Cos(A), Number(2.0)) * A.diff(wrt)
     override fun toString(): String = "tan($A)"
 }
 class ArcSin(override val A: Expr): UnaryOp(A) {
     override fun simplify(): Expr = when (A) {
-        is Value -> Value(asin(A.x))
+        is Number -> Number(asin(A.x))
         is Sin -> A.A
         else -> simplifyIns()
     }
-    override fun diff(wrt: Expr): Expr = Value.C1 / Pow(Value.C1 - Pow(A, Value(2.0)), Value(0.5)) * A.diff(wrt)
+    override fun diff(wrt: Expr): Expr = Number.C1 / Pow(Number.C1 - Pow(A, Number(2.0)), Number(0.5)) * A.diff(wrt)
     override fun toString(): String = "asin($A)"
 }
 class ArcCos(override val A: Expr): UnaryOp(A) {
     override fun simplify(): Expr = when (A) {
-        is Value -> Value(acos(A.x))
+        is Number -> Number(acos(A.x))
         is Cos -> A.A
         else -> simplifyIns()
     }
-    override fun diff(wrt: Expr): Expr =  Value(-1.0) / Pow(Value.C1 - Pow(A, Value(2.0)), Value(0.5)) * A.diff(wrt)
+    override fun diff(wrt: Expr): Expr =  Number(-1.0) / Pow(Number.C1 - Pow(A, Number(2.0)), Number(0.5)) * A.diff(wrt)
     override fun toString(): String = "acos($A)"
 }
 class ArcTan(override val A: Expr): UnaryOp(A) {
     override fun simplify(): Expr = when (A) {
-        is Value -> Value(atan(A.x))
+        is Number -> Number(atan(A.x))
         is Tan -> A.A
         else -> simplifyIns()
     }
-    override fun diff(wrt: Expr): Expr = Value.C1 / Value.C1 + Pow(A, Value(2.0)) * A.diff(wrt)
+    override fun diff(wrt: Expr): Expr = Number.C1 / Number.C1 + Pow(A, Number(2.0)) * A.diff(wrt)
     override fun toString(): String = "atan($A)"
 }
 class ArcTan2(override val A: Expr, override val B: Expr): BinaryOp(A, B) {
-    override fun simplify(): Expr = if (A is Value && B is Value) Value(atan2(A.x, B.x)) else simplifyIns()
-    override fun diff(wrt: Expr): Expr = Value(666666.0)
+    override fun simplify(): Expr = if (A is Number && B is Number) Number(atan2(A.x, B.x)) else simplifyIns()
+    override fun diff(wrt: Expr): Expr = Number(666666.0)
     override fun toString(): String = "atan2($A)"
 }
 
 class Abs(override val A: Expr): UnaryOp(A) {
     override fun simplify(): Expr = when (A) {
-        Value.C0 -> A
-        is Value -> Value(abs(A.x))
+        Number.C0 -> A
+        is Number -> Number(abs(A.x))
         else -> simplifyIns()
     }
     override fun diff(wrt: Expr): Expr = Sign(A) * A.diff(wrt)
@@ -258,24 +341,24 @@ class Abs(override val A: Expr): UnaryOp(A) {
 }
 
 class Sign(override val A: Expr): UnaryOp(A) {
-    override fun simplify(): Expr = if (A is Value) Value(sign(A.x)) else simplifyIns()
-    override fun diff(wrt: Expr): Expr = Value.C0
+    override fun simplify(): Expr = if (A is Number) Number(sign(A.x)) else simplifyIns()
+    override fun diff(wrt: Expr): Expr = Number.C0
     override fun toString(): String = "sign($A)"
 }
 
 class Floor(override val A: Expr): UnaryOp(A) {
-    override fun simplify(): Expr = if (A is Value) Value(floor(A.x)) else simplifyIns()
-    override fun diff(wrt: Expr): Expr = Value.C0
+    override fun simplify(): Expr = if (A is Number) Number(floor(A.x)) else simplifyIns()
+    override fun diff(wrt: Expr): Expr = Number.C0
     override fun toString(): String = "⌊$A⌋"
 }
 class Ceiling(override val A: Expr): UnaryOp(A) {
-    override fun simplify(): Expr = if (A is Value) Value(ceil(A.x)) else simplifyIns()
-    override fun diff(wrt: Expr): Expr = Value.C0
+    override fun simplify(): Expr = if (A is Number) Number(ceil(A.x)) else simplifyIns()
+    override fun diff(wrt: Expr): Expr = Number.C0
     override fun toString(): String = "⌈$A⌉"
 }
 
 class Modulo(override val A: Expr, override val B: Expr): BinaryOp(A, B) {
-    override fun simplify(): Expr = if (A is Value && B is Value) Value(A.x % B.x) else simplifyIns()
+    override fun simplify(): Expr = if (A is Number && B is Number) Number(A.x % B.x) else simplifyIns()
     override fun diff(wrt: Expr): Expr = A.diff(wrt)
     override fun toString(): String = "mod($A, $B)"
 }

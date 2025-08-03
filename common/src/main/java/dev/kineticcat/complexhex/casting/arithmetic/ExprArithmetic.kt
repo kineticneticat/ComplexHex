@@ -14,6 +14,7 @@ import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
 import dev.kineticcat.complexhex.api.casting.iota.ComplexHexIotaTypes
 import dev.kineticcat.complexhex.api.casting.iota.ExprIota
 import dev.kineticcat.complexhex.api.util.*
+import dev.kineticcat.complexhex.api.util.Number
 
 object ExprArithmetic : Arithmetic {
     val E = IotaPredicate.ofType(ComplexHexIotaTypes.EXPR)
@@ -50,7 +51,7 @@ object ExprArithmetic : Arithmetic {
             SUB -> BinaryEE_ED({a, b -> a.minus(b)}, {a, b -> a.minus(b)})
             MUL -> BinaryEE_ED({ a, b -> a.times(b) }, { a, b -> a.times(b) })
             DIV -> BinaryEE_ED({ a, b -> a.div(b)}, { a, b -> a.div(b)})
-            POW -> BinaryEE_ED(::Pow) { a, b -> Pow(a, Value(b)) }
+            POW -> BinaryEE_ED(::Pow) { a, b -> Pow(a, Number(b)) }
             ABS -> UnaryE(::Abs)
             FLOOR -> UnaryE(::Floor)
             CEIL -> UnaryE(::Ceiling)
@@ -60,9 +61,9 @@ object ExprArithmetic : Arithmetic {
             ARCSIN -> UnaryE(::ArcSin)
             ARCCOS -> UnaryE(::ArcCos)
             ARCTAN -> UnaryE(::ArcTan)
-            ARCTAN2 -> BinaryEE_ED(::ArcTan2) {a, b -> ArcTan2(a, Value(b))}
-            LOG -> BinaryEE_ED(::Log) {a, b -> Log(a, Value(b))}
-            MOD -> BinaryEE_ED(::Modulo) {a, b -> Modulo(a, Value(b))}
+            ARCTAN2 -> BinaryEE_ED(::ArcTan2) {a, b -> ArcTan2(a, Number(b))}
+            LOG -> BinaryEE_ED(::Log) {a, b -> Log(a, Number(b))}
+            MOD -> BinaryEE_ED(::Modulo) {a, b -> Modulo(a, Number(b))}
             else -> throw InvalidOperatorException("$pattern is not a valid operator for expr arith!")
         }
     }

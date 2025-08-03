@@ -4,7 +4,7 @@ import at.petrak.hexcasting.api.pigment.FrozenPigment
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.kineticcat.complexhex.Complexhex.id
-import dev.kineticcat.complexhex.api.util.Value
+import dev.kineticcat.complexhex.api.util.Number
 import dev.kineticcat.complexhex.entity.ParameticLineEntity
 import net.minecraft.client.renderer.LightTexture
 import net.minecraft.client.renderer.MultiBufferSource
@@ -36,9 +36,9 @@ class ParametricLineRenderer(val context: EntityRendererProvider.Context): Entit
         }
     }
     fun getPosAtT(para: ParameticLineEntity, t: Double): Vec3? {
-        val x = para.xpr("t", t).let { if (it is Value) it.x else return null }
-        val y = para.ypr("t", t).let { if (it is Value) it.x else return null }
-        val z = para.zpr("t", t).let { if (it is Value) it.x else return null }
+        val x = para.xpr("t", t).let { if (it is Number) it.x else return null }
+        val y = para.ypr("t", t).let { if (it is Number) it.x else return null }
+        val z = para.zpr("t", t).let { if (it is Number) it.x else return null }
         return Vec3(x, y, z)
     }
     private fun line(poseStack: PoseStack, vertices: VertexConsumer, start: Vec3, end: Vec3, pigment: FrozenPigment, thickness: Double) {

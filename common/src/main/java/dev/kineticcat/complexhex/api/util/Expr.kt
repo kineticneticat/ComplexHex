@@ -26,13 +26,13 @@ abstract class Expr {
     }
 
     operator fun plus(that: Expr): Expr = Add(this, that)
-    open operator fun plus(that: Double): Expr = Add(this, Value(that))
+    open operator fun plus(that: Double): Expr = Add(this, Number(that))
     operator fun minus(that: Expr): Expr = Sub(this, that)
-    open operator fun minus(that: Double): Expr = Sub(this, Value(that))
+    open operator fun minus(that: Double): Expr = Sub(this, Number(that))
     operator fun times(that: Expr): Expr = Mul(this, that)
-    open operator fun times(that: Double): Expr = Mul(this, Value(that))
+    open operator fun times(that: Double): Expr = Mul(this, Number(that))
     operator fun div(that: Expr): Expr = Div(this, that)
-    open operator fun div(that: Double): Expr = Div(this, Value(that))
+    open operator fun div(that: Double): Expr = Div(this, Number(that))
 
     fun simp(): Expr {
         var expr = this
@@ -40,7 +40,7 @@ abstract class Expr {
         return expr
     }
     fun subsimp(from: Expr, to: Expr): Expr = substitute(from, to).simp()
-    operator fun invoke(from: String, to: Double) = subsimp(Symbol(from), Value(to))
+    operator fun invoke(from: String, to: Double) = subsimp(Symbol(from), Number(to))
     fun serialise() = ExprDeSer.serialise(this)
     fun asIota(): ExprIota = ExprIota(this)
     fun asActionResult(): List<Iota> = listOf(asIota())
@@ -52,7 +52,7 @@ abstract class Expr {
 }
 
 fun main() {
-    val expr = Cos(Symbol.T * 4.0 * Value.PI)
+    val expr = Cos(Symbol.T * 4.0 * Number.PI)
     println(expr)
-    println(expr.subsimp(Symbol.T, Value(0.5)))
+    println(expr.subsimp(Symbol.T, Number(0.5)))
 }

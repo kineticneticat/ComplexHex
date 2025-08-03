@@ -4,7 +4,7 @@ import at.petrak.hexcasting.api.pigment.FrozenPigment
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.kineticcat.complexhex.Complexhex.id
-import dev.kineticcat.complexhex.api.util.Value
+import dev.kineticcat.complexhex.api.util.Number
 import dev.kineticcat.complexhex.entity.ParametricSurfaceEntity
 import net.minecraft.client.renderer.LightTexture
 import net.minecraft.client.renderer.MultiBufferSource
@@ -48,9 +48,9 @@ class ParametricSurfaceRenderer(val context: EntityRendererProvider.Context): En
         }
     }
     fun getPosAtUV(para: ParametricSurfaceEntity,u: Double, v: Double, origin: Vec3, time: Long): Vec3? {
-        val x = para.xpr("u", u)("v", v)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Value) it.x else return null }
-        val y = para.ypr("u", u)("v", v)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Value) it.x else return null }
-        val z = para.zpr("u", u)("v", v)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Value) it.x else return null }
+        val x = para.xpr("u", u)("v", v)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Number) it.x else return null }
+        val y = para.ypr("u", u)("v", v)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Number) it.x else return null }
+        val z = para.zpr("u", u)("v", v)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Number) it.x else return null }
         return Vec3(x, y, z)
     }
 
