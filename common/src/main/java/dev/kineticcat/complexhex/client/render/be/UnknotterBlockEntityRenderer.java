@@ -12,10 +12,16 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 import static dev.kineticcat.complexhex.Complexhex.id;
 
 public class UnknotterBlockEntityRenderer implements BlockEntityRenderer<UnknotterBlockEntity> {
+
+//    private static final Matrix3f forward = new Matrix3f().rotateXYZ((float) Math.toRadians(0), 0, (float) Math.toRadians(0));
+//    private static final Matrix3f backward = new Matrix3f().rotateXYZ((float) Math.toRadians(0), 0, (float) Math.toRadians(0)).invert();
 
     public UnknotterBlockEntityRenderer() {
         LayerDefinition layerdef = getLayerDefinition();
@@ -114,15 +120,17 @@ public class UnknotterBlockEntityRenderer implements BlockEntityRenderer<Unknott
     }
     @Override
     public void render(UnknotterBlockEntity blockEntity, float f, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
-        poseStack.pushPose();
-//        poseStack.mulPose(new Quaternion(new Vec3(1, 0, -1), Math.PI/4).quaternionf());
-        poseStack.translate(0.5, 0.75, 0.5);
 
-//        ModelPart.Cube cube = new ModelPart.Cube(22, 20, -5.5f, 0.5f, 0.5f, 9, 2, 2, 0, 0, 0, false, 64, 64, EnumSet.allOf(Direction.class));
+        Matrix3f forward = new Matrix3f().rotateXYZ((float) Math.toRadians(35), 0, (float) Math.toRadians(-45));
+        Matrix3f backward = forward.invert(new Matrix3f());
+
+        poseStack.pushPose();
+        poseStack.mulPoseMatrix(new Matrix4f(forward));
+        Vector3f offset = new Vector3f(0.5f, 8.25f/16, 0.5f).mul(backward);
+        poseStack.translate(offset.x, offset.y, offset.z);
 
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutout(id("textures/block/unknot.png")));
         knot.render(poseStack, consumer, light, overlay);
-//        cube.compile(poseStack.last(), consumer, light, overlay, 1, 1, 1, 1);
         poseStack.popPose();
     }
 }

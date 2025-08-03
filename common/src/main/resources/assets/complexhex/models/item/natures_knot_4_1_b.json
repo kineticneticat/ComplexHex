@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "complexhex:item/natures_knot_4_1_b"
+  }
+}

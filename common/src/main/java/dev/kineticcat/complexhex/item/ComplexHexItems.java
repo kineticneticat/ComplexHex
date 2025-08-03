@@ -59,6 +59,15 @@ public class ComplexHexItems {
             )
     );
 
+    public static final NatureKnotItem KNOT_3_1_A = make("natures_knot_3_1_a", new NatureKnotItem(new Item.Properties()));
+    public static final NatureKnotItem KNOT_3_1_B = make("natures_knot_3_1_b", new NatureKnotItem(new Item.Properties()));
+    public static final NatureKnotItem KNOT_4_1_A = make("natures_knot_4_1_a", new NatureKnotItem(new Item.Properties()));
+    public static final NatureKnotItem KNOT_4_1_B = make("natures_knot_4_1_b", new NatureKnotItem(new Item.Properties()));
+    public static final NatureKnotItem KNOT_6_3_A = make("natures_knot_6_3_a", new NatureKnotItem(new Item.Properties()));
+    public static final NatureKnotItem KNOT_6_3_B = make("natures_knot_6_3_b", new NatureKnotItem(new Item.Properties()));
+    public static final NatureKnotItem KNOT_7_4_A = make("natures_knot_7_4_a", new NatureKnotItem(new Item.Properties()));
+    public static final NatureKnotItem KNOT_7_4_B = make("natures_knot_7_4_b", new NatureKnotItem(new Item.Properties()));
+
     public static <T extends Item> T make(String name, T item, CreativeModeTab tab) {
         Item old = ITEMS.put(id(name), item);
         if (old != null) {

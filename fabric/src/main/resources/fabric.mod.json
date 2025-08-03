@@ -26,6 +26,9 @@
         "adapter": "kotlin",
         "value": "dev.kineticcat.complexhex.fabric.ComplexhexClientFabric"
       }
+    ],
+    "emi": [
+      "dev.kineticcat.complexhex.fabric.ComplexHexEmiPlugin"
     ]
   },
   "mixins": [

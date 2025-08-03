@@ -123,6 +123,14 @@
 
   "complexhex.entry.expressions": "Expressions",
   "hexcasting.action.complexhex:new_symbol": "Create Symbol",
-  "complexhex.page.expressions.new": "Creates a new symbol with the given label"
+  "complexhex.page.expressions.new": "Creates a new symbol with the given label",
 
+  "item.complexhex.natures_knot_3_1_a": "Up Nature's Knot",
+  "item.complexhex.natures_knot_3_1_b": "Down Nature's Knot",
+  "item.complexhex.natures_knot_4_1_a": "Charm Nature's Knot",
+  "item.complexhex.natures_knot_4_1_b": "Strange Nature's Knot",
+  "item.complexhex.natures_knot_6_3_a": "Top Nature's Knot",
+  "item.complexhex.natures_knot_6_3_b": "Bottom Nature's Knot",
+  "item.complexhex.natures_knot_7_4_a": "Warp Nature's Knot",
+  "item.complexhex.natures_knot_7_4_b": "Weft Nature's Knot"
 }
