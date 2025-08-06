@@ -1,0 +1,58 @@
+{
+  "name": "complexhex.entry.horrors",
+  "category": "hexcasting:patterns/maths",
+  "icon": "minecraft:raw_iron",
+  "sortnum": 11,
+  "advancement": "hexcasting:root",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:sinh",
+      "anchor": "complexhex:sinh",
+      "input": "num",
+      "output": "num",
+      "text": "complexhex.page.horrors.sinh"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:cosh",
+      "anchor": "complexhex:cosh",
+      "input": "num",
+      "output": "num",
+      "text": "complexhex.page.horrors.cosh"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:tanh",
+      "anchor": "complexhex:tanh",
+      "input": "num",
+      "output": "num",
+      "text": "complexhex.page.horrors.tanh"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:asinh",
+      "anchor": "complexhex:asinh",
+      "input": "num",
+      "output": "num",
+      "text": "complexhex.page.horrors.asinh"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:acosh",
+      "anchor": "complexhex:acosh",
+      "input": "num",
+      "output": "num",
+      "text": "complexhex.page.horrors.acosh"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:atanh",
+      "anchor": "complexhex:atanh",
+      "input": "num",
+      "output": "num",
+      "text": "complexhex.page.horrors.atanh"
+    }
+  ]
+}

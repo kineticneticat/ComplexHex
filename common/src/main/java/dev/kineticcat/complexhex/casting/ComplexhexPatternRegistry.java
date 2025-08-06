@@ -155,6 +155,13 @@ public class ComplexhexPatternRegistry {
     public static final HexPattern SUMMON_SURFACE = make("wdwddwqq", HexDir.SOUTH_EAST, "summon/surface",
             OpSpawnParametricSurface.INSTANCE);
 
+    public static final HexPattern SINH = make("eqqqqqaaw", HexDir.EAST, "sinh");
+    public static final HexPattern COSH = make("eqqqqqadw", HexDir.EAST, "cosh");
+    public static final HexPattern TANH = make("ewqqqqqadqe", HexDir.SOUTH_EAST, "tanh");
+    public static final HexPattern ASINH = make("wddeeeeeq", HexDir.SOUTH_EAST, "asinh");
+    public static final HexPattern ACOSH = make("wadeeeeeq", HexDir.NORTH_EAST, "acosh");
+    public static final HexPattern ATANH = make("qeadeeeeewq", HexDir.EAST, "atanh");
+
 
     public static void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {

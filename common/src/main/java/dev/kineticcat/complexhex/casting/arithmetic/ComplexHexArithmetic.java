@@ -1,6 +1,8 @@
 package dev.kineticcat.complexhex.casting.arithmetic;
 
 import at.petrak.hexcasting.api.casting.arithmetic.Arithmetic;
+import at.petrak.hexcasting.api.casting.math.HexDir;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.common.lib.hex.HexArithmetics;
 import dev.kineticcat.complexhex.Complexhex;
 import net.minecraft.core.Registry;
@@ -10,6 +12,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ComplexHexArithmetic {
+
+    public static HexPattern SINH = HexPattern.fromAngles("eqqqqqaaw", HexDir.EAST);
+    public static HexPattern COSH = HexPattern.fromAngles("eqqqqqadw", HexDir.EAST);
+    public static HexPattern TANH = HexPattern.fromAngles("ewqqqqqadqe", HexDir.SOUTH_EAST);
+    public static HexPattern ASINH = HexPattern.fromAngles("wddeeeeeq", HexDir.SOUTH_EAST);
+    public static HexPattern ACOSH = HexPattern.fromAngles("wadeeeeeq", HexDir.NORTH_EAST);
+    public static HexPattern ATANH = HexPattern.fromAngles("qeadeeeeewq", HexDir.EAST);
     private static final Map<ResourceLocation, Arithmetic> ARITHMETICS = new LinkedHashMap<>();
 
     public static void init() {

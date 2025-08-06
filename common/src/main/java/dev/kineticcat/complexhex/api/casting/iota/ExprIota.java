@@ -38,7 +38,7 @@ public class ExprIota extends Iota {
         @Nullable
         @Override
         public ExprIota deserialize(Tag tag, ServerLevel world) throws IllegalArgumentException {
-            return new ExprIota(deserialise(tag));
+            return new ExprIota(deserialise(tag).simp());
         }
 
         @Override

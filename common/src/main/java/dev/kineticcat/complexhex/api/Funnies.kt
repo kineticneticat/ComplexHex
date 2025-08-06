@@ -2,6 +2,7 @@ package dev.kineticcat.complexhex.api
 
 import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.Vec3Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
 import dev.kineticcat.complexhex.api.casting.iota.ComplexNumberIota
@@ -11,6 +12,7 @@ import dev.kineticcat.complexhex.api.casting.iota.QuaternionIota
 import dev.kineticcat.complexhex.api.util.Expr
 import dev.kineticcat.complexhex.api.util.Symbol
 import dev.kineticcat.complexhex.api.util.Value
+import dev.kineticcat.complexhex.api.util.Vector
 import dev.kineticcat.complexhex.stuff.ComplexNumber
 import dev.kineticcat.complexhex.stuff.Quaternion
 import kotlin.math.ln
@@ -50,11 +52,12 @@ fun List<Iota>.getExpr(idx: Int, argc: Int = 0): Expr {
         throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "expr")
     }
 }
-fun List<Iota>.getExprOrNum(idx: Int, argc: Int = 0): Expr {
+fun List<Iota>.getExprLike(idx: Int, argc: Int = 0): Expr {
     val x = this.getOrElse(idx) { throw MishapNotEnoughArgs(idx + 1, this.size) }
     return when (x) {
         is ExprIota -> x.expr()
         is DoubleIota -> Value(x.double)
+        is Vec3Iota -> Vector(x.vec3)
         else -> throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "expr_or_num")
     }
 }

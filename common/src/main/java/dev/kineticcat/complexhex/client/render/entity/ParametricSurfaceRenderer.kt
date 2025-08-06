@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.kineticcat.complexhex.Complexhex.id
 import dev.kineticcat.complexhex.api.util.Value
+import dev.kineticcat.complexhex.api.util.Vector
 import dev.kineticcat.complexhex.entity.ParametricSurfaceEntity
 import net.minecraft.client.renderer.LightTexture
 import net.minecraft.client.renderer.MultiBufferSource
@@ -24,7 +25,7 @@ class ParametricSurfaceRenderer(context: EntityRendererProvider.Context): Entity
     override fun getTextureLocation(entity: ParametricSurfaceEntity) = tex
 
     override fun render(para: ParametricSurfaceEntity, f: Float, g: Float, poseStack: PoseStack, buffer: MultiBufferSource, i: Int) {
-        val steps = 10.0
+        val steps = 6.0
         var minmin: Vec3
         var minmax: Vec3
         var maxmin: Vec3
@@ -48,10 +49,9 @@ class ParametricSurfaceRenderer(context: EntityRendererProvider.Context): Entity
         }
     }
     fun getPosAtUV(para: ParametricSurfaceEntity,u: Double, v: Double, origin: Vec3, time: Long): Vec3? {
-        val x = para.xpr("u", u)("v", v)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Value) it.x else return null }
-        val y = para.ypr("u", u)("v", v)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Value) it.x else return null }
-        val z = para.zpr("u", u)("v", v)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Value) it.x else return null }
-        return Vec3(x, y, z)
+        var vec = para.expr("u", u)("v", v)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).simp()
+        vec = vec.let { if (it is Vector && it.isPure()) it else return null }
+        return Vec3((vec.x as Value).x, (vec.y as Value).x, (vec.z as Value).x)
     }
 
     fun quad(poseStack: PoseStack, buffer: MultiBufferSource, pigment: FrozenPigment, minmin: Vec3, minmax: Vec3, maxmin: Vec3, maxmax: Vec3, time: Long) {
@@ -63,6 +63,11 @@ class ParametricSurfaceRenderer(context: EntityRendererProvider.Context): Entity
         vertex(pose, normal, vertices, minmax, pigment, time)
         vertex(pose, normal, vertices, maxmax, pigment, time)
         vertex(pose, normal, vertices, maxmin, pigment, time)
+
+        vertex(pose, normal, vertices, maxmin, pigment, time)
+        vertex(pose, normal, vertices, maxmax, pigment, time)
+        vertex(pose, normal, vertices, minmax, pigment, time)
+        vertex(pose, normal, vertices, minmin, pigment, time)
         poseStack.popPose()
     }
     private fun vertex(pose: Matrix4f, normal: Matrix3f, vertices: VertexConsumer, position: Vec3, pigment: FrozenPigment, time: Long) {
