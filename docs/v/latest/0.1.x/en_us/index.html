@@ -77,7 +77,7 @@
       <ul class="nav navbar-nav navbar-right">
             <li>
     <a
-      href="https://github.com/kineticneticat/ComplexHex/tree/70bd937f7f7a56f3b5413ec1c4b1305b5d5d2c47"
+      href="https://github.com/kineticneticat/ComplexHex/tree/cc329d33cfa6b72e28561cb9d791205220f2a030"
         target="_blank"
       class="navbar-link"
       role="button"
@@ -199,6 +199,13 @@
       loading="lazy"
       class="item-texture  texture pixelated"
     > Quaternionics</a></li>
+          <li><a href="#patterns/maths/horrors" class="toc-elem "><img
+      title="Raw Iron"
+      alt="Raw Iron"
+      src="https://raw.githubusercontent.com/PrismarineJS/minecraft-assets/a14c64362abe4a12c2dfd87f8d1673af9d1b09f4/data/1.20.2/items/raw_iron.png"
+      loading="lazy"
+      class="item-texture  texture pixelated"
+    > Cthonic Maths</a></li>
       </ul>
     </details>
     <details class="toc-category">
@@ -479,7 +486,7 @@
       <p>Creates a new symbol with the given (single character) label</p>
   </div>
 <br />
-    <p>Many operations that work on numbers can also apply to expressions.<br />The full list is: Addition, Subtraction, Multiplication, Division, Powers, Absolute, Floor, Ceiling, Sine, Cosine, Tangent, Arcsin, Arccos, Arctan, Logarithms, Modulo, Minimus, Minimus II, Maximus, Maximus II, And, Or, and Not<br />In the case of operators that work on booleans, 0 is treated as &#34;false&#34; and any non-zero value is treated as &#34;true&#34;.</p>
+    <p>Many operations that work on numbers can also apply to expressions.<br />The full list is: Addition, Subtraction, Multiplication, Division, Powers, Absolute, Floor, Ceiling, Sine, Cosine, Tangent, Arcsin, Arccos, Arctan, Sinh, Cosh, Tanh, ArcSinh, ArcCosh, ArcTanh, Vector Pack, Logarithms, Modulo, Minimus, Minimus II, Maximus, Maximus II, And, Or, and Not<br />In the case of operators that work on booleans, 0 is treated as &#34;false&#34; and any non-zero value is treated as &#34;true&#34;.</p>
 <br />
   <div id="patterns/maths/expressions@complexhex:substitute" class="">
 <h4 class="pattern-title">Substitution Exaltation (expr, expr, expr | num → expr)<a
@@ -762,7 +769,7 @@
   </div>
 <br />
   <div id="patterns/maths/expressions@complexhex:summon/line" class="">
-<h4 class="pattern-title">Parametric Line (vec, expr, expr, expr → entity)<a
+<h4 class="pattern-title">Parametric Line (vec, expr → entity)<a
     href="#patterns/maths/expressions@complexhex:summon/line"
     class="permalink small"
     title="Permalink"
@@ -814,11 +821,11 @@
         data-per-world="False"
       >Your browser does not support visualizing patterns. Pattern code: wdwddwq</canvas>
   </details>
-      <p>Summons a parametric line at the given position. The expressions given will have a t-value (0-1), x/y/z position, and time (w) substituted in and their results make a position in the line.</p>
+      <p>Summons a parametric line at the given position. The expression given will have a t-value (0-1), x/y/z position, and time (w) substituted in and must resolve to a vector on the line.</p>
   </div>
 <br />
   <div id="patterns/maths/expressions@complexhex:summon/surface" class="">
-<h4 class="pattern-title">Parametric Surface (vec, expr, expr, expr → entity)<a
+<h4 class="pattern-title">Parametric Surface (vec, expr → entity)<a
     href="#patterns/maths/expressions@complexhex:summon/surface"
     class="permalink small"
     title="Permalink"
@@ -870,7 +877,7 @@
         data-per-world="False"
       >Your browser does not support visualizing patterns. Pattern code: wdwddwqq</canvas>
   </details>
-      <p>Summons a parametric surface at the given position. The expressions given will have a u&amp;v-value (0-1), x/y/z position, and time (w) substituted in and their results make a position on the surface.</p>
+      <p>Summons a parametric surface at the given position. The expression given will have a u&amp;v-value (0-1), x/y/z position, and time (w) substituted in and must resolve to a vector on the surface</p>
   </div>
 <br />
     <p>Both Parametric objects can be killed by use of the <a href="#patterns/great_spells/bits@complexhex:killbit"><span style="color: #fc77be">Kill Bit</span></a> pattern</p>
@@ -3397,6 +3404,360 @@
       >Your browser does not support visualizing patterns. Pattern code: waqqqqqedaqqqa</canvas>
   </details>
       <p>Pushes a quaternion that reperesents a rotation by the given angle num radias around the given vector.</p>
+  </div>
+<br />
+</div>
+<div id="patterns/maths/horrors" class="entry">
+    <h3 class="entry-title page-header">
+    <img
+      title="Raw Iron"
+      alt="Raw Iron"
+      src="https://raw.githubusercontent.com/PrismarineJS/minecraft-assets/a14c64362abe4a12c2dfd87f8d1673af9d1b09f4/data/1.20.2/items/raw_iron.png"
+      loading="lazy"
+      class="item-texture  texture pixelated"
+    >Cthonic Maths<a
+    href="#table-of-contents"
+    class="permalink small"
+    title="Jump to top"
+  ><i class="bi bi-box-arrow-up"></i></a><a
+    href="#patterns/maths/horrors"
+    class="permalink small"
+    title="Permalink"
+  ><i class="bi bi-link-45deg"></i></a></h3>
+  <div id="patterns/maths/horrors@complexhex:sinh" class="">
+<h4 class="pattern-title">Hyp. Sine Prfn. (num → num)<a
+    href="#patterns/maths/horrors@complexhex:sinh"
+    class="permalink small"
+    title="Permalink"
+  ><i class="bi bi-link-45deg"></i></a></h4>
+  <details class="details-collapsible">
+    <summary class="collapse-details collapse-spell"></summary>
+    <div class="dropdown spell-settings-dropdown">
+      <span
+        href=""
+        class="dropdown-toggle spell-settings-toggle"
+        data-toggle="dropdown"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="bi bi-gear-fill"></i>
+      </span>
+      <ul class="dropdown-menu">
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Renders</a>
+          <ul class="dropdown-menu dropdown-menu-left render-dropdowns"></ul>
+        </li>
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Palettes</a>
+          <ul class="dropdown-menu dropdown-menu-left palette-dropdowns"></ul>
+        </li>
+      </ul>
+    </div>
+      <canvas
+        class="spell-viz"
+        width="216"
+        height="216"
+        data-string="eqqqqqaaw"
+        data-start="east"
+        data-per-world="False"
+      >Your browser does not support visualizing patterns. Pattern code: eqqqqqaaw</canvas>
+  </details>
+      <p>Evaluates the hyperbolic sine of the argument</p>
+  </div>
+<br />
+  <div id="patterns/maths/horrors@complexhex:cosh" class="">
+<h4 class="pattern-title">Hyp. Cosine Prfn. (num → num)<a
+    href="#patterns/maths/horrors@complexhex:cosh"
+    class="permalink small"
+    title="Permalink"
+  ><i class="bi bi-link-45deg"></i></a></h4>
+  <details class="details-collapsible">
+    <summary class="collapse-details collapse-spell"></summary>
+    <div class="dropdown spell-settings-dropdown">
+      <span
+        href=""
+        class="dropdown-toggle spell-settings-toggle"
+        data-toggle="dropdown"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="bi bi-gear-fill"></i>
+      </span>
+      <ul class="dropdown-menu">
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Renders</a>
+          <ul class="dropdown-menu dropdown-menu-left render-dropdowns"></ul>
+        </li>
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Palettes</a>
+          <ul class="dropdown-menu dropdown-menu-left palette-dropdowns"></ul>
+        </li>
+      </ul>
+    </div>
+      <canvas
+        class="spell-viz"
+        width="216"
+        height="216"
+        data-string="eqqqqqadw"
+        data-start="east"
+        data-per-world="False"
+      >Your browser does not support visualizing patterns. Pattern code: eqqqqqadw</canvas>
+  </details>
+      <p>Evaluates the hyperbolic sine of the argument</p>
+  </div>
+<br />
+  <div id="patterns/maths/horrors@complexhex:tanh" class="">
+<h4 class="pattern-title">Hyp. Tangent Prfn. (num → num)<a
+    href="#patterns/maths/horrors@complexhex:tanh"
+    class="permalink small"
+    title="Permalink"
+  ><i class="bi bi-link-45deg"></i></a></h4>
+  <details class="details-collapsible">
+    <summary class="collapse-details collapse-spell"></summary>
+    <div class="dropdown spell-settings-dropdown">
+      <span
+        href=""
+        class="dropdown-toggle spell-settings-toggle"
+        data-toggle="dropdown"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="bi bi-gear-fill"></i>
+      </span>
+      <ul class="dropdown-menu">
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Renders</a>
+          <ul class="dropdown-menu dropdown-menu-left render-dropdowns"></ul>
+        </li>
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Palettes</a>
+          <ul class="dropdown-menu dropdown-menu-left palette-dropdowns"></ul>
+        </li>
+      </ul>
+    </div>
+      <canvas
+        class="spell-viz"
+        width="216"
+        height="216"
+        data-string="ewqqqqqadqe"
+        data-start="south_east"
+        data-per-world="False"
+      >Your browser does not support visualizing patterns. Pattern code: ewqqqqqadqe</canvas>
+  </details>
+      <p>Evaluates the hyperbolic sine of the argument</p>
+  </div>
+<br />
+  <div id="patterns/maths/horrors@complexhex:asinh" class="">
+<h4 class="pattern-title">Inv. Hyp. Sine Prfn. (num → num)<a
+    href="#patterns/maths/horrors@complexhex:asinh"
+    class="permalink small"
+    title="Permalink"
+  ><i class="bi bi-link-45deg"></i></a></h4>
+  <details class="details-collapsible">
+    <summary class="collapse-details collapse-spell"></summary>
+    <div class="dropdown spell-settings-dropdown">
+      <span
+        href=""
+        class="dropdown-toggle spell-settings-toggle"
+        data-toggle="dropdown"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="bi bi-gear-fill"></i>
+      </span>
+      <ul class="dropdown-menu">
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Renders</a>
+          <ul class="dropdown-menu dropdown-menu-left render-dropdowns"></ul>
+        </li>
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Palettes</a>
+          <ul class="dropdown-menu dropdown-menu-left palette-dropdowns"></ul>
+        </li>
+      </ul>
+    </div>
+      <canvas
+        class="spell-viz"
+        width="216"
+        height="216"
+        data-string="wddeeeeeq"
+        data-start="south_east"
+        data-per-world="False"
+      >Your browser does not support visualizing patterns. Pattern code: wddeeeeeq</canvas>
+  </details>
+      <p>Evaluates the hyperbolic sine of the argument</p>
+  </div>
+<br />
+  <div id="patterns/maths/horrors@complexhex:acosh" class="">
+<h4 class="pattern-title">Inv. Hyp. Cosine Prfn. (num → num)<a
+    href="#patterns/maths/horrors@complexhex:acosh"
+    class="permalink small"
+    title="Permalink"
+  ><i class="bi bi-link-45deg"></i></a></h4>
+  <details class="details-collapsible">
+    <summary class="collapse-details collapse-spell"></summary>
+    <div class="dropdown spell-settings-dropdown">
+      <span
+        href=""
+        class="dropdown-toggle spell-settings-toggle"
+        data-toggle="dropdown"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="bi bi-gear-fill"></i>
+      </span>
+      <ul class="dropdown-menu">
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Renders</a>
+          <ul class="dropdown-menu dropdown-menu-left render-dropdowns"></ul>
+        </li>
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Palettes</a>
+          <ul class="dropdown-menu dropdown-menu-left palette-dropdowns"></ul>
+        </li>
+      </ul>
+    </div>
+      <canvas
+        class="spell-viz"
+        width="216"
+        height="216"
+        data-string="wadeeeeeq"
+        data-start="north_east"
+        data-per-world="False"
+      >Your browser does not support visualizing patterns. Pattern code: wadeeeeeq</canvas>
+  </details>
+      <p>Evaluates the hyperbolic sine of the argument</p>
+  </div>
+<br />
+  <div id="patterns/maths/horrors@complexhex:atanh" class="">
+<h4 class="pattern-title">Inv. Hyp. Tangent Prfn. (num → num)<a
+    href="#patterns/maths/horrors@complexhex:atanh"
+    class="permalink small"
+    title="Permalink"
+  ><i class="bi bi-link-45deg"></i></a></h4>
+  <details class="details-collapsible">
+    <summary class="collapse-details collapse-spell"></summary>
+    <div class="dropdown spell-settings-dropdown">
+      <span
+        href=""
+        class="dropdown-toggle spell-settings-toggle"
+        data-toggle="dropdown"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="bi bi-gear-fill"></i>
+      </span>
+      <ul class="dropdown-menu">
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Renders</a>
+          <ul class="dropdown-menu dropdown-menu-left render-dropdowns"></ul>
+        </li>
+        <li class="dropdown-submenu">
+          <a
+            href=""
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >Palettes</a>
+          <ul class="dropdown-menu dropdown-menu-left palette-dropdowns"></ul>
+        </li>
+      </ul>
+    </div>
+      <canvas
+        class="spell-viz"
+        width="216"
+        height="216"
+        data-string="qeadeeeeewq"
+        data-start="east"
+        data-per-world="False"
+      >Your browser does not support visualizing patterns. Pattern code: qeadeeeeewq</canvas>
+  </details>
+      <p>Evaluates the hyperbolic sine of the argument</p>
   </div>
 <br />
 </div>
