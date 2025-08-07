@@ -4,7 +4,7 @@ import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.Iota
 import dev.kineticcat.complexhex.api.getExpr
-import dev.kineticcat.complexhex.api.getExprOrNum
+import dev.kineticcat.complexhex.api.getExprLike
 import dev.kineticcat.complexhex.api.util.Equals
 
 object OpExprEquals : ConstMediaAction {
@@ -12,7 +12,7 @@ object OpExprEquals : ConstMediaAction {
 
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         val A = args.getExpr(0)
-        val B = args.getExprOrNum(1)
+        val B = args.getExprLike(1)
         return Equals(A, B).asActionResult()
     }
 }

@@ -17,7 +17,7 @@ abstract class Expr {
     open fun args(): List<Expr>? = null
     abstract fun diff(wrt: Symbol): Expr
 
-    abstract fun hasSymbol(sym:Symbol): Boolean
+    open fun contains(that: Expr): Boolean = this == that
 
     open fun substitute(from: Expr, to: Expr) = if (this == from) to else this
     abstract override fun toString(): String
@@ -27,18 +27,43 @@ abstract class Expr {
         return result
     }
 
-    operator fun plus(that: Expr): Expr = Add(this, that)
+    open operator fun plus(that: Expr): Expr =
+        when {
+            that == Value.ZERO -> this
+            this == Value.ZERO -> that
+            else -> Add(this, that)
+        }
     open operator fun plus(that: Double): Expr = Add(this, Value(that))
-    operator fun minus(that: Expr): Expr = Sub(this, that)
+    open operator fun minus(that: Expr): Expr =
+        when {
+            that == Value.ZERO -> this
+            this == Value.ZERO -> that * -1.0
+            else -> Sub(this, that)
+        }
     open operator fun minus(that: Double): Expr = Sub(this, Value(that))
-    operator fun times(that: Expr): Expr = Mul(this, that)
+    open operator fun times(that: Expr): Expr =
+        when {
+            that == Value.ZERO -> Value.ZERO
+            this == Value.ZERO -> Value.ZERO
+            this == Value.ONE -> that
+            that == Value.ONE -> this
+            else -> Mul(this, that)
+        }
     open operator fun times(that: Double): Expr = Mul(this, Value(that))
-    operator fun div(that: Expr): Expr = Div(this, that)
+    open operator fun div(that: Expr): Expr =
+        when {
+            that == Value.ZERO -> Infinity()
+            this == Value.ZERO -> Value.ZERO
+            that == Value.ONE -> this
+            else -> Div(this, that)
+        }
     open operator fun div(that: Double): Expr = Div(this, Value(that))
 
     fun simp(): Expr {
         var expr = this
-        while (expr != expr.simplify()) expr = expr.simplify()
+        while (expr != expr.simplify()) {
+            expr = expr.simplify()
+        }
         return expr
     }
     fun subsimp(from: Expr, to: Expr): Expr = substitute(from, to).simp()
@@ -54,7 +79,23 @@ abstract class Expr {
 }
 
 fun main() {
-    val expr = Cos(Symbol.T * 4.0 * Value.PI)
-    println(expr)
-    println(expr.subsimp(Symbol.T, Value(0.5)))
+//    val expr = Vector(-1.0 * Cosh(Symbol.V) * Cos(Symbol.U), -1.0 * Cosh(Symbol.V) * Sin(Symbol.U), Symbol.V)
+//    println(expr)
+//    val sub = expr("u", 0.0)("v", 0.0)
+//    println(sub.simp())
+//    val expr = Cos(Value(0.0)).simplify()
+//    println(expr)
+//    val expr = Symbol.V * 2.0 - 1.0
+//    println(expr)
+//    for (i in 0 until 10) {
+//        print("${i / 10.0} -> ")
+//        println(expr("v", i.toDouble()/10.0))
+//    }
+//    val expr = -1.0 * Cosh(Symbol.V) * Cos(Symbol.U)
+//    println(expr.simp())
+//    println(expr.diff(Symbol.U).simp())
+    val A = Vector(1.0, 2.0, 3.0)
+    val B = Vector(3.0, 2.0, 1.0)
+    println((A * B).simp())
+
 }

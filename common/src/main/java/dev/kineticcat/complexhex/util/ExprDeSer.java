@@ -69,6 +69,12 @@ public class ExprDeSer {
         SerialisationHandlers.put(ArcSin.class, SerUnaryHandler);
         SerialisationHandlers.put(ArcCos.class, SerUnaryHandler);
         SerialisationHandlers.put(ArcTan.class, SerUnaryHandler);
+        SerialisationHandlers.put(Sinh.class, SerUnaryHandler);
+        SerialisationHandlers.put(Cosh.class, SerUnaryHandler);
+        SerialisationHandlers.put(Tanh.class, SerUnaryHandler);
+        SerialisationHandlers.put(ArcSinh.class, SerUnaryHandler);
+        SerialisationHandlers.put(ArcCosh.class, SerUnaryHandler);
+        SerialisationHandlers.put(ArcTanh.class, SerUnaryHandler);
         SerialisationHandlers.put(ArcTan2.class, SerBinaryHandler);
         SerialisationHandlers.put(Sign.class, SerUnaryHandler);
         SerialisationHandlers.put(Floor.class, SerUnaryHandler);
@@ -88,6 +94,15 @@ public class ExprDeSer {
             ltag.add(serialise(cast.getCondition()));
             ltag.add(serialise(cast.getIfTrue()));
             ltag.add(serialise(cast.getIfFalse()));
+            ctag.put(ARGS_TAG, ltag);
+            return ctag;
+        });
+        SerialisationHandlers.put(Vector.class, (expr, ctag) -> {
+            Vector cast = (Vector) expr;
+            ListTag ltag = new ListTag();
+            ltag.add(serialise(cast.x));
+            ltag.add(serialise(cast.y));
+            ltag.add(serialise(cast.z));
             ctag.put(ARGS_TAG, ltag);
             return ctag;
         });
@@ -122,6 +137,12 @@ public class ExprDeSer {
         DeserialisationHandlers.put(ArcSin.class.getSimpleName(), DeserUnaryHandler.apply(ArcSin::new));
         DeserialisationHandlers.put(ArcCos.class.getSimpleName(), DeserUnaryHandler.apply(ArcCos::new));
         DeserialisationHandlers.put(ArcTan.class.getSimpleName(), DeserUnaryHandler.apply(ArcTan::new));
+        DeserialisationHandlers.put(Sinh.class.getSimpleName(), DeserUnaryHandler.apply(Sinh::new));
+        DeserialisationHandlers.put(Cosh.class.getSimpleName(), DeserUnaryHandler.apply(Cosh::new));
+        DeserialisationHandlers.put(Tanh.class.getSimpleName(), DeserUnaryHandler.apply(Tanh::new));
+        DeserialisationHandlers.put(ArcSinh.class.getSimpleName(), DeserUnaryHandler.apply(ArcSinh::new));
+        DeserialisationHandlers.put(ArcCosh.class.getSimpleName(), DeserUnaryHandler.apply(ArcCosh::new));
+        DeserialisationHandlers.put(ArcTanh.class.getSimpleName(), DeserUnaryHandler.apply(ArcTanh::new));
         DeserialisationHandlers.put(ArcTan2.class.getSimpleName(), DeserBinaryHandler.apply(ArcTan2::new));
         DeserialisationHandlers.put(Sign.class.getSimpleName(), DeserUnaryHandler.apply(Sign::new));
         DeserialisationHandlers.put(Floor.class.getSimpleName(), DeserUnaryHandler.apply(Floor::new));
@@ -138,6 +159,10 @@ public class ExprDeSer {
         DeserialisationHandlers.put(Piecewise.class.getSimpleName(), ctag -> {
             ListTag ltag = ctag.getList(ARGS_TAG, Tag.TAG_COMPOUND);
             return new Piecewise(deserialise(ltag.getCompound(0)), deserialise(ltag.getCompound(1)), deserialise(ltag.getCompound(2)));
+        });
+        DeserialisationHandlers.put(Vector.class.getSimpleName(), ctag -> {
+            ListTag ltag = ctag.getList(ARGS_TAG, Tag.TAG_COMPOUND);
+            return new Vector(deserialise(ltag.getCompound(0)), deserialise(ltag.getCompound(1)), deserialise(ltag.getCompound(2)));
         });
     }
 }

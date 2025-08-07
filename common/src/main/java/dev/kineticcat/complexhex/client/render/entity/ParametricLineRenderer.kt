@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.kineticcat.complexhex.Complexhex.id
 import dev.kineticcat.complexhex.api.util.Value
+import dev.kineticcat.complexhex.api.util.Vector
 import dev.kineticcat.complexhex.entity.ParametricLineEntity
 import net.minecraft.client.renderer.LightTexture
 import net.minecraft.client.renderer.MultiBufferSource
@@ -26,7 +27,7 @@ class ParametricLineRenderer(context: EntityRendererProvider.Context): EntityRen
     override fun getTextureLocation(entity: ParametricLineEntity) = tex
 
     override fun render(para: ParametricLineEntity, f: Float, g: Float, poseStack: PoseStack, multiBufferSource: MultiBufferSource, i: Int) {
-        val steps = 100.0
+        val steps = 30.0
         var start: Vec3
         var end: Vec3
         for (t in 0 until steps.toInt()) {
@@ -36,10 +37,8 @@ class ParametricLineRenderer(context: EntityRendererProvider.Context): EntityRen
         }
     }
     fun getPosAtT(para: ParametricLineEntity, t: Double, origin: Vec3, time: Long): Vec3? {
-        val x = para.xpr("t", t)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Value) it.x else return null }
-        val y = para.ypr("t", t)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Value) it.x else return null }
-        val z = para.zpr("t", t)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Value) it.x else return null }
-        return Vec3(x, y, z)
+        val vec = para.expr("t", t)("x", origin.x)("y", origin.y)("z", origin.z)("w", time.toDouble()).let { if (it is Vector && it.isPure()) it else return null }
+        return Vec3((vec.x as Value).x, (vec.y as Value).x, (vec.z as Value).x)
     }
     @Suppress("SameParameterValue")
     private fun line(poseStack: PoseStack, vertices: VertexConsumer, start: Vec3, end: Vec3, pigment: FrozenPigment, thickness: Double) {

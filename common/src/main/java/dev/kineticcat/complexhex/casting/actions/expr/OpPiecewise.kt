@@ -4,7 +4,7 @@ import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.Iota
 import dev.kineticcat.complexhex.api.getExpr
-import dev.kineticcat.complexhex.api.getExprOrNum
+import dev.kineticcat.complexhex.api.getExprLike
 import dev.kineticcat.complexhex.api.util.Piecewise
 
 object OpPiecewise : ConstMediaAction {
@@ -12,8 +12,8 @@ object OpPiecewise : ConstMediaAction {
 
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         val condition = args.getExpr(0)
-        val ifTrue = args.getExprOrNum(1)
-        val ifFalse = args.getExprOrNum(2)
+        val ifTrue = args.getExprLike(1)
+        val ifFalse = args.getExprLike(2)
         return Piecewise(condition, ifTrue, ifFalse).asActionResult()
     }
 }

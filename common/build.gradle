@@ -11,6 +11,9 @@ loom {
 }
 
 dependencies {
+    implementation 'junit:junit:4.13.1'
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+
     // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
     // Do NOT use other classes from fabric loader
     modImplementation "net.fabricmc:fabric-loader:${project.fabricLoaderVersion}"
@@ -26,6 +29,8 @@ dependencies {
     modCompileOnly files("${rootProject.rootDir}/lib/moreiotas-fabric-1.20.1-0.1.0-4.jar")
     implementation group: "org.jblas", name: "jblas", version: "1.2.5"
     implementation "org.joml:joml:1.10.8"
+
+    testImplementation "org.jetbrains.kotlin:kotlin-test"
 }
 
 publishing {
@@ -44,4 +49,8 @@ publishing {
 
 repositories {
     mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
 }
