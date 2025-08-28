@@ -104,6 +104,11 @@ public class ComplexhexPatternRegistry {
     public static final HexPattern SCALEBIT = make("wqwqwqwqwqwawwaawaawa", HexDir.SOUTH_EAST, "scalebit",
             OpScaleBIT.INSTANCE);
 
+    public static final HexPattern GET4X4MAT = make("qwqwqwqwqwqqeawwaeaww", HexDir.SOUTH_WEST, "get_bit_4x4",
+            OpGetBit4x4.INSTANCE);
+    public static final HexPattern SET4X4Mat = make("eweweweweweewwdqdwwdq", HexDir.NORTH_EAST, "set_bit_4x4",
+            OpSetBit4x4.INSTANCE);
+
     public static final HexPattern GET_ENTITY$BIT = make("qqwwewewewewewwqqdaqaaww", HexDir.SOUTH_EAST, "get_entity/bit",
             new OpGetEntityAt(e -> e instanceof Display));
     public static final HexPattern ZONE_ENTITY$BIT = make("qqwwewewewewewwqqwdeddww", HexDir.SOUTH_EAST, "zone_entity/bit",
@@ -155,11 +160,11 @@ public class ComplexhexPatternRegistry {
     public static final HexPattern SUMMON_SURFACE = make("wdwddwqq", HexDir.SOUTH_EAST, "summon/surface",
             OpSpawnParametricSurface.INSTANCE);
 
-    public static final HexPattern SINH = make("eqqqqqaaw", HexDir.EAST, "sinh");
-    public static final HexPattern COSH = make("eqqqqqadw", HexDir.EAST, "cosh");
+    public static final HexPattern SINH = make("dqqqqqaaw", HexDir.NORTH_EAST, "sinh");
+    public static final HexPattern COSH = make("wqqqqqadw", HexDir.SOUTH_EAST, "cosh");
     public static final HexPattern TANH = make("ewqqqqqadqe", HexDir.SOUTH_EAST, "tanh");
-    public static final HexPattern ASINH = make("wddeeeeeq", HexDir.SOUTH_EAST, "asinh");
-    public static final HexPattern ACOSH = make("wadeeeeeq", HexDir.NORTH_EAST, "acosh");
+    public static final HexPattern ASINH = make("wddeeeeea", HexDir.SOUTH_EAST, "asinh");
+    public static final HexPattern ACOSH = make("wadeeeeew", HexDir.NORTH_EAST, "acosh");
     public static final HexPattern ATANH = make("qeadeeeeewq", HexDir.EAST, "atanh");
 
 

@@ -2,6 +2,7 @@ package dev.kineticcat.complexhex.mixin.BITInvokers;
 
 import com.mojang.math.Transformation;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Display;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -13,6 +14,8 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface DisplayInvoker {
     @Invoker("setTransformation")
     void invokeSetTransformation(Transformation transformation);
+    @Invoker("createTransformation")
+    Transformation invokeCreateTransformation(SynchedEntityData synchedEntityData);
     @Accessor("renderState")
     Display.RenderState getRenderState();
     @Accessor("DATA_LEFT_ROTATION_ID")

@@ -89,6 +89,28 @@
       "input": "BIT",
       "output": "",
       "text": "complexhex.page.killbit"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:get_bit_4x4",
+      "anchor": "complexhex:get_bit_4x4",
+      "input": "BIT",
+      "output": "matrix",
+      "text": "complexhex.page.get_bit_4x4"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "complexhex:set_bit_4x4",
+      "anchor": "complexhex:set_bit_4x4",
+      "input": "BIT, matrix",
+      "output": "",
+      "text": "complexhex.page.set_bit_4x4"
+    },
+    {
+      "type": "patchouli:link",
+      "text": "complexhex.page.4x4explainer",
+      "link_text": "complexhex.page.4x4explainer_link",
+      "url": "https://www.brainvoyager.com/bv/doc/UsersGuide/CoordsAndTransforms/SpatialTransformationMatrices.html"
     }
   ]
 }
