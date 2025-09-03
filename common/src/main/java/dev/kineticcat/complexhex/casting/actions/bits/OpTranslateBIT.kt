@@ -28,7 +28,7 @@ object OpTranslateBIT : SpellAction {
         return SpellAction.Result(
             Spell(e, delta),
             cost,
-            listOf(ParticleSpray.burst(delta, 1.0))
+            listOf(ParticleSpray.burst(e.position(), 1.0), ParticleSpray.burst(e.position().add(delta), 1.0))
         )
     }
 

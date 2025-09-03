@@ -15,6 +15,8 @@ import dev.kineticcat.complexhex.api.util.Value
 import dev.kineticcat.complexhex.api.util.Vector
 import dev.kineticcat.complexhex.stuff.ComplexNumber
 import dev.kineticcat.complexhex.stuff.Quaternion
+import org.jblas.DoubleMatrix
+import org.joml.Matrix4f
 import kotlin.math.ln
 import kotlin.math.pow
 
@@ -83,3 +85,17 @@ fun CNpow(a: Double, power: ComplexNumber): ComplexNumber {
 
 inline val Long.asActionResult get() = listOf(LongIota(this))
 inline val Quaternion.asActionResult get() = listOf(QuaternionIota(this))
+
+fun Matrix4f.toDoubleMatrix() = DoubleMatrix(4, 4,
+    this.m00().toDouble(), this.m01().toDouble(), this.m02().toDouble(), this.m03().toDouble(),
+    this.m10().toDouble(), this.m11().toDouble(), this.m12().toDouble(), this.m13().toDouble(),
+    this.m20().toDouble(), this.m21().toDouble(), this.m22().toDouble(), this.m23().toDouble(),
+    this.m30().toDouble(), this.m31().toDouble(), this.m32().toDouble(), this.m33().toDouble()
+)
+
+fun DoubleMatrix.toMatrix4f() = Matrix4f(
+    this.get(0, 0).toFloat(), this.get(0, 1).toFloat(),this.get(0, 2).toFloat(),this.get(0, 3).toFloat(),
+    this.get(1, 0).toFloat(), this.get(1, 1).toFloat(),this.get(1, 2).toFloat(),this.get(1, 3).toFloat(),
+    this.get(2, 0).toFloat(), this.get(2, 1).toFloat(),this.get(2, 2).toFloat(),this.get(2, 3).toFloat(),
+    this.get(3, 0).toFloat(), this.get(3, 1).toFloat(),this.get(3, 2).toFloat(),this.get(3, 3).toFloat(),
+)

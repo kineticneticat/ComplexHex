@@ -1,9 +1,12 @@
 package dev.kineticcat.complexhex.api.util
 
+import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.Vec3Iota
 import dev.kineticcat.complexhex.api.casting.iota.ExprIota
 import dev.kineticcat.complexhex.util.ExprDeSer
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.world.phys.Vec3
 
 //import at.petrak.hexcasting.api.casting.iota.Iota
 //import dev.kineticcat.complexhex.api.casting.iota.ExprIota
@@ -69,7 +72,11 @@ abstract class Expr {
     fun subsimp(from: Expr, to: Expr): Expr = substitute(from, to).simp()
     operator fun invoke(from: String, to: Double) = subsimp(Symbol(from), Value(to))
     fun serialise() = ExprDeSer.serialise(this)
-    fun asIota(): ExprIota = ExprIota(this)
+    open fun asIota(): Iota = when {
+        this is Value -> DoubleIota(x)
+        this is Vector && this.isPure() -> Vec3Iota(Vec3((x as Value).x, (y as Value).x, (z as Value).x))
+        else -> ExprIota(this)
+    }
     fun asActionResult(): List<Iota> = listOf(asIota())
 
     companion object {

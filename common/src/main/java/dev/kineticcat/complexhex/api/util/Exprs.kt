@@ -1,5 +1,8 @@
 package dev.kineticcat.complexhex.api.util
 
+import at.petrak.hexcasting.api.casting.iota.DoubleIota
+import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.Vec3Iota
 import net.minecraft.world.phys.Vec3
 import java.text.DecimalFormat
 import kotlin.math.*
