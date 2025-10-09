@@ -20,12 +20,18 @@
       "text": "complexhex.page.hexbox.2"
     },
     {
-      "type": "patchouli:text",
-      "text": "complexhex.page.hexbox.1"
+      "type": "patchouli:crafting",
+      "recipe": "complexhex:inert_record",
+      "text": "complexhex.page.hexbox.inert_record"
     },
     {
       "type": "patchouli:text",
-      "text": "complexhex.page.hexbox.1"
+      "text": "complexhex.page.hexbox.3"
+    },
+    {
+      "type": "hexcasting:brainsweep",
+      "recipe": "complexhex:quenched_record",
+      "text": "complexhex.page.hexbox.quenched_record"
     }
   ]
 }
