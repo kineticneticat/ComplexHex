@@ -169,12 +169,18 @@
   "hexcasting.action.complexhex:atanh": "Inv. Hyp. Tangent Prfn.",
   "complexhex.page.horrors.atanh": "Evaluates the hyperbolic sine of the argument",
 
+  "complexhex.entry.hexbox": "Hexboxes",
+  "complexhex.page.hexbox.1": "It's fascinated me, recently, their affinity for music. I'd made the assumption that only a creature on my level of intelligence (with the exception of a certain feathered friend) perceived mere vibrations to have meaning. This may speak further to their media content, or perhaps only to my own wishful thinking. At any rate, the thought has yielded a familiar creation: a caster, subservient to me.",
+  "complexhex.page.hexbox.hexbox": "First, the housing. A unique application. Requires a catalyst, details of which follow on the next page.",
+  "complexhex.page.hexbox.2": "I shan't think of the record too much--their vociferations, they rebound endlessly in my ears, their once pleasant chimes of yearning now twisting into horrible cries. Wailing, screaming, shrieking, $(o)calling for me$() to end their pain--I must not I MUST NOT let it haunt me.",
+  
+
 
   "itemGroup.complexhex": "Complex Hex",
 
   "block.complexhex.hexbox": "Hexbox",
   "item.complexhex.inert_record": "Inert Record",
   "item.complexhex.quenched_record": "Quenched Record",
-  "subtitles.complexhex.block.hexbox.scratch": "Record Scratches"
+  "subtitles.complexhex.block.hexbox.scratch": "Record scratches"
 
 }
