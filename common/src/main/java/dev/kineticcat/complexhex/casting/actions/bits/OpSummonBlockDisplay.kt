@@ -7,6 +7,7 @@ import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.getVec3
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.misc.MediaConstants
+import dev.kineticcat.complexhex.api.util.BITHandlerRegistry
 import dev.kineticcat.complexhex.casting.mishap.MishapBadString
 import dev.kineticcat.complexhex.mixin.BITInvokers.BlockDisplayInvoker
 import net.minecraft.core.registries.BuiltInRegistries
@@ -23,13 +24,11 @@ object OpSummonBlockDisplay : SpellAction {
     private val cost = MediaConstants.CRYSTAL_UNIT
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         val pos = args.getVec3(0, argc)
-        val name = args.getString(1, argc)
+        val iotaToInspect = args.get(1)
 
         env.assertVecInRange(pos)
-        if (!BuiltInRegistries.BLOCK.containsKey(ResourceLocation(name)))
-            throw MishapBadString.of(name, "blockid")
 
-        val blockstate = BuiltInRegistries.BLOCK.get(ResourceLocation(name)).defaultBlockState()
+        val blockstate = BITHandlerRegistry.matchBlockDisplayIota(iotaToInspect, env, 0)
 
         return SpellAction.Result(
             Spell(pos, blockstate),

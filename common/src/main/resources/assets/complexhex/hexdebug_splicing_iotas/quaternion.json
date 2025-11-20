@@ -1,0 +1,11 @@
+{
+  "type": "hexdebug:texture",
+  "texture": "complexhex:textures/gui/hexdebug_iotas.png",
+  "u_offset": 17,
+  "v_offset": 1,
+  "width": 14,
+  "height": 14,
+  "texture_width": 64,
+  "texture_height": 16,
+  "use_iota_color": true
+}
