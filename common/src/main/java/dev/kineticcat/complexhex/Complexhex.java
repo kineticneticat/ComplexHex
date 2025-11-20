@@ -1,6 +1,8 @@
 package dev.kineticcat.complexhex;
 
 import dev.kineticcat.complexhex.api.casting.iota.ComplexHexIotaTypes;
+import dev.kineticcat.complexhex.api.util.BITHandlerRegistry;
+import dev.kineticcat.complexhex.api.util.BITHandlers;
 import dev.kineticcat.complexhex.casting.ComplexHexSpecialHandlers;
 import dev.kineticcat.complexhex.casting.ComplexhexPatternRegistry;
 import dev.kineticcat.complexhex.casting.arithmetic.ComplexHexArithmetic;
@@ -25,7 +27,7 @@ public class Complexhex {
         ComplexhexPatternRegistry.init();
         ComplexHexArithmetic.init();
         ComplexHexSpecialHandlers.init();
-
+        BITHandlers.INSTANCE.init();
 
         LOGGER.info(ComplexhexAbstractions.getConfigDirectory().toAbsolutePath().normalize().toString());
     }
