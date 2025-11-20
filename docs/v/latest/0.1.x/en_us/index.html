@@ -77,7 +77,7 @@
       <ul class="nav navbar-nav navbar-right">
             <li>
     <a
-      href="https://github.com/kineticneticat/ComplexHex/tree/d433a188c2cabffac10ab295f13c3724943f2ba0"
+      href="https://github.com/kineticneticat/ComplexHex/tree/eabd180866ee9ab4d6d47aea95fa2d6ff01cad51"
         target="_blank"
       class="navbar-link"
       role="button"
@@ -3800,7 +3800,7 @@
     <p>These are patterns to manipulate Block, Item, and Text Displays (BITs for short).</p><p>Oddly, Scout&#39;s Distillation does not seem to work on these, thus I must depend on Entity Prfn. or Zone Dstn.</p>
 <br />
   <div id="patterns/great_spells/bits@complexhex:summonblockdisplay" class="">
-<h4 class="pattern-title">Summon Block Display (vector, string →)<a
+<h4 class="pattern-title">Summon Block Display (vector, blockdisplayable →)<a
     href="#patterns/great_spells/bits@complexhex:summonblockdisplay"
     class="permalink small"
     title="Permalink"
@@ -3852,11 +3852,13 @@
         data-per-world="True"
       >Your browser does not support visualizing patterns. Pattern code: wqwqwqwqwqwawqaqqqqqe</canvas>
   </details>
-      <p>Summons a Block Display entity at the given position, displaying the given block. (The string must be the internal name i.e &#34;minecraft:dirt&#34;, not &#34;Dirt&#34;).<br />Costs about a <a href="https://hexcasting.hexxy.media/v/0.11.2/1.0/en_us#items/amethyst"><span style="color: #b0b">Charged Amethyst</span></a></p>
+      <p>Summons a Block Display entity at the given position, displaying the given block. <br />Costs about a <a href="https://hexcasting.hexxy.media/v/0.11.2/1.0/en_us#items/amethyst"><span style="color: #b0b">Charged Amethyst</span></a></p>
   </div>
 <br />
+    <p>&#34;itemdisplayable&#34; can mean quite a few things, like a given vector, item stack, string or even an entity like an item entity or an item frame.</p>
+<br />
   <div id="patterns/great_spells/bits@complexhex:summonitemdisplay" class="">
-<h4 class="pattern-title">Summon Item Display (vector, string →)<a
+<h4 class="pattern-title">Summon Item Display (vector, itemdisplayable →)<a
     href="#patterns/great_spells/bits@complexhex:summonitemdisplay"
     class="permalink small"
     title="Permalink"
@@ -3908,11 +3910,13 @@
         data-per-world="True"
       >Your browser does not support visualizing patterns. Pattern code: wqwqwqwqwqwaqedeaaedeq</canvas>
   </details>
-      <p>Summons an Item Display entity at the given position, displaying the given item (The string must be the internal name i.e &#34;minecraft:stick&#34;, not &#34;Stick&#34;).<br />Costs about a <a href="https://hexcasting.hexxy.media/v/0.11.2/1.0/en_us#items/amethyst"><span style="color: #b0b">Charged Amethyst</span></a></p>
+      <p>Summons an Item Display entity at the given position, displaying the given item <br />Costs about a <a href="https://hexcasting.hexxy.media/v/0.11.2/1.0/en_us#items/amethyst"><span style="color: #b0b">Charged Amethyst</span></a></p>
   </div>
 <br />
+    <p>Similar to &#34;blockdisplayable&#34;, but for items. Vectors, item stacks and types, strings and entities work.</p>
+<br />
   <div id="patterns/great_spells/bits@complexhex:summontextdisplay" class="">
-<h4 class="pattern-title">Summon Text Display (vector, string →)<a
+<h4 class="pattern-title">Summon Text Display (vector, textdisplayable →)<a
     href="#patterns/great_spells/bits@complexhex:summontextdisplay"
     class="permalink small"
     title="Permalink"
@@ -3964,8 +3968,10 @@
         data-per-world="True"
       >Your browser does not support visualizing patterns. Pattern code: wqwqwqwqwqwawaaqawdeddw</canvas>
   </details>
-      <p>Summons a Text Display entity at the given position, displaying the given string. Costs about a <a href="https://hexcasting.hexxy.media/v/0.11.2/1.0/en_us#items/amethyst"><span style="color: #b0b">Charged Amethyst</span></a></p>
+      <p>Summons a Text Display entity at the given position, displaying the given text. Costs about a <a href="https://hexcasting.hexxy.media/v/0.11.2/1.0/en_us#items/amethyst"><span style="color: #b0b">Charged Amethyst</span></a></p>
   </div>
+<br />
+    <p>Compared to &#34;blockdisplayable&#34; and &#34;itemdisplayable&#34;, &#34;textdisplayable&#34; is simply a given string... or maybe formatted text, if certain mystical forces inhabit this world.</p>
 <br />
   <div id="patterns/great_spells/bits@complexhex:get_entity/bit" class="">
 <h4 class="pattern-title">Entity Purification: BIT (vector → entity)<a

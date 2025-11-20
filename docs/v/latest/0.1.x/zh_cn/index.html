@@ -77,7 +77,7 @@
       <ul class="nav navbar-nav navbar-right">
             <li>
     <a
-      href="https://github.com/kineticneticat/ComplexHex/tree/d433a188c2cabffac10ab295f13c3724943f2ba0"
+      href="https://github.com/kineticneticat/ComplexHex/tree/eabd180866ee9ab4d6d47aea95fa2d6ff01cad51"
         target="_blank"
       class="navbar-link"
       role="button"
@@ -3800,7 +3800,7 @@
     <p>这些图案用于操纵方块、物品、文本展示体（简称 BIT）。</p><p>奇怪之处在于，侦查员之馏化对这些展示体无效，因此必须换用实体之纯化和区域之馏化。</p>
 <br />
   <div id="patterns/great_spells/bits@complexhex:summonblockdisplay" class="">
-<h4 class="pattern-title">召唤方块展示体 (vector, string →)<a
+<h4 class="pattern-title">召唤方块展示体 (vector, blockdisplayable →)<a
     href="#patterns/great_spells/bits@complexhex:summonblockdisplay"
     class="permalink small"
     title="Permalink"
@@ -3855,8 +3855,10 @@
       <p>在给定位置召唤一个方块展示体实体，以展示给定方块。（所给字符串需是内部名称，如“minecraft:dirt”，而非“泥土”。）<br />消耗大约 1 个<a href="https://hexcasting.hexxy.media/v/0.11.2/1.0/en_us#items/amethyst"><span style="color: #b0b">充能紫水晶</span></a>。</p>
   </div>
 <br />
+    <p>&#34;itemdisplayable&#34; can mean quite a few things, like a given vector, item stack, string or even an entity like an item entity or an item frame.</p>
+<br />
   <div id="patterns/great_spells/bits@complexhex:summonitemdisplay" class="">
-<h4 class="pattern-title">召唤物品展示体 (vector, string →)<a
+<h4 class="pattern-title">召唤物品展示体 (vector, itemdisplayable →)<a
     href="#patterns/great_spells/bits@complexhex:summonitemdisplay"
     class="permalink small"
     title="Permalink"
@@ -3911,8 +3913,10 @@
       <p>在给定位置召唤一个物品展示体实体，以展示给定物品。（所给字符串需是内部名称，如“minecraft:stick”，而非“木棍”。）<br />消耗大约 1 个<a href="https://hexcasting.hexxy.media/v/0.11.2/1.0/en_us#items/amethyst"><span style="color: #b0b">充能紫水晶</span></a>。</p>
   </div>
 <br />
+    <p>Similar to &#34;blockdisplayable&#34;, but for items. Vectors, item stacks and types, strings and entities work.</p>
+<br />
   <div id="patterns/great_spells/bits@complexhex:summontextdisplay" class="">
-<h4 class="pattern-title">召唤文本展示体 (vector, string →)<a
+<h4 class="pattern-title">召唤文本展示体 (vector, textdisplayable →)<a
     href="#patterns/great_spells/bits@complexhex:summontextdisplay"
     class="permalink small"
     title="Permalink"
@@ -3966,6 +3970,8 @@
   </details>
       <p>在给定位置召唤一个文本展示体实体，以展示给定字符串。消耗大约 1 个<a href="https://hexcasting.hexxy.media/v/0.11.2/1.0/en_us#items/amethyst"><span style="color: #b0b">充能紫水晶</span></a>。</p>
   </div>
+<br />
+    <p>Compared to &#34;blockdisplayable&#34; and &#34;itemdisplayable&#34;, &#34;textdisplayable&#34; is simply a given string... or maybe formatted text, if certain mystical forces inhabit this world.</p>
 <br />
   <div id="patterns/great_spells/bits@complexhex:get_entity/bit" class="">
 <h4 class="pattern-title">实体之纯化：BIT (vector → entity)<a
