@@ -39,3 +39,10 @@ mandatory = true
 versionRange = "[${hexcastingVersion},)"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies.complexhex]]
+modId = "moreiotas"
+mandatory = true
+versionRange = "[${moreiotasVersion},)"
+ordering = "NONE"
+side = "BOTH"

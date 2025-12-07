@@ -1,9 +1,11 @@
 package dev.kineticcat.complexhex.fabric
 
 import dev.kineticcat.complexhex.Complexhex
+import dev.kineticcat.complexhex.api.util.BITHandlers
 import dev.kineticcat.complexhex.block.ComplexHexBlocks
 import dev.kineticcat.complexhex.block.entity.ComplexHexBlockEntities
 import dev.kineticcat.complexhex.entity.ComplexHexEntities
+import dev.kineticcat.complexhex.fabric.api.util.BITHandlersFabric
 import dev.kineticcat.complexhex.item.ComplexHexCreativeTabs
 import dev.kineticcat.complexhex.item.ComplexHexItems
 import net.fabricmc.api.ModInitializer
@@ -24,6 +26,7 @@ import java.util.function.BiConsumer
 object ComplexhexFabric : ModInitializer {
         override fun onInitialize() {
                 Complexhex.init()
+                BITHandlersFabric.init()
 
                 ItemGroupEvents.MODIFY_ENTRIES_ALL.register { tab, entries ->
                         ComplexHexBlocks.registerBlockCreativeTab(entries::accept, tab)
