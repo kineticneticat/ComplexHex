@@ -8,7 +8,7 @@ import java.text.DecimalFormat
 import kotlin.math.*
 
 abstract class UnaryOp(open val A: Expr): Expr() {
-    override fun equals(other: Any?): Boolean = other is UnaryOp && this.A == other.A
+    override fun equals(other: Any?): Boolean = other is UnaryOp && this::class == other::class && this.A == other.A
     override fun args(): List<Expr> = listOf(A)
     override fun contains(that: Expr) = super.contains(that) || A.contains(that)
 
@@ -22,7 +22,7 @@ abstract class UnaryOp(open val A: Expr): Expr() {
     }
 }
 abstract class BinaryOp(open val A: Expr, open val B: Expr): Expr() {
-    override fun equals(other: Any?): Boolean = other is BinaryOp && this.A == other.A && this.B == other.B
+    override fun equals(other: Any?): Boolean = other is BinaryOp && this::class == other::class && this.A == other.A && this.B == other.B
     override fun args(): List<Expr> = listOf(A, B)
 
     override fun contains(that: Expr) = super.contains(that) || A.contains(that) || B.contains(that)
@@ -163,7 +163,6 @@ class Div(override val A: Expr, override val B: Expr): BinaryOp(A, B) {
     override fun simplify(): Expr = when {
         A == Value.ZERO -> Value.ZERO
         B == Value.ZERO -> Infinity()
-        A == Value.ONE -> A / B
         B == Value.ONE -> A
         A is Mul && A.A == B -> A.B
         A is Mul && A.B == B -> A.A
