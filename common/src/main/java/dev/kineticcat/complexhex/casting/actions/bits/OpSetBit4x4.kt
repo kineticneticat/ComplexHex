@@ -8,6 +8,7 @@ import at.petrak.hexcasting.api.casting.getEntity
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapBadEntity
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
+import at.petrak.hexcasting.api.misc.MediaConstants
 import com.mojang.math.Transformation
 import dev.kineticcat.complexhex.api.toMatrix4f
 import dev.kineticcat.complexhex.mixin.BITInvokers.DisplayInvoker
@@ -26,7 +27,7 @@ object OpSetBit4x4 : SpellAction {
         if (!(mat.rows == 4 && mat.columns == 4)) throw MishapInvalidIota.of(args[1], 0, "4x4matrix")
         return SpellAction.Result(
             Spell(e, mat),
-            0L,
+            MediaConstants.DUST_UNIT,
             listOf(ParticleSpray.burst(env.castingEntity?.position() ?: env.mishapSprayPos(), 1.0))
         )
     }

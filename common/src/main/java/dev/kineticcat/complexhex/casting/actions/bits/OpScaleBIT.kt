@@ -8,6 +8,7 @@ import at.petrak.hexcasting.api.casting.getEntity
 import at.petrak.hexcasting.api.casting.getVec3
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapBadEntity
+import at.petrak.hexcasting.api.misc.MediaConstants
 import com.mojang.math.Transformation
 import dev.kineticcat.complexhex.mixin.BITInvokers.DisplayInvoker
 import net.minecraft.world.entity.Display
@@ -16,7 +17,7 @@ import net.minecraft.world.phys.Vec3
 
 object OpScaleBIT : SpellAction {
     override val argc = 2
-    private var cost = 0L
+    private var cost = MediaConstants.DUST_UNIT
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         val e = args.getEntity(0, argc)
         val vec = args.getVec3(1, argc)

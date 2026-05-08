@@ -7,6 +7,7 @@ import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.getEntity
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapBadEntity
+import at.petrak.hexcasting.api.misc.MediaConstants
 import com.mojang.math.Transformation
 import dev.kineticcat.complexhex.api.getQuaternion
 import dev.kineticcat.complexhex.mixin.BITInvokers.DisplayInvoker
@@ -17,7 +18,7 @@ import org.joml.Quaternionf
 
 object OpRotateBIT : SpellAction {
     override val argc = 2
-    private val cost = 0L
+    private val cost = MediaConstants.DUST_UNIT
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         val e = args.getEntity(0, argc)
         val quaternion = args.getQuaternion(1, argc)

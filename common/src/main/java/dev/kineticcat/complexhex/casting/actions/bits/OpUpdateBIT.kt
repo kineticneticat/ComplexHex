@@ -7,6 +7,7 @@ import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.getEntity
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapBadEntity
+import at.petrak.hexcasting.api.misc.MediaConstants
 import dev.kineticcat.complexhex.casting.mishap.MishapBadString
 import dev.kineticcat.complexhex.mixin.BITInvokers.BlockDisplayInvoker
 import dev.kineticcat.complexhex.mixin.BITInvokers.ItemDisplayInvoker
@@ -21,7 +22,7 @@ import ram.talia.moreiotas.api.getString
 
 object OpUpdateBIT : SpellAction {
     override val argc = 2
-    private var cost = 0L
+    private var cost = MediaConstants.DUST_UNIT
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         val e = args.getEntity(0, argc)
         val id = args.getString(1, argc)
