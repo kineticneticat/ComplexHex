@@ -42,12 +42,12 @@ object ComplexArithmetic : Arithmetic {
     override fun opTypes() = OPS
     override fun getOperator(pattern: HexPattern): Operator {
         return when (pattern) {
-            ADD        -> CDorCCbinaryC({ a, b -> a.add(b) }, {a, b -> a.add(b)})
-            SUB        -> CDorCCbinaryC({ a, b -> a.sub(b) }, {a, b -> a.sub(b)})
-            MUL        -> CDorCCbinaryC({ a, b -> a.mul(b) }, {a, b -> a.mul(b)})
+            ADD        -> CDorCCbinaryC({ a, b -> a.add(b) }, { a, b -> a.add(b) }, {a, b -> b.add(a)})
+            SUB        -> CDorCCbinaryC({ a, b -> a.sub(b) }, {a, b -> a.sub(b)}, {a, b -> b.sub(a)})
+            MUL        -> CDorCCbinaryC({ a, b -> a.mul(b) }, {a, b -> a.mul(b)}, {a, b -> b.mul(a)})
             DIV        -> CDbinaryC    { a, b -> a.scalarDiv(b) }
             ABS        -> CunaryD      { a -> a.modulus() }
-            POW        -> DCbinaryC    {a, b -> CNpow(a, b)}
+            POW        -> CDorCCbinaryC({a, b -> a.pow(b)}, {a, b->a.pow(b)}, {a, b -> CNpow(a,b)})
             else -> throw InvalidOperatorException("$pattern is not a valid operator in complex arithmetic")
         }
     }
@@ -63,6 +63,15 @@ object ComplexArithmetic : Arithmetic {
             )
         )
     }
+    private fun DC(double: Iota, cn: Iota, op: (Double, ComplexNumber) -> (ComplexNumber)): ComplexNumberIota {
+        return ComplexNumberIota(
+            op(
+                Operator.downcast(double, HexIotaTypes.DOUBLE).double,
+                Operator.downcast(cn, ComplexHexIotaTypes.COMPLEXNUMBER).complex
+            )
+        )
+    }
+
     private fun CC(cn1: Iota, cn2: Iota, op: (ComplexNumber, ComplexNumber) -> (ComplexNumber)): ComplexNumberIota {
         return ComplexNumberIota(
             op(
@@ -82,13 +91,13 @@ object ComplexArithmetic : Arithmetic {
         }
     }
     // what the fuck is this
-    fun CDorCCbinaryC(opA:(ComplexNumber, ComplexNumber) -> (ComplexNumber), opB:(ComplexNumber, Double) -> (ComplexNumber)) = OperatorBinary(
+    fun CDorCCbinaryC(opA:(ComplexNumber, ComplexNumber) -> (ComplexNumber), opB:(ComplexNumber, Double) -> (ComplexNumber), opC: (Double, ComplexNumber)->(ComplexNumber)) = OperatorBinary(
         ACCEPTS_CCorCD
     )
         {i: Iota, j:Iota -> if (i is ComplexNumberIota && j is ComplexNumberIota) {
             CC(i, j, opA)
         } else if (i is DoubleIota && j is ComplexNumberIota) {
-            CD(j, i, opB)
+            DC(i, j, opC)
         } else if (i is ComplexNumberIota && j is DoubleIota) {
             CD(i, j, opB)
         } else {

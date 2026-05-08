@@ -42,7 +42,7 @@
       "type": "hexcasting:pattern",
       "op_id": "hexcasting:mul",
       "anchor": "hexcasting:mul",
-      "input": "complex, num",
+      "input": "complex, complex/num",
       "output": "complex",
       "text": "complexhex.page.complexities.mul"
     },
@@ -66,7 +66,7 @@
       "type": "hexcasting:pattern",
       "op_id": "hexcasting:pow",
       "anchor": "hexcasting:pow",
-      "input": "num, complex",
+      "input": "complex/num, complex/num",
       "output": "complex",
       "text": "complexhex.page.complexities.pow"
     },
