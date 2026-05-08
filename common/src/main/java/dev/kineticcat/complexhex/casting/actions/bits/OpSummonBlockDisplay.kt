@@ -34,7 +34,7 @@ object OpSummonBlockDisplay : SpellAction {
         return SpellAction.Result(
             Spell(pos, blockstate),
             cost,
-            listOf(ParticleSpray.burst(pos, 1.0))
+            listOf(ParticleSpray.burst(env.castingEntity?.position() ?: env.mishapSprayPos(), 1.0))
         )
     }
 

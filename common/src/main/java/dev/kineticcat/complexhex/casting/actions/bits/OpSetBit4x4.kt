@@ -27,7 +27,7 @@ object OpSetBit4x4 : SpellAction {
         return SpellAction.Result(
             Spell(e, mat),
             0L,
-            listOf(ParticleSpray.burst(e.position(), 1.0))
+            listOf(ParticleSpray.burst(env.castingEntity?.position() ?: env.mishapSprayPos(), 1.0))
         )
     }
 

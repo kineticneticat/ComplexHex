@@ -28,7 +28,7 @@ object OpKillBIT : SpellAction {
         return SpellAction.Result(
             Spell(e),
             cost,
-            listOf(ParticleSpray.burst(pos, 1.0))
+            listOf(ParticleSpray.burst(env.castingEntity?.position() ?: env.mishapSprayPos(), 1.0))
         )
     }
 

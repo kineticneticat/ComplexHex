@@ -36,7 +36,7 @@ object OpSummonItemDisplay : SpellAction {
         return SpellAction.Result(
             Spell(pos, itemstack),
             cost,
-            listOf(ParticleSpray.burst(pos, 1.0))
+            listOf(ParticleSpray.burst(env.castingEntity?.position() ?: env.mishapSprayPos(), 1.0))
         )
     }
 
