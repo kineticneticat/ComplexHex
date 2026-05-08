@@ -216,7 +216,7 @@ public class HexboxBlockEntity extends HexBlockEntity implements WorldlyContaine
 
     private void initialise() {
         if (level instanceof ServerLevel slevel) {
-            GameProfile fakeprofile = new GameProfile(ownerUUID, ownerName + "'s hexbox");
+            GameProfile fakeprofile = new GameProfile(ownerUUID, ownerName + "'s_hexbox");
             fake = FakePlayer.get(slevel, fakeprofile);
             fake.setPos(getBlockPos().below(2).getCenter());
         }
