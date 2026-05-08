@@ -7,6 +7,7 @@ import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.getVec3
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.misc.MediaConstants
+import dev.kineticcat.complexhex.api.util.BITHandlerRegistry
 import dev.kineticcat.complexhex.casting.mishap.MishapBadString
 import dev.kineticcat.complexhex.mixin.BITInvokers.ItemDisplayInvoker
 import net.minecraft.core.registries.BuiltInRegistries
@@ -16,6 +17,7 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.phys.Vec3
 import ram.talia.moreiotas.api.getString
+import kotlin.collections.get
 
 
 object OpSummonItemDisplay : SpellAction {
@@ -23,14 +25,10 @@ object OpSummonItemDisplay : SpellAction {
     private val cost = MediaConstants.CRYSTAL_UNIT
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         val pos = args.getVec3(0, argc)
-        val name = args.getString(1, argc)
+        val iotaToInspect = args.get(1)
 
         env.assertVecInRange(pos)
-        if (!BuiltInRegistries.ITEM.containsKey(ResourceLocation(name)))
-            throw MishapBadString.of(name, "opsummonitemdisplay")
-
-        val item = BuiltInRegistries.ITEM.get(ResourceLocation(name))
-        val itemstack = ItemStack(item)
+        val itemstack = BITHandlerRegistry.matchItemDisplayIota(iotaToInspect, env, 0)
 
 
         return SpellAction.Result(

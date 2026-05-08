@@ -1,9 +1,8 @@
 plugins {
     id "architectury-plugin" version "3.4.+"
+    id "dev.architectury.loom" version "1.9.+" apply false
 
-    id "dev.architectury.loom" version "1.6.+" apply false
-
-    id "org.jetbrains.kotlin.jvm" version "1.8.0" apply false
+    id "org.jetbrains.kotlin.jvm" version "2.0.0" apply false
 
     // for template.env api keys
     id "co.uzzu.dotenv.gradle" version "2.0.0"
@@ -64,7 +63,21 @@ allprojects {
     group = project.mavenGroup
 
     repositories {
-        maven { url 'https://jitpack.io' }
+        maven {
+            url "https://maven.hexxy.media/"
+        }
+        maven {
+            url 'https://jitpack.io'
+            content {
+                excludeGroup 'io.github.tropheusj'
+            }
+        }
+        maven {
+            url 'https://repo.sleeping.town'
+            content {
+                includeGroup 'com.unascribed'
+            }
+        }
         maven {
             url "https://squiddev.cc/maven/"
         }
@@ -149,6 +162,8 @@ allprojects {
             "forgeKotlinVersion": project.forgeKotlinVersion,
             "hexcastingVersion": project.hexcastingVersion,
             "minecraftVersion": project.minecraftVersion,
+            "moreiotasVersion": project.moreiotasVersion,
+            "hexposeVersion": project.hexposeVersion
         ]
 
         // for incremental builds

@@ -7,6 +7,7 @@ import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.getVec3
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.misc.MediaConstants
+import dev.kineticcat.complexhex.api.util.BITHandlerRegistry
 import dev.kineticcat.complexhex.mixin.BITInvokers.TextDisplayInvoker
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.Display
@@ -19,10 +20,11 @@ object OpSummonTextDisplay : SpellAction {
     override val argc = 2
     private val cost = MediaConstants.CRYSTAL_UNIT
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
-        val pos = args.getVec3(0, argc)
-        val text = args.getString(1, argc)
+        val pos = args.getVec3(0, OpSummonItemDisplay.argc)
+        val iotaToInspect = args.get(1)
 
         env.assertVecInRange(pos)
+        val text = BITHandlerRegistry.matchTextDisplayIota(iotaToInspect, env, 0)
 
 
         return SpellAction.Result(
@@ -32,12 +34,12 @@ object OpSummonTextDisplay : SpellAction {
         )
     }
 
-    private data class Spell(val pos: Vec3, val text: String) : RenderedSpell {
+    private data class Spell(val pos: Vec3, val text: Component) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
             val textdisplay = Display.TextDisplay(EntityType.TEXT_DISPLAY, env.world).apply {
                 setPos(pos.x, pos.y, pos.z);
             }
-            (textdisplay as TextDisplayInvoker).invokeSetText(Component.literal(text))
+            (textdisplay as TextDisplayInvoker).invokeSetText(text)
             env.world.addFreshEntity(textdisplay)
             textdisplay.tick()
         }

@@ -14,6 +14,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -61,7 +63,8 @@ public class HexboxBlock extends Block implements EntityBlock, ICircleComponent 
             }
             if (state.getValue(ACTIVATED)) {
                 if (player.isDiscrete()) {
-                    level.playSound(null, pos, ComplexHexSounds.HEXBOX_SCRATCH, SoundSource.BLOCKS);
+                    level.playSound(null, pos, ComplexHexSounds.HEXBOX_SCRATCH, SoundSource.BLOCKS, 1f, ((float)Math.random()*0.5f)+0.7f);
+                    level.playSound(null, pos, SoundEvents.BEACON_DEACTIVATE, SoundSource.BLOCKS, 0.2f, ((float)Math.random())+2.7f);
                     BlockState newstate = state.setValue(ACTIVATED, false);
                     level.setBlockAndUpdate(pos, newstate);
                     box.clearDisplay();
@@ -70,7 +73,8 @@ public class HexboxBlock extends Block implements EntityBlock, ICircleComponent 
                 return InteractionResult.PASS;
             } else {
                 if (player.isDiscrete()) {
-                    level.playSound(null, pos, ComplexHexSounds.HEXBOX_SCRATCH, SoundSource.BLOCKS);
+                    level.playSound(null, pos, ComplexHexSounds.HEXBOX_SCRATCH, SoundSource.BLOCKS, 1f,  ((float)Math.random()*0.5f)+1.1f);
+                    level.playSound(null, pos, SoundEvents.BEACON_ACTIVATE, SoundSource.BLOCKS, 0.2f, ((float)Math.random())+3.1f);
                     BlockState newstate = state.setValue(ACTIVATED, true);
                     level.setBlockAndUpdate(pos, newstate);
                     box.setOwner((ServerPlayer) player);

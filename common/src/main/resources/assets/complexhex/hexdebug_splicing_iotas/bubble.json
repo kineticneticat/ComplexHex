@@ -1,0 +1,25 @@
+{
+  "type": "hexdebug:layers",
+  "layers": [
+    {
+      "renderer": {
+        "type": "hexdebug:texture",
+        "texture": "complexhex:textures/gui/hexdebug_iotas.png",
+        "u_offset": 1,
+        "v_offset": 1,
+        "width": 14,
+        "height": 14,
+        "texture_width": 64,
+        "texture_height": 16,
+        "use_iota_color": true
+      }
+    },
+    {
+      "renderer": {
+        "type": "hexdebug:sub_iota",
+        "path": "[0]"
+      },
+      "scale": 0.75
+    }
+  ]
+}

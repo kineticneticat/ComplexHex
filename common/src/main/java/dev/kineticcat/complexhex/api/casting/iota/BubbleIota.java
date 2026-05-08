@@ -101,7 +101,7 @@ public class BubbleIota extends Iota {
 
         @Override
         public int color() {
-            return 0xff_fc0522;
+            return 0xff_55ffff;
         }
     };
     private static final ChatFormatting ComplexNumberColour = ChatFormatting.DARK_RED;
