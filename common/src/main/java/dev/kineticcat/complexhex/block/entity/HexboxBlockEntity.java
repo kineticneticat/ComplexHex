@@ -1,5 +1,6 @@
 package dev.kineticcat.complexhex.block.entity;
 
+import at.petrak.hexcasting.api.addldata.ADMediaHolder;
 import at.petrak.hexcasting.api.block.HexBlockEntity;
 import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
 import at.petrak.hexcasting.api.casting.iota.Iota;
@@ -38,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class HexboxBlockEntity extends HexBlockEntity implements WorldlyContainer {
+public class HexboxBlockEntity extends HexBlockEntity implements WorldlyContainer, ADMediaHolder {
     private static final DecimalFormat DUST_AMOUNT = new DecimalFormat("###,###.##");
     private static final long MAX_CAPACITY = 9_000_000_000_000_000_000L;
     public static final String TAG_DATA = "Data";
@@ -109,10 +110,42 @@ public class HexboxBlockEntity extends HexBlockEntity implements WorldlyContaine
     public Iota getIota(ServerLevel level) {
         return iota != null ? IotaType.deserialize(iota, level) : null;
     }
+
+    @Override
+    public long getMedia() {
+        return media;
+    }
+
+    @Override
+    public long getMaxMedia() {
+        return MAX_CAPACITY;
+    }
+
     public void setMedia(long media) {
         this.media = media;
         sync();
     }
+
+    @Override
+    public boolean canRecharge() {
+        return true;
+    }
+
+    @Override
+    public boolean canProvide() {
+        return true;
+    }
+
+    @Override
+    public int getConsumptionPriority() {
+        return 0;
+    }
+
+    @Override
+    public boolean canConstructBattery() {
+        return false;
+    }
+
     public void setOwner(ServerPlayer player) {
         this.ownerName = player.getGameProfile().getName();
         this.ownerUUID = player.getGameProfile().getId();
