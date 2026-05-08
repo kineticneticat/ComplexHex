@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values" : [
+    "complexhex:hexbox",
+    "complexhex:inert_record",
+    "complexhex:quenched_record"
+  ]
+}
