@@ -45,8 +45,9 @@ public class ComplexNumber {
     }
     public ComplexNumber mul(ComplexNumber B) {
         return new ComplexNumber(
-            this.real*B.real - this.imag + B.imag,
-            this.real*B.imag + this.imag * B.real);
+            this.real*B.real - this.imag * B.imag,
+            this.real*B.imag + this.imag * B.real
+        );
     }
     public ComplexNumber conjugate() { return  new ComplexNumber(this.real, -this.imag);}
     public double modulus() {
