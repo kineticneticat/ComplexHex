@@ -119,13 +119,6 @@ public class ComplexhexPatternRegistry {
     public static final HexPattern BUBBLE = make("qdqdqdqdqdq", HexDir.SOUTH_EAST, "bubble",
             OpBubbleIota.INSTANCE);
 
-
-    // chloe's iotas
-//    public static final HexPattern MAKE_CHLOE = make("weedqeaaeqdeew", HexDir.NORTH_WEST, "chloe/make",
-//            OpNewChloe.INSTANCE);
-//    public static final HexPattern COPY_CHLOE = make("aaeqdeeeweeedq", HexDir.SOUTH_WEST, "chloe/copy",
-//            OpCopyChloe.INSTANCE);
-
     // ASCII
 
     public static final HexPattern TO_ASCII = make("eawdwae", HexDir.EAST, "ascii",
