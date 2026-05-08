@@ -71,6 +71,8 @@
   "complexhex.page.zone_entity/bit": "Take a position and a maximum distance on the stack, and combine them into a list of BIT's near the position.",
   "hexcasting.action.complexhex:zone_entity/not_bit": "Zone Distillation: Not BIT",
   "complexhex.page.zone_entity/not_bit": "Take a position and a maximum distance on the stack, and combine them into a list of non-BIT's near the position.",
+  "hexcasting.action.complexhex:update_bit": "Update BIT",
+  "complexhex.page.update_bit": "Sets the BIT to the given ID if a block or item display, or to the text if a text display.",
   "hexcasting.action.complexhex:translatebit": "Translate BIT",
   "complexhex.page.translatebit": "Translates the BIT to the given offset.",
   "hexcasting.action.complexhex:rotatebit": "Rotate BIT",

@@ -96,6 +96,8 @@ public class ComplexhexPatternRegistry {
             OpSummonTextDisplay.INSTANCE);
     public static final HexPattern KILLBIT = make("wqwqwqwqwqwaqdwddwdq", HexDir.SOUTH_EAST, "killbit",
             OpKillBIT.INSTANCE);
+    public static final HexPattern UPDATEBIT = make("wqwqwqwqwqwaqedwaqe", HexDir.SOUTH_EAST, "update_bit",
+            OpUpdateBIT.INSTANCE);
 
     public static final HexPattern TRANSLATEBIT = make("wqwqwqwqwqwawwaqaeaqe", HexDir.SOUTH_EAST, "translatebit",
             OpTranslateBIT.INSTANCE);
