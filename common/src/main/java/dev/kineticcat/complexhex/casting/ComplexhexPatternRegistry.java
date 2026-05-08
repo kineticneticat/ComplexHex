@@ -26,6 +26,7 @@ import dev.kineticcat.complexhex.casting.actions.mathematics.quaternion.OpGetQua
 import dev.kineticcat.complexhex.casting.actions.mathematics.quaternion.OpQInvert;
 import dev.kineticcat.complexhex.casting.actions.mathematics.quaternion.OpQMake;
 import dev.kineticcat.complexhex.casting.actions.mathematics.quaternion.OpQUnmake;
+import dev.kineticcat.complexhex.casting.arithmetic.ComplexHexArithmetic;
 import dev.kineticcat.complexhex.stuff.ComplexNumber;
 import dev.kineticcat.complexhex.stuff.Quaternion;
 import net.minecraft.core.Registry;
@@ -155,12 +156,12 @@ public class ComplexhexPatternRegistry {
     public static final HexPattern SUMMON_SURFACE = make("wdwddwqq", HexDir.SOUTH_EAST, "summon/surface",
             OpSpawnParametricSurface.INSTANCE);
 
-    public static final HexPattern SINH = make("dqqqqqaaw", HexDir.NORTH_EAST, "sinh");
-    public static final HexPattern COSH = make("wqqqqqadw", HexDir.SOUTH_EAST, "cosh");
-    public static final HexPattern TANH = make("ewqqqqqadqe", HexDir.SOUTH_EAST, "tanh");
-    public static final HexPattern ASINH = make("wddeeeeea", HexDir.SOUTH_EAST, "asinh");
-    public static final HexPattern ACOSH = make("wadeeeeew", HexDir.NORTH_EAST, "acosh");
-    public static final HexPattern ATANH = make("qeadeeeeewq", HexDir.EAST, "atanh");
+    public static final HexPattern SINH = make(ComplexHexArithmetic.SINH, "sinh");
+    public static final HexPattern COSH = make(ComplexHexArithmetic.COSH, "cosh");
+    public static final HexPattern TANH = make(ComplexHexArithmetic.TANH, "tanh");
+    public static final HexPattern ASINH = make(ComplexHexArithmetic.ASINH, "asinh");
+    public static final HexPattern ACOSH = make(ComplexHexArithmetic.ACOSH, "acosh");
+    public static final HexPattern ATANH = make(ComplexHexArithmetic.ATANH, "atanh");
 
 
     public static void init() {
@@ -176,8 +177,7 @@ public class ComplexhexPatternRegistry {
         );
         return HexPattern.fromAngles(signature, dir);
     }
-    private static HexPattern make(String signature, HexDir dir, String name) {
-        HexPattern pattern = HexPattern.fromAngles(signature, dir);
+    private static HexPattern make(HexPattern pattern, String name) {
         PATTERNS.put(
                 new ResourceLocation(Complexhex.MOD_ID, name),
                 new ActionRegistryEntry(pattern, new OperationAction(pattern))
