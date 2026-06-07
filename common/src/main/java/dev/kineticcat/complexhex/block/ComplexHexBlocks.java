@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.PushReaction;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -43,7 +44,7 @@ public class ComplexHexBlocks {
 
     public static final RecordBlock.Inert INERT_RECORD = block(
             "inert_record",
-            new RecordBlock.Inert(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK))
+            new RecordBlock.Inert(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK).pushReaction(PushReaction.DESTROY))
     );
     public static final RecordBlock.Quenched QUENCHED_RECORD = block(
             "quenched_record",
@@ -52,7 +53,7 @@ public class ComplexHexBlocks {
 
     public static final HexboxBlock HEXBOX = blockItem(
             "hexbox",
-            new HexboxBlock(BlockBehaviour.Properties.copy(HexBlocks.SLATE_BLOCK)),
+            new HexboxBlock(BlockBehaviour.Properties.copy(HexBlocks.SLATE_BLOCK).pushReaction(PushReaction.BLOCK)),
             new Item.Properties()
     );
 

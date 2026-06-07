@@ -6,7 +6,6 @@
   "client": [
   ],
   "mixins": [
-//    "ChloeNoWrite",
     "BITInvokers.BlockDisplayInvoker",
     "BITInvokers.DisplayInvoker",
     "BITInvokers.ItemDisplayInvoker",

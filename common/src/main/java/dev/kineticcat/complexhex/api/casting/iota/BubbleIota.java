@@ -61,11 +61,7 @@ public class BubbleIota extends Iota {
     public @NotNull CastResult execute(CastingVM vm, ServerLevel world, SpellContinuation continuation) {
 
         Iota push = this.getContainedIota();
-        List<Iota> stack = vm.getImage().getStack();
-
-        if (stack.isEmpty()) {
-            stack = new ArrayList<>();
-        }
+        List<Iota> stack = new ArrayList<>(vm.getImage().getStack());
         stack.add(push);
 
         CastingImage image2 = vm.getImage().copy(
