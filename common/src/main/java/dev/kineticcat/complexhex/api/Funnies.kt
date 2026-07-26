@@ -94,8 +94,8 @@ fun Matrix4f.toDoubleMatrix() = DoubleMatrix(4, 4,
 )
 
 fun DoubleMatrix.toMatrix4f() = Matrix4f(
-    this.get(0, 0).toFloat(), this.get(0, 1).toFloat(),this.get(0, 2).toFloat(),this.get(0, 3).toFloat(),
-    this.get(1, 0).toFloat(), this.get(1, 1).toFloat(),this.get(1, 2).toFloat(),this.get(1, 3).toFloat(),
-    this.get(2, 0).toFloat(), this.get(2, 1).toFloat(),this.get(2, 2).toFloat(),this.get(2, 3).toFloat(),
-    this.get(3, 0).toFloat(), this.get(3, 1).toFloat(),this.get(3, 2).toFloat(),this.get(3, 3).toFloat(),
+    this.get(0, 0).toFloat(), this.get(1, 0).toFloat(),this.get(2, 0).toFloat(),this.get(3, 0).toFloat(),
+    this.get(0, 1).toFloat(), this.get(1, 1).toFloat(),this.get(2, 1).toFloat(),this.get(3, 1).toFloat(),
+    this.get(0, 2).toFloat(), this.get(1, 2).toFloat(),this.get(2, 2).toFloat(),this.get(3, 2).toFloat(),
+    this.get(0, 3).toFloat(), this.get(1, 3).toFloat(),this.get(2, 3).toFloat(),this.get(3, 3).toFloat(),
 )
