@@ -25,7 +25,6 @@ object OpSetBit4x4 : SpellAction {
         var mat = args.getMatrix(1)
         env.assertEntityInRange(e)
         if (e !is Display) throw MishapBadEntity.of(e, "bit")
-        if (!(mat.rows == 4 && mat.columns == 4))
 
         mat = when (mat.rows to mat.columns) {
             3 to 3 -> DoubleMatrix.eye(4).put(IntervalRange(0,3), IntervalRange(0,3), mat)
