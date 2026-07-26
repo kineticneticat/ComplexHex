@@ -205,7 +205,7 @@ object BITHandlers {
         }
         return Component.literal(iota.string)
     })
-    val TEXT_PATTERN = addTextDisplayHandler(StringIota::class.java, fun (iota, _, idx) : Component {
+    val TEXT_PATTERN = addTextDisplayHandler(PatternIota::class.java, fun (iota, _, idx) : Component {
         val pattern = (iota as PatternIota)
         return pattern.display()
     })
